@@ -71,7 +71,7 @@ function buildPeriodAggregates(
       periodMap.set(dateKey, entry);
     }
     for (const m of metrics) {
-      entry[m] += (s as Record<string, unknown>)[m] as number;
+      entry[m] += (s as unknown as Record<string, unknown>)[m] as number;
     }
   }
   return periodMap;
