@@ -1,0 +1,48 @@
+{
+  "id": 21,
+  "timestamp": "2026-03-22T03:09:29.448Z",
+  "timeframe": "1h",
+  "config": {
+    "lookbackDays": 35,
+    "minHistory": 14,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.28,
+    "funnelDropCritical": 0.5,
+    "topCampaignsToCheck": 20,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 54.50980392156863,
+    "catch": 33.33333333333333,
+    "quiet": 52.94117647058824,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 2,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 40,
+      "cleanDays": 85,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 61.256038647343,
+  "accepted": false,
+  "reasoning": "Looking at the results, the current best (score=61.26) catches 3/8 injections with 38 false positives. The catch rate needs improvement while keeping false positives manageable. Since weekday/weekend split hasn't been tried with the current best settings, and given that weekends are similar to weekdays, I'll keep that false. I'll try a slightly longer lookback (35 days) for a more stable baseline while using `trim5` outlier method instead of `iqr`, and slightly lower the warning threshold to cat",
+  "durationMs": 466
+}

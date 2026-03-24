@@ -1,0 +1,42 @@
+{
+  "id": 10,
+  "timestamp": "2026-03-22T01:30:09.853Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 30,
+    "minHistory": 10,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.5,
+    "funnelDropCritical": 0.75,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 24.11764705882353,
+    "catch": 25,
+    "quiet": 35.294117647058826,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 22,
+      "cleanDays": 34,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, the current best has terrible quiet rate (35 false positives on 50 clean days) but decent catch rate. The specificity is 0%. The key issue seems to be too many metrics generating too many false alarms. Let me try drastically reducing the metrics to only the most important ones (totalOrders and totalRevenue) while keeping thresholds similar, and try a 30-day lookback for a more stable baseline with IQR outlier method.",
+  "durationMs": 195
+}

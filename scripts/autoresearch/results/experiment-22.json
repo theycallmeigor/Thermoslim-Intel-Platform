@@ -1,0 +1,43 @@
+{
+  "id": 22,
+  "timestamp": "2026-03-22T01:31:42.461Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3.4,
+    "criticalThreshold": 5,
+    "funnelDropWarning": 0.5,
+    "funnelDropCritical": 0.75,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 35.866666666666674,
+    "catch": 41.66666666666667,
+    "quiet": 48,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 26,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every experiment has been rejected and the current best has catastrophic quiet rate (35/50 false positives). The fundamental issue seems to be too many alert opportunities (5 metrics × 7 campaigns = many chances to false alarm). I haven't tried the most aggressive reduction: minimum campaigns (5), only 2-3 core metrics, AND significantly higher thresholds (3.4+ warning) while keeping trim5 and excludeOutliers - this combination might dramatically cut false alarms while re",
+  "durationMs": 167
+}

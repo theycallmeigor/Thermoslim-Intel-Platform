@@ -1,0 +1,344 @@
+[
+  {
+    "source": "cc-qa",
+    "timestamp": "2025-10-10T10",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "PREPAID",
+    "data": {
+      "failRate": 1,
+      "baseline": 0.05,
+      "deviation": 20,
+      "durationHours": 2,
+      "affectedOrders": 2,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=PREPAID at 100% fail for 2h (2/2 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-01-30T21",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 0.5,
+      "baseline": 0.05,
+      "deviation": 10,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 50% fail for 1h (1/2 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-02-03T00",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 0.6,
+      "baseline": 0.05,
+      "deviation": 11.999999999999998,
+      "durationHours": 1,
+      "affectedOrders": 3,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 60% fail for 1h (3/5 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-02-16T10",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 1,
+      "baseline": 0.05,
+      "deviation": 20,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 100% fail for 1h (1/1 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-02-17T02",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 1,
+      "baseline": 0.05,
+      "deviation": 20,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 100% fail for 1h (1/1 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-02-22T22",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 0.6666666666666666,
+      "baseline": 0.05,
+      "deviation": 13.333333333333332,
+      "durationHours": 2,
+      "affectedOrders": 2,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 67% fail for 2h (2/3 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-02-24T09",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 1,
+      "baseline": 0.05,
+      "deviation": 20,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 100% fail for 1h (1/1 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-03-03T13",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 1,
+      "baseline": 0.05,
+      "deviation": 20,
+      "durationHours": 2,
+      "affectedOrders": 4,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 100% fail for 2h (4/4 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-03-09T04",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 1,
+      "baseline": 0.05,
+      "deviation": 20,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 100% fail for 1h (1/1 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-03-09T19",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 1,
+      "baseline": 0.05,
+      "deviation": 20,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 100% fail for 1h (1/1 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-03-11T20",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 0.5,
+      "baseline": 0.05,
+      "deviation": 10,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 50% fail for 1h (1/2 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-03-15T05",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 1,
+      "baseline": 0.05,
+      "deviation": 20,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 100% fail for 1h (1/1 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-03-18T03",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "PREPAID",
+    "data": {
+      "failRate": 0.25,
+      "baseline": 0.05,
+      "deviation": 5,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=PREPAID at 25% fail for 1h (1/4 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-03-19T08",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 1,
+      "baseline": 0.05,
+      "deviation": 20,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 100% fail for 1h (1/1 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-03-20T11",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 0.5,
+      "baseline": 0.05,
+      "deviation": 10,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 50% fail for 1h (1/2 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-03-20T20",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 0.25,
+      "baseline": 0.05,
+      "deviation": 5,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 25% fail for 1h (1/4 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-03-21T12",
+    "type": "chronic",
+    "severity": "WARNING",
+    "metric": "ccFailRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 1,
+      "baseline": 0.05,
+      "deviation": 20,
+      "durationHours": 1,
+      "affectedOrders": 1,
+      "lostRevenue": 0
+    },
+    "description": "CC CHRONIC: paySource=CREDITCARD at 100% fail for 1h (1/1 orders)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-03-22T04:01:29.329Z",
+    "type": "baseline_shift",
+    "severity": "CRITICAL",
+    "metric": "failRate",
+    "dimension": "paySource",
+    "value": "PREPAID",
+    "data": {
+      "failRate": 0.5842564749999998,
+      "baseline": 0.05,
+      "deviation": 11.685129499999995,
+      "durationHours": 0,
+      "affectedOrders": 0,
+      "lostRevenue": 0
+    },
+    "description": "Learned: paySource=PREPAID: 0% fail rate over 1h (seen 8x) (confirmed 8x)"
+  },
+  {
+    "source": "cc-qa",
+    "timestamp": "2026-03-22T04:01:29.329Z",
+    "type": "baseline_shift",
+    "severity": "CRITICAL",
+    "metric": "failRate",
+    "dimension": "paySource",
+    "value": "CREDITCARD",
+    "data": {
+      "failRate": 0.7375386934589567,
+      "baseline": 0.05,
+      "deviation": 14.750773869179135,
+      "durationHours": 0,
+      "affectedOrders": 0,
+      "lostRevenue": 0
+    },
+    "description": "Learned: paySource=CREDITCARD: 1% fail rate over 1h (seen 60x) (confirmed 60x)"
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "id": 4,
+  "timestamp": "2026-03-22T01:29:24.090Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 35.46666666666667,
+    "catch": 66.66666666666666,
+    "quiet": 22,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 39,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 35.46666666666667,
+  "accepted": true,
+  "reasoning": "Looking at the history, raising thresholds alone hasn't helped (experiments 1-3 were rejected or tied). The core issue is 33 false positives on 43 clean days with 0% specificity. I should try a dramatically different approach: switch to mean instead of median (median may be causing instability with small samples), use a shorter lookback to get a tighter baseline, and try the `trim5` outlier method which may clean the baseline better than IQR. I'll also reduce metricsToCheck to the most reliable ",
+  "durationMs": 191
+}

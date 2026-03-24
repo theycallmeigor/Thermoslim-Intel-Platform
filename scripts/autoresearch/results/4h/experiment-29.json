@@ -1,0 +1,47 @@
+{
+  "id": 29,
+  "timestamp": "2026-03-22T03:10:24.521Z",
+  "timeframe": "4h",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.4,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.5,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 61.212121212121204,
+    "catch": 33.33333333333333,
+    "quiet": 69.69696969696969,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 30,
+      "cleanDays": 99,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 63.232323232323225,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches only 3/8 injections (37.5% catch rate) while having 25 FPs. The key tension is improving catch rate without increasing false alarms. Looking at the experiment history, adding `recurringOrders` seems to hurt (rejected configs), and longer lookback windows (28 days) also underperform. I should try a shorter lookback (14-21 days) with a meaningfully lower warning threshold to catch more anomalies, while compensating for noise by tightening funnel drop threshol",
+  "durationMs": 240
+}

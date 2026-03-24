@@ -1,0 +1,47 @@
+{
+  "id": 48,
+  "timestamp": "2026-03-22T03:12:36.167Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.6,
+    "funnelDropCritical": 0.82,
+    "topCampaignsToCheck": 12,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 49.692671394799056,
+    "catch": 44.44444444444444,
+    "quiet": 29.787234042553195,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 33,
+      "cleanDays": 47,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 49.941520467836256,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best config catches only 2/8 injections with 18 FPs on clean days, suggesting thresholds are too high to catch anomalies but still generating noise. I'll try reducing warningThreshold slightly to improve catch rate while keeping criticalThreshold high to reduce FP severity, use a shorter lookback to be more sensitive to sudden changes, and add `recurringOrders` back since subscription patterns may be key to detecting injected anomalies.",
+  "durationMs": 226
+}

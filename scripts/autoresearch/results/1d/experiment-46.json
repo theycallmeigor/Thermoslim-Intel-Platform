@@ -1,0 +1,47 @@
+{
+  "id": 46,
+  "timestamp": "2026-03-22T03:12:19.109Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2,
+    "criticalThreshold": 3.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 29.629629629629626,
+    "catch": 66.66666666666666,
+    "quiet": 7.407407407407405,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 50,
+      "cleanDays": 54,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 49.50354609929078,
+  "accepted": false,
+  "reasoning": "Looking at the current config, the catch rate is very low (2/8 = 25%) while the quiet score is mediocre too (28 FPs on 47 days). The thresholds are extremely high (3.9/5.5) which likely explains missing real anomalies, and the funnel thresholds are also very high. I'll try dramatically lowering the detection thresholds to catch more real anomalies while also tightening funnel thresholds, and add `refunds` as a potential signal.",
+  "durationMs": 190
+}

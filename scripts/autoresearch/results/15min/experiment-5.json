@@ -1,0 +1,47 @@
+{
+  "id": 5,
+  "timestamp": "2026-03-22T03:07:20.115Z",
+  "timeframe": "15min",
+  "config": {
+    "lookbackDays": 7,
+    "minHistory": 4,
+    "warningThreshold": 2.6,
+    "criticalThreshold": 3.6,
+    "funnelDropWarning": 0.28,
+    "funnelDropCritical": 0.52,
+    "topCampaignsToCheck": 12,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue",
+      "refunds",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 46.13569321533923,
+    "catch": 66.66666666666666,
+    "quiet": 48.67256637168141,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 58,
+      "cleanDays": 113,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 63.67676767676768,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches 5/8 injections but has 51 false positives on 110 clean days - that's too noisy. The key tension is improving catch rate while reducing false alarms. I notice `weekdayWeekendSplit` is false (research says weekend volumes are similar, so splitting may not help), but I should try a shorter lookback (7 days) to catch sudden changes faster, while slightly raising thresholds to reduce FPs. Adding `recurringOrders` to metricsToCheck could help catch subscription a",
+  "durationMs": 484
+}

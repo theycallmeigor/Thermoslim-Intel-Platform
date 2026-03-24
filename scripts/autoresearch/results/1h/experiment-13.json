@@ -1,0 +1,48 @@
+{
+  "id": 13,
+  "timestamp": "2026-03-22T03:08:22.693Z",
+  "timeframe": "1h",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2,
+    "criticalThreshold": 3.2,
+    "funnelDropWarning": 0.25,
+    "funnelDropCritical": 0.5,
+    "topCampaignsToCheck": 20,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "recurringOrders",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 38.44863731656185,
+    "catch": 55.55555555555556,
+    "quiet": 40.56603773584906,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 63,
+      "cleanDays": 106,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 57.17171717171717,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current config is catching only 1/8 injections (very low catch rate of 22.22) while having 29 false positives on clean days. The main issue is that we're missing real anomalies - we need to be more sensitive. I'll lower the warning and critical thresholds significantly to catch more anomalies, shorten the lookback window to better detect sudden changes, and add more metrics to increase detection surface. The quiet score penalty from FPs is already hurting us, but missing 7/8 in",
+  "durationMs": 418
+}

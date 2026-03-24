@@ -1,0 +1,45 @@
+{
+  "id": 63,
+  "timestamp": "2026-03-22T03:14:33.550Z",
+  "timeframe": "1w",
+  "config": {
+    "lookbackDays": 30,
+    "minHistory": 14,
+    "warningThreshold": 3.6,
+    "criticalThreshold": 5.2,
+    "funnelDropWarning": 0.74,
+    "funnelDropCritical": 0.9,
+    "topCampaignsToCheck": 6,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 32.514619883040936,
+    "catch": 44.44444444444444,
+    "quiet": 36.8421052631579,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 24,
+      "cleanDays": 38,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 42.836879432624116,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best has 28 false positives on 47 clean days - that's terrible specificity. Previous attempts to raise thresholds kept rejecting. The key insight is that removing `refunds` from metricsToCheck caused rejections (likely missing an injection), so we should keep it. Instead, let's try a longer lookback (30 days) to get a more stable baseline, raise the warning threshold slightly to 3.6, and critically keep the same metrics but try `iqr` outlier method with `excludeOutliers",
+  "durationMs": 210
+}

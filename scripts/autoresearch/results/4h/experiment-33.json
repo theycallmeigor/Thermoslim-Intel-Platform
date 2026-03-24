@@ -1,0 +1,47 @@
+{
+  "id": 33,
+  "timestamp": "2026-03-22T03:10:56.749Z",
+  "timeframe": "4h",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.8,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.35,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 20,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 62.82828282828282,
+    "catch": 33.33333333333333,
+    "quiet": 73.73737373737373,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 26,
+      "cleanDays": 99,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 63.232323232323225,
+  "accepted": false,
+  "reasoning": "Looking at the experiment history, all recent attempts to lower thresholds or change lookback days have been rejected. The current best has high thresholds (3.8/4.8) and catches only 3/8 injections. The key issue seems to be catch rate. Let me try a different angle: keep the high thresholds but experiment with the funnel drop parameters more aggressively (lower funnelDropWarning significantly) and try `trim5` outlier method with a slightly longer lookback to stabilize the baseline, while keeping",
+  "durationMs": 231
+}

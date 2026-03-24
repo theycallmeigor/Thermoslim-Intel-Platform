@@ -1,0 +1,45 @@
+{
+  "id": 25,
+  "timestamp": "2026-03-22T01:32:07.922Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 38.666666666666664,
+    "catch": 66.66666666666666,
+    "quiet": 30,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 35,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the pattern, every experiment that deviates from the best gets rejected, yet the best has terrible quiet rate. The scoring weights suggest catch rate is heavily weighted. Let me try going back very close to the best config but making a single targeted change: reducing `topCampaignsToCheck` to the minimum (5) while keeping everything else identical — this reduces alert opportunities without changing thresholds that affect catch rate.\n\nActually, looking more carefully: the best score is",
+  "durationMs": 178
+}

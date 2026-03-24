@@ -1,0 +1,45 @@
+{
+  "id": 47,
+  "timestamp": "2026-03-22T01:34:54.864Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 7,
+    "minHistory": 4,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 32.10526315789474,
+    "catch": 75,
+    "quiet": 5.26315789473685,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 54,
+      "cleanDays": 57,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the pattern, every modification to the best config has been rejected. The best config has 35/50 false positives, suggesting the baseline is systematically too low due to growth trend. I haven't tried a shorter lookback (e.g., 7 days) which would track the trend more closely and reduce false positives from comparing current values to older, lower baseline values — combined with keeping thresholds the same as the best config.",
+  "durationMs": 174
+}

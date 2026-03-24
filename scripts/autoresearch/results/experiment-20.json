@@ -1,0 +1,45 @@
+{
+  "id": 20,
+  "timestamp": "2026-03-22T01:31:27.782Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.6,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.68,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 35.2,
+    "catch": 50,
+    "quiet": 38,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 6,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 31,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every experiment deviates from the best and gets rejected. The current best has terrible quiet rate (35/50 false positives) suggesting the thresholds are fundamentally too low for this platform's natural variance. I haven't tried keeping the exact same structure but raising the warning threshold to 3.2+ while keeping trim5 and the same 5 metrics - previous attempts changed too many things at once. Let me try a minimal change: only raise the critical threshold slightly and",
+  "durationMs": 179
+}

@@ -1,0 +1,47 @@
+{
+  "id": 50,
+  "timestamp": "2026-03-22T03:12:53.783Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 30,
+    "minHistory": 14,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.68,
+    "funnelDropCritical": 0.87,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 52.280701754385966,
+    "catch": 33.33333333333333,
+    "quiet": 47.36842105263158,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 2,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 20,
+      "cleanDays": 38,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 52.280701754385966,
+  "accepted": true,
+  "reasoning": "Looking at the experiment history, the key challenge is improving catch rate (only 2/8 injections caught) without increasing false positives beyond the current 18 FPs. The current config with warningThreshold=3.5 is too conservative for catching anomalies. Exp 48 (score 49.69) tried lowering thresholds with IQR but was slightly worse - however the best config uses trim5 which may be more stable. I'll try a modest threshold reduction while keeping trim5, and add `recurringOrders` back since subsc",
+  "durationMs": 222
+}

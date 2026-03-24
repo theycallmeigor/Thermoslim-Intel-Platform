@@ -1,0 +1,46 @@
+{
+  "id": 11,
+  "timestamp": "2026-03-22T02:40:23.610Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.6,
+    "funnelDropCritical": 0.8,
+    "topCampaignsToCheck": 8,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 32.59259259259259,
+    "catch": 66.66666666666666,
+    "quiet": 14.81481481481481,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 46,
+      "cleanDays": 54,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 49.50354609929078,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches only 2/8 injections (very low catch rate) with 28 false positives. The rejected experiment lowered thresholds but added too many metrics causing noise. I need to improve catch rate while keeping FPs low. I'll try a shorter lookback (14 days) to be more sensitive to sudden changes, lower thresholds moderately (warningThreshold ~2.8, criticalThreshold ~4.2), add `refunds` and `avgOrderValue` to catch more anomaly types, but keep the metric set focused. I'll a",
+  "durationMs": 205
+}

@@ -1,0 +1,46 @@
+{
+  "id": 36,
+  "timestamp": "2026-03-22T01:33:32.377Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 30.533333333333335,
+    "catch": 58.333333333333336,
+    "quiet": 18,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 6,
+      "injectionsTotal": 11,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 41,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the pattern, every modification has been rejected. The best config has 35/50 false positives suggesting the thresholds are too sensitive, but raising them hurts catch rate. The key insight I haven't tried: keeping thresholds identical to the best config but adding `recurringOrders` back while trying `iqr` outlier method instead of `trim5`, and slightly increasing `topCampaignsToCheck` - the IQR method may be more appropriate for the small sample sizes (~25 orders/day) and could produc",
+  "durationMs": 185
+}

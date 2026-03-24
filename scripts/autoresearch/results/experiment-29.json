@@ -1,0 +1,46 @@
+{
+  "id": 29,
+  "timestamp": "2026-03-22T01:32:39.730Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 38,
+    "catch": 75,
+    "quiet": 20,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 40,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, the best config has 66.67 catch rate but only 30.00 quiet rate (35/50 false positives). Every modification has been rejected. The only tied result was `topCampaignsToCheck: 5`. I should try adding `refunds` and `avgOrderValue` to the metrics (which might catch more injections to improve catch rate) while also slightly adjusting the lookback and keeping thresholds identical - a fresh angle that doesn't touch what's working.",
+  "durationMs": 183
+}

@@ -1,0 +1,521 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Source {
+  SHOPIFY
+  CHECKOUTCHAMP
+}
+
+enum OrderStatus {
+  PARTIAL
+  COMPLETE
+  PENDING
+  DECLINED
+  REFUNDED
+}
+
+enum ResponseType {
+  SUCCESS
+  HARD_DECLINE
+  SOFT_DECLINE
+  PENDING
+  COD_PENDING
+}
+
+enum PaySource {
+  CREDITCARD
+  CHECK
+  ACCTONFILE
+  COD
+  PREPAID
+  APPLEPAY
+  GOOGLEPAY
+}
+
+enum RecurringStatus {
+  TRIAL
+  ACTIVE
+  RECYCLE_BILLING
+  RECYCLE_FAILED
+  COMPLETE
+  CANCELLED
+}
+
+enum SubscriptionStatus {
+  TRIAL
+  ACTIVE
+  RECYCLE_BILLING
+  RECYCLE_FAILED
+  COMPLETE
+  CANCELLED
+  PAUSED
+}
+
+enum SubscriptionEventType {
+  CREATED
+  BILLED
+  DECLINED
+  CANCELLED
+  PAUSED
+  RESUMED
+  REACTIVATED
+}
+
+enum RevenueEventType {
+  SALE
+  REFUND
+  CHARGEBACK
+  REBILL
+  VOID
+}
+
+enum FulfillmentStatus {
+  HOLD
+  PENDING
+  PENDING_SHIPMENT
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RMA_PENDING
+  RETURNED
+}
+
+enum EmailEventType {
+  SENT
+  OPENED
+  CLICKED
+  BOUNCED
+  UNSUBSCRIBED
+}
+
+model Order {
+  id                  String        @id @default(uuid())
+  source              Source
+  sourceOrderId       String
+  sourceClientOrderId String?
+  customerId          String
+  customer            Customer      @relation(fields: [customerId], references: [id])
+  status              OrderStatus
+  orderTotal          Int
+  totalPrice          Int
+  totalShipping       Int           @default(0)
+  totalDiscount       Int           @default(0)
+  salesTax            Int           @default(0)
+  currencyCode        String        @default("USD")
+  campaignId          String?
+  campaignName        String?
+  salesUrl            String?
+  hasUpsells          Boolean       @default(false)
+  couponCode          String?
+  ipAddress           String?
+  paySource           PaySource?
+  responseType        ResponseType?
+  shopifyOrderId      String?       // For CC orders: the Shopify order ID this duplicates
+  ccOrderType         String?       // For CC orders: NEW_SALE | REBILL | CHARGEBACK
+  funnelReferenceId   String?       // CC funnel reference ID
+  funnelPageId        String?       // FK to FunnelPage — which page this order landed on
+  funnelPage          FunnelPage?   @relation(fields: [funnelPageId], references: [id])
+  declineReason       String?       // Processor decline reason text from CC API
+  // Payment verification
+  avsResponse         String?       // Address Verification: Y=match, N=no match, U=unavailable
+  cvvResponse         String?       // CVV Verification: Y=match, N=no match, U=unavailable
+  cardType            String?       // VISA, MASTERCARD, AMEX, DISCOVER
+  cardLast4           String?       // Last 4 digits of card
+  cardIsDebit         Boolean?      // Is debit card
+  cardIsPrepaid       Boolean?      // Is prepaid card
+  isDeclineSave       Boolean?      // Order saved by call center after decline
+  // Browser / device
+  userAgent           String?       // Full user agent string
+  device              String?       // Device type from CC (mobile, desktop, tablet)
+  browser             String?       // Browser name from CC
+  geoState            String?       // Geo-located state from CC
+  geoCountry          String?       // Geo-located country from CC
+  // CC custom fields
+  ccCustom1           String?       // Brand identifier
+  ccCustom2           String?       // Checkout variant name
+  // Fulfillment
+  fulfillmentData     Json?         // Full fulfillment array from CC
+  refundRemaining     Int?          // Remaining refundable amount (cents)
+  tags                String?       // Shopify order tags (comma-separated)
+  createdAt           DateTime
+  syncedAt            DateTime      @default(now())
+  items               OrderItem[]
+  revenueEvents       RevenueEvent[]
+  funnelEvents        FunnelEvent[]
+  upsellPath          UpsellPath?
+  attribution         Attribution?
+
+  @@unique([source, sourceOrderId])
+  @@index([customerId])
+  @@index([campaignId])
+  @@index([createdAt])
+  @@index([shopifyOrderId])
+  @@index([funnelPageId])
+}
+
+model OrderItem {
+  id                    String          @id @default(uuid())
+  orderId               String
+  order                 Order           @relation(fields: [orderId], references: [id])
+  productSlot           Int
+  productMapId          String?
+  productMap            ProductMap?     @relation(fields: [productMapId], references: [id])
+  ccCrmId               String?
+  ccCampaignProductId   String?
+  externalId            String?
+  name                  String
+  sku                   String?
+  price                 Int
+  quantity              Int             @default(1)
+  recurringStatus       RecurringStatus?
+  billingCycleNumber    Int?
+  recurringPrice        Int?
+  productCategoryId     String?
+  productCategoryName   String?
+  replacedByOrderItemId String?
+  merchantId            String?         // CC payment processor ID
+  responseType          String?         // Item-level response: SUCCESS, SOFT_DECLINE, etc.
+  txnType               String?         // SALE, REBILL
+  productType           String?         // OFFER, UPSALE
+  productDescription    String?         // Product description from CC
+
+  @@index([orderId])
+  @@index([externalId])
+  @@index([ccCampaignProductId])
+}
+
+model Customer {
+  id                 String              @id @default(uuid())
+  email              String              @unique
+  phone              String?
+  firstName          String?
+  lastName           String?
+  fullName           String?
+  billingAddress     Json?
+  shippingAddress    Json?
+  ccCustomerId       String?             @unique
+  shopifyCustomerId  String?             @unique
+  klaviyoProfileId   String?             @unique
+  contactOptIn       Boolean             @default(false)
+  firstOrderAt       DateTime?
+  lastOrderAt        DateTime?
+  totalOrders        Int                 @default(0)
+  totalRevenue       Int                 @default(0)
+  createdAt          DateTime            @default(now())
+  orders             Order[]
+  subscriptions      Subscription[]
+  revenueEvents      RevenueEvent[]
+  emailEvents        EmailEvent[]
+}
+
+model Subscription {
+  id                   String               @id @default(uuid())
+  customerId           String
+  customer             Customer             @relation(fields: [customerId], references: [id])
+  ccPurchaseId         String?              @unique
+  ccClientPurchaseId   String?              @unique
+  originalOrderId      String?
+  productMapId         String?
+  productMap           ProductMap?          @relation(fields: [productMapId], references: [id])
+  status               SubscriptionStatus
+  currentBillingCycle  Int                  @default(1)
+  recurringPrice       Int
+  frequency            String?
+  campaignId           String?
+  startedAt            DateTime
+  cancelledAt          DateTime?
+  cancelReason         String?
+  lastBilledAt         DateTime?
+  nextBillDate         DateTime?
+  events               SubscriptionEvent[]
+
+  @@index([customerId])
+  @@index([status])
+  @@index([campaignId])
+}
+
+model SubscriptionEvent {
+  id                 String                  @id @default(uuid())
+  subscriptionId     String
+  subscription       Subscription            @relation(fields: [subscriptionId], references: [id])
+  eventType          SubscriptionEventType
+  fromStatus         SubscriptionStatus?
+  toStatus           SubscriptionStatus
+  billingCycleNumber Int?
+  amount             Int?
+  declineReason      String?
+  metadata           Json?
+  occurredAt         DateTime
+
+  @@index([subscriptionId])
+  @@index([occurredAt])
+}
+
+model RevenueEvent {
+  id                    String           @id @default(uuid())
+  orderId               String?
+  order                 Order?           @relation(fields: [orderId], references: [id])
+  customerId            String
+  customer              Customer         @relation(fields: [customerId], references: [id])
+  eventType             RevenueEventType
+  amount                Int
+  source                Source
+  refundReason          String?
+  chargebackReasonCode  String?
+  transactionId         String?
+  occurredAt            DateTime
+
+  @@index([orderId])
+  @@index([customerId])
+  @@index([occurredAt])
+}
+
+model ProductMap {
+  id                   String         @id @default(uuid())
+  shopifyProductId     String?
+  shopifyVariantId     String?
+  ccCrmId              String?
+  ccCampaignProductIds Json?
+  externalId           String?
+  name                 String
+  sku                  String?
+  productLine          String?
+  category             String?
+  frequency            String?
+  priceTier            String?
+  isSubscription       Boolean        @default(false)
+  metadata             Json?
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+  orderItems           OrderItem[]
+  subscriptions        Subscription[]
+  funnelEvents         FunnelEvent[]
+
+  @@index([externalId])
+  @@index([shopifyProductId])
+  @@index([ccCrmId])
+  @@index([productLine])
+}
+
+model FunnelEvent {
+  id            String      @id @default(uuid())
+  orderId       String?
+  order         Order?      @relation(fields: [orderId], references: [id])
+  customerId    String?
+  campaignId    String?
+  step          String
+  pageUrl       String?
+  productMapId  String?
+  productMap    ProductMap? @relation(fields: [productMapId], references: [id])
+  accepted      Boolean?
+  occurredAt    DateTime
+
+  @@index([campaignId])
+  @@index([occurredAt])
+}
+
+model UpsellPath {
+  id                    String  @id @default(uuid())
+  orderId               String  @unique
+  order                 Order   @relation(fields: [orderId], references: [id])
+  initialProductMapId   String?
+  finalProductMapId     String?
+  upsellsAccepted       Int     @default(0)
+  upsellsDeclined       Int     @default(0)
+  revenueAdded          Int     @default(0)
+}
+
+model EmailCampaign {
+  id                  String       @id @default(uuid())
+  klaviyoCampaignId   String       @unique
+  name                String
+  subject             String?
+  sentAt              DateTime?
+  sends               Int          @default(0)
+  opens               Int          @default(0)
+  clicks              Int          @default(0)
+  bounces             Int          @default(0)
+  unsubscribes        Int          @default(0)
+  attributedRevenue   Int          @default(0)
+  attributedOrders    Int          @default(0)
+  syncedAt            DateTime     @default(now())
+  emailEvents         EmailEvent[]
+}
+
+model EmailFlow {
+  id                String       @id @default(uuid())
+  klaviyoFlowId     String       @unique
+  name              String
+  status            String
+  sends             Int          @default(0)
+  conversions       Int          @default(0)
+  attributedRevenue Int          @default(0)
+  syncedAt          DateTime     @default(now())
+  emailEvents       EmailEvent[]
+}
+
+model EmailEvent {
+  id              String         @id @default(uuid())
+  customerId      String
+  customer        Customer       @relation(fields: [customerId], references: [id])
+  eventType       EmailEventType
+  campaignId      String?
+  campaign        EmailCampaign? @relation(fields: [campaignId], references: [id])
+  flowId          String?
+  flow            EmailFlow?     @relation(fields: [flowId], references: [id])
+  occurredAt      DateTime
+
+  @@index([customerId])
+  @@index([occurredAt])
+}
+
+model PageAnalytics {
+  id                       String   @id @default(uuid())
+  pageUrl                  String
+  date                     DateTime @db.Date
+  sessions                 Int      @default(0)
+  pageViews                Int      @default(0)
+  uniqueVisitors           Int      @default(0)
+  avgTimeOnPage            Float?
+  bounceRate               Float?
+  avgScrollDepth           Float?
+  rageClicks               Int      @default(0)
+  deadClicks               Int      @default(0)
+  excessiveScrollSessions  Int      @default(0)
+  jsErrorCount             Int      @default(0)
+  quickBacks               Int      @default(0)
+  topReferrers             Json?
+  deviceBreakdown          Json?
+  funnelId                 String?
+
+  @@unique([pageUrl, date])
+  @@index([date])
+  @@index([funnelId])
+}
+
+model Attribution {
+  id            String  @id @default(uuid())
+  orderId       String  @unique
+  order         Order   @relation(fields: [orderId], references: [id])
+  sourceId      String?
+  pubId         String?
+  subAffId      String?
+  sourceValue1  String?
+  sourceValue2  String?
+  sourceValue3  String?
+  sourceValue4  String?
+  sourceValue5  String?
+  utmSource     String?
+  utmMedium     String?
+  utmCampaign   String?
+  utmContent    String?
+  utmTerm       String?
+  httpReferer   String?
+  userAgent     String?
+}
+
+model DailySnapshot {
+  id                    String   @id @default(uuid())
+  date                  DateTime @db.Date
+  source                Source?
+  campaignId            String?
+  campaignName          String?
+  productLine           String?
+  frequency             String?
+  channel               String?
+  funnelId              String?
+  pageUrl               String?
+  totalOrders           Int      @default(0)
+  newOrders             Int      @default(0)
+  recurringOrders       Int      @default(0)
+  totalRevenue          Int      @default(0)
+  checkoutRevenue       Int      @default(0)
+  recurringRevenue      Int      @default(0)
+  refunds               Int      @default(0)
+  chargebacks           Int      @default(0)
+  newSubscribers        Int      @default(0)
+  cancelledSubscribers  Int      @default(0)
+  activeSubscribers     Int      @default(0)
+  activeMRR             Int      @default(0)
+  avgOrderValue         Int      @default(0)
+  churnRate             Float?
+  pageViews             Int      @default(0)
+  uniqueVisitors        Int      @default(0)
+
+  @@unique([date, source, campaignId, productLine, frequency, channel, funnelId, pageUrl])
+  @@index([date])
+  @@index([campaignId])
+  @@index([productLine])
+  @@index([channel])
+  @@index([funnelId])
+}
+
+model Anomaly {
+  id              String    @id @default(uuid())
+  type            String
+  severity        String
+  metric          String
+  dimension       String?
+  dimensionValue  String?
+  expected        Float
+  actual          Float
+  deviation       Float
+  explanation     String
+  detectedAt      DateTime  @default(now())
+  resolvedAt      DateTime?
+  acknowledged    Boolean   @default(false)
+
+  @@index([detectedAt])
+  @@index([type])
+  @@index([severity])
+  @@index([acknowledged, resolvedAt])
+}
+
+model IngestionError {
+  id          String   @id @default(uuid())
+  source      Source
+  errorType   String
+  message     String
+  payload     Json?
+  occurredAt  DateTime @default(now())
+  resolved    Boolean  @default(false)
+
+  @@index([occurredAt])
+  @@index([source])
+}
+
+model Funnel {
+  id              String       @id @default(uuid())
+  ccReferenceId   String       @unique
+  name            String
+  campaignId      String?
+  campaignName    String?
+  pages           FunnelPage[]
+  syncedAt        DateTime     @default(now())
+
+  @@index([campaignId])
+}
+
+model FunnelPage {
+  id          String  @id @default(uuid())
+  funnelId    String
+  funnel      Funnel  @relation(fields: [funnelId], references: [id])
+  ccPageId    String
+  title       String
+  slug        String?
+  pageType    String?
+  externalUrl String?
+  sortOrder   Int     @default(0)
+  orders      Order[]
+
+  @@unique([funnelId, ccPageId])
+  @@index([slug])
+  @@index([externalUrl])
+}

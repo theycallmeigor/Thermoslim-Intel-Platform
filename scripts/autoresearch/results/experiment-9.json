@@ -1,0 +1,45 @@
+{
+  "id": 9,
+  "timestamp": "2026-03-22T01:30:03.155Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 30.077519379844958,
+    "catch": 33.33333333333333,
+    "quiet": 41.860465116279066,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 25,
+      "cleanDays": 43,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, the current best has 35 false positives on 50 clean days (terrible quiet rate) and 0% specificity. The catch rate is decent at 66.67%. All experiments reducing thresholds or changing lookback have failed. I should try a significantly higher warning threshold (3.0+) combined with a longer lookback (21 days) to get a more stable baseline, while keeping the proven trim5+mean approach. The longer lookback should reduce variance in the baseline, making the thresholds more mean",
+  "durationMs": 196
+}

@@ -1,0 +1,45 @@
+{
+  "id": 31,
+  "timestamp": "2026-03-22T01:32:55.761Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.35,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 33.02325581395349,
+    "catch": 50,
+    "quiet": 32.55813953488372,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 6,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 29,
+      "cleanDays": 43,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every modification to the best config has been rejected. The best config catches 8/11 injections but has 35/50 false positives. I need to either catch more injections (improve catch rate) or reduce false positives significantly. Let me try a longer lookback (21 days) which gives more stable baseline statistics, combined with `useMedianInsteadOfMean=true` (more robust to outliers in the baseline) and slightly tighter funnel thresholds - the longer window might help reduce ",
+  "durationMs": 179
+}

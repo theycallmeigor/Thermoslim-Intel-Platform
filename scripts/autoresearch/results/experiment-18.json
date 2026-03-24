@@ -1,0 +1,45 @@
+{
+  "id": 18,
+  "timestamp": "2026-03-22T01:31:12.356Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.9,
+    "criticalThreshold": 4.3,
+    "funnelDropWarning": 0.42,
+    "funnelDropCritical": 0.67,
+    "topCampaignsToCheck": 6,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 32.8,
+    "catch": 50,
+    "quiet": 32,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 6,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 34,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every experiment has been rejected, suggesting the current best is hard to beat incrementally. The key issue is 35 false positives on 50 clean days with 0% specificity. I notice that `weekdayWeekendSplit=true` combined with the full 5-metric set and original thresholds hasn't been tried - and reducing campaigns from 7 to 5 alone didn't help but might combined with a slightly higher warning threshold of 2.9. Let me try keeping the winning core (14-day lookback, trim5, mean",
+  "durationMs": 185
+}

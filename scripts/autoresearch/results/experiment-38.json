@@ -1,0 +1,45 @@
+{
+  "id": 38,
+  "timestamp": "2026-03-22T01:33:47.787Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.5,
+    "funnelDropCritical": 0.75,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 36.93333333333334,
+    "catch": 58.333333333333336,
+    "quiet": 34,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 7,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 33,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the experiment history, every modification to the best config has been rejected. The best config has terrible quiet rate (35/50 false positives) but decent catch rate. The specificity is 0/4 on funnel detection, suggesting funnel thresholds need adjustment. Let me try a minimal change: keep most parameters identical to the best config but try `funnelDropWarning: 0.5` and `funnelDropCritical: 0.75` (tighter funnel thresholds to reduce false positives there) while also slightly raising ",
+  "durationMs": 163
+}

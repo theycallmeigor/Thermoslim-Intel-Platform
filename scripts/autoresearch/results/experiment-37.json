@@ -1,0 +1,45 @@
+{
+  "id": 37,
+  "timestamp": "2026-03-22T01:33:40.216Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 30,
+    "minHistory": 10,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 28.823529411764707,
+    "catch": 25,
+    "quiet": 47.05882352941176,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 18,
+      "cleanDays": 34,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the pattern, every modification has been rejected and the best score of 38.67 has terrible quiet rate (35/50 false positives). The problem seems to be that the baseline is noisy due to the growing trend - a longer lookback captures older, lower-volume days that make current volumes look anomalous. Let me try a longer lookback of 30 days combined with significantly higher thresholds (3.2/4.8) to reduce false alarms, while keeping the proven metric set - the longer window should smooth ",
+  "durationMs": 197
+}

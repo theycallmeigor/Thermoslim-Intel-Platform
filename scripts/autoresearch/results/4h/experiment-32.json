@@ -1,0 +1,47 @@
+{
+  "id": 32,
+  "timestamp": "2026-03-22T03:10:49.289Z",
+  "timeframe": "4h",
+  "config": {
+    "lookbackDays": 35,
+    "minHistory": 14,
+    "warningThreshold": 3.5,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.5,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 57.12418300653595,
+    "catch": 22.22222222222222,
+    "quiet": 70.58823529411765,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 2,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 25,
+      "cleanDays": 85,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 63.232323232323225,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches only 3/8 injections (37.5%) with 25 FPs. Most experiments that lower thresholds or add `recurringOrders` get rejected due to increased FPs. I should try a different angle: increase `lookbackDays` significantly to get a more stable baseline, and try `weekdayWeekendSplit: true` (since the platform notes weekend volumes are similar, this might actually tighten baselines for each day type). I'll also try `useMedianInsteadOfMean: false` with `outlierMethod: \"iqr",
+  "durationMs": 266
+}

@@ -1,0 +1,48 @@
+{
+  "id": 55,
+  "timestamp": "2026-03-22T03:13:35.741Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 30,
+    "minHistory": 14,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.68,
+    "funnelDropCritical": 0.87,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 45.73099415204678,
+    "catch": 22.22222222222222,
+    "quiet": 42.10526315789473,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 2,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 22,
+      "cleanDays": 38,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 52.280701754385966,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe catch rate is stuck at 2/8 and lower thresholds keep creating too many false positives. The current best uses `trim5` outlier removal with median - let me try switching to `iqr` outlier method while keeping the high thresholds, and also try enabling `weekdayWeekendSplit` since it hasn't been tested in the accepted range. Additionally, I'll try a shorter lookback of 21 days with `weekdayWeekendSplit=true` to see if splitting baselines helps detect anomalies that get washed out i",
+  "durationMs": 224
+}

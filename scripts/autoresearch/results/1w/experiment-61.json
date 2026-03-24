@@ -1,0 +1,44 @@
+{
+  "id": 61,
+  "timestamp": "2026-03-22T03:14:16.688Z",
+  "timeframe": "1w",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.9,
+    "criticalThreshold": 5.2,
+    "funnelDropWarning": 0.75,
+    "funnelDropCritical": 0.9,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 33.56973995271868,
+    "catch": 22.22222222222222,
+    "quiet": 61.702127659574465,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 2,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 18,
+      "cleanDays": 47,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 42.836879432624116,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches 6/8 injections but has 28 false positives on 47 clean days, resulting in a poor quiet score. The specificity is 0.00, suggesting the system never achieves \"critical\" level alerts correctly. I'll try raising the warning threshold further to reduce false positives while keeping funnelDrop parameters moderate, and removing `refunds` from metricsToCheck since it may be generating noise - the key is fewer FPs while maintaining catch rate.",
+  "durationMs": 194
+}

@@ -1,0 +1,45 @@
+{
+  "id": 37,
+  "timestamp": "2026-03-22T03:11:19.003Z",
+  "timeframe": "6h",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.3,
+    "criticalThreshold": 3.5,
+    "funnelDropWarning": 0.35,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 63.73165618448638,
+    "catch": 55.55555555555556,
+    "quiet": 53.77358490566038,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 49,
+      "cleanDays": 106,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 63.73165618448638,
+  "accepted": true,
+  "reasoning": "## Reasoning\n\nThe current best has excellent catch rate (5/8) but terrible quiet score (82 FP on 106 clean days). The main issue is false positives - with warningThreshold at 1.8 and checking all 8 metrics, we're firing too many alerts. I'll raise the warning threshold significantly to ~2.3, reduce the metrics checked to only the most critical ones (dropping refunds and avgOrderValue which are noisier), and try IQR outlier method which may better handle the growing trend in this dataset.",
+  "durationMs": 182
+}

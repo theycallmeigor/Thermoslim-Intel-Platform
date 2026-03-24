@@ -1,0 +1,44 @@
+{
+  "id": 40,
+  "timestamp": "2026-03-22T03:11:42.327Z",
+  "timeframe": "6h",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.38,
+    "funnelDropCritical": 0.62,
+    "topCampaignsToCheck": 8,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 64.86373165618448,
+    "catch": 55.55555555555556,
+    "quiet": 56.60377358490566,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 46,
+      "cleanDays": 106,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 64.86373165618448,
+  "accepted": true,
+  "reasoning": "## Reasoning\n\nThe current best (63.73) catches 4/8 injections with 49 false positives, giving a poor quiet score of 53.77. The key tension is between catch rate and false positives. Since increasing lookback (21 days) hurt the score, and the current 14-day window with median+IQR is decent, I should try raising the warning threshold slightly to reduce FPs while keeping the focused metric set. Specifically, pushing `warningThreshold` to 2.5 and `criticalThreshold` to 3.8 should reduce noise, and d",
+  "durationMs": 173
+}

@@ -1,0 +1,44 @@
+{
+  "id": 6,
+  "timestamp": "2026-03-22T01:29:40.408Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 7,
+    "minHistory": 4,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.35,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 32.10526315789474,
+    "catch": 75,
+    "quiet": 5.26315789473685,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 54,
+      "cleanDays": 57,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 35.46666666666667,
+  "accepted": false,
+  "reasoning": "Looking at the history, the current best (35.47) has terrible quiet rate (22.00, meaning 39 false positives on 50 clean days) but decent catch rate. All attempts to raise thresholds have been rejected or hurt the score. The specificity is 0% which suggests the system never correctly identifies the *type* of anomaly. I should try a very different approach: use a much shorter lookback (7 days) to get tighter baselines that adapt faster, keep the mean+trim5 that worked, but try reducing topCampaign",
+  "durationMs": 163
+}

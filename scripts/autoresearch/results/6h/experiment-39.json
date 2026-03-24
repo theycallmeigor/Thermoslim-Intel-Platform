@@ -1,0 +1,46 @@
+{
+  "id": 39,
+  "timestamp": "2026-03-22T03:11:34.081Z",
+  "timeframe": "6h",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 4,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 56.36363636363636,
+    "catch": 33.33333333333333,
+    "quiet": 57.57575757575758,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 2,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 42,
+      "cleanDays": 99,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 63.73165618448638,
+  "accepted": false,
+  "reasoning": "Looking at the current best (63.73), it catches 4/8 injections but has 49 false positives on 106 clean days. The quiet score (53.77) is being dragged down significantly. I need to reduce FPs while trying to maintain or improve catch rate. The current config uses median with IQR outlier exclusion and 14-day lookback. Let me try increasing thresholds slightly to reduce FPs, while adding `recurringOrders` to potentially catch more injection types, and trying a slightly longer lookback to stabilize ",
+  "durationMs": 193
+}

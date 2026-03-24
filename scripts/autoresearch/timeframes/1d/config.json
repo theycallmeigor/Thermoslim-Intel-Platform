@@ -1,0 +1,22 @@
+{
+  "lookbackDays": 30,
+  "minHistory": 14,
+  "warningThreshold": 3.2,
+  "criticalThreshold": 4.8,
+  "funnelDropWarning": 0.68,
+  "funnelDropCritical": 0.87,
+  "topCampaignsToCheck": 15,
+  "metricsToCheck": [
+    "totalOrders",
+    "totalRevenue",
+    "newOrders",
+    "recurringOrders",
+    "newSubscribers",
+    "cancelledSubscribers",
+    "avgOrderValue"
+  ],
+  "useMedianInsteadOfMean": true,
+  "weekdayWeekendSplit": false,
+  "excludeOutliersFromBaseline": true,
+  "outlierMethod": "trim5"
+}

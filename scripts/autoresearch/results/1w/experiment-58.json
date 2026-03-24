@@ -1,0 +1,45 @@
+{
+  "id": 58,
+  "timestamp": "2026-03-22T03:13:51.670Z",
+  "timeframe": "1w",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.65,
+    "funnelDropCritical": 0.82,
+    "topCampaignsToCheck": 8,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 36.296296296296305,
+    "catch": 55.55555555555556,
+    "quiet": 35.18518518518519,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 35,
+      "cleanDays": 54,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 36.296296296296305,
+  "accepted": true,
+  "reasoning": "## Reasoning\n\nThe current best has a poor quiet score (42 FP on 54 clean days) suggesting thresholds are too low, but we're already catching 6/8 injections. I should raise the warning threshold significantly to reduce false positives while keeping critical threshold at a level that still catches real anomalies. I'll also try trimming the metrics list to the most impactful ones and use `trim5` outlier method which may be more robust for this small ~25 orders/day dataset with growth trends.",
+  "durationMs": 189
+}

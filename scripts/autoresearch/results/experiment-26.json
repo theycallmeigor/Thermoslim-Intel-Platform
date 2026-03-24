@@ -1,0 +1,45 @@
+{
+  "id": 26,
+  "timestamp": "2026-03-22T01:32:15.855Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 7,
+    "minHistory": 4,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 31.403508771929825,
+    "catch": 75,
+    "quiet": 3.5087719298245617,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 55,
+      "cleanDays": 57,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the pattern, every experiment has been rejected and the best config has 35/50 false positives. The scoring system seems heavily weighted toward catch rate (66.67 catch rate dominates the 38.67 total). Since reducing metrics and campaigns hurts catch rate, and raising thresholds also hurts, I should try a fundamentally different approach: use `useMedianInsteadOfMean=true` with the **exact same thresholds** as the best config (median is more robust, might reduce false alarms without sac",
+  "durationMs": 161
+}

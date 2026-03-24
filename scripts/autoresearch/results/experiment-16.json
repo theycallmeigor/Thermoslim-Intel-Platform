@@ -1,0 +1,45 @@
+{
+  "id": 16,
+  "timestamp": "2026-03-22T01:30:55.957Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 33.02325581395349,
+    "catch": 50,
+    "quiet": 32.55813953488372,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 11,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 29,
+      "cleanDays": 43,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, the current best has catastrophic quiet rate (35 false positives on 50 clean days, 0% specificity) but decent catch rate. Every incremental change has been rejected. The false alarms seem deeply systematic - likely the combination of 5 metrics × 7 campaigns generating many alert opportunities. Let me try a radically different approach: use IQR outlier method (not tried recently), keep the 5 metrics but significantly raise both thresholds, and use `useMedianInsteadOfMean=t",
+  "durationMs": 191
+}

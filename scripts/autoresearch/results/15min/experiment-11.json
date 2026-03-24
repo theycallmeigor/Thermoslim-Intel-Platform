@@ -1,0 +1,45 @@
+{
+  "id": 11,
+  "timestamp": "2026-03-22T03:08:14.804Z",
+  "timeframe": "15min",
+  "config": {
+    "lookbackDays": 8,
+    "minHistory": 5,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 3.5,
+    "funnelDropWarning": 0.35,
+    "funnelDropCritical": 0.58,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 49.88095238095238,
+    "catch": 66.66666666666666,
+    "quiet": 58.035714285714285,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 6,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 47,
+      "cleanDays": 112,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 64.40404040404042,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches 5/8 injections with 49 false positives. The quiet score is dragged down by FPs, so I should try to reduce them while maintaining catch rate. Since weekdayWeekendSplit=false works better (experiments with true were rejected), and IQR outlier method seems stable, I'll try increasing the warning threshold slightly to reduce FPs while keeping criticalThreshold moderate. I'll also try a slightly shorter lookback (8 days) which might make the baseline tighter and",
+  "durationMs": 482
+}

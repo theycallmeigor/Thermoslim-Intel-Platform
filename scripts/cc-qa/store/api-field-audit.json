@@ -1,0 +1,959 @@
+{
+  "generatedAt": "2026-03-22T13:14:02.312Z",
+  "orderFields": [
+    {
+      "field": "orderId",
+      "populatedPct": 100,
+      "samples": [
+        "19F5AC4C0C",
+        "095CE8FE12",
+        "8A34509A4E"
+      ]
+    },
+    {
+      "field": "actualOrderId",
+      "populatedPct": 100,
+      "samples": [
+        "1443",
+        "1445",
+        "1447"
+      ]
+    },
+    {
+      "field": "clientOrderId",
+      "populatedPct": 100,
+      "samples": [
+        "19F5AC4C0C",
+        "095CE8FE12",
+        "8A34509A4E"
+      ]
+    },
+    {
+      "field": "dateCreated",
+      "populatedPct": 100,
+      "samples": [
+        "2026-03-01 02:14:46",
+        "2026-03-01 02:22:14",
+        "2026-03-01 03:07:37"
+      ]
+    },
+    {
+      "field": "dateUpdated",
+      "populatedPct": 100,
+      "samples": [
+        "2026-03-02 13:23:52",
+        "2026-03-03 01:23:02",
+        "2026-03-02 13:23:56"
+      ]
+    },
+    {
+      "field": "orderType",
+      "populatedPct": 100,
+      "samples": [
+        "NEW_SALE",
+        "RECURRING"
+      ]
+    },
+    {
+      "field": "orderStatus",
+      "populatedPct": 100,
+      "samples": [
+        "COMPLETE",
+        "PARTIAL"
+      ]
+    },
+    {
+      "field": "campaignName",
+      "populatedPct": 100,
+      "samples": [
+        "Shopify"
+      ]
+    },
+    {
+      "field": "campaignCategoryName",
+      "populatedPct": 100,
+      "samples": [
+        "CheckoutChamp"
+      ]
+    },
+    {
+      "field": "customerId",
+      "populatedPct": 100,
+      "samples": [
+        "1231",
+        "1233",
+        "657"
+      ]
+    },
+    {
+      "field": "name",
+      "populatedPct": 100,
+      "samples": [
+        "Arlene Salandy",
+        "Jennifer Strand",
+        "Mayra Hernandez"
+      ]
+    },
+    {
+      "field": "emailAddress",
+      "populatedPct": 100,
+      "samples": [
+        "jayetyraw@yahoo.com",
+        "jennstrand@me.com",
+        "myhern02@yahoo.com"
+      ]
+    },
+    {
+      "field": "firstName",
+      "populatedPct": 100,
+      "samples": [
+        "Arlene",
+        "Jennifer",
+        "Mayra"
+      ]
+    },
+    {
+      "field": "lastName",
+      "populatedPct": 100,
+      "samples": [
+        "Salandy",
+        "Strand",
+        "Hernandez"
+      ]
+    },
+    {
+      "field": "address1",
+      "populatedPct": 100,
+      "samples": [
+        "848 Southwick Dr",
+        "203 W Windsor Ct",
+        "4800 Citrus Ave"
+      ]
+    },
+    {
+      "field": "city",
+      "populatedPct": 100,
+      "samples": [
+        "El Paso",
+        "Coeur D Alene",
+        "Fontana"
+      ]
+    },
+    {
+      "field": "state",
+      "populatedPct": 100,
+      "samples": [
+        "TX",
+        "ID",
+        "CA"
+      ]
+    },
+    {
+      "field": "country",
+      "populatedPct": 100,
+      "samples": [
+        "US"
+      ]
+    },
+    {
+      "field": "postalCode",
+      "populatedPct": 100,
+      "samples": [
+        "79928",
+        "83815",
+        "92336"
+      ]
+    },
+    {
+      "field": "shipFirstName",
+      "populatedPct": 100,
+      "samples": [
+        "Arlene",
+        "Jenn",
+        "Mayra"
+      ]
+    },
+    {
+      "field": "shipLastName",
+      "populatedPct": 100,
+      "samples": [
+        "Salandy",
+        "Strand",
+        "Hernandez"
+      ]
+    },
+    {
+      "field": "shipAddress1",
+      "populatedPct": 100,
+      "samples": [
+        "848 Southwick Dr",
+        "203 W Windsor Ct",
+        "4800 Citrus Ave"
+      ]
+    },
+    {
+      "field": "shipCity",
+      "populatedPct": 100,
+      "samples": [
+        "El Paso",
+        "Coeur D Alene",
+        "Fontana"
+      ]
+    },
+    {
+      "field": "shipState",
+      "populatedPct": 100,
+      "samples": [
+        "TX",
+        "ID",
+        "CA"
+      ]
+    },
+    {
+      "field": "shipCountry",
+      "populatedPct": 100,
+      "samples": [
+        "US"
+      ]
+    },
+    {
+      "field": "shipPostalCode",
+      "populatedPct": 100,
+      "samples": [
+        "79928",
+        "83815",
+        "92336"
+      ]
+    },
+    {
+      "field": "shipProfileId",
+      "populatedPct": 100,
+      "samples": [
+        "2"
+      ]
+    },
+    {
+      "field": "ipAddress",
+      "populatedPct": 100,
+      "samples": [
+        "68.207.117.29",
+        "174.204.65.251",
+        "172.115.201.31"
+      ]
+    },
+    {
+      "field": "currencySymbol",
+      "populatedPct": 100,
+      "samples": [
+        "$"
+      ]
+    },
+    {
+      "field": "currencyCode",
+      "populatedPct": 100,
+      "samples": [
+        "USD"
+      ]
+    },
+    {
+      "field": "campaignId",
+      "populatedPct": 100,
+      "samples": [
+        "2"
+      ]
+    },
+    {
+      "field": "productCost",
+      "populatedPct": 100,
+      "samples": [
+        "0.00"
+      ]
+    },
+    {
+      "field": "shippingCost",
+      "populatedPct": 100,
+      "samples": [
+        "0.00"
+      ]
+    },
+    {
+      "field": "custom1",
+      "populatedPct": 100,
+      "samples": [
+        "Thermoslim"
+      ]
+    },
+    {
+      "field": "custom2",
+      "populatedPct": 100,
+      "samples": [
+        "TS - BSD - Subscriprions Checkout NEW",
+        "Original Control",
+        "FIXES"
+      ]
+    },
+    {
+      "field": "hasUpsell",
+      "populatedPct": 100,
+      "samples": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "field": "items",
+      "populatedPct": 100,
+      "samples": [
+        "{\"273\":{\"productId\":\"273\",\"transactionItemId\":\"1851\",\"name\":\"Thermoslim Body Scu",
+        "{\"239\":{\"productId\":\"239\",\"transactionItemId\":\"1855\",\"name\":\"Sculpt+ Conductive ",
+        "{\"207\":{\"productId\":\"207\",\"transactionItemId\":\"1859\",\"name\":\"Sculpt+ Conductive "
+      ]
+    },
+    {
+      "field": "funnelReferenceId",
+      "populatedPct": 100,
+      "samples": [
+        "8B0924CCB5C644E580792695AC560643"
+      ]
+    },
+    {
+      "field": "browserDetails",
+      "populatedPct": 100,
+      "samples": [
+        "{\"userAgent\":\"Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like",
+        "{\"userAgent\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit",
+        "{\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+      ]
+    },
+    {
+      "field": "externalOrderId",
+      "populatedPct": 74,
+      "samples": [
+        "7184351822005",
+        "7184341369013",
+        "7184367288501"
+      ]
+    },
+    {
+      "field": "totalAmount",
+      "populatedPct": 74,
+      "samples": [
+        "99.95",
+        "294.85",
+        "29.95"
+      ]
+    },
+    {
+      "field": "refundRemaining",
+      "populatedPct": 74,
+      "samples": [
+        "99.95",
+        "294.85",
+        "29.95"
+      ]
+    },
+    {
+      "field": "paySource",
+      "populatedPct": 74,
+      "samples": [
+        "PAYPAL",
+        "PREPAID",
+        "CREDITCARD"
+      ]
+    },
+    {
+      "field": "price",
+      "populatedPct": 74,
+      "samples": [
+        "99.95",
+        "294.85",
+        "29.95"
+      ]
+    },
+    {
+      "field": "baseShipping",
+      "populatedPct": 74,
+      "samples": [
+        "0.00"
+      ]
+    },
+    {
+      "field": "discountPrice",
+      "populatedPct": 74,
+      "samples": [
+        "0.00",
+        "17.00"
+      ]
+    },
+    {
+      "field": "salesTax",
+      "populatedPct": 74,
+      "samples": [
+        "0.00"
+      ]
+    },
+    {
+      "field": "shipUpcharge",
+      "populatedPct": 74,
+      "samples": [
+        "0.00"
+      ]
+    },
+    {
+      "field": "totalDiscount",
+      "populatedPct": 74,
+      "samples": [
+        "0.00",
+        "10.00"
+      ]
+    },
+    {
+      "field": "fulfillments",
+      "populatedPct": 100,
+      "samples": [
+        "[{\"fulfillmentId\":1009,\"fulfillmentHouseId\":null,\"company\":\"System Fulfillment\",",
+        "[{\"fulfillmentId\":1011,\"fulfillmentHouseId\":null,\"company\":\"System Fulfillment\",",
+        "[{\"fulfillmentId\":1013,\"fulfillmentHouseId\":null,\"company\":\"System Fulfillment\","
+      ]
+    },
+    {
+      "field": "salesUrl",
+      "populatedPct": 70,
+      "samples": [
+        "https://try.thermoslim.co/checkout2?products=273:1&cpid=266fc95a-0532-469d-8297-",
+        "https://try.thermoslim.co/checkout2?products=273:1",
+        "https://try.thermoslim.co/checkout2?products=273:1&cpid=bc370bc6-2db2-4716-ab8d-"
+      ]
+    },
+    {
+      "field": "phoneNumber",
+      "populatedPct": 66,
+      "samples": [
+        "3108062533",
+        "3108662044",
+        "7194601378"
+      ]
+    },
+    {
+      "field": "avsResponse",
+      "populatedPct": 46,
+      "samples": [
+        "U",
+        "Y",
+        "N"
+      ]
+    },
+    {
+      "field": "cvvResponse",
+      "populatedPct": 46,
+      "samples": [
+        "U",
+        "Y"
+      ]
+    },
+    {
+      "field": "shipCarrier",
+      "populatedPct": 32,
+      "samples": [
+        "Default"
+      ]
+    },
+    {
+      "field": "shipMethod",
+      "populatedPct": 32,
+      "samples": [
+        "Default"
+      ]
+    },
+    {
+      "field": "cardType",
+      "populatedPct": 30,
+      "samples": [
+        "VISA",
+        "MASTERCARD",
+        "AMEX"
+      ]
+    },
+    {
+      "field": "cardLast4",
+      "populatedPct": 30,
+      "samples": [
+        "3219",
+        "8244",
+        "9914"
+      ]
+    },
+    {
+      "field": "cardExpiryDate",
+      "populatedPct": 30,
+      "samples": [
+        "2029-03-31 00:00:00",
+        "2026-08-31 23:59:59",
+        "2027-04-30 23:59:59"
+      ]
+    },
+    {
+      "field": "address2",
+      "populatedPct": 14,
+      "samples": [
+        "Apt 6311",
+        "Suite 210",
+        "Drury Circle"
+      ]
+    },
+    {
+      "field": "shipAddress2",
+      "populatedPct": 10,
+      "samples": [
+        "Apt 6311",
+        "Suite 210",
+        "A"
+      ]
+    },
+    {
+      "field": "cardIsDebit",
+      "populatedPct": 10,
+      "samples": [
+        "1"
+      ]
+    },
+    {
+      "field": "couponCode",
+      "populatedPct": 2,
+      "samples": [
+        "WELCOME10"
+      ]
+    },
+    {
+      "field": "reviewStatus",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "companyName",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "shipCompanyName",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "cardIsPrepaid",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "achRoutingNumber",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "achAccountNumber",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "agentUserId",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "agentName",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "voiceLogNumber",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "surcharge",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "isDeclineSave",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "sourceId",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "sourceTitle",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "affId",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "sourceValue1",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "sourceValue2",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "sourceValue3",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "sourceValue4",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "sourceValue5",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "custom3",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "custom4",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "custom5",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "UTMSource",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "UTMMedium",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "UTMCampaign",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "UTMTerm",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "UTMContent",
+      "populatedPct": 0,
+      "samples": []
+    }
+  ],
+  "itemFields": [
+    {
+      "field": "productId",
+      "populatedPct": 100,
+      "samples": [
+        "273",
+        "239",
+        "241"
+      ]
+    },
+    {
+      "field": "name",
+      "populatedPct": 100,
+      "samples": [
+        "Thermoslim Body Sculpting Device (Starter Bundle)",
+        "Sculpt+ Conductive Gel Upsells",
+        "Thermoslim Maintenance Cream"
+      ]
+    },
+    {
+      "field": "qty",
+      "populatedPct": 100,
+      "samples": [
+        "1"
+      ]
+    },
+    {
+      "field": "shipping",
+      "populatedPct": 100,
+      "samples": [
+        "0.00"
+      ]
+    },
+    {
+      "field": "price",
+      "populatedPct": 100,
+      "samples": [
+        "99.95",
+        "44.95",
+        "149.95"
+      ]
+    },
+    {
+      "field": "orderItemId",
+      "populatedPct": 100,
+      "samples": [
+        "8323",
+        "8327",
+        "8329"
+      ]
+    },
+    {
+      "field": "salesTax",
+      "populatedPct": 100,
+      "samples": [
+        "0.00"
+      ]
+    },
+    {
+      "field": "productSku",
+      "populatedPct": 100,
+      "samples": [
+        "DHOD9-WM408001+DECD9-WM373001",
+        "DHOD9-WM408001-3PCS",
+        "DPCD9-PQ022001-6PCS"
+      ]
+    },
+    {
+      "field": "transactionItemId",
+      "populatedPct": 83,
+      "samples": [
+        "1851",
+        "1855",
+        "1857"
+      ]
+    },
+    {
+      "field": "merchantId",
+      "populatedPct": 83,
+      "samples": [
+        "6",
+        "8"
+      ]
+    },
+    {
+      "field": "txnType",
+      "populatedPct": 83,
+      "samples": [
+        "SALE"
+      ]
+    },
+    {
+      "field": "responseType",
+      "populatedPct": 83,
+      "samples": [
+        "SUCCESS"
+      ]
+    },
+    {
+      "field": "productType",
+      "populatedPct": 74,
+      "samples": [
+        "OFFER",
+        "UPSALE"
+      ]
+    },
+    {
+      "field": "variantDetailId",
+      "populatedPct": 33,
+      "samples": [
+        "165",
+        "179",
+        "163"
+      ]
+    },
+    {
+      "field": "variantName",
+      "populatedPct": 33,
+      "samples": [
+        "3 month supply",
+        "6 Month Supply",
+        "6 month supply"
+      ]
+    },
+    {
+      "field": "productDescription",
+      "populatedPct": 33,
+      "samples": [
+        "Specially Formulated Conductivity Gel for Maximized Results",
+        "Premium conductive formula enhances microcurrent penetration, breaks down fat de"
+      ]
+    },
+    {
+      "field": "externalProductId",
+      "populatedPct": 9,
+      "samples": [
+        "10337129136309"
+      ]
+    },
+    {
+      "field": "purchaseId",
+      "populatedPct": 9,
+      "samples": [
+        "C339E74542",
+        "A25206528F",
+        "795E637E17"
+      ]
+    },
+    {
+      "field": "purchaseStatus",
+      "populatedPct": 9,
+      "samples": [
+        "ACTIVE"
+      ]
+    },
+    {
+      "field": "currentProduct",
+      "populatedPct": 9,
+      "samples": [
+        "Sculpt+ Conductive Gel"
+      ]
+    },
+    {
+      "field": "currentPrice",
+      "populatedPct": 9,
+      "samples": [
+        "29.95",
+        "19.95"
+      ]
+    },
+    {
+      "field": "currentProductId",
+      "populatedPct": 9,
+      "samples": [
+        "207",
+        "249"
+      ]
+    },
+    {
+      "field": "actualProductId",
+      "populatedPct": 9,
+      "samples": [
+        "131"
+      ]
+    },
+    {
+      "field": "currentQty",
+      "populatedPct": 9,
+      "samples": [
+        "1"
+      ]
+    },
+    {
+      "field": "nextBillDate",
+      "populatedPct": 8,
+      "samples": [
+        "2026-04-01",
+        "2026-04-02"
+      ]
+    },
+    {
+      "field": "cancelAfterDate",
+      "populatedPct": 1,
+      "samples": [
+        "2026-04-02"
+      ]
+    },
+    {
+      "field": "cancellationScheduled",
+      "populatedPct": 1,
+      "samples": [
+        "1"
+      ]
+    },
+    {
+      "field": "clientId",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "lastCancellationDate",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "detailedStatus",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "currentVariantDetailId",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "clubPluginId",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "pauseScheduled",
+      "populatedPct": 0,
+      "samples": []
+    },
+    {
+      "field": "replacedByOrderItemId",
+      "populatedPct": 0,
+      "samples": []
+    }
+  ],
+  "missingOrderFields": [
+    "shipCarrier",
+    "shipMethod",
+    "reviewStatus",
+    "refundRemaining",
+    "avsResponse",
+    "cvvResponse",
+    "campaignCategoryName",
+    "companyName",
+    "shipCompanyName",
+    "cardType",
+    "cardLast4",
+    "cardExpiryDate",
+    "cardIsPrepaid",
+    "cardIsDebit",
+    "achRoutingNumber",
+    "achAccountNumber",
+    "agentUserId",
+    "agentName",
+    "voiceLogNumber",
+    "shipProfileId",
+    "isDeclineSave",
+    "totalDiscount",
+    "productCost",
+    "shippingCost",
+    "browserDetails",
+    "fulfillments"
+  ],
+  "missingItemFields": [
+    "merchantId",
+    "productDescription",
+    "clientId",
+    "lastCancellationDate",
+    "detailedStatus",
+    "currentProduct",
+    "currentVariantDetailId",
+    "clubPluginId"
+  ],
+  "dbValidation": {
+    "totalCC": 1288,
+    "apiTotal": 1293,
+    "withResponseType": 912,
+    "withFunnelPage": 1028,
+    "withPaySource": 654,
+    "withAttribution": 1288
+  }
+}

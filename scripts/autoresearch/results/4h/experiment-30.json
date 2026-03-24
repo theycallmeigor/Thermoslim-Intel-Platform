@@ -1,0 +1,48 @@
+{
+  "id": 30,
+  "timestamp": "2026-03-22T03:10:32.447Z",
+  "timeframe": "4h",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 8,
+    "warningThreshold": 3.5,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.55,
+    "funnelDropCritical": 0.75,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 61.63522012578616,
+    "catch": 33.33333333333333,
+    "quiet": 70.75471698113208,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 31,
+      "cleanDays": 106,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 63.232323232323225,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches only 3/8 injections, suggesting the thresholds may be too high or the lookback window is masking anomalies. I'll try a shorter lookback window (14 days) to make the baseline more sensitive to recent changes, while slightly lowering the warning threshold to 3.5 to catch more anomalies - but not so low as to cause excessive false positives. I'll also add `recurringOrders` to the metrics since recurring subscription patterns might reveal anomalies missed by th",
+  "durationMs": 224
+}

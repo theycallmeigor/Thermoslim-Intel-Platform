@@ -1,0 +1,44 @@
+{
+  "id": 60,
+  "timestamp": "2026-03-22T03:14:09.119Z",
+  "timeframe": "1w",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.8,
+    "criticalThreshold": 5.2,
+    "funnelDropWarning": 0.78,
+    "funnelDropCritical": 0.9,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 37.163120567375884,
+    "catch": 33.33333333333333,
+    "quiet": 59.57446808510639,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 19,
+      "cleanDays": 47,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 42.836879432624116,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best achieves 6/8 catch rate but has 28 false positives on 47 clean days (quiet score 40.43) and specificity of 0. To improve, I should try to reduce false positives further by raising thresholds slightly, while maintaining catch rate. The lookbackDays of 21 with trim5 outlier exclusion seems to work well - let me try tightening the funnel drop thresholds (raising them to reduce FPs) and slightly increasing warningThreshold, while also trying `weekdayWeekendSplit: true`",
+  "durationMs": 182
+}

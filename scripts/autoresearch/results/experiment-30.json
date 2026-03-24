@@ -1,0 +1,46 @@
+{
+  "id": 30,
+  "timestamp": "2026-03-22T01:32:48.098Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 36.13333333333334,
+    "catch": 58.333333333333336,
+    "quiet": 32,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 7,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 34,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, the best config has poor quiet rate (35/50 false positives) but good catch rate. Every attempt to raise thresholds hurts catch rate. The scoring formula seems to heavily weight catch rate. Let me try a different angle: keeping the exact best config but adding `newOrders` to the metrics list (which might catch more of the 3 missed injections to improve catch rate from 8/11 to potentially 9/11 or higher), while also trying `weekdayWeekendSplit: true` which could reduce fals",
+  "durationMs": 190
+}

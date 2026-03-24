@@ -1,0 +1,47 @@
+{
+  "id": 7,
+  "timestamp": "2026-03-22T03:07:37.288Z",
+  "timeframe": "15min",
+  "config": {
+    "lookbackDays": 10,
+    "minHistory": 5,
+    "warningThreshold": 2.7,
+    "criticalThreshold": 3.7,
+    "funnelDropWarning": 0.32,
+    "funnelDropCritical": 0.58,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue",
+      "refunds",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 43.67676767676768,
+    "catch": 55.55555555555556,
+    "quiet": 53.63636363636364,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 51,
+      "cleanDays": 110,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 63.67676767676768,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches 5/8 injections but has 51 false positives, giving a poor quiet score of 53.64. The key insight is that weekday/weekend split was tried and rejected, and longer lookback windows also hurt. I should try reducing false positives by slightly raising thresholds while keeping the same core structure, and experiment with `trim5` outlier method instead of `iqr` (without the weekday split that caused issues). Adding `recurringOrders` to metrics might catch injection",
+  "durationMs": 529
+}

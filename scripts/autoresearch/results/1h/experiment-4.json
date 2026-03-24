@@ -1,0 +1,44 @@
+{
+  "id": 4,
+  "timestamp": "2026-03-22T02:39:52.617Z",
+  "timeframe": "1h",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.5,
+    "funnelDropWarning": 0.3,
+    "funnelDropCritical": 0.55,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 35.95959595959596,
+    "catch": 33.33333333333333,
+    "quiet": 56.56565656565656,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 2,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 43,
+      "cleanDays": 99,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 66.33123689727464,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current config has decent catch rate (77.78%) but poor quiet score (54.72) with 48 false positives on 106 clean days. The main issue is too many false alarms. I'll try raising both thresholds to reduce FPs, use median instead of mean (more robust for small samples ~25 orders/day), and enable outlier exclusion to prevent noisy days from inflating baseline variance. I'll also slightly increase lookback to 21 days for more stable baselines while keeping the focused metric set.",
+  "durationMs": 430
+}

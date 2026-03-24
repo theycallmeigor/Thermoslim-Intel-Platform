@@ -1,0 +1,47 @@
+{
+  "id": 25,
+  "timestamp": "2026-03-22T03:09:52.465Z",
+  "timeframe": "4h",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.55,
+    "funnelDropCritical": 0.75,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 60,
+    "catch": 33.33333333333333,
+    "quiet": 66.66666666666667,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 33,
+      "cleanDays": 99,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 62.0125786163522,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches only 3/8 injections (37.5% catch rate) while generating 30 false positives. To improve catch rate, I should lower thresholds slightly and add more metrics (like `refunds`, `newSubscribers`) to detect more anomaly types. However, I need to be careful not to increase false positives too much. I'll try a moderate reduction in thresholds, add `newSubscribers` and `recurringOrders` to catch subscription-related anomalies, and increase lookback slightly to 21 day",
+  "durationMs": 246
+}

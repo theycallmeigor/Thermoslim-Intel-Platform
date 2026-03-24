@@ -1,0 +1,44 @@
+{
+  "id": 1,
+  "timestamp": "2026-03-22T01:29:01.806Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 31.200000000000003,
+    "catch": 50,
+    "quiet": 28,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 11,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 36,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 32.63565891472869,
+  "accepted": false,
+  "reasoning": "Looking at the current results, the catch rate is decent (58%) but specificity is 0% and there are way too many false positives (33 on 43 clean days). I need to reduce false alarms significantly by raising thresholds while potentially improving catch rate by adjusting the lookback window and funnel parameters.",
+  "durationMs": 172
+}

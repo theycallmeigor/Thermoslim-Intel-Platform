@@ -1,0 +1,48 @@
+{
+  "id": 28,
+  "timestamp": "2026-03-22T03:10:14.056Z",
+  "timeframe": "4h",
+  "config": {
+    "lookbackDays": 28,
+    "minHistory": 12,
+    "warningThreshold": 3.5,
+    "criticalThreshold": 5,
+    "funnelDropWarning": 0.5,
+    "funnelDropCritical": 0.72,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 61.59420289855072,
+    "catch": 33.33333333333333,
+    "quiet": 70.65217391304347,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 27,
+      "cleanDays": 92,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 63.232323232323225,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches only 3/8 injections (37.5%) while generating 25 FPs. To improve catch rate, I should try lowering the warning threshold slightly while keeping the critical threshold high enough to avoid false alarms. Adding `recurringOrders` to the metrics could help catch more anomaly types, and increasing the lookback window slightly (to 28 days) might give a more stable baseline with less noise, reducing false positives while the lower warning threshold catches more rea",
+  "durationMs": 245
+}

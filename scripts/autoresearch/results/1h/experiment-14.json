@@ -1,0 +1,48 @@
+{
+  "id": 14,
+  "timestamp": "2026-03-22T03:08:31.211Z",
+  "timeframe": "1h",
+  "config": {
+    "lookbackDays": 30,
+    "minHistory": 14,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.38,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "recurringOrders",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 47.55555555555556,
+    "catch": 0,
+    "quiet": 68.88888888888889,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 0,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 28,
+      "cleanDays": 90,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 57.17171717171717,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current config catches only 1/8 injections (very low catch rate) while having 29 false positives. Lowering thresholds in Exp 13 hurt the quiet score badly. The key issue is improving catch rate without exploding false positives. I'll try a longer lookback (30 days) for a more stable baseline, slightly lower thresholds (3.0/4.2) to catch more anomalies, enable weekdayWeekendSplit since it might help differentiate patterns, and add `avgOrderValue` and `newOrders` to the metrics s",
+  "durationMs": 450
+}

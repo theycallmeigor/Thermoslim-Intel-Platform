@@ -1,0 +1,45 @@
+{
+  "id": 32,
+  "timestamp": "2026-03-22T01:33:02.636Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 7,
+    "minHistory": 4,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 34.21052631578947,
+    "catch": 75,
+    "quiet": 10.526315789473685,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 51,
+      "cleanDays": 57,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every modification has been rejected and the best score remains 38.67 with poor quiet rate (35/50 FPs). The catch rate is 8/11 but specificity is 0/4. I need to try a fundamentally different approach - let me try a shorter lookback (7 days) which might be more adaptive to the growing trend, combined with slightly higher thresholds to reduce false alarms, while keeping the same core metrics that work.",
+  "durationMs": 152
+}

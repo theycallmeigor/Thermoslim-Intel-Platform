@@ -1,0 +1,45 @@
+{
+  "id": 8,
+  "timestamp": "2026-03-22T01:29:55.818Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 38.666666666666664,
+    "catch": 66.66666666666666,
+    "quiet": 30,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 35,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": true,
+  "reasoning": "Looking at the history, the current best has a very poor quiet rate (39 false positives on 50 clean days) and 0% specificity. All attempts to raise thresholds or change methods have been rejected. The key insight is that `warningThreshold: 2.5` is quite low — let me try raising it moderately to 2.8 while keeping the exact same proven baseline approach (mean+trim5, 14-day lookback), and add `recurringOrders` which might improve specificity without adding noise.",
+  "durationMs": 173
+}

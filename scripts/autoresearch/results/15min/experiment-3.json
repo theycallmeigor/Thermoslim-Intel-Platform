@@ -1,0 +1,47 @@
+{
+  "id": 3,
+  "timestamp": "2026-03-22T03:07:04.264Z",
+  "timeframe": "15min",
+  "config": {
+    "lookbackDays": 10,
+    "minHistory": 5,
+    "warningThreshold": 2.3,
+    "criticalThreshold": 3.2,
+    "funnelDropWarning": 0.28,
+    "funnelDropCritical": 0.55,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 61.494949494949495,
+    "catch": 55.55555555555556,
+    "quiet": 48.18181818181818,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 57,
+      "cleanDays": 110,
+      "specificityHits": 1,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 62.68343815513627,
+  "accepted": false,
+  "reasoning": "Looking at the results, the main issue is low catch rate (3/8 injections). Exp 2 tried lowering thresholds aggressively but was rejected, likely due to too many false positives. I'll try a moderate approach: lower thresholds slightly to catch more anomalies, add a couple more metrics (refunds, avgOrderValue) which might catch different injection types, but keep the lookback shorter (10 days) so the baseline is more sensitive to recent changes, while keeping noise manageable.",
+  "durationMs": 499
+}

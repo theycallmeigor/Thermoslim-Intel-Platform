@@ -1,0 +1,46 @@
+{
+  "id": 10,
+  "timestamp": "2026-03-22T03:08:06.335Z",
+  "timeframe": "15min",
+  "config": {
+    "lookbackDays": 10,
+    "minHistory": 5,
+    "warningThreshold": 2.6,
+    "criticalThreshold": 3.4,
+    "funnelDropWarning": 0.33,
+    "funnelDropCritical": 0.57,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 64.40404040404042,
+    "catch": 55.55555555555556,
+    "quiet": 55.45454545454545,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 49,
+      "cleanDays": 110,
+      "specificityHits": 1,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 64.40404040404042,
+  "accepted": true,
+  "reasoning": "## Reasoning\n\nThe current best score of 63.68 comes from 5/8 catch rate and 51 false positives on 110 clean days. All recent experiments have been rejected, suggesting the current config is near a local optimum. The key issue is the high false positive rate (51 FPs). Since raising thresholds (Exp 6,7,8) and reducing metrics (Exp 9) both hurt, I should try reducing `funnelDropWarning` slightly upward (to reduce funnel-related FPs) while keeping the core metric set, and try a slightly longer lookb",
+  "durationMs": 501
+}

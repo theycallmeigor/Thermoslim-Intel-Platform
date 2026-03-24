@@ -1,0 +1,131 @@
+{
+  "15min": {
+    "lookbackDays": 10,
+    "minHistory": 5,
+    "warningThreshold": 2.6,
+    "criticalThreshold": 3.4,
+    "funnelDropWarning": 0.33,
+    "funnelDropCritical": 0.57,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "1h": {
+    "lookbackDays": 28,
+    "minHistory": 12,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4,
+    "funnelDropWarning": 0.3,
+    "funnelDropCritical": 0.55,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "4h": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.8,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.55,
+    "funnelDropCritical": 0.75,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "6h": {
+    "lookbackDays": 10,
+    "minHistory": 6,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.33,
+    "funnelDropCritical": 0.58,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "1d": {
+    "lookbackDays": 30,
+    "minHistory": 14,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.68,
+    "funnelDropCritical": 0.87,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "1w": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.5,
+    "criticalThreshold": 5,
+    "funnelDropWarning": 0.72,
+    "funnelDropCritical": 0.88,
+    "topCampaignsToCheck": 6,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  }
+}

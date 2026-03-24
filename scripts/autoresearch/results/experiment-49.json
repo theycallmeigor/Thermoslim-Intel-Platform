@@ -1,0 +1,46 @@
+{
+  "id": 49,
+  "timestamp": "2026-03-22T01:35:10.532Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.35,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 33.565891472868216,
+    "catch": 58.333333333333336,
+    "quiet": 25.581395348837205,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 6,
+      "injectionsTotal": 11,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 32,
+      "cleanDays": 43,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the pattern, every modification has been rejected, but the best config still has terrible quiet rate (35/50 false positives) suggesting systematic false alarms. The specificity score is 0/4, meaning the config completely fails on a specific anomaly type. I haven't tried combining a longer lookback (21 days) with weekdayWeekendSplit=true AND raising the warning threshold to 3.0 — the context says weekend volumes are similar to weekdays so this split might not help, but it hasn't been t",
+  "durationMs": 221
+}

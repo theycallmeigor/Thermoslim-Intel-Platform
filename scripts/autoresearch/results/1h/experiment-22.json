@@ -1,0 +1,48 @@
+{
+  "id": 22,
+  "timestamp": "2026-03-22T03:09:37.364Z",
+  "timeframe": "1h",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 2.6,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.32,
+    "funnelDropCritical": 0.52,
+    "topCampaignsToCheck": 20,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 61.21212121212122,
+    "catch": 44.44444444444444,
+    "quiet": 58.58585858585859,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 41,
+      "cleanDays": 99,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 61.256038647343,
+  "accepted": false,
+  "reasoning": "Looking at the results, the current best catches 3/8 injections with 38 false positives. The catch rate is the primary bottleneck. Since lowering thresholds tends to increase false positives too much, I should try increasing sensitivity through a longer lookback window (more stable baseline) while slightly relaxing thresholds - or try a shorter lookback to catch sudden changes faster. Given that shorter lookbacks (14 days) were rejected but 28 days works, I'll try 21 days with more careful thres",
+  "durationMs": 424
+}

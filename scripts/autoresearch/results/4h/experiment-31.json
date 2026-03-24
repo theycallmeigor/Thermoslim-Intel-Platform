@@ -1,0 +1,46 @@
+{
+  "id": 31,
+  "timestamp": "2026-03-22T03:10:40.460Z",
+  "timeframe": "4h",
+  "config": {
+    "lookbackDays": 10,
+    "minHistory": 7,
+    "warningThreshold": 3.8,
+    "criticalThreshold": 5.2,
+    "funnelDropWarning": 0.5,
+    "funnelDropCritical": 0.72,
+    "topCampaignsToCheck": 20,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 45.41414141414142,
+    "catch": 44.44444444444444,
+    "quiet": 69.0909090909091,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 34,
+      "cleanDays": 110,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 63.232323232323225,
+  "accepted": false,
+  "reasoning": "Looking at the pattern, experiments that add `recurringOrders` or lower thresholds are consistently rejected. The current best has high thresholds (3.8/4.8) with median+IQR. The low catch rate (3/8) suggests we're missing anomalies, but lowering thresholds increases FPs. Let me try a different approach: keep the high thresholds but try a shorter lookback (7-10 days) which might make the baseline tighter and more sensitive to sudden changes, while removing `cancelledSubscribers` which may be nois",
+  "durationMs": 199
+}

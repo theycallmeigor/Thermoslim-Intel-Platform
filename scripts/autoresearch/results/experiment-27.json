@@ -1,0 +1,45 @@
+{
+  "id": 27,
+  "timestamp": "2026-03-22T01:32:23.786Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 35.333333333333336,
+    "catch": 58.333333333333336,
+    "quiet": 30,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 7,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 35,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every experiment has been rejected. The best config has 66.67 catch rate but terrible quiet rate (35/50 false positives). Experiment 25 tied the best score with `topCampaignsToCheck: 5` but was \"rejected\" (tied, not beaten). The key insight is that I need to improve quiet rate WITHOUT hurting catch rate. Let me try adding `recurringOrders` back (it was in the best) while slightly raising thresholds and using `useMedianInsteadOfMean=true` with the same lookback - median is",
+  "durationMs": 186
+}

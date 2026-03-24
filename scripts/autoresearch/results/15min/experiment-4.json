@@ -1,0 +1,46 @@
+{
+  "id": 4,
+  "timestamp": "2026-03-22T03:07:11.837Z",
+  "timeframe": "15min",
+  "config": {
+    "lookbackDays": 10,
+    "minHistory": 5,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.5,
+    "funnelDropWarning": 0.3,
+    "funnelDropCritical": 0.55,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 63.67676767676768,
+    "catch": 55.55555555555556,
+    "quiet": 53.63636363636364,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 51,
+      "cleanDays": 110,
+      "specificityHits": 1,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 63.67676767676768,
+  "accepted": true,
+  "reasoning": "Looking at the results, the catch rate (3/8 = 44.44%) is the critical weakness. Previous experiments that lowered thresholds were rejected due to too many false positives. I should try a targeted approach: keep thresholds moderate but add more metrics to increase coverage of different anomaly types, while using a shorter lookback to be more sensitive to sudden changes. The key insight is that adding `avgOrderValue` and `refunds` might catch injections the current metrics miss, without dramatical",
+  "durationMs": 510
+}

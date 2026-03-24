@@ -1,0 +1,45 @@
+{
+  "id": 36,
+  "timestamp": "2026-03-22T03:11:11.884Z",
+  "timeframe": "6h",
+  "config": {
+    "lookbackDays": 7,
+    "minHistory": 5,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.35,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 45.231071779744354,
+    "catch": 55.55555555555556,
+    "quiet": 57.52212389380531,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 48,
+      "cleanDays": 113,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 55.72327044025157,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current config has poor catch rate (5/8) and very high false positives (82 FP on 106 clean days), giving a terrible quiet score of 22.64. The warningThreshold of 1.8 is too sensitive, causing excessive false alarms. I'll try raising warningThreshold to reduce FPs while keeping criticalThreshold reasonable, and try a shorter lookback (7 days) to catch sudden changes faster. I'll also reduce metricsToCheck to focus on the most signal-rich metrics and try IQR outlier method.",
+  "durationMs": 162
+}

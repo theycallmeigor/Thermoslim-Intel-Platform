@@ -1,0 +1,47 @@
+{
+  "id": 18,
+  "timestamp": "2026-03-22T03:09:04.716Z",
+  "timeframe": "1h",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4,
+    "funnelDropWarning": 0.35,
+    "funnelDropCritical": 0.58,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 54.84276729559748,
+    "catch": 33.33333333333333,
+    "quiet": 53.77358490566038,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 49,
+      "cleanDays": 106,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 60,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches 2/8 injections with 33 false positives, giving a modest score of 60. The low catch rate (25%) is the primary bottleneck - we need to detect more real anomalies. Since lowering thresholds increased false positives too much in previous experiments, let me try a different approach: keeping thresholds similar but adding more metrics (like `avgOrderValue` and `newOrders`) which might catch injection patterns that `totalOrders`/`totalRevenue` alone miss. I'll als",
+  "durationMs": 399
+}

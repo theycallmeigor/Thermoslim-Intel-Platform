@@ -1,0 +1,48 @@
+{
+  "id": 27,
+  "timestamp": "2026-03-22T03:10:06.806Z",
+  "timeframe": "4h",
+  "config": {
+    "lookbackDays": 28,
+    "minHistory": 12,
+    "warningThreshold": 3.4,
+    "criticalThreshold": 4.6,
+    "funnelDropWarning": 0.55,
+    "funnelDropCritical": 0.75,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 61.59420289855072,
+    "catch": 33.33333333333333,
+    "quiet": 70.65217391304347,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 27,
+      "cleanDays": 92,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 63.232323232323225,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches only 3/8 injections with a quiet score of 74.75 (25 FPs on 99 clean days). To improve catch rate while keeping false alarms low, I should try lowering the warning threshold slightly and including `recurringOrders` as it may catch revenue anomalies missed by other metrics. I'll also try a slightly longer lookback (28 days) to get a more stable baseline, while keeping the IQR outlier exclusion and median approach that have been working well.",
+  "durationMs": 246
+}

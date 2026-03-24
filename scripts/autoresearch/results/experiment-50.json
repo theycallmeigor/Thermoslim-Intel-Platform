@@ -1,0 +1,47 @@
+{
+  "id": 50,
+  "timestamp": "2026-03-22T01:35:18.356Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.25,
+    "funnelDropCritical": 0.5,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 35.6,
+    "catch": 75,
+    "quiet": 14,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 43,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the pattern, every experiment modifies multiple parameters and gets rejected. The best config has terrible quiet rate (35/50 false positives) but decent catch rate. The key insight I haven't fully explored: the specificity is 0/4, meaning there's a specific anomaly type being completely missed. Let me try adding `refunds` and `avgOrderValue` to catch those missed anomalies, while keeping the warning threshold exactly at 2.8 (proven best) but lowering `funnelDropWarning` to catch funne",
+  "durationMs": 188
+}

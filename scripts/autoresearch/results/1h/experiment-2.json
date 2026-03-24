@@ -1,0 +1,44 @@
+{
+  "id": 2,
+  "timestamp": "2026-03-22T02:39:47.228Z",
+  "timeframe": "1h",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2,
+    "criticalThreshold": 3,
+    "funnelDropWarning": 0.25,
+    "funnelDropCritical": 0.5,
+    "topCampaignsToCheck": 20,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": false,
+    "outlierMethod": "none"
+  },
+  "score": {
+    "total": 66.33123689727464,
+    "catch": 77.77777777777779,
+    "quiet": 54.71698113207547,
+    "specificity": 66.66666666666666,
+    "details": {
+      "injectionsCaught": 6,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 48,
+      "cleanDays": 106,
+      "specificityHits": 2,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 66.33123689727464,
+  "accepted": true,
+  "reasoning": "Baseline for 1h",
+  "durationMs": 0
+}

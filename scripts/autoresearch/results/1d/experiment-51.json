@@ -1,0 +1,48 @@
+{
+  "id": 51,
+  "timestamp": "2026-03-22T03:13:02.462Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 30,
+    "minHistory": 14,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.62,
+    "funnelDropCritical": 0.82,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 29.356725146198833,
+    "catch": 44.44444444444444,
+    "quiet": 28.94736842105263,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 27,
+      "cleanDays": 38,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 52.280701754385966,
+  "accepted": false,
+  "reasoning": "Looking at the history, the catch rate is stuck at 2/8 (25%) despite various threshold adjustments. The injected anomalies might be on specific metrics not currently checked - notably `refunds` is absent from the current config. Also, the `weekdayWeekendSplit` rejected experiment may have failed due to combined changes, not the split itself. Let me try adding `refunds` to metrics while carefully tuning thresholds slightly lower to improve catch rate, keeping the successful `lookbackDays=30` and ",
+  "durationMs": 223
+}

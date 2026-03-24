@@ -1,0 +1,46 @@
+{
+  "id": 44,
+  "timestamp": "2026-03-22T03:12:11.674Z",
+  "timeframe": "6h",
+  "config": {
+    "lookbackDays": 10,
+    "minHistory": 6,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.33,
+    "funnelDropCritical": 0.58,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 65.13131313131314,
+    "catch": 55.55555555555556,
+    "quiet": 57.27272727272727,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 47,
+      "cleanDays": 110,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 65.13131313131314,
+  "accepted": true,
+  "reasoning": "## Reasoning\n\nThe current best catches 4/8 injections with 46 FPs. The catch rate is the primary weakness (55.56). I should try to catch more injections by adding `newOrders` and `recurringOrders` to the metrics (which might detect subscription-related anomalies) while tightening thresholds slightly to reduce FPs. A shorter lookback (10 days) might make the baseline more sensitive to sudden changes, and lowering the funnel drop warning could catch more funnel anomalies.",
+  "durationMs": 177
+}

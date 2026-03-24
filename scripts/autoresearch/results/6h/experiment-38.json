@@ -1,0 +1,45 @@
+{
+  "id": 38,
+  "timestamp": "2026-03-22T03:11:26.325Z",
+  "timeframe": "6h",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 2.6,
+    "criticalThreshold": 4,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 56.76767676767677,
+    "catch": 33.33333333333333,
+    "quiet": 58.58585858585859,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 2,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 41,
+      "cleanDays": 99,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 63.73165618448638,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best (63.73) catches 4/8 injections with 49 FPs on 106 clean days. The quiet score is being dragged down by false positives - raising thresholds should reduce FPs while potentially maintaining catch rate. I'll try increasing warningThreshold slightly to 2.6 and criticalThreshold to 4.0, tighten the metrics list to the most signal-rich ones, and try a longer lookback of 21 days with IQR outlier removal to create a more stable baseline that reduces noise-driven alerts.",
+  "durationMs": 174
+}

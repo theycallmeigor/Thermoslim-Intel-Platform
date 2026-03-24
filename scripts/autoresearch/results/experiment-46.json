@@ -1,0 +1,45 @@
+{
+  "id": 46,
+  "timestamp": "2026-03-22T01:34:47.859Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 18,
+    "minHistory": 8,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.6,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 33.18840579710145,
+    "catch": 41.66666666666667,
+    "quiet": 41.30434782608695,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 27,
+      "cleanDays": 46,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, the best config has terrible quiet rate (35/50 false positives) but decent catch rate. The growing trend likely causes false positives because recent values exceed old baselines. I haven't tried raising the warning threshold significantly (to 3.2+) while keeping the same lookback and metrics - previous threshold increases were always paired with other changes that hurt catch rate. Let me try a more aggressive threshold increase with a slightly longer lookback to capture m",
+  "durationMs": 202
+}

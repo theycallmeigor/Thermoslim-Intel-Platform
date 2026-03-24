@@ -1,0 +1,45 @@
+{
+  "id": 11,
+  "timestamp": "2026-03-22T01:30:17.467Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 37.06666666666666,
+    "catch": 66.66666666666666,
+    "quiet": 26,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 37,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, the current best has terrible quiet rate (35 false positives on 50 clean days) and 0% specificity. The current config is essentially the best found so far, and raising thresholds or changing lookback has consistently failed. I should try a subtle variation: keep the proven 14-day lookback with trim5+mean, but try `useMedianInsteadOfMean=true` which might give a more robust baseline and reduce false alarms, while slightly adjusting the funnel thresholds to be a bit more le",
+  "durationMs": 192
+}

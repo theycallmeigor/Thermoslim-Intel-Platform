@@ -1,0 +1,45 @@
+{
+  "id": 23,
+  "timestamp": "2026-03-22T01:31:51.303Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 7,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 34.49612403100776,
+    "catch": 58.333333333333336,
+    "quiet": 27.906976744186053,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 6,
+      "injectionsTotal": 11,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 31,
+      "cleanDays": 43,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every deviation from the best config gets rejected, but the best config itself has terrible quiet rate (35/50 false positives). The false positives persist even with higher thresholds, suggesting the issue might be with `outlierMethod` or `excludeOutliersFromBaseline` interactions, or perhaps switching to median (more robust to small samples) while keeping thresholds near the proven values. I haven't tried `useMedianInsteadOfMean=true` with the original threshold structur",
+  "durationMs": 196
+}

@@ -1,0 +1,47 @@
+{
+  "id": 57,
+  "timestamp": "2026-03-22T03:13:43.733Z",
+  "timeframe": "1w",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 4,
+    "funnelDropWarning": 0.55,
+    "funnelDropCritical": 0.75,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 35.55555555555555,
+    "catch": 66.66666666666666,
+    "quiet": 22.222222222222214,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 6,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 42,
+      "cleanDays": 54,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 35.55555555555555,
+  "accepted": true,
+  "reasoning": "Looking at the current config, it's catching only 4/8 injections (50% catch rate) and generating 37 false positives on 61 clean days - both need improvement. The very high warning threshold (4.0) may be missing real anomalies, while the limited metrics list might be causing missed detections. I'll try lowering thresholds slightly to catch more injections while adding more metrics, and try a shorter lookback to be more responsive to sudden changes.",
+  "durationMs": 189
+}

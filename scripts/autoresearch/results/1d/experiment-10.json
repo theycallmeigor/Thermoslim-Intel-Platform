@@ -1,0 +1,48 @@
+{
+  "id": 10,
+  "timestamp": "2026-03-22T02:40:15.035Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.55,
+    "funnelDropCritical": 0.75,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 31.851851851851848,
+    "catch": 66.66666666666666,
+    "quiet": 12.962962962962962,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 47,
+      "cleanDays": 54,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 49.50354609929078,
+  "accepted": false,
+  "reasoning": "Looking at the current config, the catch rate is very low (2/8 injections caught) while there are still 28 false positives. The extremely high thresholds (3.9/5.8) are likely causing misses, while the limited metrics being checked means some injected anomalies aren't being observed at all. I'll lower thresholds moderately and add more metrics to improve detection coverage.",
+  "durationMs": 204
+}

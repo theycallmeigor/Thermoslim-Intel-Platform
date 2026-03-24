@@ -1,0 +1,47 @@
+{
+  "id": 47,
+  "timestamp": "2026-03-22T03:12:28.761Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 30,
+    "minHistory": 14,
+    "warningThreshold": 3.5,
+    "criticalThreshold": 5,
+    "funnelDropWarning": 0.65,
+    "funnelDropCritical": 0.85,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 49.941520467836256,
+    "catch": 22.22222222222222,
+    "quiet": 52.631578947368425,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 2,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 18,
+      "cleanDays": 38,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 49.941520467836256,
+  "accepted": true,
+  "reasoning": "## Reasoning\n\nThe current config catches only 2/8 injections (25% catch rate) while generating 28 false positives. The rejected experiment with lower thresholds improved catch rate but exploded FPs. The key insight is that we need better signal discrimination - let's try a longer lookback (30 days) to build a more stable baseline, use `trim5` outlier method for robustness, and moderately lower the warning threshold (3.5) while keeping critical high. Adding `recurringOrders` might help catch subs",
+  "durationMs": 215
+}

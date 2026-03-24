@@ -1,0 +1,45 @@
+{
+  "id": 45,
+  "timestamp": "2026-03-22T01:34:40.484Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 35.333333333333336,
+    "catch": 58.333333333333336,
+    "quiet": 30,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 7,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 35,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the pattern, every modification has been rejected. The best config scores 38.67 with 35/50 false positives (terrible quiet rate) but good catch rate. The false positives on clean days suggest the baseline is too low relative to current values due to growth trend. I haven't tried using median instead of mean (which is more robust to trend skew with small samples) combined with a slightly higher warning threshold - this combination hasn't been tested yet.",
+  "durationMs": 172
+}

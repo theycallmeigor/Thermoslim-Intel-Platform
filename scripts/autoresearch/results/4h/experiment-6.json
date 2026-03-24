@@ -1,0 +1,44 @@
+{
+  "id": 6,
+  "timestamp": "2026-03-22T02:40:00.937Z",
+  "timeframe": "4h",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 2.6,
+    "criticalThreshold": 3.5,
+    "funnelDropWarning": 0.35,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 65.65656565656566,
+    "catch": 55.55555555555556,
+    "quiet": 58.58585858585859,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 41,
+      "cleanDays": 99,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 73.37526205450735,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current config has decent catch rate (77.78%) but poor quiet score (55.66) with 47 false positives on 106 clean days - that's nearly 0.44 FP/day which is too noisy. I need to reduce false alarms by raising the warning threshold slightly and tightening the funnel drop thresholds, while also trimming the metrics list to focus on the most signal-rich ones. Since weekday/weekend volumes are similar, keeping that split off is correct, but I'll try raising `warningThreshold` to 2.5 a",
+  "durationMs": 219
+}

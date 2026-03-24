@@ -1,0 +1,43 @@
+{
+  "id": 19,
+  "timestamp": "2026-03-22T01:31:20.227Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 10,
+    "minHistory": 5,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 30.370370370370367,
+    "catch": 66.66666666666666,
+    "quiet": 9.259259259259252,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 49,
+      "cleanDays": 54,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every experiment that deviates from the best config gets rejected, but the current best still has terrible quiet rate (35/50 false positives). The false alarms seem systematic regardless of threshold adjustments. I haven't tried using a much shorter lookback (e.g., 7 days) with `excludeOutliersFromBaseline=true` and `trim5` kept, but reducing the metrics checked to just the most critical 3 (dropping recurringOrders and cancelledSubscribers which may be noisier) while keep",
+  "durationMs": 165
+}

@@ -1,0 +1,47 @@
+{
+  "id": 54,
+  "timestamp": "2026-03-22T03:13:27.921Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.58,
+    "funnelDropCritical": 0.8,
+    "topCampaignsToCheck": 25,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 32.24586288416076,
+    "catch": 44.44444444444444,
+    "quiet": 36.170212765957444,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 30,
+      "cleanDays": 47,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 52.280701754385966,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe catch rate is stuck at 2/8, and lowering thresholds consistently generates too many false positives. The missed anomalies might be subtle drops that only appear in specific metrics or funnel patterns. Since `refunds` was tried and hurt scores, and weekdayWeekendSplit hurt, let me try a different angle: keep the current best's core settings but experiment with a shorter lookback (21 days) to make the baseline more sensitive to recent drift, while slightly tightening the funnelDr",
+  "durationMs": 192
+}

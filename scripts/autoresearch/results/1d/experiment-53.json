@@ -1,0 +1,48 @@
+{
+  "id": 53,
+  "timestamp": "2026-03-22T03:13:19.211Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.68,
+    "funnelDropCritical": 0.87,
+    "topCampaignsToCheck": 20,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 41.48148148148148,
+    "catch": 66.66666666666666,
+    "quiet": 37.03703703703704,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 34,
+      "cleanDays": 54,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 52.280701754385966,
+  "accepted": false,
+  "reasoning": "Looking at the history, lowering thresholds consistently increases false positives without improving catch rate, suggesting the missed anomalies aren't standard metric deviations. The funnel drop thresholds haven't been explored in the \"tighter\" direction with a shorter lookback. Let me try a shorter lookback (14 days) to make the baseline more sensitive to recent shifts, while keeping thresholds high to avoid FPs, and switch from median+trim5 to mean+IQR which may behave differently on the smal",
+  "durationMs": 193
+}

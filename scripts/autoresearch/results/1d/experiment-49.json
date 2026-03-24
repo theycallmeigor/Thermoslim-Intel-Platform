@@ -1,0 +1,47 @@
+{
+  "id": 49,
+  "timestamp": "2026-03-22T03:12:44.886Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.6,
+    "funnelDropCritical": 0.82,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 34.79905437352245,
+    "catch": 44.44444444444444,
+    "quiet": 42.553191489361694,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 27,
+      "cleanDays": 47,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 49.941520467836256,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best config has very high thresholds (3.5/5.0) which likely explains the poor catch rate (2/8). However, lowering thresholds in Exp 46/48 didn't improve catch rate significantly and hurt quiet score badly. The injected anomalies might be caught better by focusing on the right metrics and using a shorter lookback to be more sensitive to sudden changes. Let me try a moderate threshold reduction (3.0/4.5) combined with a shorter lookback (21 days) and keep `trim5` outlier ",
+  "durationMs": 228
+}

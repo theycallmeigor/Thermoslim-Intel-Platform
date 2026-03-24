@@ -1,0 +1,558 @@
+{
+  "generatedAt": "2026-03-22T04:45:43.878Z",
+  "pages": [
+    {
+      "funnelPageId": "06122b32-e842-4c94-8cec-e8dda19c1994",
+      "funnelName": "Shopify Funnel",
+      "slug": "checkout2",
+      "pageType": "checkout",
+      "totalOrders": 498,
+      "completeOrders": 308,
+      "declinedOrders": 12,
+      "abandonedOrders": 172,
+      "partialOrders": 0,
+      "revenue": 4951144,
+      "conversionRate": 0.6184738955823293,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 498
+      }
+    },
+    {
+      "funnelPageId": "7d171c8f-4711-4930-968b-da5338a04151",
+      "funnelName": "Shopify Funnel",
+      "slug": "secure-checkout",
+      "pageType": "checkout",
+      "totalOrders": 175,
+      "completeOrders": 113,
+      "declinedOrders": 4,
+      "abandonedOrders": 51,
+      "partialOrders": 0,
+      "revenue": 1919405,
+      "conversionRate": 0.6457142857142857,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 175
+      }
+    },
+    {
+      "funnelPageId": "cff94322-320a-48b8-8a4a-9036d1e8ce2e",
+      "funnelName": "Shopify Funnel",
+      "slug": "checkout-v2",
+      "pageType": "checkout",
+      "totalOrders": 68,
+      "completeOrders": 47,
+      "declinedOrders": 0,
+      "abandonedOrders": 20,
+      "partialOrders": 0,
+      "revenue": 253260,
+      "conversionRate": 0.6911764705882353,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 68
+      }
+    },
+    {
+      "funnelPageId": "0ba56213-8eaa-4a55-b93b-50b34ce60d53",
+      "funnelName": "Shopify Funnel",
+      "slug": "checkout",
+      "pageType": "checkout",
+      "totalOrders": 67,
+      "completeOrders": 39,
+      "declinedOrders": 1,
+      "abandonedOrders": 27,
+      "partialOrders": 0,
+      "revenue": 469296,
+      "conversionRate": 0.582089552238806,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 67
+      }
+    },
+    {
+      "funnelPageId": "399f39dd-bb5f-49c9-a6cc-0641c4a11ecb",
+      "funnelName": "Shopify Funnel",
+      "slug": "special-offer",
+      "pageType": "upsell",
+      "totalOrders": 35,
+      "completeOrders": 18,
+      "declinedOrders": 0,
+      "abandonedOrders": 17,
+      "partialOrders": 0,
+      "revenue": 238380,
+      "conversionRate": 0.5142857142857142,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 35
+      }
+    },
+    {
+      "funnelPageId": "1e1ee195-edc7-4520-a51d-c17d50be1dcb",
+      "funnelName": "Shopify Funnel",
+      "slug": "checkout-bsd-quiz",
+      "pageType": "checkout",
+      "totalOrders": 29,
+      "completeOrders": 12,
+      "declinedOrders": 2,
+      "abandonedOrders": 13,
+      "partialOrders": 0,
+      "revenue": 243355,
+      "conversionRate": 0.41379310344827586,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 29
+      }
+    },
+    {
+      "funnelPageId": "515adac9-80f2-47ce-844e-2324ab608dde",
+      "funnelName": "Shopify Funnel",
+      "slug": "checkout-bsd-top5",
+      "pageType": "checkout",
+      "totalOrders": 23,
+      "completeOrders": 13,
+      "declinedOrders": 2,
+      "abandonedOrders": 8,
+      "partialOrders": 0,
+      "revenue": 209420,
+      "conversionRate": 0.5652173913043478,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 23
+      }
+    },
+    {
+      "funnelPageId": "d2fc6d52-4098-4ed4-aec5-39bcf0321a2b",
+      "funnelName": "Shopify Funnel",
+      "slug": "1time-special-offer",
+      "pageType": "upsell",
+      "totalOrders": 18,
+      "completeOrders": 9,
+      "declinedOrders": 0,
+      "abandonedOrders": 9,
+      "partialOrders": 0,
+      "revenue": 155925,
+      "conversionRate": 0.5,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 18
+      }
+    },
+    {
+      "funnelPageId": "1d859906-9f30-4a2e-82b6-24d68cd3be2e",
+      "funnelName": "Shopify Funnel",
+      "slug": "special-offer-ctrl",
+      "pageType": "upsell",
+      "totalOrders": 17,
+      "completeOrders": 12,
+      "declinedOrders": 0,
+      "abandonedOrders": 5,
+      "partialOrders": 0,
+      "revenue": 204929,
+      "conversionRate": 0.7058823529411765,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 17
+      }
+    },
+    {
+      "funnelPageId": "ef869940-c261-4b2c-86a3-08efce073bc8",
+      "funnelName": "Shopify Funnel",
+      "slug": "test/checkout",
+      "pageType": "checkout",
+      "totalOrders": 13,
+      "completeOrders": 11,
+      "declinedOrders": 1,
+      "abandonedOrders": 0,
+      "partialOrders": 0,
+      "revenue": 263004,
+      "conversionRate": 0.8461538461538461,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 13
+      }
+    },
+    {
+      "funnelPageId": "8007fd72-ff2b-4160-bb53-d81fb9edb07e",
+      "funnelName": "Shopify Funnel",
+      "slug": "special-offer-new2",
+      "pageType": "upsell",
+      "totalOrders": 12,
+      "completeOrders": 10,
+      "declinedOrders": 0,
+      "abandonedOrders": 2,
+      "partialOrders": 0,
+      "revenue": 162967,
+      "conversionRate": 0.8333333333333334,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 12
+      }
+    },
+    {
+      "funnelPageId": "45f919d5-3066-4d2d-a60d-487bebe9ebfa",
+      "funnelName": "Shopify Funnel",
+      "slug": "special-offer-ps1",
+      "pageType": "upsell",
+      "totalOrders": 12,
+      "completeOrders": 8,
+      "declinedOrders": 0,
+      "abandonedOrders": 3,
+      "partialOrders": 0,
+      "revenue": 113460,
+      "conversionRate": 0.6666666666666666,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 12
+      }
+    },
+    {
+      "funnelPageId": "7cfabd9f-8de2-41c9-b13d-252e2b33a551",
+      "funnelName": "Shopify Funnel",
+      "slug": "checkout2-old",
+      "pageType": "checkout",
+      "totalOrders": 10,
+      "completeOrders": 6,
+      "declinedOrders": 0,
+      "abandonedOrders": 4,
+      "partialOrders": 0,
+      "revenue": 92930,
+      "conversionRate": 0.6,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 10
+      }
+    },
+    {
+      "funnelPageId": "2e1c63bf-44e2-4797-8465-20ee05c15194",
+      "funnelName": "Shopify Funnel",
+      "slug": "special-offer-new",
+      "pageType": "upsell",
+      "totalOrders": 8,
+      "completeOrders": 4,
+      "declinedOrders": 1,
+      "abandonedOrders": 3,
+      "partialOrders": 0,
+      "revenue": 65086,
+      "conversionRate": 0.5,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 8
+      }
+    },
+    {
+      "funnelPageId": "525089cb-2ad4-44ae-ae05-c702d4eef350",
+      "funnelName": "Shopify Funnel",
+      "slug": "1time-special-offer-bump",
+      "pageType": "upsell",
+      "totalOrders": 6,
+      "completeOrders": 4,
+      "declinedOrders": 0,
+      "abandonedOrders": 2,
+      "partialOrders": 0,
+      "revenue": 83970,
+      "conversionRate": 0.6666666666666666,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 6
+      }
+    },
+    {
+      "funnelPageId": "8a58e123-1759-43a3-be97-5a7c5bd32ffa",
+      "funnelName": "Shopify Funnel",
+      "slug": "1time-special-offer-new",
+      "pageType": "upsell",
+      "totalOrders": 6,
+      "completeOrders": 4,
+      "declinedOrders": 0,
+      "abandonedOrders": 2,
+      "partialOrders": 0,
+      "revenue": 63515,
+      "conversionRate": 0.6666666666666666,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 6
+      }
+    },
+    {
+      "funnelPageId": "1d63c019-bf50-4201-9920-aa8e0ac32ce3",
+      "funnelName": "Shopify Funnel",
+      "slug": "checkout2-new",
+      "pageType": "checkout",
+      "totalOrders": 5,
+      "completeOrders": 5,
+      "declinedOrders": 0,
+      "abandonedOrders": 0,
+      "partialOrders": 0,
+      "revenue": 65960,
+      "conversionRate": 1,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 5
+      }
+    },
+    {
+      "funnelPageId": "2aef25ef-7c33-4129-9a8b-3e93dff037e4",
+      "funnelName": "Shopify Funnel",
+      "slug": "checkout-v2",
+      "pageType": "checkout",
+      "totalOrders": 4,
+      "completeOrders": 3,
+      "declinedOrders": 0,
+      "abandonedOrders": 1,
+      "partialOrders": 0,
+      "revenue": 15985,
+      "conversionRate": 0.75,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 4
+      }
+    },
+    {
+      "funnelPageId": "28f0da3c-5daa-4942-bdc2-50f74cb7b660",
+      "funnelName": "Shopify Funnel",
+      "slug": "secure-checkout1-1",
+      "pageType": "checkout",
+      "totalOrders": 3,
+      "completeOrders": 3,
+      "declinedOrders": 0,
+      "abandonedOrders": 0,
+      "partialOrders": 0,
+      "revenue": 23985,
+      "conversionRate": 1,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 3
+      }
+    },
+    {
+      "funnelPageId": "613111ca-ba5f-4724-a643-b86d916a2edd",
+      "funnelName": "Shopify Funnel",
+      "slug": "1time-special-offer-ctrl",
+      "pageType": "upsell",
+      "totalOrders": 3,
+      "completeOrders": 1,
+      "declinedOrders": 0,
+      "abandonedOrders": 2,
+      "partialOrders": 0,
+      "revenue": 13995,
+      "conversionRate": 0.3333333333333333,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 3
+      }
+    },
+    {
+      "funnelPageId": "7ef4de95-8944-4f71-8b72-67ea1e6ff427",
+      "funnelName": "Shopify Funnel",
+      "slug": "checkout855",
+      "pageType": "checkout",
+      "totalOrders": 3,
+      "completeOrders": 0,
+      "declinedOrders": 0,
+      "abandonedOrders": 0,
+      "partialOrders": 0,
+      "revenue": 410,
+      "conversionRate": 0,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 3
+      }
+    },
+    {
+      "funnelPageId": "0d2b303a-a1ed-4dff-84fc-5a46ce560354",
+      "funnelName": "Shopify Funnel",
+      "slug": "secure-checkout0-1",
+      "pageType": "checkout",
+      "totalOrders": 2,
+      "completeOrders": 1,
+      "declinedOrders": 0,
+      "abandonedOrders": 1,
+      "partialOrders": 0,
+      "revenue": 14490,
+      "conversionRate": 0.5,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 2
+      }
+    },
+    {
+      "funnelPageId": "5b2d7e9d-3cc8-4e79-890f-d49e1b219a9c",
+      "funnelName": "Shopify Funnel",
+      "slug": "secure-checkout1-0",
+      "pageType": "checkout",
+      "totalOrders": 2,
+      "completeOrders": 1,
+      "declinedOrders": 0,
+      "abandonedOrders": 1,
+      "partialOrders": 0,
+      "revenue": 9995,
+      "conversionRate": 0.5,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 2
+      }
+    },
+    {
+      "funnelPageId": "42d71e73-fb34-4c13-bc87-e3e6c72fb5de",
+      "funnelName": "Shopify Funnel",
+      "slug": "8b0924cc-b5c6-44e5-8079-2695ac560643/checkout8625",
+      "pageType": "checkout",
+      "totalOrders": 1,
+      "completeOrders": 0,
+      "declinedOrders": 0,
+      "abandonedOrders": 1,
+      "partialOrders": 0,
+      "revenue": 0,
+      "conversionRate": 0,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 1
+      }
+    },
+    {
+      "funnelPageId": "5641134d-4834-4fbe-85d8-ec0f79b9f876",
+      "funnelName": "Shopify Funnel",
+      "slug": "checkout-bsd-top5",
+      "pageType": "checkout",
+      "totalOrders": 1,
+      "completeOrders": 0,
+      "declinedOrders": 0,
+      "abandonedOrders": 1,
+      "partialOrders": 0,
+      "revenue": 0,
+      "conversionRate": 0,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 1
+      }
+    },
+    {
+      "funnelPageId": "b2fd1718-c367-48c2-8842-379e4915fa64",
+      "funnelName": "Shopify Funnel",
+      "slug": "special-offer-control",
+      "pageType": "upsell",
+      "totalOrders": 1,
+      "completeOrders": 0,
+      "declinedOrders": 0,
+      "abandonedOrders": 1,
+      "partialOrders": 0,
+      "revenue": 0,
+      "conversionRate": 0,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 1
+      }
+    },
+    {
+      "funnelPageId": "2c7ca205-6cd4-45b3-833e-cc4a281a3ae4",
+      "funnelName": "Shopify Funnel",
+      "slug": "special-offer-ps1-control",
+      "pageType": "upsell",
+      "totalOrders": 1,
+      "completeOrders": 0,
+      "declinedOrders": 0,
+      "abandonedOrders": 1,
+      "partialOrders": 0,
+      "revenue": 0,
+      "conversionRate": 0,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 1
+      }
+    },
+    {
+      "funnelPageId": "087dd3f3-4b1e-47bb-b367-a06b131bd72c",
+      "funnelName": "Shopify Funnel",
+      "slug": "time1-special-offer",
+      "pageType": "upsell",
+      "totalOrders": 1,
+      "completeOrders": 0,
+      "declinedOrders": 0,
+      "abandonedOrders": 1,
+      "partialOrders": 0,
+      "revenue": 0,
+      "conversionRate": 0,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 1
+      }
+    },
+    {
+      "funnelPageId": "1e67989a-7aff-49ff-addd-ed504fcb9aeb",
+      "funnelName": "Shopify Funnel",
+      "slug": "878afb77-6c72-430a-89d5-853f49996669.html",
+      "pageType": "other",
+      "totalOrders": 1,
+      "completeOrders": 0,
+      "declinedOrders": 0,
+      "abandonedOrders": 1,
+      "partialOrders": 0,
+      "revenue": 0,
+      "conversionRate": 0,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 1
+      }
+    },
+    {
+      "funnelPageId": "3d004490-d317-47be-afec-43493e9c5a78",
+      "funnelName": "Shopify Funnel",
+      "slug": "c4a362a7-0a0a-4b00-ac13-6562aa3c6498.html",
+      "pageType": "other",
+      "totalOrders": 1,
+      "completeOrders": 0,
+      "declinedOrders": 0,
+      "abandonedOrders": 1,
+      "partialOrders": 0,
+      "revenue": 0,
+      "conversionRate": 0,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 1
+      }
+    },
+    {
+      "funnelPageId": "3550745e-b08c-44f8-877e-9957b698bfeb",
+      "funnelName": "Shopify Funnel",
+      "slug": "/checkout-bsd-top5",
+      "pageType": "checkout",
+      "totalOrders": 1,
+      "completeOrders": 1,
+      "declinedOrders": 0,
+      "abandonedOrders": 0,
+      "partialOrders": 0,
+      "revenue": 9995,
+      "conversionRate": 1,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 1
+      }
+    },
+    {
+      "funnelPageId": "41153d3f-da0e-4abc-907c-1529d1ef4594",
+      "funnelName": "Shopify Funnel",
+      "slug": "checkout2",
+      "pageType": "checkout",
+      "totalOrders": 1,
+      "completeOrders": 1,
+      "declinedOrders": 0,
+      "abandonedOrders": 0,
+      "partialOrders": 0,
+      "revenue": 19485,
+      "conversionRate": 1,
+      "topDeclineReasons": {},
+      "responseBreakdown": {
+        "unknown": 1
+      }
+    }
+  ],
+  "summary": {
+    "totalPages": 32,
+    "totalOrders": 1028,
+    "totalComplete": 634,
+    "totalDeclined": 23,
+    "totalAbandoned": 350,
+    "totalRevenue": 9664346,
+    "overallConversionRate": 0.6167315175097277
+  }
+}

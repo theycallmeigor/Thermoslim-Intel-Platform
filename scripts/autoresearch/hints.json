@@ -1,0 +1,10 @@
+[
+  {
+    "date": "2026-03-21",
+    "type": "real",
+    "metric": "conversionRate",
+    "dimension": "funnel",
+    "dimensionValue": "checkout2",
+    "description": "checkout2 funnel conversion dropped ~30%"
+  }
+]

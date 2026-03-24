@@ -1,0 +1,46 @@
+{
+  "id": 8,
+  "timestamp": "2026-03-22T02:40:08.091Z",
+  "timeframe": "6h",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.5,
+    "funnelDropWarning": 0.3,
+    "funnelDropCritical": 0.55,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 52.24318658280923,
+    "catch": 77.77777777777779,
+    "quiet": 52.83018867924528,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 6,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 50,
+      "cleanDays": 106,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 52.24318658280923,
+  "accepted": true,
+  "reasoning": "## Reasoning\n\nThe current config has poor specificity (0.00) and a noisy baseline with 42 false positives on 106 clean days. I'll try using median instead of mean (more robust for small samples with ~25 orders/day), enable IQR outlier exclusion to clean the baseline, and raise thresholds slightly to reduce false alarms. I'll also add `refunds` and `avgOrderValue` to improve specificity catch rate while keeping the lookback at 14 days.",
+  "durationMs": 156
+}

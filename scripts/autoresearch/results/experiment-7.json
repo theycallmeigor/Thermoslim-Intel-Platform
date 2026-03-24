@@ -1,0 +1,46 @@
+{
+  "id": 7,
+  "timestamp": "2026-03-22T01:29:48.808Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 34.53333333333334,
+    "catch": 58.333333333333336,
+    "quiet": 28,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 7,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 36,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 35.46666666666667,
+  "accepted": false,
+  "reasoning": "Looking at the history, the current best has terrible quiet rate (39 false positives) but decent catch rate. All threshold-raising experiments hurt the score, and shorter lookback also failed. The 0% specificity suggests the system isn't identifying anomaly *types* correctly. Let me try a fundamentally different approach: keep the working baseline (mean+trim5, 14-day lookback) but add `refunds` and `avgOrderValue` metrics which might help specificity, while also trying `weekdayWeekendSplit=true`",
+  "durationMs": 438
+}

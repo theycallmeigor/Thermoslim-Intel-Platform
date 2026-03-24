@@ -1,0 +1,44 @@
+{
+  "id": 42,
+  "timestamp": "2026-03-22T03:11:57.828Z",
+  "timeframe": "6h",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.4,
+    "criticalThreshold": 3.6,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 62.22222222222223,
+    "catch": 55.55555555555556,
+    "quiet": 50,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 53,
+      "cleanDays": 106,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 64.86373165618448,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches 4/8 injections (catch=55.56) with 46 FPs (quiet=56.60). The main issues are: missing 4 injections and having too many false positives. I should try reducing the metrics checked to the most signal-rich ones (fewer metrics = fewer FP opportunities) while slightly lowering thresholds to catch more real anomalies. Adding `avgOrderValue` could help catch revenue anomalies that don't show up in order counts, while removing `cancelledSubscribers` which may be nois",
+  "durationMs": 157
+}

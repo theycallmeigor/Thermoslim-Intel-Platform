@@ -1,0 +1,44 @@
+{
+  "id": 40,
+  "timestamp": "2026-03-22T01:34:02.213Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 36.13333333333334,
+    "catch": 58.333333333333336,
+    "quiet": 32,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 7,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 34,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the pattern, every modification has been rejected. The best config has 35/50 false positives suggesting thresholds are too sensitive, but raising them hurts catch rate. The specificity is 0/4 on funnel detection. Let me try reducing the metric set to only the most signal-rich metrics (removing `recurringOrders` which may generate noise) while slightly raising the warning threshold to 3.0 and keeping everything else identical to the best config - a minimal surgical change targeting the",
+  "durationMs": 172
+}

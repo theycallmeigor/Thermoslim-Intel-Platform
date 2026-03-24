@@ -1,0 +1,46 @@
+{
+  "id": 8,
+  "timestamp": "2026-03-22T03:07:45.533Z",
+  "timeframe": "15min",
+  "config": {
+    "lookbackDays": 15,
+    "minHistory": 7,
+    "warningThreshold": 2.7,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.32,
+    "funnelDropCritical": 0.58,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 62.539682539682545,
+    "catch": 44.44444444444444,
+    "quiet": 61.904761904761905,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 40,
+      "cleanDays": 105,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 63.67676767676768,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best (63.68) catches 5/8 injections but has 51 false positives on 110 clean days. Most experiments that changed `outlierMethod`, `weekdayWeekendSplit`, or added metrics were rejected. The core config seems right, but the false positive rate is hurting the quiet score significantly. I should try slightly raising thresholds to reduce false positives while keeping the metrics set that works, and perhaps try a longer lookback (15 days) to create a more stable baseline - whi",
+  "durationMs": 543
+}

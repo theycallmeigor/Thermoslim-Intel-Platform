@@ -1,0 +1,46 @@
+{
+  "id": 6,
+  "timestamp": "2026-03-22T03:07:29.178Z",
+  "timeframe": "15min",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.35,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 44.19287211740042,
+    "catch": 44.44444444444444,
+    "quiet": 66.0377358490566,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 36,
+      "cleanDays": 106,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 63.67676767676768,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best (63.68) catches 5/8 injections but has 51 false positives on 110 clean days, making quiet score quite low. The key insight is that with ~25 orders/day and a growing trend, a longer lookback with median may be over-smoothing while a shorter one (7 days) was too noisy. Let me try reducing false positives by raising thresholds slightly while keeping the metric set focused, and try `weekdayWeekendSplit: true` since the context mentions weekend volumes are similar (whic",
+  "durationMs": 544
+}

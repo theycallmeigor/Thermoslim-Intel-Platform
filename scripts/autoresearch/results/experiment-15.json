@@ -1,0 +1,45 @@
+{
+  "id": 15,
+  "timestamp": "2026-03-22T01:30:48.266Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 36.13333333333334,
+    "catch": 58.333333333333336,
+    "quiet": 32,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 7,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 34,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every experiment that deviates from the current best gets rejected. The false alarms are systematic (35/50 clean days) suggesting the baseline calculation or thresholds need fundamental adjustment. I haven't tried combining `weekdayWeekendSplit=true` with the original 5 metrics and keeping thresholds near the best - the context says weekend volumes are similar, so this split might actually hurt. Let me try pushing the warning threshold higher (3.0) while keeping the exact",
+  "durationMs": 178
+}

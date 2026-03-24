@@ -1,0 +1,44 @@
+{
+  "id": 62,
+  "timestamp": "2026-03-22T03:14:24.653Z",
+  "timeframe": "1w",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.7,
+    "criticalThreshold": 5.2,
+    "funnelDropWarning": 0.75,
+    "funnelDropCritical": 0.9,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 33.758865248226954,
+    "catch": 33.33333333333333,
+    "quiet": 51.06382978723404,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 23,
+      "cleanDays": 47,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 42.836879432624116,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best (42.84) catches 6/8 injections but has 28 false positives on 47 clean days - the quiet score is dragging things down significantly. Previous attempts to raise thresholds lost catch rate. I should try keeping the same catch capability but reducing false positives by removing `refunds` from metrics (which tends to be noisy) and slightly raising the warning threshold while also trying a longer lookback (21 days is already there) with `iqr` outlier method which may be ",
+  "durationMs": 206
+}

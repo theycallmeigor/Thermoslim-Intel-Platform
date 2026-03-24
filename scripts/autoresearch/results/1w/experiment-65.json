@@ -1,0 +1,44 @@
+{
+  "id": 65,
+  "timestamp": "2026-03-22T03:14:51.114Z",
+  "timeframe": "1w",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3.5,
+    "criticalThreshold": 5,
+    "funnelDropWarning": 0.8,
+    "funnelDropCritical": 0.92,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 35.55555555555556,
+    "catch": 33.33333333333333,
+    "quiet": 55.55555555555556,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 24,
+      "cleanDays": 54,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 42.836879432624116,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best has 28 false positives on 47 clean days, which is the main drag. The false positives likely come from the funnel drop checks (funnelDropWarning at 0.72 is quite sensitive) and checking too many metrics. Since raising thresholds on z-score hasn't helped much, I'll try keeping the current threshold but significantly tightening the funnel thresholds and reducing the metrics set to the most signal-rich ones, while also trying a shorter lookback to better capture the gr",
+  "durationMs": 168
+}

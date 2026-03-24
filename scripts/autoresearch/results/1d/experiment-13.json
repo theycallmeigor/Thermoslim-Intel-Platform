@@ -1,0 +1,44 @@
+{
+  "id": 13,
+  "timestamp": "2026-03-22T02:40:39.366Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.72,
+    "funnelDropCritical": 0.88,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 38.518518518518526,
+    "catch": 55.55555555555556,
+    "quiet": 40.74074074074075,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 32,
+      "cleanDays": 54,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 49.50354609929078,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best only catches 2/8 injections (25% catch rate) which is very poor, yet we have 28 false positives and a quiet score of only 40.43. The problem seems to be that very high thresholds (3.9/5.8) miss most anomalies, while somehow still generating many FPs. I should try keeping the metrics focused but reducing thresholds moderately while also trying a shorter lookback window and trim5 outlier method to get a more stable baseline - the key insight is we need to catch more ",
+  "durationMs": 178
+}

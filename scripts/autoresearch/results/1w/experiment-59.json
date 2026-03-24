@@ -1,0 +1,45 @@
+{
+  "id": 59,
+  "timestamp": "2026-03-22T03:13:59.257Z",
+  "timeframe": "1w",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.5,
+    "criticalThreshold": 5,
+    "funnelDropWarning": 0.72,
+    "funnelDropCritical": 0.88,
+    "topCampaignsToCheck": 6,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 42.836879432624116,
+    "catch": 66.66666666666666,
+    "quiet": 40.42553191489362,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 6,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 28,
+      "cleanDays": 47,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 42.836879432624116,
+  "accepted": true,
+  "reasoning": "## Reasoning\n\nThe current best catches 5/8 injections but has 35 false positives on 54 clean days, giving a terrible quiet score. The specificity is 0.00, suggesting we're missing something fundamental. I'll try increasing thresholds significantly to cut false positives (the quiet score is dragging overall score down heavily), while keeping the metrics focused on the most signal-rich ones. The trim5 outlier method with median and a longer lookback of 21 days might provide a more stable baseline,",
+  "durationMs": 182
+}

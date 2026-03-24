@@ -1,0 +1,676 @@
+{
+  "generatedAt": "2026-03-22T04:22:54.260Z",
+  "source": "database",
+  "summary": {
+    "funnels": 7,
+    "pages": 46,
+    "orders": 1275,
+    "complete": 852,
+    "declined": 25,
+    "abandoned": 370,
+    "revenue": 12283527
+  },
+  "funnels": [
+    {
+      "funnelId": "8B0924CCB5C644E580792695AC560643",
+      "name": "Shopify — 8B0924CC",
+      "campaignId": "2",
+      "campaignName": "Shopify",
+      "totalOrders": 1096,
+      "pages": [
+        {
+          "slug": "checkout",
+          "pageType": "checkout",
+          "totalOrders": 67,
+          "completeOrders": 39,
+          "declinedOrders": 1,
+          "abandonedOrders": 27,
+          "revenue": 469296,
+          "responseTypes": {
+            "unknown": 67
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "checkout-v2",
+          "pageType": "checkout",
+          "totalOrders": 4,
+          "completeOrders": 3,
+          "declinedOrders": 0,
+          "abandonedOrders": 1,
+          "revenue": 15985,
+          "responseTypes": {
+            "unknown": 4
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "secure-checkout",
+          "pageType": "checkout",
+          "totalOrders": 175,
+          "completeOrders": 113,
+          "declinedOrders": 4,
+          "abandonedOrders": 51,
+          "revenue": 1919405,
+          "responseTypes": {
+            "unknown": 175
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "secure-checkout0-1",
+          "pageType": "checkout",
+          "totalOrders": 2,
+          "completeOrders": 1,
+          "declinedOrders": 0,
+          "abandonedOrders": 1,
+          "revenue": 14490,
+          "responseTypes": {
+            "unknown": 2
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "secure-checkout1-1",
+          "pageType": "checkout",
+          "totalOrders": 3,
+          "completeOrders": 3,
+          "declinedOrders": 0,
+          "abandonedOrders": 0,
+          "revenue": 23985,
+          "responseTypes": {
+            "unknown": 3
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "secure-checkout1-0",
+          "pageType": "checkout",
+          "totalOrders": 2,
+          "completeOrders": 1,
+          "declinedOrders": 0,
+          "abandonedOrders": 1,
+          "revenue": 9995,
+          "responseTypes": {
+            "unknown": 2
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "checkout2",
+          "pageType": "checkout",
+          "totalOrders": 497,
+          "completeOrders": 308,
+          "declinedOrders": 12,
+          "abandonedOrders": 171,
+          "revenue": 4951144,
+          "responseTypes": {
+            "unknown": 497
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "8b0924cc-b5c6-44e5-8079-2695ac560643/checkout8625",
+          "pageType": "checkout",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 1,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "checkout2-old",
+          "pageType": "checkout",
+          "totalOrders": 10,
+          "completeOrders": 6,
+          "declinedOrders": 0,
+          "abandonedOrders": 4,
+          "revenue": 92930,
+          "responseTypes": {
+            "unknown": 10
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "checkout2-new",
+          "pageType": "checkout",
+          "totalOrders": 5,
+          "completeOrders": 5,
+          "declinedOrders": 0,
+          "abandonedOrders": 0,
+          "revenue": 65960,
+          "responseTypes": {
+            "unknown": 5
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "checkout-bsd-top5",
+          "pageType": "checkout",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 1,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "1time-special-offer",
+          "pageType": "upsell",
+          "totalOrders": 18,
+          "completeOrders": 9,
+          "declinedOrders": 0,
+          "abandonedOrders": 9,
+          "revenue": 155925,
+          "responseTypes": {
+            "unknown": 18
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "special-offer",
+          "pageType": "upsell",
+          "totalOrders": 35,
+          "completeOrders": 18,
+          "declinedOrders": 0,
+          "abandonedOrders": 17,
+          "revenue": 238380,
+          "responseTypes": {
+            "unknown": 35
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "time1-special-offer",
+          "pageType": "upsell",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 1,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "1time-special-offer-bump",
+          "pageType": "upsell",
+          "totalOrders": 6,
+          "completeOrders": 4,
+          "declinedOrders": 0,
+          "abandonedOrders": 2,
+          "revenue": 83970,
+          "responseTypes": {
+            "unknown": 6
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "special-offer-ctrl",
+          "pageType": "upsell",
+          "totalOrders": 17,
+          "completeOrders": 12,
+          "declinedOrders": 0,
+          "abandonedOrders": 5,
+          "revenue": 204929,
+          "responseTypes": {
+            "unknown": 17
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "special-offer-ps1",
+          "pageType": "upsell",
+          "totalOrders": 12,
+          "completeOrders": 8,
+          "declinedOrders": 0,
+          "abandonedOrders": 3,
+          "revenue": 113460,
+          "responseTypes": {
+            "unknown": 12
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "1time-special-offer-ctrl",
+          "pageType": "upsell",
+          "totalOrders": 3,
+          "completeOrders": 1,
+          "declinedOrders": 0,
+          "abandonedOrders": 2,
+          "revenue": 13995,
+          "responseTypes": {
+            "unknown": 3
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "special-offer-new",
+          "pageType": "upsell",
+          "totalOrders": 8,
+          "completeOrders": 4,
+          "declinedOrders": 1,
+          "abandonedOrders": 3,
+          "revenue": 65086,
+          "responseTypes": {
+            "unknown": 8
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "1time-special-offer-new",
+          "pageType": "upsell",
+          "totalOrders": 6,
+          "completeOrders": 4,
+          "declinedOrders": 0,
+          "abandonedOrders": 2,
+          "revenue": 63515,
+          "responseTypes": {
+            "unknown": 6
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "special-offer-ps1-control",
+          "pageType": "upsell",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 1,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "special-offer-new2",
+          "pageType": "upsell",
+          "totalOrders": 12,
+          "completeOrders": 10,
+          "declinedOrders": 0,
+          "abandonedOrders": 2,
+          "revenue": 162967,
+          "responseTypes": {
+            "unknown": 12
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "special-offer-control",
+          "pageType": "upsell",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 1,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "unknown",
+          "pageType": "other",
+          "totalOrders": 208,
+          "completeOrders": 204,
+          "declinedOrders": 0,
+          "abandonedOrders": 0,
+          "revenue": 2334501,
+          "responseTypes": {
+            "unknown": 208
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "878afb77-6c72-430a-89d5-853f49996669.html",
+          "pageType": "other",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 1,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        }
+      ]
+    },
+    {
+      "funnelId": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "name": "Shopify — A84CCA48",
+      "campaignId": "2",
+      "campaignName": "Shopify",
+      "totalOrders": 68,
+      "pages": [
+        {
+          "slug": "checkout-v2",
+          "pageType": "checkout",
+          "totalOrders": 68,
+          "completeOrders": 47,
+          "declinedOrders": 0,
+          "abandonedOrders": 20,
+          "revenue": 253260,
+          "responseTypes": {
+            "unknown": 68
+          },
+          "declineReasons": {}
+        }
+      ]
+    },
+    {
+      "funnelId": "F684F3F4CAF9401D8415700C21F593C1",
+      "name": "Shopify — F684F3F4",
+      "campaignId": "2",
+      "campaignName": "Shopify",
+      "totalOrders": 35,
+      "pages": [
+        {
+          "slug": "/checkout-bsd-top5",
+          "pageType": "checkout",
+          "totalOrders": 1,
+          "completeOrders": 1,
+          "declinedOrders": 0,
+          "abandonedOrders": 0,
+          "revenue": 9995,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "checkout-bsd-top5",
+          "pageType": "checkout",
+          "totalOrders": 23,
+          "completeOrders": 13,
+          "declinedOrders": 2,
+          "abandonedOrders": 8,
+          "revenue": 209420,
+          "responseTypes": {
+            "unknown": 23
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "checkout2",
+          "pageType": "checkout",
+          "totalOrders": 1,
+          "completeOrders": 1,
+          "declinedOrders": 0,
+          "abandonedOrders": 0,
+          "revenue": 19485,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "unknown",
+          "pageType": "other",
+          "totalOrders": 10,
+          "completeOrders": 10,
+          "declinedOrders": 0,
+          "abandonedOrders": 0,
+          "revenue": 170395,
+          "responseTypes": {
+            "unknown": 10
+          },
+          "declineReasons": {}
+        }
+      ]
+    },
+    {
+      "funnelId": "5D0E497B070541498BE92C9CA2C49F6E",
+      "name": "Shopify — 5D0E497B",
+      "campaignId": "2",
+      "campaignName": "Shopify",
+      "totalOrders": 33,
+      "pages": [
+        {
+          "slug": "checkout-bsd-quiz",
+          "pageType": "checkout",
+          "totalOrders": 29,
+          "completeOrders": 12,
+          "declinedOrders": 2,
+          "abandonedOrders": 13,
+          "revenue": 243355,
+          "responseTypes": {
+            "unknown": 29
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "unknown",
+          "pageType": "other",
+          "totalOrders": 4,
+          "completeOrders": 4,
+          "declinedOrders": 0,
+          "abandonedOrders": 0,
+          "revenue": 97950,
+          "responseTypes": {
+            "unknown": 4
+          },
+          "declineReasons": {}
+        }
+      ]
+    },
+    {
+      "funnelId": "no-funnel",
+      "name": "Shopify — no-funne",
+      "campaignId": "2",
+      "campaignName": "Shopify",
+      "totalOrders": 26,
+      "pages": [
+        {
+          "slug": "8b0924cc-b5c6-44e5-8079-2695ac560643/checkout",
+          "pageType": "checkout",
+          "totalOrders": 2,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 2,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 2
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "checkout",
+          "pageType": "checkout",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 1,
+          "abandonedOrders": 0,
+          "revenue": 100,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "8b0924cc-b5c6-44e5-8079-2695ac560643/checkout2",
+          "pageType": "checkout",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 1,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "8b0924cc-b5c6-44e5-8079-2695ac560643/checkout8625",
+          "pageType": "checkout",
+          "totalOrders": 11,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 11,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 11
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "5d0e497b-0705-4149-8be9-2c9ca2c49f6e/checkout-bsd-quiz",
+          "pageType": "checkout",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 0,
+          "revenue": 145,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "checkout2",
+          "pageType": "checkout",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 1,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "8b0924cc-b5c6-44e5-8079-2695ac560643/special-offer-new2",
+          "pageType": "upsell",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 1,
+          "abandonedOrders": 0,
+          "revenue": 13995,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "8b0924cc-b5c6-44e5-8079-2695ac560643/special-offer-new",
+          "pageType": "upsell",
+          "totalOrders": 2,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 2,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 2
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "8b0924cc-b5c6-44e5-8079-2695ac560643/89d84769-ba90-4584-8ef6-844f2c373539.html",
+          "pageType": "other",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 0,
+          "revenue": 100,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "unknown",
+          "pageType": "other",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 0,
+          "revenue": 1995,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "8b0924cc-b5c6-44e5-8079-2695ac560643/48cafeca-fc27-47e1-bfc2-1ab9ce6f07b5.html",
+          "pageType": "other",
+          "totalOrders": 4,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 4,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 4
+          },
+          "declineReasons": {}
+        }
+      ]
+    },
+    {
+      "funnelId": "93BDBE7FE1ED4116802F21EDFFBC1169",
+      "name": "Shopify — 93BDBE7F",
+      "campaignId": "2",
+      "campaignName": "Shopify",
+      "totalOrders": 13,
+      "pages": [
+        {
+          "slug": "test/checkout",
+          "pageType": "checkout",
+          "totalOrders": 13,
+          "completeOrders": 11,
+          "declinedOrders": 1,
+          "abandonedOrders": 0,
+          "revenue": 263004,
+          "responseTypes": {
+            "unknown": 13
+          },
+          "declineReasons": {}
+        }
+      ]
+    },
+    {
+      "funnelId": "1497FD34A97F449E96D5D6063A58B24B",
+      "name": "Shopify — 1497FD34",
+      "campaignId": "2",
+      "campaignName": "Shopify",
+      "totalOrders": 4,
+      "pages": [
+        {
+          "slug": "checkout855",
+          "pageType": "checkout",
+          "totalOrders": 3,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 0,
+          "revenue": 410,
+          "responseTypes": {
+            "unknown": 3
+          },
+          "declineReasons": {}
+        },
+        {
+          "slug": "c4a362a7-0a0a-4b00-ac13-6562aa3c6498.html",
+          "pageType": "other",
+          "totalOrders": 1,
+          "completeOrders": 0,
+          "declinedOrders": 0,
+          "abandonedOrders": 1,
+          "revenue": 0,
+          "responseTypes": {
+            "unknown": 1
+          },
+          "declineReasons": {}
+        }
+      ]
+    }
+  ]
+}

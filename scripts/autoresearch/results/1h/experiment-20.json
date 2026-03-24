@@ -1,0 +1,48 @@
+{
+  "id": 20,
+  "timestamp": "2026-03-22T03:09:21.015Z",
+  "timeframe": "1h",
+  "config": {
+    "lookbackDays": 28,
+    "minHistory": 12,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4,
+    "funnelDropWarning": 0.3,
+    "funnelDropCritical": 0.55,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 61.256038647343,
+    "catch": 44.44444444444444,
+    "quiet": 58.69565217391305,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 38,
+      "cleanDays": 92,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 61.256038647343,
+  "accepted": true,
+  "reasoning": "## Reasoning\n\nThe current best catches only 2/8 injections, suggesting sensitivity is too low. Rather than lowering thresholds (which increases false positives), I should try adding more metrics to monitor (like `recurringOrders` and `avgOrderValue`) which might catch injection types we're currently missing, while keeping the stable threshold settings. I'll also try a slightly longer lookback to get a more stable baseline and reduce false positives.",
+  "durationMs": 447
+}

@@ -1,0 +1,45 @@
+{
+  "id": 16,
+  "timestamp": "2026-03-22T03:08:46.536Z",
+  "timeframe": "1h",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 2.4,
+    "criticalThreshold": 3.5,
+    "funnelDropWarning": 0.3,
+    "funnelDropCritical": 0.52,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 54.74747474747475,
+    "catch": 33.33333333333333,
+    "quiet": 53.535353535353536,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 2,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 46,
+      "cleanDays": 99,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 60,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best catches only 2/8 injections with 33 false positives, suggesting we need to improve catch rate without increasing noise. The catch rate is very low (33%), so I should try reducing thresholds moderately to catch more anomalies while keeping the metrics focused. I'll try reducing warningThreshold slightly, keeping the proven metrics set, and experimenting with a slightly shorter lookback to be more responsive to sudden changes while maintaining median and IQR for robu",
+  "durationMs": 422
+}

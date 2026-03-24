@@ -1,0 +1,45 @@
+{
+  "id": 19,
+  "timestamp": "2026-03-22T03:09:13.277Z",
+  "timeframe": "1h",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.3,
+    "funnelDropCritical": 0.55,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 50.39832285115304,
+    "catch": 22.22222222222222,
+    "quiet": 53.77358490566038,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 2,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 49,
+      "cleanDays": 106,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 60,
+  "accepted": false,
+  "reasoning": "Looking at the experiment history, the main challenge is improving catch rate (currently 2/8) without increasing false positives beyond the noisy threshold. The current config with lookbackDays=21, median, IQR outlier exclusion, and 5 metrics gives 33 FPs. Lower thresholds (Exp 16, 17) hurt the quiet score, and adding more metrics (Exp 14, 17, 18) also seems to hurt. Let me try a different approach: keep the current metrics but experiment with a shorter lookback window (14 days) to be more sensi",
+  "durationMs": 385
+}

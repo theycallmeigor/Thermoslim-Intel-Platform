@@ -1,0 +1,45 @@
+{
+  "id": 17,
+  "timestamp": "2026-03-22T01:31:03.445Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 33.02325581395349,
+    "catch": 50,
+    "quiet": 32.55813953488372,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 6,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 29,
+      "cleanDays": 43,
+      "specificityHits": 0,
+      "specificityTotal": 2
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every experiment has been rejected, suggesting the current best at 38.67 is a local optimum that's hard to improve incrementally. The terrible quiet rate (35/50 false positives) suggests the issue is fundamental. I haven't tried using `useMedianInsteadOfMean=true` with the original trim5 method and keeping thresholds close to the best - median is more robust for small samples (~25 orders/day) and might reduce variance-driven false alarms. Let me also try a slightly longer",
+  "durationMs": 189
+}

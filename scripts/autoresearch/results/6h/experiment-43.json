@@ -1,0 +1,46 @@
+{
+  "id": 43,
+  "timestamp": "2026-03-22T03:12:04.834Z",
+  "timeframe": "6h",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.32,
+    "funnelDropCritical": 0.55,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 62.22222222222223,
+    "catch": 55.55555555555556,
+    "quiet": 50,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 53,
+      "cleanDays": 106,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 64.86373165618448,
+  "accepted": false,
+  "reasoning": "Looking at the history, the current best (64.86) catches 4/8 injections with 46 FPs. The catch rate is the bigger weakness at 55.56. I should try adding more metrics to catch missed injections while keeping thresholds high enough to avoid FPs. Adding `refunds` and `avgOrderValue` might catch different types of anomalies, and slightly lowering funnel drop thresholds could help catch funnel-based injections.",
+  "durationMs": 159
+}

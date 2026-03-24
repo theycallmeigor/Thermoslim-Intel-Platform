@@ -1,0 +1,45 @@
+{
+  "id": 64,
+  "timestamp": "2026-03-22T03:14:42.314Z",
+  "timeframe": "1w",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.6,
+    "criticalThreshold": 5,
+    "funnelDropWarning": 0.74,
+    "funnelDropCritical": 0.89,
+    "topCampaignsToCheck": 6,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 38.2033096926714,
+    "catch": 44.44444444444444,
+    "quiet": 51.06382978723404,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 23,
+      "cleanDays": 47,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 42.836879432624116,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best has 28 FPs on 47 clean days (quiet score 40.43) with 6/8 catch rate. Recent experiments raising thresholds or removing metrics all got rejected, suggesting the metric set and threshold combination matters a lot. I should try keeping `refunds` in the mix but significantly raising the warning threshold to 3.8+ while trying a longer lookback (30 days) with IQR outlier method - but that was tried and failed. Instead, let me try a very different approach: keep the curre",
+  "durationMs": 209
+}

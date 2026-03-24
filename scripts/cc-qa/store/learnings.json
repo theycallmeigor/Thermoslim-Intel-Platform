@@ -1,0 +1,1046 @@
+[
+  {
+    "id": "learn-paySource-PREPAID-1774184947515",
+    "discoveredAt": "2026-03-22T13:09:07.514Z",
+    "type": "pattern",
+    "description": "paySource=PREPAID: 1% fail rate over 1h (seen 110x)",
+    "pattern": {
+      "dimension": "paySource",
+      "value": "PREPAID",
+      "metric": "failRate",
+      "baseline": 0.3857916931325035,
+      "alertThreshold": 0.8
+    },
+    "confirmations": 110,
+    "lastSeen": "2026-03-24T11:21:46.401Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "learn-paySource-CREDITCA-1774184947515",
+    "discoveredAt": "2026-03-22T13:09:07.514Z",
+    "type": "pattern",
+    "description": "paySource=CREDITCARD: 1% fail rate over 1h (seen 660x)",
+    "pattern": {
+      "dimension": "paySource",
+      "value": "CREDITCARD",
+      "metric": "failRate",
+      "baseline": 0.7925554732701753,
+      "alertThreshold": 0.4
+    },
+    "confirmations": 660,
+    "lastSeen": "2026-03-24T11:21:46.401Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "baseline-pay-CREDITCA-1774184947515",
+    "discoveredAt": "2026-03-22T13:09:07.514Z",
+    "type": "baseline",
+    "description": "Hourly fail rate profile for paySource=CREDITCARD",
+    "pattern": {
+      "dimension": "paySource",
+      "value": "CREDITCARD",
+      "metric": "failRate",
+      "baseline": 0.05276912229858455,
+      "alertThreshold": 0.07915368344787682,
+      "hourlyProfile": [
+        0,
+        0.16666666666666666,
+        0,
+        0,
+        0,
+        0.3333333333333333,
+        0,
+        0,
+        0.5,
+        0,
+        0,
+        0.16666666666666666,
+        0.16666666666666666,
+        0,
+        0,
+        0,
+        0,
+        0.016666666666666666,
+        0,
+        0,
+        0.05,
+        0,
+        0,
+        0
+      ]
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-24T11:21:46.401Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "baseline-pay-PREPAID-1774184947515",
+    "discoveredAt": "2026-03-22T13:09:07.514Z",
+    "type": "baseline",
+    "description": "Hourly fail rate profile for paySource=PREPAID",
+    "pattern": {
+      "dimension": "paySource",
+      "value": "PREPAID",
+      "metric": "failRate",
+      "baseline": 0.03156565656565657,
+      "alertThreshold": 0.04734848484848485,
+      "hourlyProfile": [
+        0,
+        0,
+        0,
+        0.3333333333333333,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-24T11:21:46.401Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-responseType-SOFT_DECLINE-1774184947516",
+    "discoveredAt": "2026-03-22T13:09:07.516Z",
+    "type": "correlation",
+    "description": "responseType=SOFT_DECLINE: 100% fail (36.5x baseline)",
+    "pattern": {
+      "dimension": "responseType",
+      "value": "SOFT_DECLINE",
+      "metric": "failRate",
+      "baseline": 1,
+      "alertThreshold": 0.8
+    },
+    "confirmations": 2,
+    "lastSeen": "2026-03-22T17:01:15.521Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-couponCode-NICOTEST-1774184947516",
+    "discoveredAt": "2026-03-22T13:09:07.516Z",
+    "type": "correlation",
+    "description": "couponCode=NICOTEST: 13% fail (4.8x baseline)",
+    "pattern": {
+      "dimension": "couponCode",
+      "value": "NICOTEST",
+      "metric": "failRate",
+      "baseline": 0.13043478260869565,
+      "alertThreshold": 0.10434782608695653
+    },
+    "confirmations": 2,
+    "lastSeen": "2026-03-22T17:01:15.521Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-hasUpsells-false-1774184947516",
+    "discoveredAt": "2026-03-22T13:09:07.516Z",
+    "type": "correlation",
+    "description": "hasUpsells=false: 5% fail (1.9x baseline)",
+    "pattern": {
+      "dimension": "hasUpsells",
+      "value": "false",
+      "metric": "failRate",
+      "baseline": 0.08641975308641975,
+      "alertThreshold": 0.04132231404958678
+    },
+    "confirmations": 7,
+    "lastSeen": "2026-03-22T17:06:52.098Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-checkoutVariant-bsd-checkout-1774184947910",
+    "discoveredAt": "2026-03-22T13:09:07.910Z",
+    "type": "correlation",
+    "description": "checkoutVariant=bsd-checkout: 13% fail (4.6x baseline)",
+    "pattern": {
+      "dimension": "checkoutVariant",
+      "value": "bsd-checkout",
+      "metric": "failRate",
+      "baseline": 0.10638297872340426,
+      "alertThreshold": 0.1
+    },
+    "confirmations": 83,
+    "lastSeen": "2026-03-24T11:21:46.403Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-pageSlug-checkout-v2-1774184947910",
+    "discoveredAt": "2026-03-22T13:09:07.910Z",
+    "type": "correlation",
+    "description": "pageSlug=checkout-v2: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "pageSlug",
+      "value": "checkout-v2",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 2,
+    "lastSeen": "2026-03-22T17:01:15.822Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-checkoutVariant-checkout-v2-1774184947910",
+    "discoveredAt": "2026-03-22T13:09:07.910Z",
+    "type": "correlation",
+    "description": "checkoutVariant=checkout-v2: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "checkoutVariant",
+      "value": "checkout-v2",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 2,
+    "lastSeen": "2026-03-22T17:01:15.822Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-CT-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=CT: 17% fail (6.4x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "CT",
+      "metric": "failRate",
+      "baseline": 0.17391304347826086,
+      "alertThreshold": 0.1391304347826087
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-NY-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=NY: 9% fail (3.3x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "NY",
+      "metric": "failRate",
+      "baseline": 0.09090909090909091,
+      "alertThreshold": 0.07272727272727274
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-IL-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=IL: 9% fail (3.2x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "IL",
+      "metric": "failRate",
+      "baseline": 0.08695652173913043,
+      "alertThreshold": 0.06956521739130435
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-device-Desktop / Wi-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "device=Desktop / Win10: 7% fail (2.7x baseline)",
+    "pattern": {
+      "dimension": "device",
+      "value": "Desktop / Win10",
+      "metric": "failRate",
+      "baseline": 0.07407407407407407,
+      "alertThreshold": 0.05925925925925926
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-NJ-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=NJ: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "NJ",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-OH-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=OH: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "OH",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-VA-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=VA: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "VA",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-GA-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=GA: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "GA",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-AZ-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=AZ: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "AZ",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-PA-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=PA: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "PA",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-12-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=12: 5% fail (1.8x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "12",
+      "metric": "failRate",
+      "baseline": 0.05,
+      "alertThreshold": 0.04000000000000001
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-deviceCategory-desktop-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "deviceCategory=desktop: 5% fail (1.8x baseline)",
+    "pattern": {
+      "dimension": "deviceCategory",
+      "value": "desktop",
+      "metric": "failRate",
+      "baseline": 0.05,
+      "alertThreshold": 0.04000000000000001
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-browser-Mobile Safar-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "browser=Mobile Safari UIWebView: 1% fail (0.3x baseline)",
+    "pattern": {
+      "dimension": "browser",
+      "value": "Mobile Safari UIWebView",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0.0068376068376068385
+    },
+    "confirmations": 24,
+    "lastSeen": "2026-03-23T02:00:12.590Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-device-Desktop / Ma-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "device=Desktop / MacOSX: 5% fail (1.7x baseline)",
+    "pattern": {
+      "dimension": "device",
+      "value": "Desktop / MacOSX",
+      "metric": "failRate",
+      "baseline": 0.045454545454545456,
+      "alertThreshold": 0.03636363636363637
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-NC-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=NC: 4% fail (1.6x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "NC",
+      "metric": "failRate",
+      "baseline": 0.043478260869565216,
+      "alertThreshold": 0.034782608695652174
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-CO-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=CO: 4% fail (1.5x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "CO",
+      "metric": "failRate",
+      "baseline": 0.041666666666666664,
+      "alertThreshold": 0.03333333333333333
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.133Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-geoState-CA-1774198876133",
+    "discoveredAt": "2026-03-22T17:01:16.133Z",
+    "type": "correlation",
+    "description": "geoState=CA: 1% fail (0.5x baseline)",
+    "pattern": {
+      "dimension": "geoState",
+      "value": "CA",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0.010526315789473684
+    },
+    "confirmations": 24,
+    "lastSeen": "2026-03-23T02:00:12.590Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-cardType-MASTERCARD-1774198876382",
+    "discoveredAt": "2026-03-22T17:01:16.382Z",
+    "type": "correlation",
+    "description": "cardType=MASTERCARD: 6% fail (2.2x baseline)",
+    "pattern": {
+      "dimension": "cardType",
+      "value": "MASTERCARD",
+      "metric": "failRate",
+      "baseline": 0.08333333333333333,
+      "alertThreshold": 0.04768211920529802
+    },
+    "confirmations": 81,
+    "lastSeen": "2026-03-24T11:21:46.403Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-declineReasonCategory-other-1774198876382",
+    "discoveredAt": "2026-03-22T17:01:16.382Z",
+    "type": "correlation",
+    "description": "declineReasonCategory=other: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "declineReasonCategory",
+      "value": "other",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.382Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-cardType-TESTCARD-1774198876382",
+    "discoveredAt": "2026-03-22T17:01:16.382Z",
+    "type": "correlation",
+    "description": "cardType=TESTCARD: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "cardType",
+      "value": "TESTCARD",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.382Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-avsResponse-U-1774198876382",
+    "discoveredAt": "2026-03-22T17:01:16.382Z",
+    "type": "correlation",
+    "description": "avsResponse=U: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "avsResponse",
+      "value": "U",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 82,
+    "lastSeen": "2026-03-24T11:21:46.403Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-avsResponse-N-1774198876382",
+    "discoveredAt": "2026-03-22T17:01:16.382Z",
+    "type": "correlation",
+    "description": "avsResponse=N: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "avsResponse",
+      "value": "N",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.382Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-avsResponse-Y-1774198876382",
+    "discoveredAt": "2026-03-22T17:01:16.382Z",
+    "type": "correlation",
+    "description": "avsResponse=Y: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "avsResponse",
+      "value": "Y",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.382Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-cvvResponse-Y-1774198876382",
+    "discoveredAt": "2026-03-22T17:01:16.382Z",
+    "type": "correlation",
+    "description": "cvvResponse=Y: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "cvvResponse",
+      "value": "Y",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 82,
+    "lastSeen": "2026-03-24T11:21:46.403Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-cvvResponse-U-1774198876382",
+    "discoveredAt": "2026-03-22T17:01:16.382Z",
+    "type": "correlation",
+    "description": "cvvResponse=U: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "cvvResponse",
+      "value": "U",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 81,
+    "lastSeen": "2026-03-24T11:21:46.403Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-cardType-DISCOVER-1774198876382",
+    "discoveredAt": "2026-03-22T17:01:16.382Z",
+    "type": "correlation",
+    "description": "cardType=DISCOVER: 4% fail (1.6x baseline)",
+    "pattern": {
+      "dimension": "cardType",
+      "value": "DISCOVER",
+      "metric": "failRate",
+      "baseline": 0.043478260869565216,
+      "alertThreshold": 0.034782608695652174
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.382Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-cardType-VISA-1774198876382",
+    "discoveredAt": "2026-03-22T17:01:16.382Z",
+    "type": "correlation",
+    "description": "cardType=VISA: 4% fail (1.5x baseline)",
+    "pattern": {
+      "dimension": "cardType",
+      "value": "VISA",
+      "metric": "failRate",
+      "baseline": 0.04119850187265917,
+      "alertThreshold": 0.03295880149812734
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.382Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-ccCustom1-TS - Quiz - -1774198876699",
+    "discoveredAt": "2026-03-22T17:01:16.699Z",
+    "type": "correlation",
+    "description": "ccCustom1=TS - Quiz - Cold: 8% fail (3.0x baseline)",
+    "pattern": {
+      "dimension": "ccCustom1",
+      "value": "TS - Quiz - Cold",
+      "metric": "failRate",
+      "baseline": 0.10344827586206896,
+      "alertThreshold": 0.06666666666666667
+    },
+    "confirmations": 81,
+    "lastSeen": "2026-03-24T11:21:46.403Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-ccCustom2-BSD - TS-TOP-1774198876699",
+    "discoveredAt": "2026-03-22T17:01:16.699Z",
+    "type": "correlation",
+    "description": "ccCustom2=BSD - TS-TOP5  - CHECKOUT: 8% fail (2.8x baseline)",
+    "pattern": {
+      "dimension": "ccCustom2",
+      "value": "BSD - TS-TOP5  - CHECKOUT",
+      "metric": "failRate",
+      "baseline": 0.06382978723404255,
+      "alertThreshold": 0.06153846153846154
+    },
+    "confirmations": 81,
+    "lastSeen": "2026-03-24T11:21:46.403Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-ccCustom1-TS - TOP5 - -1774198876699",
+    "discoveredAt": "2026-03-22T17:01:16.699Z",
+    "type": "correlation",
+    "description": "ccCustom1=TS - TOP5 - MOF: 7% fail (2.7x baseline)",
+    "pattern": {
+      "dimension": "ccCustom1",
+      "value": "TS - TOP5 - MOF",
+      "metric": "failRate",
+      "baseline": 0.05714285714285714,
+      "alertThreshold": 0.05925925925925926
+    },
+    "confirmations": 79,
+    "lastSeen": "2026-03-24T10:24:35.408Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-ccCustom1-Thermoslimv -1774198876699",
+    "discoveredAt": "2026-03-22T17:01:16.699Z",
+    "type": "correlation",
+    "description": "ccCustom1=Thermoslimv -B: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "ccCustom1",
+      "value": "Thermoslimv -B",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.699Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-ccCustom2-Checkout Pag-1774198876699",
+    "discoveredAt": "2026-03-22T17:01:16.699Z",
+    "type": "correlation",
+    "description": "ccCustom2=Checkout Page 2: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "ccCustom2",
+      "value": "Checkout Page 2",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.699Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-ccCustom2-V5 Checkout-1774198876699",
+    "discoveredAt": "2026-03-22T17:01:16.699Z",
+    "type": "correlation",
+    "description": "ccCustom2=V5 Checkout: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "ccCustom2",
+      "value": "V5 Checkout",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.699Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-ccCustom2-V5 Checkout -1774198876699",
+    "discoveredAt": "2026-03-22T17:01:16.699Z",
+    "type": "correlation",
+    "description": "ccCustom2=V5 Checkout Payment Section Test 1: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "ccCustom2",
+      "value": "V5 Checkout Payment Section Test 1",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:01:16.699Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-browser-Safari-1774198951221",
+    "discoveredAt": "2026-03-22T17:02:31.221Z",
+    "type": "correlation",
+    "description": "browser=Safari: 5% fail (1.6x baseline)",
+    "pattern": {
+      "dimension": "browser",
+      "value": "Safari",
+      "metric": "failRate",
+      "baseline": 0.06329113924050633,
+      "alertThreshold": 0.04000000000000001
+    },
+    "confirmations": 24,
+    "lastSeen": "2026-03-24T10:54:15.324Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-ccCustom1-Thermoslim-1774198951786",
+    "discoveredAt": "2026-03-22T17:02:31.786Z",
+    "type": "correlation",
+    "description": "ccCustom1=Thermoslim: 1% fail (0.4x baseline)",
+    "pattern": {
+      "dimension": "ccCustom1",
+      "value": "Thermoslim",
+      "metric": "failRate",
+      "baseline": 0.014705882352941176,
+      "alertThreshold": 0.01032258064516129
+    },
+    "confirmations": 79,
+    "lastSeen": "2026-03-24T10:24:35.408Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-avgItemPrice-9995-1774199212084",
+    "discoveredAt": "2026-03-22T17:06:52.084Z",
+    "type": "correlation",
+    "description": "avgItemPrice=9995: 10% fail (3.2x baseline)",
+    "pattern": {
+      "dimension": "avgItemPrice",
+      "value": "9995",
+      "metric": "failRate",
+      "baseline": 0.10144927536231885,
+      "alertThreshold": 0.08115942028985508
+    },
+    "confirmations": 4,
+    "lastSeen": "2026-03-22T17:06:52.098Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-skus-DHOD9-WM4080-1774199212084",
+    "discoveredAt": "2026-03-22T17:06:52.084Z",
+    "type": "correlation",
+    "description": "skus=DHOD9-WM408001+DECD9-WM373001: 10% fail (3.0x baseline)",
+    "pattern": {
+      "dimension": "skus",
+      "value": "DHOD9-WM408001+DECD9-WM373001",
+      "metric": "failRate",
+      "baseline": 0.09722222222222222,
+      "alertThreshold": 0.07777777777777778
+    },
+    "confirmations": 4,
+    "lastSeen": "2026-03-22T17:06:52.098Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-totalItems-1-1774199212084",
+    "discoveredAt": "2026-03-22T17:06:52.084Z",
+    "type": "correlation",
+    "description": "totalItems=1: 9% fail (2.7x baseline)",
+    "pattern": {
+      "dimension": "totalItems",
+      "value": "1",
+      "metric": "failRate",
+      "baseline": 0.08641975308641975,
+      "alertThreshold": 0.0691358024691358
+    },
+    "confirmations": 4,
+    "lastSeen": "2026-03-22T17:06:52.098Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-salesUrl-https://try.-1774199212084",
+    "discoveredAt": "2026-03-22T17:06:52.084Z",
+    "type": "correlation",
+    "description": "salesUrl=https://try.thermoslim.co/checkout2?products=273:1: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "salesUrl",
+      "value": "https://try.thermoslim.co/checkout2?products=273:1",
+      "metric": "failRate",
+      "baseline": 0.018518518518518517,
+      "alertThreshold": 0
+    },
+    "confirmations": 79,
+    "lastSeen": "2026-03-24T11:21:46.403Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-totalItems-2-1774199212084",
+    "discoveredAt": "2026-03-22T17:06:52.084Z",
+    "type": "correlation",
+    "description": "totalItems=2: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "totalItems",
+      "value": "2",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 4,
+    "lastSeen": "2026-03-22T17:06:52.098Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-totalItems-3-1774199212084",
+    "discoveredAt": "2026-03-22T17:06:52.084Z",
+    "type": "correlation",
+    "description": "totalItems=3: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "totalItems",
+      "value": "3",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 4,
+    "lastSeen": "2026-03-22T17:06:52.098Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-hasRecurring-true-1774199212084",
+    "discoveredAt": "2026-03-22T17:06:52.084Z",
+    "type": "correlation",
+    "description": "hasRecurring=true: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "hasRecurring",
+      "value": "true",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 4,
+    "lastSeen": "2026-03-22T17:06:52.098Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-avgItemPrice-7245-1774199212084",
+    "discoveredAt": "2026-03-22T17:06:52.084Z",
+    "type": "correlation",
+    "description": "avgItemPrice=7245: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "avgItemPrice",
+      "value": "7245",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 4,
+    "lastSeen": "2026-03-22T17:06:52.098Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-skus-DHOD9-WM4080-1774199212084",
+    "discoveredAt": "2026-03-22T17:06:52.084Z",
+    "type": "correlation",
+    "description": "skus=DHOD9-WM408001-3PCS,DHOD9-WM408001+DECD9-WM373001: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "skus",
+      "value": "DHOD9-WM408001-3PCS,DHOD9-WM408001+DECD9-WM373001",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 4,
+    "lastSeen": "2026-03-22T17:06:52.098Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-skus-DHOD9-WM4080-1774199212084",
+    "discoveredAt": "2026-03-22T17:06:52.084Z",
+    "type": "correlation",
+    "description": "skus=DHOD9-WM408001+DECD9-WM373001,DHOD9-WM408001-3PCS: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "skus",
+      "value": "DHOD9-WM408001+DECD9-WM373001,DHOD9-WM408001-3PCS",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 4,
+    "lastSeen": "2026-03-22T17:06:52.098Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-hasRecurring-false-1774199212084",
+    "discoveredAt": "2026-03-22T17:06:52.084Z",
+    "type": "correlation",
+    "description": "hasRecurring=false: 6% fail (1.8x baseline)",
+    "pattern": {
+      "dimension": "hasRecurring",
+      "value": "false",
+      "metric": "failRate",
+      "baseline": 0.058333333333333334,
+      "alertThreshold": 0.04666666666666667
+    },
+    "confirmations": 4,
+    "lastSeen": "2026-03-22T17:06:52.098Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-checkoutVariant-other-1774199895679",
+    "discoveredAt": "2026-03-22T17:18:15.679Z",
+    "type": "correlation",
+    "description": "checkoutVariant=other: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "checkoutVariant",
+      "value": "other",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 75,
+    "lastSeen": "2026-03-24T11:21:46.403Z",
+    "exportToTraining": true
+  },
+  {
+    "id": "corr-device-Mobile Phone-1774199948798",
+    "discoveredAt": "2026-03-22T17:19:08.798Z",
+    "type": "correlation",
+    "description": "device=Mobile Phone / iOS: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "device",
+      "value": "Mobile Phone / iOS",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:19:08.798Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-checkoutVariant-checkout2-1774199948798",
+    "discoveredAt": "2026-03-22T17:19:08.798Z",
+    "type": "correlation",
+    "description": "checkoutVariant=checkout2: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "checkoutVariant",
+      "value": "checkout2",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:19:08.798Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-funnelPageId-06122b32-e84-1774199948798",
+    "discoveredAt": "2026-03-22T17:19:08.798Z",
+    "type": "correlation",
+    "description": "funnelPageId=06122b32-e842-4c94-8cec-e8dda19c1994: 0% fail (0.0x baseline)",
+    "pattern": {
+      "dimension": "funnelPageId",
+      "value": "06122b32-e842-4c94-8cec-e8dda19c1994",
+      "metric": "failRate",
+      "baseline": 0,
+      "alertThreshold": 0
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:19:08.798Z",
+    "exportToTraining": false
+  },
+  {
+    "id": "corr-ccCustom2-TS - BSD - S-1774199948799",
+    "discoveredAt": "2026-03-22T17:19:08.798Z",
+    "type": "correlation",
+    "description": "ccCustom2=TS - BSD - Subscriprions Checkout NEW: 2% fail (0.4x baseline)",
+    "pattern": {
+      "dimension": "ccCustom2",
+      "value": "TS - BSD - Subscriprions Checkout NEW",
+      "metric": "failRate",
+      "baseline": 0.018518518518518517,
+      "alertThreshold": 0.014814814814814815
+    },
+    "confirmations": 1,
+    "lastSeen": "2026-03-22T17:19:08.798Z",
+    "exportToTraining": false
+  }
+]

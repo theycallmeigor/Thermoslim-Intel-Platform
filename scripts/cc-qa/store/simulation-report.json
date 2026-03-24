@@ -1,0 +1,188 @@
+{
+  "runAt": "2026-03-22T04:05:35.508Z",
+  "totalConfigs": 3240,
+  "totalTime": "0.8s",
+  "dataset": {
+    "events": 1275,
+    "active": 905,
+    "abandoned": 370,
+    "realFailures": 25,
+    "windows": 844
+  },
+  "winner": {
+    "score": 71.43235294117648,
+    "config": {
+      "minOrdersPerHour": 1,
+      "streakStartThreshold": 0.15,
+      "streakEndThreshold": 0.1,
+      "minStreakHours": 1,
+      "baselineHours": 168,
+      "chronicThreshold": 5,
+      "sources": [
+        "database"
+      ],
+      "emaAlpha": 0.1,
+      "strategy": "full-backlog",
+      "exportAfter": 1
+    },
+    "results": {
+      "streaks": 17,
+      "substantialStreaks": 4,
+      "capturedFailures": 24,
+      "coverage": 0.96,
+      "precision": 0.23529411764705882,
+      "uniqueRootCauses": 2,
+      "trainFindings": 19,
+      "efficiency": 22.511848341232227,
+      "rounds": 1
+    }
+  },
+  "top10": [
+    {
+      "score": 71.43235294117648,
+      "strategy": "full-backlog",
+      "minOrd": 1,
+      "startT": 0.15,
+      "endT": 0.1,
+      "minH": 1,
+      "alpha": 0.1,
+      "exportN": 1,
+      "streaks": 17,
+      "coverage": 0.96,
+      "precision": 0.23529411764705882,
+      "findings": 19
+    },
+    {
+      "score": 71.43235294117648,
+      "strategy": "rolling-week",
+      "minOrd": 1,
+      "startT": 0.15,
+      "endT": 0.1,
+      "minH": 1,
+      "alpha": 0.1,
+      "exportN": 1,
+      "streaks": 17,
+      "coverage": 0.96,
+      "precision": 0.23529411764705882,
+      "findings": 19
+    },
+    {
+      "score": 71.43235294117648,
+      "strategy": "rolling-month",
+      "minOrd": 1,
+      "startT": 0.15,
+      "endT": 0.1,
+      "minH": 1,
+      "alpha": 0.1,
+      "exportN": 1,
+      "streaks": 17,
+      "coverage": 0.96,
+      "precision": 0.23529411764705882,
+      "findings": 19
+    },
+    {
+      "score": 71.43235294117648,
+      "strategy": "rolling-month",
+      "minOrd": 1,
+      "startT": 0.15,
+      "endT": 0.1,
+      "minH": 1,
+      "alpha": 0.1,
+      "exportN": 3,
+      "streaks": 17,
+      "coverage": 0.96,
+      "precision": 0.23529411764705882,
+      "findings": 19
+    },
+    {
+      "score": 71.43235294117648,
+      "strategy": "incremental-day",
+      "minOrd": 1,
+      "startT": 0.15,
+      "endT": 0.1,
+      "minH": 1,
+      "alpha": 0.1,
+      "exportN": 1,
+      "streaks": 17,
+      "coverage": 0.96,
+      "precision": 0.23529411764705882,
+      "findings": 19
+    },
+    {
+      "score": 71.43235294117648,
+      "strategy": "full-backlog",
+      "minOrd": 1,
+      "startT": 0.15,
+      "endT": 0.1,
+      "minH": 1,
+      "alpha": 0.3,
+      "exportN": 1,
+      "streaks": 17,
+      "coverage": 0.96,
+      "precision": 0.23529411764705882,
+      "findings": 19
+    },
+    {
+      "score": 71.43235294117648,
+      "strategy": "rolling-week",
+      "minOrd": 1,
+      "startT": 0.15,
+      "endT": 0.1,
+      "minH": 1,
+      "alpha": 0.3,
+      "exportN": 1,
+      "streaks": 17,
+      "coverage": 0.96,
+      "precision": 0.23529411764705882,
+      "findings": 19
+    },
+    {
+      "score": 71.43235294117648,
+      "strategy": "rolling-month",
+      "minOrd": 1,
+      "startT": 0.15,
+      "endT": 0.1,
+      "minH": 1,
+      "alpha": 0.3,
+      "exportN": 1,
+      "streaks": 17,
+      "coverage": 0.96,
+      "precision": 0.23529411764705882,
+      "findings": 19
+    },
+    {
+      "score": 71.43235294117648,
+      "strategy": "rolling-month",
+      "minOrd": 1,
+      "startT": 0.15,
+      "endT": 0.1,
+      "minH": 1,
+      "alpha": 0.3,
+      "exportN": 3,
+      "streaks": 17,
+      "coverage": 0.96,
+      "precision": 0.23529411764705882,
+      "findings": 19
+    },
+    {
+      "score": 71.43235294117648,
+      "strategy": "incremental-day",
+      "minOrd": 1,
+      "startT": 0.15,
+      "endT": 0.1,
+      "minH": 1,
+      "alpha": 0.3,
+      "exportN": 1,
+      "streaks": 17,
+      "coverage": 0.96,
+      "precision": 0.23529411764705882,
+      "findings": 19
+    }
+  ],
+  "strategyAvgScores": {
+    "full-backlog": 24.29481336926548,
+    "rolling-week": 24.062724458204325,
+    "rolling-month": 24.082826797385668,
+    "incremental-day": 24.29481336926548
+  }
+}

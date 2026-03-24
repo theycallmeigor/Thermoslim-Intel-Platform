@@ -1,0 +1,45 @@
+{
+  "id": 24,
+  "timestamp": "2026-03-22T01:31:59.316Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 36.201550387596896,
+    "catch": 41.66666666666667,
+    "quiet": 48.837209302325576,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 22,
+      "cleanDays": 43,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the scoring breakdown, the current best has decent catch rate (66.67) but terrible quiet rate (30.00 from 35 false positives on 50 clean days) and zero specificity. The quiet rate formula suggests heavy penalties for false positives. Since all threshold increases and metric reductions have been rejected, I should try a different angle: keeping the core metrics but trying `weekdayWeekendSplit=true` (even though weekends are similar, it might tighten baselines) combined with a longer lo",
+  "durationMs": 219
+}

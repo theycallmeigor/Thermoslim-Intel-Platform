@@ -1,0 +1,45 @@
+{
+  "id": 66,
+  "timestamp": "2026-03-22T03:15:02.167Z",
+  "timeframe": "1w",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.5,
+    "criticalThreshold": 5,
+    "funnelDropWarning": 0.78,
+    "funnelDropCritical": 0.91,
+    "topCampaignsToCheck": 6,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 38.2033096926714,
+    "catch": 44.44444444444444,
+    "quiet": 51.06382978723404,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 23,
+      "cleanDays": 47,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 42.836879432624116,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe main problem is 28 false positives on 47 clean days. All recent attempts to reduce FPs by raising thresholds or changing metrics got rejected (lower scores). The current best keeps `refunds` in metrics and uses `trim5` outlier method. Let me try a different angle: keep the current metrics and outlier method but raise `funnelDropWarning` significantly (to 0.78) since funnel drops are likely causing many FPs, while slightly raising `warningThreshold` to 3.6 and keeping `criticalT",
+  "durationMs": 189
+}

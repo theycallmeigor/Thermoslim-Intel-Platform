@@ -1,0 +1,72 @@
+[
+  {
+    "field": "couponCode",
+    "value": "NICOTEST",
+    "totalOrders": 23,
+    "failedOrders": 3,
+    "failRate": 0.13043478260869565,
+    "baselineFailRate": 0.027624309392265192,
+    "lift": 4.721739130434782,
+    "significance": "HIGH"
+  },
+  {
+    "field": "ipAddress",
+    "value": "66.30.107.75",
+    "totalOrders": 18,
+    "failedOrders": 2,
+    "failRate": 0.1111111111111111,
+    "baselineFailRate": 0.027624309392265192,
+    "lift": 4.022222222222222,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "ipAddress",
+    "value": "94.207.106.82",
+    "totalOrders": 13,
+    "failedOrders": 0,
+    "failRate": 0,
+    "baselineFailRate": 0.027624309392265192,
+    "lift": 0,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "ipAddress",
+    "value": "84.40.152.227",
+    "totalOrders": 16,
+    "failedOrders": 0,
+    "failRate": 0,
+    "baselineFailRate": 0.027624309392265192,
+    "lift": 0,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "couponCode",
+    "value": "LABOR15",
+    "totalOrders": 16,
+    "failedOrders": 0,
+    "failRate": 0,
+    "baselineFailRate": 0.027624309392265192,
+    "lift": 0,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "hasUpsells",
+    "value": "false",
+    "totalOrders": 482,
+    "failedOrders": 25,
+    "failRate": 0.05186721991701245,
+    "baselineFailRate": 0.027624309392265192,
+    "lift": 1.8775933609958508,
+    "significance": "HIGH"
+  },
+  {
+    "field": "couponCode",
+    "value": "WELCOME10",
+    "totalOrders": 52,
+    "failedOrders": 1,
+    "failRate": 0.019230769230769232,
+    "baselineFailRate": 0.027624309392265192,
+    "lift": 0.6961538461538462,
+    "significance": "MEDIUM"
+  }
+]

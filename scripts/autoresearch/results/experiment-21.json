@@ -1,0 +1,44 @@
+{
+  "id": 21,
+  "timestamp": "2026-03-22T01:31:34.980Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 36.13333333333334,
+    "catch": 58.333333333333336,
+    "quiet": 32,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 7,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 34,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every experiment has been rejected. The current best has a catastrophic quiet rate (35/50 false positives) but decent catch rate. The key insight I haven't fully explored: reducing `topCampaignsToCheck` drastically (campaigns likely generate most false alarms via multiple alert opportunities) while also reducing metrics to the most critical ones AND raising thresholds slightly - but doing this as a more targeted combination than previous attempts.",
+  "durationMs": 178
+}

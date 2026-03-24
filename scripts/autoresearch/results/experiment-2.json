@@ -1,0 +1,46 @@
+{
+  "id": 2,
+  "timestamp": "2026-03-22T01:29:08.305Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 30,
+    "minHistory": 14,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 8,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 20.3921568627451,
+    "catch": 33.33333333333333,
+    "quiet": 17.64705882352942,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 11,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 28,
+      "cleanDays": 34,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 32.63565891472869,
+  "accepted": false,
+  "reasoning": "Looking at the results, the main problem is too many false positives (33/43 clean days) with 0% specificity, while catch rate is only 58%. I need to significantly raise thresholds to reduce noise, while keeping a reasonable lookback window. I'll try a more aggressive threshold increase combined with a longer lookback to stabilize the baseline, and add more metrics to improve catch rate.",
+  "durationMs": 220
+}

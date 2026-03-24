@@ -1,0 +1,44 @@
+{
+  "id": 13,
+  "timestamp": "2026-03-22T01:30:31.869Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 10,
+    "minHistory": 5,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.45,
+    "funnelDropCritical": 0.7,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 35.55555555555555,
+    "catch": 66.66666666666666,
+    "quiet": 22.222222222222214,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 42,
+      "cleanDays": 54,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, the current best has terrible quiet rate (35 false positives on 50 clean days) but decent catch rate. The key pattern I notice is that reducing metrics to only 2 killed performance, but keeping 5 metrics generates too many false alarms. Let me try a middle ground with 3-4 carefully chosen metrics, add `weekdayWeekendSplit=true` (which hasn't been tried much), and use a slightly shorter lookback (10 days) to be more responsive while keeping trim5+mean. The weekday/weekend ",
+  "durationMs": 193
+}

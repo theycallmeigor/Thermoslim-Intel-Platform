@@ -1,0 +1,45 @@
+{
+  "id": 12,
+  "timestamp": "2026-03-22T02:40:31.132Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 30,
+    "minHistory": 14,
+    "warningThreshold": 3.5,
+    "criticalThreshold": 5.2,
+    "funnelDropWarning": 0.7,
+    "funnelDropCritical": 0.85,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 47.83625730994152,
+    "catch": 22.22222222222222,
+    "quiet": 47.36842105263158,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 2,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 20,
+      "cleanDays": 38,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 49.50354609929078,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best only catches 2/8 injections, suggesting the thresholds are too conservative. However, lowering thresholds in previous experiments created more false positives without improving the score enough. The key insight is that with ~25 orders/day and natural variance, we need a longer lookback to get a stable baseline while using median (already enabled) to handle outliers. Let me try keeping high thresholds but expanding the metrics checked moderately and slightly adjusti",
+  "durationMs": 221
+}

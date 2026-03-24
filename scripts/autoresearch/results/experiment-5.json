@@ -1,0 +1,44 @@
+{
+  "id": 5,
+  "timestamp": "2026-03-22T01:29:31.842Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.2,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.5,
+    "funnelDropCritical": 0.75,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 31.93798449612403,
+    "catch": 33.33333333333333,
+    "quiet": 46.51162790697675,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 23,
+      "cleanDays": 43,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 35.46666666666667,
+  "accepted": false,
+  "reasoning": "Looking at the results, the current best has good catch rate (66.67%) but terrible quiet rate (22.00) with 39 false positives on 50 clean days. The specificity is 0%. I need to dramatically reduce false positives. The thresholds seem too low - I'll try pushing warningThreshold much higher (to 3.2) and criticalThreshold to 4.5, while switching to median (more robust for small samples) and trying IQR outlier method. I'll also try weekdayWeekendSplit=true since it might help differentiate patterns ",
+  "durationMs": 194
+}

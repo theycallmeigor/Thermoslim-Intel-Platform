@@ -1,0 +1,47 @@
+{
+  "id": 2,
+  "timestamp": "2026-03-22T03:06:56.452Z",
+  "timeframe": "15min",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 2,
+    "criticalThreshold": 3,
+    "funnelDropWarning": 0.25,
+    "funnelDropCritical": 0.5,
+    "topCampaignsToCheck": 12,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 40.80808080808081,
+    "catch": 55.55555555555556,
+    "quiet": 46.464646464646464,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 53,
+      "cleanDays": 99,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 62.68343815513627,
+  "accepted": false,
+  "reasoning": "Looking at the current results, the catch rate is very low (3/8 injections = 44.44%) which is the main weakness. The config is too conservative with high thresholds and limited metrics. I'll lower the thresholds to catch more anomalies, add more metrics to check (refunds, avgOrderValue), and slightly extend lookback to get a more stable baseline while keeping noise manageable.",
+  "durationMs": 576
+}

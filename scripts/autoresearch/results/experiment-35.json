@@ -1,0 +1,45 @@
+{
+  "id": 35,
+  "timestamp": "2026-03-22T01:33:24.642Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 10,
+    "minHistory": 5,
+    "warningThreshold": 2.8,
+    "criticalThreshold": 4.2,
+    "funnelDropWarning": 0.35,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 29.629629629629626,
+    "catch": 66.66666666666666,
+    "quiet": 7.407407407407405,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 8,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 50,
+      "cleanDays": 54,
+      "specificityHits": 0,
+      "specificityTotal": 4
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every modification to the best config has been rejected. The best config has 35/50 false positives (terrible quiet rate) but good catch rate. The specificity is 0/4 on funnel detection. Let me try a very different angle: keep the exact same thresholds and metrics but try `weekdayWeekendSplit: false` (already false) with a slightly different lookback of 10 days and `useMedianInsteadOfMean: true` - the 10-day window gives more recent data for the growing trend while median ",
+  "durationMs": 157
+}

@@ -1,0 +1,44 @@
+{
+  "id": 9,
+  "timestamp": "2026-03-22T03:07:55.555Z",
+  "timeframe": "15min",
+  "config": {
+    "lookbackDays": 12,
+    "minHistory": 6,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.5,
+    "funnelDropWarning": 0.3,
+    "funnelDropCritical": 0.55,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 46.66666666666667,
+    "catch": 55.55555555555556,
+    "quiet": 61.11111111111111,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 42,
+      "cleanDays": 108,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 63.67676767676768,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best has 51 false positives on 110 clean days (quiet score 53.64) while catching 5/8 injections. Recent experiments raising thresholds slightly have been rejected, suggesting the threshold direction isn't the key lever. The false positives seem to be driven by `avgOrderValue` and `refunds` being noisy metrics - removing them and focusing on high-signal metrics like `totalOrders`, `totalRevenue`, `newSubscribers`, and `cancelledSubscribers` could reduce FPs while maintai",
+  "durationMs": 551
+}

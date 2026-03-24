@@ -1,0 +1,242 @@
+[
+  {
+    "field": "geoState",
+    "value": "CT",
+    "failRate": 0.1875,
+    "lift": 4.479166666666667,
+    "totalOrders": 16,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "funnelPageId",
+    "value": "515adac9-80f2-47ce-844e-2324ab608dde",
+    "failRate": 0.125,
+    "lift": 2.986111111111111,
+    "totalOrders": 16,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "funnelPageId",
+    "value": "1e1ee195-edc7-4520-a51d-c17d50be1dcb",
+    "failRate": 0.1111111111111111,
+    "lift": 2.654320987654321,
+    "totalOrders": 18,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "checkoutVariant",
+    "value": "bsd-checkout",
+    "failRate": 0.10638297872340426,
+    "lift": 2.541371158392435,
+    "totalOrders": 47,
+    "significance": "HIGH"
+  },
+  {
+    "field": "ccCustom1",
+    "value": "TS - Quiz - Cold",
+    "failRate": 0.10344827586206896,
+    "lift": 2.471264367816092,
+    "totalOrders": 29,
+    "significance": "HIGH"
+  },
+  {
+    "field": "cardType",
+    "value": "AMEX",
+    "failRate": 0.1,
+    "lift": 2.388888888888889,
+    "totalOrders": 10,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "geoState",
+    "value": "FL",
+    "failRate": 0,
+    "lift": 0,
+    "totalOrders": 12,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "geoState",
+    "value": "PA",
+    "failRate": 0,
+    "lift": 0,
+    "totalOrders": 12,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "geoState",
+    "value": "TX",
+    "failRate": 0,
+    "lift": 0,
+    "totalOrders": 16,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "deviceCategory",
+    "value": "unknown",
+    "failRate": 0,
+    "lift": 0,
+    "totalOrders": 11,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "cardType",
+    "value": "TESTCARD",
+    "failRate": 0,
+    "lift": 0,
+    "totalOrders": 15,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "avsResponse",
+    "value": "U",
+    "failRate": 0,
+    "lift": 0,
+    "totalOrders": 112,
+    "significance": "HIGH"
+  },
+  {
+    "field": "avsResponse",
+    "value": "N",
+    "failRate": 0,
+    "lift": 0,
+    "totalOrders": 10,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "cvvResponse",
+    "value": "Y",
+    "failRate": 0,
+    "lift": 0,
+    "totalOrders": 94,
+    "significance": "HIGH"
+  },
+  {
+    "field": "cvvResponse",
+    "value": "U",
+    "failRate": 0,
+    "lift": 0,
+    "totalOrders": 36,
+    "significance": "HIGH"
+  },
+  {
+    "field": "checkoutVariant",
+    "value": "other",
+    "failRate": 0,
+    "lift": 0,
+    "totalOrders": 52,
+    "significance": "HIGH"
+  },
+  {
+    "field": "cardType",
+    "value": "MASTERCARD",
+    "failRate": 0.08333333333333333,
+    "lift": 1.9907407407407407,
+    "totalOrders": 36,
+    "significance": "HIGH"
+  },
+  {
+    "field": "funnelPageId",
+    "value": "ef869940-c261-4b2c-86a3-08efce073bc8",
+    "failRate": 0.07692307692307693,
+    "lift": 1.8376068376068377,
+    "totalOrders": 13,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "ccCustom1",
+    "value": "TEST CAMPAIGN FOR DEVELOPMENT",
+    "failRate": 0.07692307692307693,
+    "lift": 1.8376068376068377,
+    "totalOrders": 13,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "checkoutVariant",
+    "value": "checkout-classic",
+    "failRate": 0.07692307692307693,
+    "lift": 1.8376068376068377,
+    "totalOrders": 13,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "salesUrl",
+    "value": "https://try.thermoslim.co/test/checkout?products=273:1",
+    "failRate": 0.07692307692307693,
+    "lift": 1.8376068376068377,
+    "totalOrders": 13,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "salesUrl",
+    "value": "https://try.thermoslim.co/checkout2?products=273:1",
+    "failRate": 0.018518518518518517,
+    "lift": 0.44238683127572015,
+    "totalOrders": 54,
+    "significance": "HIGH"
+  },
+  {
+    "field": "ccCustom2",
+    "value": "BSD - TS-TOP5  - CHECKOUT",
+    "failRate": 0.06382978723404255,
+    "lift": 1.5248226950354609,
+    "totalOrders": 47,
+    "significance": "HIGH"
+  },
+  {
+    "field": "browser",
+    "value": "Safari",
+    "failRate": 0.0625,
+    "lift": 1.4930555555555556,
+    "totalOrders": 80,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "ccCustom1",
+    "value": "Thermoslim",
+    "failRate": 0.021739130434782608,
+    "lift": 0.5193236714975845,
+    "totalOrders": 138,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "funnelPageId",
+    "value": "06122b32-e842-4c94-8cec-e8dda19c1994",
+    "failRate": 0.023529411764705882,
+    "lift": 0.5620915032679739,
+    "totalOrders": 85,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "device",
+    "value": "Mobile Phone / Android",
+    "failRate": 0.025,
+    "lift": 0.5972222222222222,
+    "totalOrders": 40,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "browser",
+    "value": "Android WebView",
+    "failRate": 0.025,
+    "lift": 0.5972222222222222,
+    "totalOrders": 40,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "ccCustom1",
+    "value": "TS - TOP5 - MOF",
+    "failRate": 0.05714285714285714,
+    "lift": 1.3650793650793651,
+    "totalOrders": 35,
+    "significance": "MEDIUM"
+  },
+  {
+    "field": "checkoutVariant",
+    "value": "checkout2",
+    "failRate": 0.02912621359223301,
+    "lift": 0.6957928802588997,
+    "totalOrders": 103,
+    "significance": "MEDIUM"
+  }
+]

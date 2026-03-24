@@ -1,0 +1,43 @@
+{
+  "id": 34,
+  "timestamp": "2026-03-22T01:33:17.126Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.35,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 34.53333333333334,
+    "catch": 58.333333333333336,
+    "quiet": 28,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 7,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 36,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, every modification to the best config has been rejected. The best score has 66.67 catch rate but terrible quiet rate (35/50 false positives). The specificity is 0/4, suggesting the funnel detection is completely missing its targets. Let me try reducing the metrics list to the absolute minimum core metrics (removing `cancelledSubscribers` and `recurringOrders` which may be generating false positives) while tightening both thresholds slightly to reduce noise, keeping the 14",
+  "durationMs": 175
+}

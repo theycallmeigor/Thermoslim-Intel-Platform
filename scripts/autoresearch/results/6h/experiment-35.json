@@ -1,0 +1,48 @@
+{
+  "id": 35,
+  "timestamp": "2026-03-22T03:11:04.844Z",
+  "timeframe": "6h",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 1.8,
+    "criticalThreshold": 3,
+    "funnelDropWarning": 0.25,
+    "funnelDropCritical": 0.5,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "recurringOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 55.72327044025157,
+    "catch": 66.66666666666666,
+    "quiet": 22.641509433962256,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 5,
+      "injectionsTotal": 8,
+      "hintsCaught": 1,
+      "hintsTotal": 1,
+      "falsePositives": 82,
+      "cleanDays": 106,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 55.72327044025157,
+  "accepted": true,
+  "reasoning": "## Reasoning\n\nThe current config is catching only 1/8 injections (very poor catch rate) while having 35 false positives on 99 clean days. The warningThreshold of 3.0 with median and IQR outlier exclusion may be making the baseline too \"clean,\" causing it to miss real anomalies while still generating FPs. I should try lowering the warningThreshold to catch more anomalies, broaden the metrics to check (adding more signals like `totalRevenue`, `newOrders`, `refunds`), and try a shorter lookback to ",
+  "durationMs": 174
+}

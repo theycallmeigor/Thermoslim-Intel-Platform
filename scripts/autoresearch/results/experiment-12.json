@@ -1,0 +1,45 @@
+{
+  "id": 12,
+  "timestamp": "2026-03-22T01:30:24.282Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 14,
+    "minHistory": 7,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.4,
+    "funnelDropWarning": 0.5,
+    "funnelDropCritical": 0.72,
+    "topCampaignsToCheck": 5,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 36.93333333333334,
+    "catch": 58.333333333333336,
+    "quiet": 34,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 7,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 33,
+      "cleanDays": 50,
+      "specificityHits": 0,
+      "specificityTotal": 3
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the history, the current best has 35 false positives on 50 clean days (terrible quiet rate) and 0% specificity. The score is dominated by quiet rate issues. The proven baseline is 14-day lookback, trim5, mean. Let me try reducing `topCampaignsToCheck` significantly (campaigns checking likely generates many false alarms) while also slightly raising the warning threshold and tightening the funnel thresholds - this should reduce noise without hurting catch rate much.",
+  "durationMs": 179
+}

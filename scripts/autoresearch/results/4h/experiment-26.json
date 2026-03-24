@@ -1,0 +1,47 @@
+{
+  "id": 26,
+  "timestamp": "2026-03-22T03:09:59.647Z",
+  "timeframe": "4h",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3.8,
+    "criticalThreshold": 4.8,
+    "funnelDropWarning": 0.55,
+    "funnelDropCritical": 0.75,
+    "topCampaignsToCheck": 15,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newOrders",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": true,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 63.232323232323225,
+    "catch": 33.33333333333333,
+    "quiet": 74.74747474747474,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 3,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 25,
+      "cleanDays": 99,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 63.232323232323225,
+  "accepted": true,
+  "reasoning": "## Reasoning\n\nThe current best catches only 3/8 injections with 30 false positives. Adding more metrics (like `refunds` and `newSubscribers`) could help catch more anomaly types, while keeping thresholds high enough to avoid false alarms. I'll try a slightly longer lookback (21 days) for a more stable baseline, add `newSubscribers` and `refunds` to metricsToCheck, and slightly lower the critical threshold to improve catch rate while keeping warning threshold high to suppress false positives.",
+  "durationMs": 221
+}

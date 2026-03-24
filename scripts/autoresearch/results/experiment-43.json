@@ -1,0 +1,45 @@
+{
+  "id": 43,
+  "timestamp": "2026-03-22T01:34:24.369Z",
+  "timeframe": "1d",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 3,
+    "criticalThreshold": 4.5,
+    "funnelDropWarning": 0.4,
+    "funnelDropCritical": 0.65,
+    "topCampaignsToCheck": 7,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "recurringOrders"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": false,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "trim5"
+  },
+  "score": {
+    "total": 30.077519379844958,
+    "catch": 33.33333333333333,
+    "quiet": 41.860465116279066,
+    "specificity": 0,
+    "details": {
+      "injectionsCaught": 4,
+      "injectionsTotal": 11,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 25,
+      "cleanDays": 43,
+      "specificityHits": 0,
+      "specificityTotal": 1
+    }
+  },
+  "bestScore": 38.666666666666664,
+  "accepted": false,
+  "reasoning": "Looking at the pattern, every modification to the best config has been rejected, suggesting the best config is finely balanced. The 35/50 false positives likely come from the growing trend making current values look high against the baseline. Let me try a longer lookback (21 days) to get a more stable baseline that better captures the trend, combined with slightly higher thresholds to compensate, while keeping the exact same metrics as the best config.",
+  "durationMs": 201
+}

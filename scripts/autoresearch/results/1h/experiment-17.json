@@ -1,0 +1,46 @@
+{
+  "id": 17,
+  "timestamp": "2026-03-22T03:08:55.813Z",
+  "timeframe": "1h",
+  "config": {
+    "lookbackDays": 21,
+    "minHistory": 10,
+    "warningThreshold": 2.5,
+    "criticalThreshold": 3.8,
+    "funnelDropWarning": 0.38,
+    "funnelDropCritical": 0.6,
+    "topCampaignsToCheck": 10,
+    "metricsToCheck": [
+      "totalOrders",
+      "totalRevenue",
+      "newSubscribers",
+      "cancelledSubscribers",
+      "refunds",
+      "avgOrderValue"
+    ],
+    "useMedianInsteadOfMean": false,
+    "weekdayWeekendSplit": true,
+    "excludeOutliersFromBaseline": true,
+    "outlierMethod": "iqr"
+  },
+  "score": {
+    "total": 47.878787878787875,
+    "catch": 0,
+    "quiet": 69.69696969696969,
+    "specificity": 100,
+    "details": {
+      "injectionsCaught": 0,
+      "injectionsTotal": 8,
+      "hintsCaught": 0,
+      "hintsTotal": 1,
+      "falsePositives": 30,
+      "cleanDays": 99,
+      "specificityHits": 0,
+      "specificityTotal": 0
+    }
+  },
+  "bestScore": 60,
+  "accepted": false,
+  "reasoning": "## Reasoning\n\nThe current best config catches only 2/8 injections (25% catch rate) with 33 false positives. The core issue is low sensitivity to real anomalies. Since lowering thresholds increases false positives (Exp 16), and adding more metrics/shorter windows also hurt (Exp 13, 14), I should try improving catch rate through a different angle: using mean instead of median (median can mask real anomalies by being too stable), and slightly reducing warningThreshold while tightening the outlier e",
+  "durationMs": 409
+}
