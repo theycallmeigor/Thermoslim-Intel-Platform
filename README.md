@@ -1,0 +1,1 @@
+# Thermoslim-Intel-Platform
