@@ -468,7 +468,7 @@ export function runDetection(
         if (!dimValues.has(dimVal)) dimValues.set(dimVal, new Map());
         const dateMap = dimValues.get(dimVal)!;
         const dk = useFullTimestamp ? s.date.toISOString() : s.date.toISOString().split('T')[0];
-        dateMap.set(dk, (dateMap.get(dk) ?? 0) + (s as Record<string, unknown>)[metric] as number);
+        dateMap.set(dk, (dateMap.get(dk) ?? 0) + (s as unknown as Record<string, unknown>)[metric] as number);
       }
 
       for (const [dimVal, dateMap] of dimValues.entries()) {
