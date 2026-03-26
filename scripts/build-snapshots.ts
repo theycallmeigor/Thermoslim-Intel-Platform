@@ -214,7 +214,7 @@ async function main() {
           bucket.totalOrders += 1;
 
           // Only count SHOPIFY revenue to avoid double-counting
-          if (order.source === 'SHOPIFY') {
+          if (order.source === 'SHOPIFY' || order.source === 'MERGED') {
             bucket.totalRevenue += order.totalPrice;
             if (isRecurring) {
               bucket.recurringRevenue += order.totalPrice;
