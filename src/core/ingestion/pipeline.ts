@@ -491,6 +491,102 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
     await upsertAttribution(orderId, data.attribution);
   }
 
+  // --- Reverse merge: CC order may have arrived before this Shopify order ---
+  if (data.source === 'SHOPIFY') {
+    const waitingCCOrder = await prisma.order.findFirst({
+      where: {
+        source: 'CHECKOUTCHAMP',
+        shopifyOrderId: data.sourceOrderId,
+      },
+      include: { items: true, attribution: true },
+    });
+
+    if (waitingCCOrder) {
+      // Re-ingest the CC order — now the Shopify order exists, the merge path will fire
+      const ccData: OrderData = {
+        source: 'CHECKOUTCHAMP',
+        sourceOrderId: waitingCCOrder.sourceOrderId,
+        customerEmail: data.customerEmail,
+        status: waitingCCOrder.status as OrderStatus,
+        orderTotal: waitingCCOrder.orderTotal,
+        totalPrice: waitingCCOrder.totalPrice,
+        totalShipping: waitingCCOrder.totalShipping,
+        totalDiscount: waitingCCOrder.totalDiscount,
+        salesTax: waitingCCOrder.salesTax,
+        currencyCode: waitingCCOrder.currencyCode,
+        shopifyOrderId: data.sourceOrderId,
+        campaignId: waitingCCOrder.campaignId,
+        campaignName: waitingCCOrder.campaignName,
+        salesUrl: waitingCCOrder.salesUrl,
+        ccOrderType: waitingCCOrder.ccOrderType,
+        funnelReferenceId: waitingCCOrder.funnelReferenceId,
+        hasUpsells: waitingCCOrder.hasUpsells,
+        avsResponse: waitingCCOrder.avsResponse,
+        cvvResponse: waitingCCOrder.cvvResponse,
+        cardType: waitingCCOrder.cardType,
+        cardLast4: waitingCCOrder.cardLast4,
+        cardIsDebit: waitingCCOrder.cardIsDebit,
+        cardIsPrepaid: waitingCCOrder.cardIsPrepaid,
+        isDeclineSave: waitingCCOrder.isDeclineSave,
+        userAgent: waitingCCOrder.userAgent,
+        device: waitingCCOrder.device,
+        browser: waitingCCOrder.browser,
+        geoState: waitingCCOrder.geoState,
+        geoCountry: waitingCCOrder.geoCountry,
+        ccCustom1: waitingCCOrder.ccCustom1,
+        ccCustom2: waitingCCOrder.ccCustom2,
+        fulfillmentData: waitingCCOrder.fulfillmentData,
+        refundRemaining: waitingCCOrder.refundRemaining,
+        createdAt: waitingCCOrder.createdAt.toISOString(),
+        items: waitingCCOrder.items.map((item, i) => ({
+          productSlot: i + 1,
+          ccCrmId: item.ccCrmId,
+          ccCampaignProductId: item.ccCampaignProductId,
+          externalId: item.externalId,
+          name: item.name,
+          sku: item.sku,
+          price: item.price,
+          quantity: item.quantity,
+          recurringstatus: item.recurringStatus as string | null,
+          billingCycleNumber: item.billingCycleNumber,
+          merchantId: item.merchantId,
+          responseType: item.responseType,
+          txnType: item.txnType,
+          productType: item.productType,
+          productDescription: item.productDescription,
+        })),
+        attribution: waitingCCOrder.attribution ? {
+          sourceId: waitingCCOrder.attribution.sourceId,
+          pubId: waitingCCOrder.attribution.pubId,
+          subAffId: waitingCCOrder.attribution.subAffId,
+          utmSource: waitingCCOrder.attribution.utmSource,
+          utmMedium: waitingCCOrder.attribution.utmMedium,
+          utmCampaign: waitingCCOrder.attribution.utmCampaign,
+          utmContent: waitingCCOrder.attribution.utmContent,
+          utmTerm: waitingCCOrder.attribution.utmTerm,
+          httpReferer: waitingCCOrder.attribution.httpReferer,
+          userAgent: waitingCCOrder.attribution.userAgent,
+          sourceValue1: waitingCCOrder.attribution.sourceValue1,
+          sourceValue2: waitingCCOrder.attribution.sourceValue2,
+          sourceValue3: waitingCCOrder.attribution.sourceValue3,
+          sourceValue4: waitingCCOrder.attribution.sourceValue4,
+          sourceValue5: waitingCCOrder.attribution.sourceValue5,
+        } : null,
+      };
+
+      // Delete standalone CC order and all its child records
+      await prisma.attribution.deleteMany({ where: { orderId: waitingCCOrder.id } });
+      await prisma.orderItem.deleteMany({ where: { orderId: waitingCCOrder.id } });
+      await prisma.revenueEvent.deleteMany({ where: { orderId: waitingCCOrder.id } });
+      await prisma.funnelEvent.deleteMany({ where: { orderId: waitingCCOrder.id } });
+      await prisma.upsellPath.deleteMany({ where: { orderId: waitingCCOrder.id } });
+      await prisma.order.delete({ where: { id: waitingCCOrder.id } });
+
+      // Now merge CC data onto the Shopify order — recursive call hits the merge path
+      await upsertOrder(ccData);
+    }
+  }
+
   return { created: !existing };
 }
 
