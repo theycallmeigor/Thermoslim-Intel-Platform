@@ -11,6 +11,7 @@ datasource db {
 enum Source {
   SHOPIFY
   CHECKOUTCHAMP
+  MERGED
 }
 
 enum OrderStatus {
@@ -100,6 +101,7 @@ model Order {
   source              Source
   sourceOrderId       String
   sourceClientOrderId String?
+  ccSourceOrderId     String?       // When merged: the original CC sourceOrderId
   customerId          String
   customer            Customer      @relation(fields: [customerId], references: [id])
   status              OrderStatus
@@ -158,6 +160,7 @@ model Order {
   @@index([createdAt])
   @@index([shopifyOrderId])
   @@index([funnelPageId])
+  @@index([ccSourceOrderId])
 }
 
 model OrderItem {
