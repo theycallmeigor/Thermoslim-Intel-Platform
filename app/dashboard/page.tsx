@@ -21,13 +21,10 @@ function parseRange(from?: string, to?: string): { startDate: Date; endDate: Dat
 
 // ─── Data fetching ────────────────────────────────────────────────────────────
 
-async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date, prevEnd: Date) {
-  const now = new Date();
+const ORDERS_PER_PAGE = 12;
 
-  // All CC orders flow through to Shopify — Shopify is the single source of truth for revenue.
-  // CC data is used only for subscriptions, campaign attribution, and recurring item details.
-  // No dedup query needed: revenue queries simply filter source=SHOPIFY.
-  const duplicateCCOrderIds: string[] = [];
+async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date, prevEnd: Date, ordersPage: number = 1) {
+  const now = new Date();
 
   const [
     activeSubscriptions,
@@ -44,6 +41,7 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
     subsByProductLineRaw,
     topCampaigns,
     recentOrders,
+    totalOrders,
     newSubsRaw,
     cancelledSubsRaw,
     shopifyOrdersForChart,
@@ -61,22 +59,22 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
       _sum: { recurringPrice: true },
     }),
 
-    // Revenue: Shopify only (all CC orders are mirrored in Shopify)
+    // Revenue: Shopify + Merged (MERGED rows carry revenue for CC orders merged onto Shopify)
     prisma.order.aggregate({
-      where: { source: 'SHOPIFY', status: 'COMPLETE', createdAt: { gte: startDate, lte: endDate } },
+      where: { source: { in: ['SHOPIFY', 'MERGED'] }, status: 'COMPLETE', createdAt: { gte: startDate, lte: endDate } },
       _sum: { totalPrice: true },
     }),
     prisma.order.aggregate({
-      where: { source: 'SHOPIFY', status: 'COMPLETE', createdAt: { gte: prevStart, lte: prevEnd } },
+      where: { source: { in: ['SHOPIFY', 'MERGED'] }, status: 'COMPLETE', createdAt: { gte: prevStart, lte: prevEnd } },
       _sum: { totalPrice: true },
     }),
 
-    prisma.order.count({ where: { source: 'SHOPIFY' } }),
+    prisma.order.count({ where: { source: { in: ['SHOPIFY', 'MERGED'] } } }),
     prisma.order.count({ where: { source: 'CHECKOUTCHAMP' } }),
 
-    // All-time Shopify revenue (single source of truth)
+    // All-time Shopify + Merged revenue (single source of truth)
     prisma.order.aggregate({
-      where: { source: 'SHOPIFY', status: 'COMPLETE' },
+      where: { source: { in: ['SHOPIFY', 'MERGED'] }, status: 'COMPLETE' },
       _sum: { totalPrice: true },
     }),
     // CC revenue shown separately for reference (informational only, not added to totals)
@@ -97,11 +95,10 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
       include: { productMap: { select: { productLine: true } } },
     }),
 
-    // Campaign data comes from CC orders (Shopify orders don't carry campaign attribution)
+    // Campaign data comes from CC and Merged orders (campaign attribution lives on CHECKOUTCHAMP and MERGED rows)
     prisma.order.groupBy({
       by: ['campaignId', 'campaignName'],
       where: {
-        source: 'CHECKOUTCHAMP',
         campaignId: { not: null },
         status: 'COMPLETE',
         createdAt: { gte: startDate, lte: endDate },
@@ -113,10 +110,13 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
     }),
 
     prisma.order.findMany({
-      take: 12,
+      take: ORDERS_PER_PAGE,
+      skip: (ordersPage - 1) * ORDERS_PER_PAGE,
       orderBy: { createdAt: 'desc' },
       include: { customer: { select: { email: true, firstName: true, lastName: true } } },
     }),
+
+    prisma.order.count(),
 
     prisma.subscription.findMany({
       where: { startedAt: { gte: startDate, lte: endDate } },
@@ -127,11 +127,11 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
       select: { cancelledAt: true },
     }),
 
-    // Daily chart: all Shopify orders, classified by tags
+    // Daily chart: Shopify + Merged orders, classified by tags
     // Tags set by CheckoutChamp: "New Sale" | "New Sale, Subscription" | "Recurring, Subscription"
     // No tags (source=web): direct online store purchase
     prisma.order.findMany({
-      where: { source: 'SHOPIFY', status: 'COMPLETE', createdAt: { gte: startDate, lte: endDate } },
+      where: { source: { in: ['SHOPIFY', 'MERGED'] }, status: 'COMPLETE', createdAt: { gte: startDate, lte: endDate } },
       select: { createdAt: true, totalPrice: true, tags: true },
     }),
 
@@ -261,6 +261,7 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
     mrrBreakdown,
     topCampaigns,
     recentOrders,
+    totalOrders,
   };
 }
 
@@ -288,6 +289,7 @@ const statusColors: Record<string, string> = {
 const sourceColors: Record<string, string> = {
   SHOPIFY: 'bg-emerald-500/10 text-emerald-400',
   CHECKOUTCHAMP: 'bg-blue-500/10 text-blue-400',
+  MERGED: 'bg-purple-500/10 text-purple-400',
 };
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -295,14 +297,15 @@ const sourceColors: Record<string, string> = {
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams: Promise<{ from?: string; to?: string }>;
+  searchParams: Promise<{ from?: string; to?: string; page?: string }>;
 }) {
   const sp = await searchParams;
   const { startDate, endDate, prevStart, prevEnd } = parseRange(sp.from, sp.to);
   const fromStr = format(startDate, 'yyyy-MM-dd');
   const toStr = format(endDate, 'yyyy-MM-dd');
+  const ordersPage = Math.max(1, parseInt(sp.page ?? '1', 10) || 1);
 
-  const data = await getDashboardData(startDate, endDate, prevStart, prevEnd);
+  const data = await getDashboardData(startDate, endDate, prevStart, prevEnd, ordersPage);
 
   const shopifyConfigured = !!(
     process.env.SHOPIFY_API_KEY &&
@@ -468,68 +471,115 @@ export default async function DashboardPage({
       </div>
 
       {/* Recent orders */}
-      <div className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray-800 flex items-center justify-between">
-          <h2 className="font-semibold text-white text-sm">Recent Orders</h2>
-          <span className="text-xs text-gray-500">{data.shopifyOrders.toLocaleString()} Shopify orders</span>
-        </div>
+      {(() => {
+        const totalPages = Math.max(1, Math.ceil(data.totalOrders / ORDERS_PER_PAGE));
+        const pageStart = (ordersPage - 1) * ORDERS_PER_PAGE + 1;
+        const pageEnd = Math.min(ordersPage * ORDERS_PER_PAGE, data.totalOrders);
+        const buildPageUrl = (p: number) => {
+          const params = new URLSearchParams();
+          if (sp.from) params.set('from', sp.from);
+          if (sp.to) params.set('to', sp.to);
+          if (p > 1) params.set('page', String(p));
+          const qs = params.toString();
+          return `/dashboard${qs ? `?${qs}` : ''}`;
+        };
+        return (
+          <div className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden">
+            <div className="px-6 py-4 border-b border-gray-800 flex items-center justify-between">
+              <h2 className="font-semibold text-white text-sm">Recent Orders</h2>
+              <span className="text-xs text-gray-500">
+                {data.totalOrders > 0 ? `${pageStart}–${pageEnd} of ${data.totalOrders.toLocaleString()}` : '0'} orders
+              </span>
+            </div>
 
-        {data.recentOrders.length === 0 ? (
-          <div className="px-6 py-16 text-center">
-            <p className="text-gray-500 text-sm">No orders synced yet.</p>
+            {data.recentOrders.length === 0 ? (
+              <div className="px-6 py-16 text-center">
+                <p className="text-gray-500 text-sm">No orders synced yet.</p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-gray-800">
+                      <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Order</th>
+                      <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Source</th>
+                      <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Customer</th>
+                      <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Status</th>
+                      <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Total</th>
+                      <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-800/60">
+                    {data.recentOrders.map(order => (
+                      <tr key={order.id} className="hover:bg-gray-800/40 transition-colors">
+                        <td className="px-6 py-3.5 font-mono text-xs text-gray-400">
+                          #{order.sourceOrderId.slice(-8)}
+                          {(order as typeof order & { shopifyOrderId?: string }).shopifyOrderId && (
+                            <span className="ml-1 text-amber-500 text-[10px]">↔</span>
+                          )}
+                        </td>
+                        <td className="px-6 py-3.5">
+                          <span className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${sourceColors[order.source] ?? 'bg-gray-500/10 text-gray-400'}`}>
+                            {order.source === 'CHECKOUTCHAMP' ? 'CC' : order.source === 'MERGED' ? 'Merged' : order.source}
+                          </span>
+                        </td>
+                        <td className="px-6 py-3.5 text-gray-200">
+                          {order.customer.firstName
+                            ? `${order.customer.firstName} ${order.customer.lastName ?? ''}`.trim()
+                            : order.customer.email}
+                        </td>
+                        <td className="px-6 py-3.5">
+                          <span className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${statusColors[order.status] ?? 'bg-gray-500/10 text-gray-400'}`}>
+                            {order.status}
+                          </span>
+                        </td>
+                        <td className="px-6 py-3.5 text-right text-gray-200 tabular-nums">
+                          {fmt$(order.totalPrice)}
+                        </td>
+                        <td className="px-6 py-3.5 text-gray-400 text-xs">
+                          {new Date(order.createdAt).toLocaleDateString('en-US', {
+                            month: 'short', day: 'numeric', year: 'numeric',
+                          })}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {totalPages > 1 && (
+              <div className="px-6 py-3 border-t border-gray-800 flex items-center justify-between">
+                <a
+                  href={ordersPage > 1 ? buildPageUrl(ordersPage - 1) : undefined}
+                  aria-disabled={ordersPage <= 1}
+                  className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+                    ordersPage <= 1
+                      ? 'text-gray-600 cursor-default pointer-events-none'
+                      : 'text-gray-300 bg-gray-800 hover:bg-gray-700'
+                  }`}
+                >
+                  ← Prev
+                </a>
+                <span className="text-xs text-gray-500">
+                  Page {ordersPage} of {totalPages}
+                </span>
+                <a
+                  href={ordersPage < totalPages ? buildPageUrl(ordersPage + 1) : undefined}
+                  aria-disabled={ordersPage >= totalPages}
+                  className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+                    ordersPage >= totalPages
+                      ? 'text-gray-600 cursor-default pointer-events-none'
+                      : 'text-gray-300 bg-gray-800 hover:bg-gray-700'
+                  }`}
+                >
+                  Next →
+                </a>
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-gray-800">
-                  <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Order</th>
-                  <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Source</th>
-                  <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Customer</th>
-                  <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Status</th>
-                  <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Total</th>
-                  <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Date</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-800/60">
-                {data.recentOrders.map(order => (
-                  <tr key={order.id} className="hover:bg-gray-800/40 transition-colors">
-                    <td className="px-6 py-3.5 font-mono text-xs text-gray-400">
-                      #{order.sourceOrderId.slice(-8)}
-                      {(order as typeof order & { shopifyOrderId?: string }).shopifyOrderId && (
-                        <span className="ml-1 text-amber-500 text-[10px]">↔</span>
-                      )}
-                    </td>
-                    <td className="px-6 py-3.5">
-                      <span className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${sourceColors[order.source] ?? 'bg-gray-500/10 text-gray-400'}`}>
-                        {order.source === 'CHECKOUTCHAMP' ? 'CC' : order.source}
-                      </span>
-                    </td>
-                    <td className="px-6 py-3.5 text-gray-200">
-                      {order.customer.firstName
-                        ? `${order.customer.firstName} ${order.customer.lastName ?? ''}`.trim()
-                        : order.customer.email}
-                    </td>
-                    <td className="px-6 py-3.5">
-                      <span className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${statusColors[order.status] ?? 'bg-gray-500/10 text-gray-400'}`}>
-                        {order.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-3.5 text-right text-gray-200 tabular-nums">
-                      {fmt$(order.totalPrice)}
-                    </td>
-                    <td className="px-6 py-3.5 text-gray-400 text-xs">
-                      {new Date(order.createdAt).toLocaleDateString('en-US', {
-                        month: 'short', day: 'numeric', year: 'numeric',
-                      })}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+        );
+      })()}
     </div>
   );
 }
