@@ -63,7 +63,7 @@ export async function runQAAnalysis(options: QARunOptions = {}): Promise<QARunRe
   // Pull base events
   const baseOrders = await prisma.order.findMany({
     where: {
-      source: 'CHECKOUTCHAMP',
+      source: { in: ['CHECKOUTCHAMP', 'MERGED'] },
       createdAt: { gte: from, lte: to },
     },
     select: {
@@ -178,19 +178,23 @@ export async function runQAAnalysis(options: QARunOptions = {}): Promise<QARunRe
   // Learn from correlations
   learnings = learnFromCorrelations(correlations, learnings);
 
-  // Save
-  saveLearnings(learnings);
-  const findings = exportFindings(
-    detectStreaks(buildWindows(events, '1h'), DEFAULT_QA_CONFIG, learnings),
-    learnings,
-  );
-  saveFindings(findings);
+  // Save — wrapped in try/catch: Vercel serverless has a read-only fs outside /tmp
+  try {
+    saveLearnings(learnings);
+    const findings = exportFindings(
+      detectStreaks(buildWindows(events, '1h'), DEFAULT_QA_CONFIG, learnings),
+      learnings,
+    );
+    saveFindings(findings);
 
-  if (!fs.existsSync(STORE_DIR)) fs.mkdirSync(STORE_DIR, { recursive: true });
-  fs.writeFileSync(
-    path.join(STORE_DIR, 'correlations.json'),
-    JSON.stringify(allCorrelations, null, 2) + '\n',
-  );
+    if (!fs.existsSync(STORE_DIR)) fs.mkdirSync(STORE_DIR, { recursive: true });
+    fs.writeFileSync(
+      path.join(STORE_DIR, 'correlations.json'),
+      JSON.stringify(allCorrelations, null, 2) + '\n',
+    );
+  } catch {
+    // File persistence is for local CLI scripts only — non-fatal in serverless
+  }
 
   const topRisks = allCorrelations
     .filter((c) => c.significance === 'HIGH' && c.lift > 1)
