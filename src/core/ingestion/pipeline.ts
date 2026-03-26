@@ -274,6 +274,151 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
     throw new Error(`Customer not found for email: ${data.customerEmail}`);
   }
 
+  // --- Merge path: CC order with a matching Shopify order ---
+  if (data.source === 'CHECKOUTCHAMP' && data.shopifyOrderId) {
+    // Look for existing Shopify order to merge into
+    const shopifyOrder = await prisma.order.findUnique({
+      where: {
+        source_sourceOrderId: { source: 'SHOPIFY', sourceOrderId: data.shopifyOrderId },
+      },
+      include: { items: true },
+    });
+
+    // Also check if already merged (re-ingestion scenario)
+    const mergedOrder = await prisma.order.findFirst({
+      where: { source: 'MERGED', sourceOrderId: data.shopifyOrderId },
+      include: { items: true },
+    });
+
+    const targetOrder = shopifyOrder ?? mergedOrder;
+
+    if (targetOrder) {
+      // Build the CC-wins enrichment payload (only overwrite if CC provides a value)
+      const ccEnrichment: Record<string, unknown> = {
+        source: 'MERGED' as const,
+        ccSourceOrderId: data.sourceOrderId,
+      };
+
+      // CC wins for these fields — only set if CC provides a non-null value
+      const ccWinsFields = [
+        'paySource', 'declineReason', 'campaignId', 'campaignName',
+        'salesUrl', 'ccOrderType', 'funnelReferenceId', 'avsResponse',
+        'cvvResponse', 'cardType', 'cardLast4', 'cardIsDebit', 'cardIsPrepaid',
+        'isDeclineSave', 'userAgent', 'device', 'browser', 'geoState',
+        'geoCountry', 'ccCustom1', 'ccCustom2', 'fulfillmentData', 'refundRemaining',
+      ] as const;
+
+      for (const field of ccWinsFields) {
+        if (data[field] != null) {
+          ccEnrichment[field] = data[field];
+        }
+      }
+
+      // responseType needs casting
+      if (data.responseType != null) {
+        ccEnrichment.responseType = data.responseType as ResponseType;
+      }
+
+      // hasUpsells uses OR — true if either side says true
+      if (data.hasUpsells) {
+        ccEnrichment.hasUpsells = true;
+      }
+
+      // Update the target order — Shopify wins for financial fields (not overwritten)
+      await prisma.order.update({
+        where: { id: targetOrder.id },
+        data: ccEnrichment,
+      });
+
+      // --- Merge items ---
+      for (const ccItem of data.items) {
+        // Try to find a matching existing item by externalId
+        const matchingItem = ccItem.externalId
+          ? targetOrder.items.find(i => i.externalId === ccItem.externalId)
+          : null;
+
+        if (matchingItem) {
+          // Update existing item with CC-specific fields
+          const itemUpdate: Record<string, unknown> = {};
+          if (ccItem.ccCrmId != null) itemUpdate.ccCrmId = ccItem.ccCrmId;
+          if (ccItem.ccCampaignProductId != null) itemUpdate.ccCampaignProductId = ccItem.ccCampaignProductId;
+          if (ccItem.recurringstatus != null) {
+            itemUpdate.recurringStatus = ccItem.recurringstatus.replace(' ', '_').toUpperCase();
+          }
+          if (ccItem.billingCycleNumber != null) itemUpdate.billingCycleNumber = ccItem.billingCycleNumber;
+          if (ccItem.merchantId != null) itemUpdate.merchantId = ccItem.merchantId;
+          if (ccItem.responseType != null) itemUpdate.responseType = ccItem.responseType;
+          if (ccItem.txnType != null) itemUpdate.txnType = ccItem.txnType;
+          if (ccItem.productType != null) itemUpdate.productType = ccItem.productType;
+          if (ccItem.productDescription != null) itemUpdate.productDescription = ccItem.productDescription;
+
+          if (Object.keys(itemUpdate).length > 0) {
+            await prisma.orderItem.update({
+              where: { id: matchingItem.id },
+              data: itemUpdate,
+            });
+          }
+        } else {
+          // CC-only item — add with incremented productSlot
+          const maxSlot = targetOrder.items.reduce(
+            (max, i) => Math.max(max, i.productSlot),
+            0,
+          );
+
+          // Resolve product map for the new item
+          let productMapId: string | null = null;
+          if (ccItem.externalId) {
+            const pm = await prisma.productMap.findFirst({
+              where: { shopifyProductId: ccItem.externalId },
+            });
+            productMapId = pm?.id ?? null;
+          }
+          if (!productMapId && ccItem.sku) {
+            const pm = await prisma.productMap.findFirst({
+              where: { sku: ccItem.sku },
+            });
+            productMapId = pm?.id ?? null;
+          }
+
+          await prisma.orderItem.create({
+            data: {
+              orderId: targetOrder.id,
+              productSlot: maxSlot + 1 + data.items.indexOf(ccItem),
+              productMapId,
+              ccCrmId: ccItem.ccCrmId,
+              ccCampaignProductId: ccItem.ccCampaignProductId,
+              externalId: ccItem.externalId ?? null,
+              name: ccItem.name,
+              sku: ccItem.sku,
+              price: ccItem.price,
+              quantity: ccItem.quantity,
+              recurringStatus: ccItem.recurringstatus
+                ? (ccItem.recurringstatus.replace(' ', '_').toUpperCase() as never)
+                : null,
+              billingCycleNumber: ccItem.billingCycleNumber,
+              productCategoryId: ccItem.productCategoryId,
+              productCategoryName: ccItem.productCategoryName,
+              merchantId: ccItem.merchantId ?? null,
+              responseType: ccItem.responseType ?? null,
+              txnType: ccItem.txnType ?? null,
+              productType: ccItem.productType ?? null,
+              productDescription: ccItem.productDescription ?? null,
+            },
+          });
+        }
+      }
+
+      // Write CC attribution
+      if (data.attribution) {
+        await upsertAttribution(targetOrder.id, data.attribution);
+      }
+
+      return { created: false };
+    }
+    // No matching Shopify order found — fall through to standard upsert
+  }
+
+  // --- Standard upsert path ---
   const existing = await prisma.order.findUnique({
     where: {
       source_sourceOrderId: { source: data.source, sourceOrderId: data.sourceOrderId },
