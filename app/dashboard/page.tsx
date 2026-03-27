@@ -110,13 +110,14 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
     }),
 
     prisma.order.findMany({
+      where: { source: { in: ['SHOPIFY', 'MERGED'] } },
       take: ORDERS_PER_PAGE,
       skip: (ordersPage - 1) * ORDERS_PER_PAGE,
       orderBy: { createdAt: 'desc' },
       include: { customer: { select: { email: true, firstName: true, lastName: true } } },
     }),
 
-    prisma.order.count(),
+    prisma.order.count({ where: { source: { in: ['SHOPIFY', 'MERGED'] } } }),
 
     prisma.subscription.findMany({
       where: { startedAt: { gte: startDate, lte: endDate } },

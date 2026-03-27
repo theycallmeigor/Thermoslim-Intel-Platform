@@ -9,6 +9,13 @@
  *   npx tsx scripts/merge-existing-duplicates.ts [--dry-run]
  */
 
+import * as dotenv from 'dotenv';
+import * as fs from 'fs';
+import * as path from 'path';
+
+const envProd = path.resolve(__dirname, '../.env.production');
+dotenv.config({ path: envProd });
+
 import { prisma } from '../src/lib/prisma';
 
 const DRY_RUN = process.argv.includes('--dry-run');

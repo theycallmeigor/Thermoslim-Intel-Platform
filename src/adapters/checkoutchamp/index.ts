@@ -253,10 +253,44 @@ export class CheckoutChampAdapter implements IAdapter {
   }
 
   async handleWebhook(payload: unknown, options?: { source?: 'webhook' | 'sync' | 'manual' }): Promise<void> {
-    const order = payload as CCOrder;
-    if (!order.orderId) return;
+    const raw = payload as Record<string, string>;
+    if (!raw.orderId) return;
+
+    // CC webhook field names differ from CC API field names — normalize before processing.
+    // Webhook: orderTotal → API: totalAmount
+    // Webhook: clientOrderId → API: orderId (alphanumeric string)
+    // Webhook: orderId (numeric) → API: actualOrderId
+    const normalized: Record<string, unknown> = { ...raw };
+    if (raw.orderTotal && !raw.totalAmount) normalized.totalAmount = raw.orderTotal;
+    if (raw.clientOrderId && !normalized.orderId) normalized.orderId = raw.clientOrderId;
+
+    // CC GET postbacks are thin (no totalAmount/items) — try to fetch full order from API.
+    // If the CC API call fails, fall back to saving the thin record so the order at least
+    // lands in the DB; the scheduled sync will enrich it with full details later.
+    let order: CCOrder = normalized as unknown as CCOrder;
+    const isThin = !raw.orderTotal && !raw.totalAmount && !raw.items;
+    if (isThin) {
+      try {
+        const full = await this.fetchOrderById(raw.orderId, raw.dateCreated);
+        if (full) {
+          order = full;
+        } else {
+          console.warn(`[cc adapter] handleWebhook: no full order found for orderId=${raw.orderId}, saving thin record`);
+        }
+      } catch (err) {
+        console.error(`[cc adapter] handleWebhook: CC API fetch failed for orderId=${raw.orderId}, saving thin record:`, err);
+      }
+    }
+
     const records = this.mapOrderToSchema(order);
-    await runIngestion(records, { source: options?.source ?? 'webhook' });
+    console.log(`[cc adapter] ingesting orderId=${raw.orderId}, records=${records.length}, isThin=${isThin}`);
+    try {
+      const result = await runIngestion(records, { source: options?.source ?? 'webhook' });
+      console.log(`[cc adapter] ingestion done: created=${result.created}, updated=${result.updated}`);
+    } catch (err) {
+      console.error(`[cc adapter] runIngestion failed for orderId=${raw.orderId}:`, err instanceof Error ? err.message : err);
+      throw err;
+    }
   }
 
   async disconnect(): Promise<void> {
@@ -264,6 +298,24 @@ export class CheckoutChampAdapter implements IAdapter {
   }
 
   // ─── Private: API ──────────────────────────────────────────────────────────
+
+  private async fetchOrderById(orderId: string, dateCreated?: string): Promise<CCOrder | null> {
+    if (!dateCreated) return null;
+    const date = new Date(dateCreated.replace(' ', 'T'));
+    const orders = await this.fetchOrders(date, new Date(date.getTime() + 86400000));
+    console.log(`[cc adapter] fetchOrderById: looking for orderId=${orderId} in ${orders.length} orders`);
+    if (orders.length > 0) {
+      console.log(`[cc adapter] first order sample: orderId=${orders[0].orderId}, actualOrderId=${orders[0].actualOrderId}`);
+    }
+    // CC postback sends numeric order ID — try matching both orderId and actualOrderId
+    const match = orders.find(
+      o => String(o.actualOrderId) === String(orderId) || String(o.orderId) === String(orderId)
+    );
+    if (!match) {
+      console.warn(`[cc adapter] fetchOrderById: no match for orderId=${orderId}`);
+    }
+    return match ?? null;
+  }
 
   private async apiGet(path: string, params: Record<string, string>): Promise<CCApiResponse> {
     const qs = new URLSearchParams({ ...this.authParams, ...params });
@@ -448,6 +500,38 @@ export class CheckoutChampAdapter implements IAdapter {
   }
 
   private extractItems(order: CCOrder): Array<Record<string, unknown>> {
+    // CC API returns nested items object; CC webhook sends flat product1_* keys
+    const flat = order as unknown as Record<string, string>;
+    if (!order.items && flat.product1_name) {
+      const items: Array<Record<string, unknown>> = [];
+      for (let i = 1; i <= 5; i++) {
+        if (!flat[`product${i}_name`]) break;
+        items.push({
+          productSlot: i,
+          ccCrmId: flat[`product${i}_crmId`] || null,
+          ccCampaignProductId: flat[`product${i}_campaignProductId`] || null,
+          externalId: flat[`product${i}_externalId`] || null,
+          name: flat[`product${i}_name`],
+          sku: flat[`product${i}_sku`] || null,
+          price: toCents(flat[`product${i}_price`]),
+          quantity: parseInt(flat[`product${i}_qty`] || '1', 10),
+          ccPurchaseId: flat[`product${i}_purchaseId`] || null,
+          purchaseStatus: flat[`product${i}_recurringstatus`] || null,
+          nextBillDate: flat[`product${i}_nextBillDate`] || null,
+          recurringstatus: flat[`product${i}_recurringstatus`] || null,
+          billingCycleNumber: flat[`product${i}_billingCycleNumber`] ? parseInt(flat[`product${i}_billingCycleNumber`], 10) : null,
+          productCategoryId: flat[`product${i}_productCategoryId`] || null,
+          productCategoryName: flat[`product${i}_productCategoryName`] || null,
+          merchantId: null,
+          responseType: null,
+          txnType: null,
+          productType: null,
+          productDescription: null,
+        });
+      }
+      return items;
+    }
+
     if (!order.items || typeof order.items !== 'object') return [];
 
     return Object.values(order.items).map((item, index) => ({
