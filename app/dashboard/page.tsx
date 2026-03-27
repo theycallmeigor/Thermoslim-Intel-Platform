@@ -521,7 +521,7 @@ export default async function DashboardPage({
                         </td>
                         <td className="px-6 py-3.5">
                           <span className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${sourceColors[order.source] ?? 'bg-gray-500/10 text-gray-400'}`}>
-                            {order.source === 'CHECKOUTCHAMP' ? 'CC' : order.source === 'MERGED' ? 'Merged' : order.source}
+                            {order.source === 'SHOPIFY' ? 'Shopify' : order.source === 'CHECKOUTCHAMP' ? 'CC' : order.source === 'MERGED' ? 'Merged' : order.source}
                           </span>
                         </td>
                         <td className="px-6 py-3.5 text-gray-200">
@@ -531,7 +531,7 @@ export default async function DashboardPage({
                         </td>
                         <td className="px-6 py-3.5">
                           <span className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${statusColors[order.status] ?? 'bg-gray-500/10 text-gray-400'}`}>
-                            {order.status}
+                            {order.status.charAt(0) + order.status.slice(1).toLowerCase()}
                           </span>
                         </td>
                         <td className="px-6 py-3.5 text-right text-gray-200 tabular-nums">
