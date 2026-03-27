@@ -341,7 +341,7 @@ export default async function DashboardPage({
         <ConnectionBadge label="Shopify" ok={shopifyConfigured} sub={process.env.SHOPIFY_STORE_URL} />
         <ConnectionBadge label="CheckoutChamp" ok={ccConfigured} />
         <div className="flex items-center gap-2 bg-gray-900 border border-gray-800 rounded-lg px-3 py-2">
-          <span className="text-xs text-gray-500">Revenue source: <span className="text-gray-300">Shopify</span> · Subscriptions: <span className="text-gray-300">CheckoutChamp</span></span>
+          <span className="text-xs text-gray-500">Revenue: <span className="text-gray-300">Shopify + Merged</span> · Subscriptions: <span className="text-gray-300">CheckoutChamp</span></span>
         </div>
       </div>
 
@@ -375,9 +375,9 @@ export default async function DashboardPage({
           sub={`${fromStr} → ${toStr}`}
         />
         <KpiCard
-          label="Shopify Orders"
+          label="Orders"
           value={data.shopifyOrders.toLocaleString()}
-          sub={`CC events: ${data.ccOrders.toLocaleString()}`}
+          sub={`Unmatched CC: ${data.ccOrders.toLocaleString()}`}
         />
       </div>
 
@@ -385,7 +385,7 @@ export default async function DashboardPage({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="lg:col-span-2 bg-gray-900 border border-gray-800 rounded-xl p-6">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-sm font-semibold text-white">Revenue (Shopify)</h2>
+            <h2 className="text-sm font-semibold text-white">Revenue</h2>
             <div className="flex gap-4 text-xs text-gray-500">
               <span>All-time: <span className="text-gray-300">{fmt$(data.shopifyRevenue)}</span></span>
               <span className="text-gray-600">CC ref: {fmt$(data.ccRevenue)}</span>
