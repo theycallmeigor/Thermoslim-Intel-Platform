@@ -3,7 +3,7 @@
 
 import { prisma } from '../../lib/prisma';
 import type { NormalizedRecord } from '../types';
-import type { OrderStatus, PaySource, ResponseType, SubscriptionStatus } from '@prisma/client';
+import type { OrderStatus, PaySource, ResponseType, SubscriptionStatus, SubscriptionEventType } from '@prisma/client';
 import { notifyOrdersIngested, type PostHookSource } from './post-hooks';
 
 export interface IngestionResult {
@@ -185,6 +185,8 @@ interface SubscriptionData {
   startedAt: string;
   nextBillDate?: string | null;
   shopifyExternalId?: string | null;
+  billingCycleNumber?: number | null;
+  orderType?: string | null; // NEW_SALE, REBILL, CHARGEBACK
 }
 
 // --- Upsert functions ---
@@ -275,22 +277,48 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
   }
 
   // --- Merge path: CC order with a matching Shopify order ---
-  if (data.source === 'CHECKOUTCHAMP' && data.shopifyOrderId) {
-    // Look for existing Shopify order to merge into
-    const shopifyOrder = await prisma.order.findUnique({
-      where: {
-        source_sourceOrderId: { source: 'SHOPIFY', sourceOrderId: data.shopifyOrderId },
-      },
-      include: { items: true },
-    });
+  if (data.source === 'CHECKOUTCHAMP') {
+    let targetOrder = null;
+    let matchedShopifyOrderId = data.shopifyOrderId;
 
-    // Also check if already merged (re-ingestion scenario)
-    const mergedOrder = await prisma.order.findFirst({
-      where: { source: 'MERGED', sourceOrderId: data.shopifyOrderId },
-      include: { items: true },
-    });
+    if (data.shopifyOrderId) {
+      // Primary match: CC knows the Shopify order ID
+      const shopifyOrder = await prisma.order.findUnique({
+        where: {
+          source_sourceOrderId: { source: 'SHOPIFY', sourceOrderId: data.shopifyOrderId },
+        },
+        include: { items: true },
+      });
 
-    const targetOrder = shopifyOrder ?? mergedOrder;
+      // Also check if already merged (re-ingestion scenario)
+      const mergedOrder = await prisma.order.findFirst({
+        where: { source: 'MERGED', sourceOrderId: data.shopifyOrderId },
+        include: { items: true },
+      });
+
+      targetOrder = shopifyOrder ?? mergedOrder;
+    }
+
+    // Fallback: CC has no shopifyOrderId — try matching by customer + time window
+    if (!targetOrder && !data.shopifyOrderId) {
+      const orderDate = new Date(data.createdAt);
+      const windowStart = new Date(orderDate.getTime() - 24 * 3600000);
+      const windowEnd = new Date(orderDate.getTime() + 24 * 3600000);
+      const shopifyMatch = await prisma.order.findFirst({
+        where: {
+          source: { in: ['SHOPIFY', 'MERGED'] },
+          customerId: customer.id,
+          createdAt: { gte: windowStart, lte: windowEnd },
+        },
+        orderBy: { createdAt: 'desc' },
+        include: { items: true },
+      });
+      if (shopifyMatch) {
+        targetOrder = shopifyMatch;
+        matchedShopifyOrderId = shopifyMatch.sourceOrderId;
+        console.log(`[pipeline] fallback forward merge: matched CC order ${data.sourceOrderId} to Shopify ${matchedShopifyOrderId} by customer+time`);
+      }
+    }
 
     if (targetOrder) {
       // Build the CC-wins enrichment payload (only overwrite if CC provides a value)
@@ -413,17 +441,43 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
         await upsertAttribution(targetOrder.id, data.attribution);
       }
 
+      // Clean up standalone CC order if it exists (avoid orphan duplicate)
+      const standaloneCC = await prisma.order.findUnique({
+        where: {
+          source_sourceOrderId: { source: 'CHECKOUTCHAMP', sourceOrderId: data.sourceOrderId },
+        },
+      });
+      if (standaloneCC && standaloneCC.id !== targetOrder.id) {
+        await prisma.attribution.deleteMany({ where: { orderId: standaloneCC.id } });
+        await prisma.orderItem.deleteMany({ where: { orderId: standaloneCC.id } });
+        await prisma.revenueEvent.deleteMany({ where: { orderId: standaloneCC.id } });
+        await prisma.funnelEvent.deleteMany({ where: { orderId: standaloneCC.id } });
+        await prisma.upsellPath.deleteMany({ where: { orderId: standaloneCC.id } });
+        await prisma.order.delete({ where: { id: standaloneCC.id } });
+        console.log(`[pipeline] cleaned up standalone CC order ${standaloneCC.sourceOrderId} after merge`);
+      }
+
       return { created: false };
     }
     // No matching Shopify order found — fall through to standard upsert
   }
 
   // --- Standard upsert path ---
-  const existing = await prisma.order.findUnique({
+  let existing = await prisma.order.findUnique({
     where: {
       source_sourceOrderId: { source: data.source, sourceOrderId: data.sourceOrderId },
     },
   });
+
+  // If a Shopify re-sync can't find (SHOPIFY, id), check for (MERGED, id).
+  // The original row was renamed during a CC merge — update it instead of creating a duplicate.
+  if (!existing && data.source === 'SHOPIFY') {
+    existing = await prisma.order.findUnique({
+      where: {
+        source_sourceOrderId: { source: 'MERGED', sourceOrderId: data.sourceOrderId },
+      },
+    });
+  }
 
   const orderPayload = {
     customerId: customer.id,
@@ -474,7 +528,27 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
   let orderId: string;
 
   if (existing) {
-    await prisma.order.update({ where: { id: existing.id }, data: orderPayload });
+    // If updating a MERGED row from a Shopify re-sync, only update Shopify-owned fields.
+    // Preserve CC-enriched fields (ccOrderType, ccCustom1, ccSourceOrderId, etc.)
+    if (existing.source === 'MERGED' && data.source === 'SHOPIFY') {
+      const shopifyOnlyPayload = {
+        customerId: orderPayload.customerId,
+        status: orderPayload.status,
+        orderTotal: orderPayload.orderTotal,
+        totalPrice: orderPayload.totalPrice,
+        totalShipping: orderPayload.totalShipping,
+        totalDiscount: orderPayload.totalDiscount,
+        salesTax: orderPayload.salesTax,
+        currencyCode: orderPayload.currencyCode,
+        couponCode: orderPayload.couponCode,
+        tags: orderPayload.tags,
+        sourceClientOrderId: orderPayload.sourceClientOrderId,
+        createdAt: orderPayload.createdAt,
+      };
+      await prisma.order.update({ where: { id: existing.id }, data: shopifyOnlyPayload });
+    } else {
+      await prisma.order.update({ where: { id: existing.id }, data: orderPayload });
+    }
     await prisma.orderItem.deleteMany({ where: { orderId: existing.id } });
     orderId = existing.id;
   } else {
@@ -493,13 +567,38 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
 
   // --- Reverse merge: CC order may have arrived before this Shopify order ---
   if (data.source === 'SHOPIFY') {
-    const waitingCCOrder = await prisma.order.findFirst({
+    // Primary match: CC order that already knows its Shopify order ID
+    let waitingCCOrder = await prisma.order.findFirst({
       where: {
         source: 'CHECKOUTCHAMP',
         shopifyOrderId: data.sourceOrderId,
       },
       include: { items: true, attribution: true },
     });
+
+    // Fallback match: Shopify order has CC tags but CC order has no shopifyOrderId yet.
+    // Match by same customer + creation time within 24h window.
+    if (!waitingCCOrder && data.tags) {
+      const hasCCTags = /New Sale|Recurring|Subscription/.test(data.tags);
+      if (hasCCTags) {
+        const orderDate = new Date(data.createdAt);
+        const windowStart = new Date(orderDate.getTime() - 24 * 3600000);
+        const windowEnd = new Date(orderDate.getTime() + 24 * 3600000);
+        waitingCCOrder = await prisma.order.findFirst({
+          where: {
+            source: 'CHECKOUTCHAMP',
+            shopifyOrderId: null,
+            customerId: customer.id,
+            createdAt: { gte: windowStart, lte: windowEnd },
+          },
+          orderBy: { createdAt: 'desc' },
+          include: { items: true, attribution: true },
+        });
+        if (waitingCCOrder) {
+          console.log(`[pipeline] fallback reverse merge: matched CC order ${waitingCCOrder.sourceOrderId} to Shopify ${data.sourceOrderId} by customer+time`);
+        }
+      }
+    }
 
     if (waitingCCOrder) {
       // Re-ingest the CC order — now the Shopify order exists, the merge path will fire
@@ -605,38 +704,111 @@ async function upsertSubscription(data: SubscriptionData): Promise<{ created: bo
 
   // Try to find matching product map via shopify external ID
   let productMapId: string | null = null;
+  let frequency: string | null = null;
   if (data.shopifyExternalId) {
     const pm = await prisma.productMap.findFirst({
       where: { shopifyProductId: data.shopifyExternalId },
     });
     productMapId = pm?.id ?? null;
+    frequency = pm?.frequency ?? null;
   }
 
   const existing = data.ccPurchaseId
     ? await prisma.subscription.findUnique({ where: { ccPurchaseId: data.ccPurchaseId } })
     : null;
 
+  const now = new Date(data.startedAt);
+
+  // Track status-dependent dates
+  const cancelledAt = data.status === 'CANCELLED' ? now : (existing?.status === 'CANCELLED' ? existing.cancelledAt : null);
+  const lastBilledAt = data.orderType === 'REBILL' ? now : (existing?.lastBilledAt ?? null);
+  const currentBillingCycle = data.billingCycleNumber ?? existing?.currentBillingCycle ?? 1;
+
   const payload = {
     customerId: customer.id,
     status: data.status,
     recurringPrice: data.recurringPrice,
+    frequency,
     campaignId: data.campaignId,
-    startedAt: new Date(data.startedAt),
+    startedAt: now,
     nextBillDate: data.nextBillDate ? new Date(data.nextBillDate) : null,
+    cancelledAt,
+    lastBilledAt,
+    currentBillingCycle,
     productMapId,
     ccClientPurchaseId: data.ccClientPurchaseId,
     originalOrderId: data.originalOrderId,
   };
 
   if (existing) {
+    const oldStatus = existing.status;
+    const newStatus = data.status;
+
     await prisma.subscription.update({ where: { id: existing.id }, data: payload });
+
+    // Detect status change → emit SubscriptionEvent
+    if (oldStatus !== newStatus) {
+      const eventType = deriveSubscriptionEventType(oldStatus, newStatus);
+      await prisma.subscriptionEvent.create({
+        data: {
+          subscriptionId: existing.id,
+          eventType,
+          fromStatus: oldStatus,
+          toStatus: newStatus,
+          billingCycleNumber: currentBillingCycle,
+          amount: data.orderType === 'REBILL' ? data.recurringPrice : null,
+          occurredAt: now,
+        },
+      });
+    } else if (data.orderType === 'REBILL') {
+      // Same status but a rebill happened — emit BILLED event
+      await prisma.subscriptionEvent.create({
+        data: {
+          subscriptionId: existing.id,
+          eventType: 'BILLED',
+          fromStatus: oldStatus,
+          toStatus: newStatus,
+          billingCycleNumber: currentBillingCycle,
+          amount: data.recurringPrice,
+          occurredAt: now,
+        },
+      });
+    }
+
     return { created: false };
   }
 
-  await prisma.subscription.create({
+  const sub = await prisma.subscription.create({
     data: { ccPurchaseId: data.ccPurchaseId, ...payload },
   });
+
+  // Emit CREATED event for new subscriptions
+  await prisma.subscriptionEvent.create({
+    data: {
+      subscriptionId: sub.id,
+      eventType: 'CREATED',
+      fromStatus: null,
+      toStatus: data.status,
+      billingCycleNumber: currentBillingCycle,
+      amount: data.recurringPrice,
+      occurredAt: now,
+    },
+  });
+
   return { created: true };
+}
+
+function deriveSubscriptionEventType(
+  from: SubscriptionStatus,
+  to: SubscriptionStatus,
+): SubscriptionEventType {
+  if (to === 'CANCELLED') return 'CANCELLED';
+  if (to === 'PAUSED') return 'PAUSED';
+  if (from === 'PAUSED' && to === 'ACTIVE') return 'RESUMED';
+  if (from === 'CANCELLED' && (to === 'ACTIVE' || to === 'TRIAL')) return 'REACTIVATED';
+  if (from === 'RECYCLE_FAILED' && to === 'ACTIVE') return 'REACTIVATED';
+  // Default for other transitions (e.g., TRIAL → ACTIVE after first bill)
+  return 'BILLED';
 }
 
 async function writeOrderItems(orderId: string, items: OrderItemData[]): Promise<void> {

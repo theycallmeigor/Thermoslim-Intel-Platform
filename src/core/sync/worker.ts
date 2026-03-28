@@ -5,6 +5,7 @@
  *
  * Jobs:
  *   - qa:analyze    — Run QA multi-resolution analysis
+ *   - qa:health     — Run data health checks (weekly)
  *   - sync:cc       — Sync CheckoutChamp orders
  *   - sync:shopify  — Sync Shopify orders
  *
@@ -116,6 +117,13 @@ async function processJob(job: Job): Promise<void> {
       break;
     }
 
+    case 'qa:health': {
+      const { runHealthChecks } = await import('../qa/health-check');
+      const result = await runHealthChecks();
+      console.log(`[worker] Health checks: ${result.checks.length} checks, ${result.totalIssues} issues (${result.durationMs}ms)`);
+      break;
+    }
+
     case 'sync:cc': {
       const { CheckoutChampAdapter } = await import('../../adapters/checkoutchamp');
       const adapter = new CheckoutChampAdapter();
@@ -189,7 +197,16 @@ export async function startWorker(): Promise<void> {
     opts: { removeOnComplete: 5, removeOnFail: 3 },
   });
 
-  console.log('[worker] Scheduled: CC sync (15min), QA analysis (1hr)');
+  // Data health checks every 24 hours
+  await q.upsertJobScheduler('health-check-schedule', {
+    every: 24 * 60 * 60 * 1000,
+  }, {
+    name: 'qa:health',
+    data: {},
+    opts: { removeOnComplete: 5, removeOnFail: 3 },
+  });
+
+  console.log('[worker] Scheduled: CC sync (15min), QA analysis (1hr), health checks (24hr)');
   console.log('[worker] Ready and listening for jobs...');
 }
 
