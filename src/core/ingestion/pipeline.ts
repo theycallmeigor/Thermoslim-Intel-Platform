@@ -299,8 +299,9 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
       targetOrder = shopifyOrder ?? mergedOrder;
     }
 
-    // Fallback: CC has no shopifyOrderId — try matching by customer + time window
-    if (!targetOrder && !data.shopifyOrderId) {
+    // Fallback: CC has no shopifyOrderId — try matching by customer + time window.
+    // Only for initial sales — rebills are separate transactions and must not be merged via fuzzy match.
+    if (!targetOrder && !data.shopifyOrderId && data.ccOrderType !== 'REBILL') {
       const orderDate = new Date(data.createdAt);
       const windowStart = new Date(orderDate.getTime() - 24 * 3600000);
       const windowEnd = new Date(orderDate.getTime() + 24 * 3600000);
@@ -578,9 +579,10 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
 
     // Fallback match: Shopify order has CC tags but CC order has no shopifyOrderId yet.
     // Match by same customer + creation time within 24h window.
+    // Only match initial sales — "Recurring" tags mean rebills which are separate orders.
     if (!waitingCCOrder && data.tags) {
-      const hasCCTags = /New Sale|Recurring|Subscription/.test(data.tags);
-      if (hasCCTags) {
+      const isInitialSale = /New Sale|Subscription/.test(data.tags) && !/Recurring/.test(data.tags);
+      if (isInitialSale) {
         const orderDate = new Date(data.createdAt);
         const windowStart = new Date(orderDate.getTime() - 24 * 3600000);
         const windowEnd = new Date(orderDate.getTime() + 24 * 3600000);
@@ -588,6 +590,7 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
           where: {
             source: 'CHECKOUTCHAMP',
             shopifyOrderId: null,
+            ccOrderType: { not: 'REBILL' }, // Rebills are separate orders, never merge via fallback
             customerId: customer.id,
             createdAt: { gte: windowStart, lte: windowEnd },
           },

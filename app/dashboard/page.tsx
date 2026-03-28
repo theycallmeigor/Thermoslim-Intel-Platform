@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import SyncButton from './SyncButton';
 import { RevenueChart, type DailyRevenue } from './RevenueChart';
 import { SubscriberDonut, type DonutSlice } from './SubscriberDonut';
+import { SubscriberActivityChart, type SubActivityDay } from './SubscriberActivityChart';
 import { DateFilter } from './DateFilter';
 import { subDays, startOfDay, format, startOfYear } from 'date-fns';
 
@@ -29,16 +30,13 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
   const [
     activeSubscriptions,
     prevActiveSubscriptions,
-    mrrResult,
-    prevMrrResult,
     revenueResult,
     prevRevenueResult,
     shopifyOrders,
     ccOrders,
     shopifyRevenue,
     ccRevenue,
-    subsByFrequency,
-    subsByProductLineRaw,
+    activeSubsWithProduct,
     topCampaigns,
     recentOrders,
     totalOrders,
@@ -46,18 +44,10 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
     cancelledSubsRaw,
     shopifyOrdersForChart,
     mrrByProduct,
+    subEvents,
   ] = await Promise.all([
     prisma.subscription.count({ where: { status: { in: ['ACTIVE', 'TRIAL'] } } }),
     prisma.subscription.count({ where: { status: { in: ['ACTIVE', 'TRIAL'] }, startedAt: { lt: startDate } } }),
-
-    prisma.subscription.aggregate({
-      where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-      _sum: { recurringPrice: true },
-    }),
-    prisma.subscription.aggregate({
-      where: { status: { in: ['ACTIVE', 'TRIAL'] }, startedAt: { lt: startDate } },
-      _sum: { recurringPrice: true },
-    }),
 
     // Revenue: Shopify + Merged (MERGED rows carry revenue for CC orders merged onto Shopify)
     prisma.order.aggregate({
@@ -83,23 +73,17 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
       _sum: { totalPrice: true },
     }),
 
-    prisma.subscription.groupBy({
-      by: ['frequency'],
-      where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-      _count: { id: true },
-      orderBy: { _count: { id: 'desc' } },
-    }),
-
+    // Fetch active subs with product map for both frequency and product line donuts
     prisma.subscription.findMany({
       where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-      include: { productMap: { select: { productLine: true } } },
+      include: { productMap: { select: { productLine: true, frequency: true } } },
     }),
 
-    // Campaign data comes from CC and Merged orders (campaign attribution lives on CHECKOUTCHAMP and MERGED rows)
+    // Top funnels — group by ccCustom1 (funnel name), include direct Shopify orders
     prisma.order.groupBy({
-      by: ['campaignId', 'campaignName'],
+      by: ['ccCustom1'],
       where: {
-        campaignId: { not: null },
+        source: { in: ['SHOPIFY', 'MERGED'] },
         status: 'COMPLETE',
         createdAt: { gte: startDate, lte: endDate },
       },
@@ -142,6 +126,13 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
       include: {
         productMap: { select: { name: true, productLine: true, frequency: true } },
       },
+    }),
+
+    // Subscription events for activity chart
+    prisma.subscriptionEvent.findMany({
+      where: { occurredAt: { gte: startDate, lte: endDate } },
+      select: { eventType: true, occurredAt: true },
+      orderBy: { occurredAt: 'asc' },
     }),
   ]);
 
@@ -199,13 +190,24 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
   }
 
   // ─── Donuts ───────────────────────────────────────────────────────────────
-  const freqSlices: DonutSlice[] = subsByFrequency.map(r => ({
-    name: r.frequency ?? 'Unknown',
-    value: r._count.id,
-  }));
+  // Build frequency donut from product map data
+  const freqCount = new Map<string, number>();
+  for (const sub of activeSubsWithProduct) {
+    const freq = sub.productMap?.frequency ?? 'Unknown';
+    freqCount.set(freq, (freqCount.get(freq) ?? 0) + 1);
+  }
+  const freqLabels: Record<string, string> = {
+    '1-month': 'Monthly',
+    '3-month': 'Every 3 Mo',
+    '6-month': 'Every 6 Mo',
+    'Unknown': 'Unknown',
+  };
+  const freqSlices: DonutSlice[] = [...freqCount.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([name, value]) => ({ name: freqLabels[name] ?? name, value }));
 
   const productLineCount = new Map<string, number>();
-  for (const sub of subsByProductLineRaw) {
+  for (const sub of activeSubsWithProduct) {
     const line = sub.productMap?.productLine ?? 'Unmapped';
     productLineCount.set(line, (productLineCount.get(line) ?? 0) + 1);
   }
@@ -213,18 +215,25 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
     .sort((a, b) => b[1] - a[1])
     .map(([name, value]) => ({ name, value }));
 
-  // ─── MRR breakdown by product ─────────────────────────────────────────────
+  // ─── MRR breakdown by product (normalized by frequency) ───────────────────
+  const freqMonths: Record<string, number> = { '1-month': 1, '3-month': 3, '6-month': 6 };
+  function toMonthlyMrr(recurringPrice: number, frequency: string | null): number {
+    const months = freqMonths[frequency ?? ''] ?? 1;
+    return Math.round(recurringPrice / months);
+  }
+
   const mrrProductMap = new Map<string, { name: string; mrr: number; count: number }>();
   for (const sub of mrrByProduct) {
     const key = sub.productMap?.name ?? sub.ccPurchaseId ?? 'Unknown';
+    const monthlyMrr = toMonthlyMrr(sub.recurringPrice, sub.frequency);
     const existing = mrrProductMap.get(key);
     if (existing) {
-      existing.mrr += sub.recurringPrice;
+      existing.mrr += monthlyMrr;
       existing.count += 1;
     } else {
       mrrProductMap.set(key, {
         name: sub.productMap?.name ?? 'Unknown Product',
-        mrr: sub.recurringPrice,
+        mrr: monthlyMrr,
         count: 1,
       });
     }
@@ -242,8 +251,49 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
 
   const currRevenue = revenueResult._sum.totalPrice ?? 0;
   const prevRevenue = prevRevenueResult._sum.totalPrice ?? 0;
-  const currMrr = mrrResult._sum.recurringPrice ?? 0;
-  const prevMrr = prevMrrResult._sum.recurringPrice ?? 0;
+  // MRR normalized by frequency
+  const currMrr = activeSubsWithProduct.reduce((sum, s) => sum + toMonthlyMrr(s.recurringPrice, s.frequency), 0);
+  const prevMrr = activeSubsWithProduct
+    .filter(s => s.startedAt < startDate)
+    .reduce((sum, s) => sum + toMonthlyMrr(s.recurringPrice, s.frequency), 0);
+
+  // ─── Subscriber activity chart ───────────────────────────────────────────
+  const additionTypes = new Set(['CREATED', 'REACTIVATED', 'RESUMED']);
+  const reductionTypes = new Set(['CANCELLED', 'PAUSED', 'DECLINED']);
+
+  // Build daily buckets
+  const subActivityByDay = new Map<string, SubActivityDay>();
+  for (let i = 0; i < Math.min(rangeDays, 90); i++) {
+    const d = format(subDays(endDate, rangeDays - 1 - i), 'yyyy-MM-dd');
+    subActivityByDay.set(d, {
+      date: format(subDays(endDate, rangeDays - 1 - i), 'MMM d'),
+      active: 0, new: 0, reactivated: 0, resumed: 0,
+      cancelled: 0, paused: 0, declined: 0,
+    });
+  }
+
+  for (const evt of subEvents) {
+    const day = format(evt.occurredAt, 'yyyy-MM-dd');
+    const bucket = subActivityByDay.get(day);
+    if (!bucket) continue;
+    if (evt.eventType === 'CREATED') bucket.new += 1;
+    else if (evt.eventType === 'REACTIVATED') bucket.reactivated += 1;
+    else if (evt.eventType === 'RESUMED') bucket.resumed += 1;
+    else if (evt.eventType === 'CANCELLED') bucket.cancelled -= 1;
+    else if (evt.eventType === 'PAUSED') bucket.paused -= 1;
+    else if (evt.eventType === 'DECLINED') bucket.declined -= 1;
+  }
+
+  // Compute running active count — start from (current active - net changes in period)
+  const netInPeriod = [...subActivityByDay.values()].reduce((sum, d) =>
+    sum + d.new + d.reactivated + d.resumed + d.cancelled + d.paused + d.declined, 0);
+  let runningActive = activeSubscriptions - netInPeriod;
+  for (const day of subActivityByDay.values()) {
+    runningActive += day.new + day.reactivated + day.resumed + day.cancelled + day.paused + day.declined;
+    day.active = runningActive;
+  }
+
+  const subActivityData = [...subActivityByDay.values()];
 
   return {
     activeSubscriptions,
@@ -261,6 +311,7 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
     productLineSlices,
     mrrBreakdown,
     topCampaigns,
+    subActivityData,
     recentOrders,
     totalOrders,
   };
@@ -290,8 +341,26 @@ const statusColors: Record<string, string> = {
 const sourceColors: Record<string, string> = {
   SHOPIFY: 'bg-emerald-500/10 text-emerald-400',
   CHECKOUTCHAMP: 'bg-blue-500/10 text-blue-400',
-  MERGED: 'bg-purple-500/10 text-purple-400',
+  MERGED: 'bg-blue-500/10 text-blue-400',
 };
+
+function getSourceLabel(order: { source: string; ccSourceOrderId?: string | null; ccCustom1?: string | null; tags?: string | null }): { label: string; linked: boolean } {
+  if (order.source === 'MERGED') return { label: 'CC', linked: true };
+  if (order.source === 'CHECKOUTCHAMP') return { label: 'CC', linked: false };
+  // SHOPIFY orders with CC custom fields or CC tags originated from CheckoutChamp but weren't merged
+  if (order.ccCustom1 || (order.tags && /New Sale|Recurring|Subscription/.test(order.tags))) {
+    return { label: 'CC', linked: true };
+  }
+  return { label: 'Shopify', linked: false };
+}
+
+function isSubscriptionOrder(order: { ccOrderType?: string | null; tags?: string | null }): 'rebill' | 'subscription' | null {
+  if (order.ccOrderType === 'REBILL') return 'rebill';
+  const tags = order.tags ?? '';
+  if (tags.includes('Recurring')) return 'rebill';
+  if (tags.includes('Subscription')) return 'subscription';
+  return null;
+}
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -428,6 +497,12 @@ export default async function DashboardPage({
         </div>
       </div>
 
+      {/* Subscriber activity */}
+      <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h2 className="text-sm font-semibold text-white mb-4">Subscriber Activity</h2>
+        <SubscriberActivityChart data={data.subActivityData} />
+      </div>
+
       {/* Subscriber donuts + top campaigns */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
@@ -441,9 +516,9 @@ export default async function DashboardPage({
 
         {/* Top campaigns */}
         <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
-          <h2 className="text-sm font-semibold text-white mb-4">Top Campaigns</h2>
+          <h2 className="text-sm font-semibold text-white mb-4">Top Funnels</h2>
           {data.topCampaigns.length === 0 ? (
-            <p className="text-gray-600 text-sm">No campaign data for this period</p>
+            <p className="text-gray-600 text-sm">No funnel data for this period</p>
           ) : (
             <div className="space-y-2.5">
               {data.topCampaigns.map((c, i) => {
@@ -453,7 +528,7 @@ export default async function DashboardPage({
                   <div key={i} className="space-y-1">
                     <div className="flex items-center justify-between text-xs">
                       <span className="text-gray-300 truncate max-w-[55%]">
-                        {c.campaignName ?? c.campaignId ?? 'Unknown'}
+                        {c.ccCustom1 ?? 'Direct'}
                       </span>
                       <div className="flex gap-2 text-gray-500 flex-shrink-0">
                         <span>{c._count.id} orders</span>
@@ -504,6 +579,7 @@ export default async function DashboardPage({
                     <tr className="border-b border-gray-800">
                       <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Order</th>
                       <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Source</th>
+                      <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Type</th>
                       <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Customer</th>
                       <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Status</th>
                       <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Total</th>
@@ -515,14 +591,29 @@ export default async function DashboardPage({
                       <tr key={order.id} className="hover:bg-gray-800/40 transition-colors">
                         <td className="px-6 py-3.5 font-mono text-xs text-gray-400">
                           #{order.sourceOrderId.slice(-8)}
-                          {(order as typeof order & { shopifyOrderId?: string }).shopifyOrderId && (
-                            <span className="ml-1 text-amber-500 text-[10px]">↔</span>
-                          )}
                         </td>
                         <td className="px-6 py-3.5">
-                          <span className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${sourceColors[order.source] ?? 'bg-gray-500/10 text-gray-400'}`}>
-                            {order.source === 'SHOPIFY' ? 'Shopify' : order.source === 'CHECKOUTCHAMP' ? 'CC' : order.source === 'MERGED' ? 'Merged' : order.source}
-                          </span>
+                          {(() => {
+                            const src = getSourceLabel(order);
+                            return (
+                              <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium ${src.label === 'CC' ? 'bg-blue-500/10 text-blue-400' : 'bg-emerald-500/10 text-emerald-400'}`}>
+                                {src.label}
+                                {src.linked && <span className="text-emerald-400 text-[10px]" title="Linked to Shopify">↔S</span>}
+                              </span>
+                            );
+                          })()}
+                        </td>
+                        <td className="px-6 py-3.5">
+                          {(() => {
+                            const subType = isSubscriptionOrder(order);
+                            if (subType === 'rebill') return (
+                              <span className="inline-flex px-2 py-0.5 rounded text-xs font-medium bg-amber-500/10 text-amber-400">Rebill</span>
+                            );
+                            if (subType === 'subscription') return (
+                              <span className="inline-flex px-2 py-0.5 rounded text-xs font-medium bg-cyan-500/10 text-cyan-400">Sub</span>
+                            );
+                            return <span className="text-xs text-gray-600">One-time</span>;
+                          })()}
                         </td>
                         <td className="px-6 py-3.5 text-gray-200">
                           {order.customer.firstName
