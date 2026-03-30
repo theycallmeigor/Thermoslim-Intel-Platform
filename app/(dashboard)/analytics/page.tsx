@@ -31,11 +31,9 @@ async function getAnalyticsData(filters: Filters) {
   const { startDate, endDate } = parseRange(filters.from, filters.to);
 
   // Build where clause for DailySnapshot
-  // Exclude raw CHECKOUTCHAMP snapshots — CC orders are duplicates of SHOPIFY/MERGED
-  // and carry $0 revenue but inflate order counts
+  // Snapshots only contain deduplicated SHOPIFY/MERGED COMPLETE orders (no raw CC rows)
   const where: Record<string, unknown> = {
     date: { gte: startDate, lte: endDate },
-    source: { not: 'CHECKOUTCHAMP' },
   };
   if (filters.campaign) where.campaignId = filters.campaign;
   if (filters.product) where.productLine = filters.product;
@@ -49,7 +47,7 @@ async function getAnalyticsData(filters: Filters) {
 
   // ── Filter options (for dropdown population) ──
   const allSnaps = await prisma.dailySnapshot.findMany({
-    where: { date: { gte: startDate, lte: endDate }, source: { not: 'CHECKOUTCHAMP' } },
+    where: { date: { gte: startDate, lte: endDate } },
     select: { campaignId: true, campaignName: true, productLine: true, channel: true, funnelId: true },
     distinct: ['campaignId', 'productLine', 'channel', 'funnelId'],
   });
