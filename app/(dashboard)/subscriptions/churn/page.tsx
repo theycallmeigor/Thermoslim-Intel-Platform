@@ -8,12 +8,13 @@ import { KpiCard } from '@/components/ui/KpiCard';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { ChurnTrendChart, type ChurnDay } from './ChurnTrendChart';
 import { CancelReasonsChart, type ReasonCount } from './CancelReasonsChart';
+import { CancelByMilestoneChart, type MilestoneBar } from './CancelByMilestoneChart';
 
 export default async function ChurnPage({ searchParams }: { searchParams: Promise<{ from?: string; to?: string }> }) {
   const sp = await searchParams;
   const { startDate, endDate, prevStart, prevEnd } = parseRange(sp.from, sp.to);
 
-  const [cancelled, prevCancelled, paused, activeSubs, cancelledEvents, cancelReasons] = await Promise.all([
+  const [cancelled, prevCancelled, paused, activeSubs, cancelledEvents, cancelReasons, milestoneData] = await Promise.all([
     // Cancelled in period
     prisma.subscription.count({
       where: { status: 'CANCELLED', cancelledAt: { gte: startDate, lte: endDate } },
@@ -47,6 +48,13 @@ export default async function ChurnPage({ searchParams }: { searchParams: Promis
       orderBy: { _count: { id: 'desc' } },
       take: 10,
     }),
+    // Cancellations by billing cycle milestone
+    prisma.subscription.groupBy({
+      by: ['currentBillingCycle'],
+      where: { status: 'CANCELLED', cancelledAt: { gte: startDate, lte: endDate } },
+      _count: { id: true },
+      orderBy: { currentBillingCycle: 'asc' },
+    }),
   ]);
 
   // Build trend data with churn rate (cancelled / active subs at period start)
@@ -68,6 +76,12 @@ export default async function ChurnPage({ searchParams }: { searchParams: Promis
   const reasonData: ReasonCount[] = cancelReasons.map(r => ({
     reason: (r.cancelReason ?? 'Unknown').slice(0, 30),
     count: r._count.id,
+  }));
+
+  // Build milestone data (cancellations by billing cycle)
+  const milestoneChartData: MilestoneBar[] = milestoneData.map(m => ({
+    cycle: String(m.currentBillingCycle),
+    count: m._count.id,
   }));
 
   // Churn rate = cancelled in period / active subs at start
@@ -94,6 +108,13 @@ export default async function ChurnPage({ searchParams }: { searchParams: Promis
           <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Top Cancel Reasons</h3>
           <CancelReasonsChart data={reasonData} />
         </div>
+      </div>
+
+      {/* Order-milestone cancellation chart */}
+      <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
+        <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Cancellations by Billing Cycle</h3>
+        <p className="text-xs text-gray-600 mb-3">Shows when in the subscription lifecycle customers cancel — after the 1st billing, 2nd, 3rd, etc.</p>
+        <CancelByMilestoneChart data={milestoneChartData} />
       </div>
 
       {/* Recent cancellations table */}

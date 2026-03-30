@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma';
 import { fmtK, fmt$ } from '@/lib/dashboard/formatting';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { KpiCard } from '@/components/ui/KpiCard';
+import { RetentionCurvesChart, type CohortCurve } from './RetentionCurvesChart';
 
 export default async function CohortsPage() {
   // Get all subscriptions with their events
@@ -69,6 +70,20 @@ export default async function CohortsPage() {
         <KpiCard label="Avg Retention" value={avgRetention} sub="at latest month" />
         <KpiCard label="Cohorts Tracked" value={cohorts.length.toLocaleString()} />
       </div>
+
+      {/* Retention curves chart */}
+      {(() => {
+        const curveData: CohortCurve[] = cohorts.map(([key, c]) => ({
+          cohort: key,
+          rates: c.retained.slice(0, maxMonths + 1).map(count => c.total > 0 ? Math.round((count / c.total) * 1000) / 10 : 0),
+        }));
+        return (
+          <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
+            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Retention Curves</h3>
+            <RetentionCurvesChart cohorts={curveData} maxMonths={maxMonths} />
+          </div>
+        );
+      })()}
 
       {/* Heatmap table */}
       <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
