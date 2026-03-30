@@ -142,11 +142,11 @@ export default async function RebillsPage() {
                 const billDate = sub.nextBillDate!;
                 const daysUntil = differenceInDays(startOfDay(billDate), startOfDay(now));
                 const isOverdue = daysUntil < 0;
-                const isImminentl = !isOverdue && daysUntil <= 3;
+                const isImminent = !isOverdue && daysUntil <= 3;
 
                 let dateClass = 'text-gray-300';
                 if (isOverdue) dateClass = 'text-red-400 font-medium';
-                else if (isImminentl) dateClass = 'text-yellow-400 font-medium';
+                else if (isImminent) dateClass = 'text-yellow-400 font-medium';
 
                 const email = sub.customer.email;
                 const truncatedEmail =
