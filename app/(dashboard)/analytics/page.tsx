@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { prisma } from '@/lib/prisma';
 import { toYMD, parseRange, fmtDollars } from '@/lib/dashboard/formatting';
 import { AnalyticsFilters } from './AnalyticsFilters';
+import { KpiCard } from '@/components/ui/KpiCard';
 import {
   DowChart, type DowData,
   RollingChart, type RollingData,
@@ -247,25 +248,24 @@ async function getAnalyticsData(filters: Filters) {
 export default async function AnalyticsPage({
   searchParams,
 }: {
-  searchParams: { from?: string; to?: string; campaign?: string; product?: string; channel?: string; funnel?: string };
+  searchParams: Promise<{ from?: string; to?: string; campaign?: string; product?: string; channel?: string; funnel?: string }>;
 }) {
-  const data = await getAnalyticsData(searchParams);
+  const sp = await searchParams;
+  const data = await getAnalyticsData(sp);
   const { kpis, dowData, rollingData, channelData, heatmapData, topCampaigns, topProducts, anomalyData, filterOptions, dateRange } = data;
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 p-4 md:p-6 space-y-6">
-      {/* Filters */}
+    <div className="space-y-6">
+      {/* Dimension filters (date range handled by TopBar) */}
       <AnalyticsFilters
-        from={dateRange.from}
-        to={dateRange.to}
         campaigns={filterOptions.campaigns}
         products={filterOptions.products}
         channels={filterOptions.channels}
         funnels={filterOptions.funnels}
-        activeCampaign={searchParams.campaign ?? null}
-        activeProduct={searchParams.product ?? null}
-        activeChannel={searchParams.channel ?? null}
-        activeFunnel={searchParams.funnel ?? null}
+        activeCampaign={sp.campaign ?? null}
+        activeProduct={sp.product ?? null}
+        activeChannel={sp.channel ?? null}
+        activeFunnel={sp.funnel ?? null}
       />
 
       {/* Anomalies */}
@@ -357,17 +357,6 @@ export default async function AnalyticsPage({
           </div>
         )}
       </div>
-    </div>
-  );
-}
-
-// ─── Sub-components ─────────────────────────────────────────────────────────
-
-function KpiCard({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="bg-gray-900 rounded-lg border border-gray-800 p-3">
-      <p className="text-[10px] text-gray-500 uppercase tracking-wider">{label}</p>
-      <p className="text-lg font-semibold mt-0.5">{value}</p>
     </div>
   );
 }
