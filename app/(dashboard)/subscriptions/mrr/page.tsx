@@ -92,9 +92,10 @@ async function getMrrData(startDate: Date, endDate: Date) {
 export default async function MrrWaterfallPage({
   searchParams,
 }: {
-  searchParams: { from?: string; to?: string };
+  searchParams: Promise<{ from?: string; to?: string }>;
 }) {
-  const { startDate, endDate } = parseRange(searchParams.from, searchParams.to);
+  const sp = await searchParams;
+  const { startDate, endDate } = parseRange(sp.from, sp.to);
   const { activeSubs, periodEvents, recentEvents } = await getMrrData(startDate, endDate);
 
   // ── KPI: Current MRR ────────────────────────────────────────────────────────

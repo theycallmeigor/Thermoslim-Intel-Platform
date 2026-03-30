@@ -4,14 +4,24 @@ export const metadata: Metadata = { title: 'Frequency Analysis — ThermoSlim' }
 export const dynamic = 'force-dynamic';
 
 import { prisma } from '@/lib/prisma';
-import { fmt$, fmtK, toMonthlyMrr } from '@/lib/dashboard/formatting';
+import { fmt$, fmtK, toMonthlyMrr, parseRange } from '@/lib/dashboard/formatting';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { FrequencyDonut, type FreqSlice } from './FrequencyDonut';
 
-export default async function FrequencyPage() {
+export default async function FrequencyPage({ searchParams }: { searchParams: Promise<{ from?: string; to?: string }> }) {
+  const sp = await searchParams;
+  const { startDate, endDate } = parseRange(sp.from, sp.to);
+
+  // Active subs, or subs that were active during the selected period (started before endDate, not cancelled before startDate)
   const subs = await prisma.subscription.findMany({
-    where: { status: { in: ['ACTIVE', 'TRIAL'] } },
+    where: {
+      startedAt: { lte: endDate },
+      OR: [
+        { status: { in: ['ACTIVE', 'TRIAL'] } },
+        { cancelledAt: { gte: startDate } },
+      ],
+    },
     select: {
       id: true,
       recurringPrice: true,

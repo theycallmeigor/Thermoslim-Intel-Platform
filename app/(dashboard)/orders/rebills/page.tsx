@@ -4,7 +4,7 @@ export const metadata: Metadata = { title: 'Upcoming Rebills — ThermoSlim' };
 
 import { format, addDays, startOfDay, differenceInDays } from 'date-fns';
 import { prisma } from '@/lib/prisma';
-import { fmt$, fmtK } from '@/lib/dashboard/formatting';
+import { fmt$, fmtK, parseRange } from '@/lib/dashboard/formatting';
 import { subscriptionStatusColors, humanizeStatus } from '@/lib/dashboard/colors';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { Badge } from '@/components/ui/Badge';
@@ -13,17 +13,19 @@ import { RebillCalendar, type DayVolume } from './RebillCalendar';
 
 // ─── Data fetching ────────────────────────────────────────────────────────────
 
-async function getRebillData() {
+async function getRebillData(rangeStart: Date, rangeEnd: Date) {
   const now = new Date();
-  const in7Days = addDays(now, 7);
-  const in30Days = addDays(now, 30);
+  // Use TopBar date range if set, otherwise default to next 30 days
+  const windowStart = rangeStart > now ? rangeStart : now;
+  const windowEnd = rangeEnd;
+  const in7Days = addDays(windowStart, 7);
 
   const [kpi7, kpi30, upcoming] = await Promise.all([
     // KPI: next 7 days (ACTIVE + TRIAL only)
     prisma.subscription.aggregate({
       where: {
         status: { in: ['ACTIVE', 'TRIAL'] },
-        nextBillDate: { gte: now, lte: in7Days },
+        nextBillDate: { gte: windowStart, lte: in7Days },
       },
       _count: { id: true },
       _sum: { recurringPrice: true },
@@ -33,7 +35,7 @@ async function getRebillData() {
     prisma.subscription.aggregate({
       where: {
         status: { in: ['ACTIVE', 'TRIAL'] },
-        nextBillDate: { gte: now, lte: in30Days },
+        nextBillDate: { gte: windowStart, lte: windowEnd },
       },
       _count: { id: true },
       _sum: { recurringPrice: true },
@@ -54,18 +56,24 @@ async function getRebillData() {
     }),
   ]);
 
-  return { kpi7, kpi30, upcoming, now, in30Days };
+  return { kpi7, kpi30, upcoming, windowStart, windowEnd };
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default async function RebillsPage() {
-  const { kpi7, kpi30, upcoming, now, in30Days } = await getRebillData();
+export default async function RebillsPage({ searchParams }: { searchParams: Promise<{ from?: string; to?: string }> }) {
+  const sp = await searchParams;
+  // Default to next 30 days if no date range selected
+  const now = new Date();
+  const rangeStart = sp.from ? new Date(sp.from + 'T00:00:00Z') : now;
+  const rangeEnd = sp.to ? new Date(sp.to + 'T23:59:59Z') : addDays(now, 30);
+  const { kpi7, kpi30, upcoming, windowStart, windowEnd } = await getRebillData(rangeStart, rangeEnd);
 
   // ── Daily volume chart data (next 30 days) ──────────────────────────────────
   const dayMap = new Map<string, DayVolume>();
-  for (let d = 0; d <= 30; d++) {
-    const day = addDays(startOfDay(now), d);
+  const rangeDays = Math.min(60, Math.max(1, differenceInDays(windowEnd, windowStart)));
+  for (let d = 0; d <= rangeDays; d++) {
+    const day = addDays(startOfDay(windowStart), d);
     const key = format(day, 'MMM d');
     dayMap.set(key, { date: key, count: 0, revenue: 0 });
   }
@@ -73,7 +81,7 @@ export default async function RebillsPage() {
   for (const sub of upcoming) {
     if (!sub.nextBillDate) continue;
     const billDay = startOfDay(sub.nextBillDate);
-    if (billDay < startOfDay(now) || billDay > in30Days) continue;
+    if (billDay < startOfDay(windowStart) || billDay > windowEnd) continue;
     const key = format(billDay, 'MMM d');
     const existing = dayMap.get(key);
     if (existing) {

@@ -4,13 +4,15 @@ export const metadata: Metadata = { title: 'Ingestion Health — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import { prisma } from '@/lib/prisma';
+import { parseRange } from '@/lib/dashboard/formatting';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { KpiCard } from '@/components/ui/KpiCard';
 
-export default async function IngestionHealthPage() {
+export default async function IngestionHealthPage({ searchParams }: { searchParams: Promise<{ from?: string; to?: string }> }) {
+  const sp = await searchParams;
+  const { startDate, endDate } = parseRange(sp.from, sp.to);
   const now = new Date();
   const last24h = new Date(now.getTime() - 24 * 60 * 60 * 1000);
-  const last7d = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
 
   const [
     errorsLast24h,
@@ -25,17 +27,17 @@ export default async function IngestionHealthPage() {
     recentAnomalies,
   ] = await Promise.all([
     prisma.ingestionError.count({ where: { occurredAt: { gte: last24h } } }),
-    prisma.ingestionError.count({ where: { occurredAt: { gte: last7d } } }),
+    prisma.ingestionError.count({ where: { occurredAt: { gte: startDate, lte: endDate } } }),
     prisma.ingestionError.count({ where: { resolved: false } }),
     prisma.ingestionError.groupBy({
       by: ['source'],
-      where: { occurredAt: { gte: last7d } },
+      where: { occurredAt: { gte: startDate, lte: endDate } },
       _count: { id: true },
       orderBy: { _count: { id: 'desc' } },
     }),
     prisma.ingestionError.groupBy({
       by: ['errorType'],
-      where: { occurredAt: { gte: last7d } },
+      where: { occurredAt: { gte: startDate, lte: endDate } },
       _count: { id: true },
       orderBy: { _count: { id: 'desc' } },
       take: 8,
@@ -92,10 +94,10 @@ export default async function IngestionHealthPage() {
         {/* Errors by source */}
         <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-800">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Errors by Source (7d)</h3>
+            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Errors by Source</h3>
           </div>
           {errorsBySource.length === 0 ? (
-            <div className="px-6 py-8 text-center text-green-400 text-sm">No errors in the last 7 days</div>
+            <div className="px-6 py-8 text-center text-green-400 text-sm">No errors in this period</div>
           ) : (
             <table className="w-full text-sm">
               <thead>
@@ -119,10 +121,10 @@ export default async function IngestionHealthPage() {
         {/* Errors by type */}
         <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-800">
-            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Top Error Types (7d)</h3>
+            <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Top Error Types</h3>
           </div>
           {errorsByType.length === 0 ? (
-            <div className="px-6 py-8 text-center text-green-400 text-sm">No errors in the last 7 days</div>
+            <div className="px-6 py-8 text-center text-green-400 text-sm">No errors in this period</div>
           ) : (
             <table className="w-full text-sm">
               <thead>

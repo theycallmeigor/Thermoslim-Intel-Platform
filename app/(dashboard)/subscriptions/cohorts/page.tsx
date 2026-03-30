@@ -10,9 +10,16 @@ import { PageHeader } from '@/components/ui/PageHeader';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { RetentionCurvesChart, type CohortCurve } from './RetentionCurvesChart';
 
-export default async function CohortsPage() {
-  // Get all subscriptions with their events
+export default async function CohortsPage({ searchParams }: { searchParams: Promise<{ from?: string; to?: string }> }) {
+  const sp = await searchParams;
+  // If date range provided, only include cohorts that started within that range
+  // Otherwise show all cohorts (default behavior)
+  const startFilter = sp.from ? { gte: new Date(sp.from + 'T00:00:00Z') } : undefined;
+  const endFilter = sp.to ? { lte: new Date(sp.to + 'T23:59:59Z') } : undefined;
+  const dateWhere = startFilter || endFilter ? { startedAt: { ...startFilter, ...endFilter } } : {};
+
   const subs = await prisma.subscription.findMany({
+    where: dateWhere,
     select: {
       id: true,
       startedAt: true,
