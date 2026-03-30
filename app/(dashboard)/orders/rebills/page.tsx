@@ -46,8 +46,8 @@ async function getRebillData() {
       orderBy: { nextBillDate: 'asc' },
       take: 50,
       include: {
-        customer: true,
-        productMap: true,
+        customer: { select: { email: true, firstName: true, lastName: true } },
+        productMap: { select: { name: true, productLine: true, frequency: true } },
       },
     }),
   ]);
