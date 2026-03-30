@@ -28,6 +28,12 @@ This is the ThermoSlim Commerce Intelligence Platform — a standalone Next.js w
 
 5. **Module independence** — each module in `src/modules/` (dashboard, alerts, order-qa, funnel) reads from the unified store. Modules don't talk to each other directly.
 
+6. **Single source of truth for metrics** — Revenue and order counts have ONE canonical definition. Fix discrepancies at the data layer (snapshot builder, ingestion), never at the UI layer. Before building any new dashboard or metric:
+   - **Revenue** = `Order.totalPrice` where `source IN ('SHOPIFY', 'MERGED')` and `status = 'COMPLETE'`. Raw CHECKOUTCHAMP orders are duplicates and MUST be excluded.
+   - **DailySnapshot** is the pre-aggregated source for time-series analytics. It only contains deduplicated, COMPLETE orders. If a new page needs aggregate data over time, query DailySnapshot — not the Order table.
+   - **Order table** is the source of truth for real-time / single-order queries (detail pages, customer lookup, recent orders).
+   - If numbers disagree between pages, the bug is in the data pipeline — not the UI. Fix it at the source so all consumers benefit.
+
 ## Key documentation
 
 Read these before making changes:
@@ -103,3 +109,36 @@ See `.env.example` for all required variables. Critical ones:
 - `KLAVIYO_API_KEY` — Klaviyo private API key
 - `GA4_PROPERTY_ID`, `GA4_CREDENTIALS_JSON` — GA4 service account
 - `CLARITY_TOKEN`, `CLARITY_PROJECT_ID` — Clarity Data Export API
+
+---
+
+## SYNC SYSTEM
+<!-- This section connects this file to the multi-project sync infrastructure -->
+
+**This project's files:**
+- `CLAUDE.md` — you are here (Claude Code instructions)
+- `GEMINI.md` — Gemini CLI instructions (market research/API docs role)
+
+**Sync source of truth:** `/Users/igordviniatin/Documents/CROMaxLabs/CLAUDE.md` (vault root)
+
+**What stays in sync across all projects:**
+- Igor Model Snapshot (propagated by vault orchestrator)
+- Priority order (CROMaxLabs > ThermoSlim > Second Brain > cc-expert)
+- Igor's working rules and correction log
+- Session Export format
+- Life context updates
+
+**What is project-specific (not synced):**
+- Tech stack, architecture principles, coding conventions
+- Environment variables, testing commands
+- File naming rules, common tasks
+
+**Companion files across projects:**
+
+| Project | CLAUDE.md | GEMINI.md |
+|---------|-----------|-----------|
+| CROMaxLabs vault | `/Users/igordviniatin/Documents/CROMaxLabs/CLAUDE.md` | `/Users/igordviniatin/Documents/CROMaxLabs/GEMINI.md` |
+| Second Brain | `.../CROMaxLabs/Second Brain/CLAUDE.md` | `.../CROMaxLabs/Second Brain/GEMINI.md` |
+| ThermoSlim | `/Users/igordviniatin/Documents/thermoslim-platform/CLAUDE.md` | `/Users/igordviniatin/Documents/thermoslim-platform/GEMINI.md` |
+| cc-expert | `/Users/igordviniatin/cc-expert/CLAUDE.md` | `/Users/igordviniatin/cc-expert/GEMINI.md` |
+| MasterApp | `~/Library/Mobile Documents/com~apple~CloudDocs/MasterApp/CLAUDE.md` | Same path `/GEMINI.md` |

@@ -81,9 +81,16 @@ async function main() {
       const dayEnd = addDays(dayStart, 1);
       const dateKey = startOfDayUTC(dayStart);
 
-      // ----- Fetch orders for the day with their items + product map -----
+      // ----- Fetch deduplicated, completed orders only -----
+      // SHOPIFY + MERGED = single source of truth for revenue.
+      // Raw CHECKOUTCHAMP orders are duplicates and carry no unique revenue.
+      // Only COMPLETE orders count — PENDING/DECLINED are not realized revenue.
       const orders = await prisma.order.findMany({
-        where: { createdAt: { gte: dayStart, lt: dayEnd } },
+        where: {
+          createdAt: { gte: dayStart, lt: dayEnd },
+          source: { in: ['SHOPIFY', 'MERGED'] },
+          status: 'COMPLETE',
+        },
         include: {
           items: {
             include: { productMap: { select: { productLine: true, frequency: true } } },
@@ -212,15 +219,11 @@ async function main() {
           );
 
           bucket.totalOrders += 1;
-
-          // Only count SHOPIFY revenue to avoid double-counting
-          if (order.source === 'SHOPIFY' || order.source === 'MERGED') {
-            bucket.totalRevenue += order.totalPrice;
-            if (isRecurring) {
-              bucket.recurringRevenue += order.totalPrice;
-            } else {
-              bucket.checkoutRevenue += order.totalPrice;
-            }
+          bucket.totalRevenue += order.totalPrice;
+          if (isRecurring) {
+            bucket.recurringRevenue += order.totalPrice;
+          } else {
+            bucket.checkoutRevenue += order.totalPrice;
           }
 
           if (isRefunded) bucket.refunds += 1;
@@ -255,8 +258,8 @@ async function main() {
         const avgOrderValue =
           b.totalOrders > 0 ? Math.round(b.totalRevenue / b.totalOrders) : 0;
 
-        // Use empty string for nullable unique constraint fields
-        const sourceEnum = b.source === 'CHECKOUTCHAMP' ? 'CHECKOUTCHAMP' : 'SHOPIFY';
+        // All orders are SHOPIFY or MERGED — map MERGED to SHOPIFY for snapshot grouping
+        const sourceEnum = b.source === 'MERGED' ? 'SHOPIFY' : b.source;
 
         await prisma.dailySnapshot.upsert({
           where: {
