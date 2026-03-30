@@ -49,7 +49,7 @@ export default async function ChurnPage({ searchParams }: { searchParams: Promis
     }),
   ]);
 
-  // Build trend data
+  // Build trend data with churn rate (cancelled / active subs at period start)
   const dayMap = new Map<string, { cancelled: number; paused: number }>();
   for (const e of cancelledEvents) {
     const dk = format(new Date(e.occurredAt), 'MMM d');
@@ -58,7 +58,11 @@ export default async function ChurnPage({ searchParams }: { searchParams: Promis
     else entry.paused += 1;
     dayMap.set(dk, entry);
   }
-  const trendData: ChurnDay[] = [...dayMap.entries()].map(([date, v]) => ({ date, ...v }));
+  const trendData: ChurnDay[] = [...dayMap.entries()].map(([date, v]) => ({
+    date,
+    ...v,
+    churnRate: activeSubs > 0 ? (v.cancelled / activeSubs) * 100 : 0,
+  }));
 
   // Build cancel reasons data
   const reasonData: ReasonCount[] = cancelReasons.map(r => ({

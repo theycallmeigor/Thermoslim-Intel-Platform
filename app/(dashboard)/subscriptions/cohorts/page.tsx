@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 
 import { format, startOfMonth, addMonths, differenceInMonths } from 'date-fns';
 import { prisma } from '@/lib/prisma';
+import { fmtK, fmt$ } from '@/lib/dashboard/formatting';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { KpiCard } from '@/components/ui/KpiCard';
 
@@ -14,12 +15,14 @@ export default async function CohortsPage() {
       startedAt: true,
       status: true,
       cancelledAt: true,
+      recurringPrice: true,
+      currentBillingCycle: true,
     },
   });
 
   // Group subs by cohort month (startedAt month)
   const now = new Date();
-  const cohortMap = new Map<string, { total: number; retained: number[] }>();
+  const cohortMap = new Map<string, { total: number; retained: number[]; totalRevenue: number; totalLtv: number }>();
   const maxMonths = 6;
 
   for (const sub of subs) {
@@ -27,8 +30,12 @@ export default async function CohortsPage() {
     const monthsSinceStart = differenceInMonths(now, new Date(sub.startedAt));
     if (monthsSinceStart < 0) continue;
 
-    const entry = cohortMap.get(cohortKey) ?? { total: 0, retained: new Array(maxMonths + 1).fill(0) };
+    const entry = cohortMap.get(cohortKey) ?? { total: 0, retained: new Array(maxMonths + 1).fill(0), totalRevenue: 0, totalLtv: 0 };
     entry.total += 1;
+    // Cumulative LTV = recurring price × billing cycles completed
+    const subLtv = sub.recurringPrice * sub.currentBillingCycle;
+    entry.totalRevenue += subLtv;
+    entry.totalLtv += subLtv;
 
     // Determine which months this sub was active
     const cancelMonth = sub.cancelledAt ? differenceInMonths(new Date(sub.cancelledAt), new Date(sub.startedAt)) : Infinity;
@@ -74,6 +81,8 @@ export default async function CohortsPage() {
               <tr className="border-b border-gray-800">
                 <th className="px-4 py-3 text-left text-gray-500 uppercase font-medium">Cohort</th>
                 <th className="px-4 py-3 text-right text-gray-500 uppercase font-medium">Size</th>
+                <th className="px-4 py-3 text-right text-gray-500 uppercase font-medium">Avg LTV</th>
+                <th className="px-4 py-3 text-right text-gray-500 uppercase font-medium">Revenue</th>
                 {Array.from({ length: maxMonths + 1 }, (_, i) => (
                   <th key={i} className="px-4 py-3 text-center text-gray-500 uppercase font-medium">M{i}</th>
                 ))}
@@ -84,6 +93,8 @@ export default async function CohortsPage() {
                 <tr key={key}>
                   <td className="px-4 py-3 text-gray-300 font-medium whitespace-nowrap">{key}</td>
                   <td className="px-4 py-3 text-right text-gray-400 tabular-nums">{cohort.total}</td>
+                  <td className="px-4 py-3 text-right text-gray-200 tabular-nums font-medium">{fmt$(cohort.total > 0 ? Math.round(cohort.totalLtv / cohort.total) : 0)}</td>
+                  <td className="px-4 py-3 text-right text-gray-300 tabular-nums">{fmtK(cohort.totalRevenue)}</td>
                   {cohort.retained.slice(0, maxMonths + 1).map((count, i) => {
                     const rate = cohort.total > 0 ? count / cohort.total : 0;
                     const pct = (rate * 100).toFixed(0);

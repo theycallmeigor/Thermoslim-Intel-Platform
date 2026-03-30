@@ -8,7 +8,10 @@ export interface ChurnDay {
   date: string;
   cancelled: number;
   paused: number;
+  churnRate: number;
 }
+
+const pctFormatter = (v: number) => `${v.toFixed(1)}%`;
 
 export function ChurnTrendChart({ data }: { data: ChurnDay[] }) {
   if (data.length === 0) return <p className="text-gray-600 text-sm">No churn data</p>;
@@ -17,10 +20,15 @@ export function ChurnTrendChart({ data }: { data: ChurnDay[] }) {
       <LineChart data={data}>
         <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} />
         <XAxis dataKey="date" tick={{ fill: chartColors.tick, fontSize: 10 }} interval="preserveStartEnd" />
-        <YAxis tick={{ fill: chartColors.tick, fontSize: 10 }} />
-        <Tooltip contentStyle={{ background: chartColors.tooltipBg, border: `1px solid ${chartColors.tooltipBorder}`, borderRadius: 8, fontSize: 12 }} />
-        <Line type="monotone" dataKey="cancelled" stroke={chartColors.red} strokeWidth={2} dot={false} name="Cancelled" />
-        <Line type="monotone" dataKey="paused" stroke={chartColors.orange} strokeWidth={2} dot={false} name="Paused" />
+        <YAxis yAxisId="rate" tickFormatter={pctFormatter} tick={{ fill: chartColors.tick, fontSize: 10 }} />
+        <YAxis yAxisId="count" orientation="right" tick={{ fill: chartColors.tick, fontSize: 10 }} />
+        <Tooltip
+          contentStyle={{ background: chartColors.tooltipBg, border: `1px solid ${chartColors.tooltipBorder}`, borderRadius: 8, fontSize: 12 }}
+          formatter={(value: number, name: string) => name === 'Churn Rate' ? `${value.toFixed(2)}%` : value}
+        />
+        <Line yAxisId="rate" type="monotone" dataKey="churnRate" stroke={chartColors.primary} strokeWidth={2} dot={false} name="Churn Rate" />
+        <Line yAxisId="count" type="monotone" dataKey="cancelled" stroke={chartColors.red} strokeWidth={1.5} dot={false} name="Cancelled" strokeDasharray="4 2" />
+        <Line yAxisId="count" type="monotone" dataKey="paused" stroke={chartColors.orange} strokeWidth={1.5} dot={false} name="Paused" strokeDasharray="4 2" />
       </LineChart>
     </ResponsiveContainer>
   );
