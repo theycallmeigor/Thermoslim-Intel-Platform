@@ -3,7 +3,6 @@ export const dynamic = 'force-dynamic';
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
-import { fmt$ } from '@/lib/dashboard/formatting';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { SearchForm } from './SearchForm';
 
@@ -31,12 +30,11 @@ export default async function CustomersPage({
       email: true,
       fullName: true,
       phone: true,
-      totalOrders: true,
-      totalRevenue: true,
       createdAt: true,
+      _count: { select: { orders: true } },
     },
     take: 50,
-    orderBy: isSearch ? { totalRevenue: 'desc' } : { createdAt: 'desc' },
+    orderBy: { createdAt: 'desc' },
   });
 
   return (
@@ -65,7 +63,6 @@ export default async function CustomersPage({
                   <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Email</th>
                   <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Phone</th>
                   <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Orders</th>
-                  <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Revenue</th>
                   <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Since</th>
                 </tr>
               </thead>
@@ -82,10 +79,7 @@ export default async function CustomersPage({
                     </td>
                     <td className="px-6 py-3.5 text-gray-300 font-mono text-xs">{customer.email}</td>
                     <td className="px-6 py-3.5 text-gray-400 text-xs">{customer.phone ?? '—'}</td>
-                    <td className="px-6 py-3.5 text-right text-gray-300 tabular-nums">{customer.totalOrders}</td>
-                    <td className="px-6 py-3.5 text-right text-gray-200 tabular-nums font-medium">
-                      {fmt$(customer.totalRevenue)}
-                    </td>
+                    <td className="px-6 py-3.5 text-right text-gray-300 tabular-nums">{customer._count.orders}</td>
                     <td className="px-6 py-3.5 text-gray-400 text-xs">
                       {new Date(customer.createdAt).toLocaleDateString('en-US', {
                         month: 'short',

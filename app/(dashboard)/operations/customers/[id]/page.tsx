@@ -45,8 +45,6 @@ export default async function CustomerDetailPage({
       email: true,
       fullName: true,
       phone: true,
-      totalOrders: true,
-      totalRevenue: true,
       createdAt: true,
       ccCustomerId: true,
       shopifyCustomerId: true,
@@ -99,6 +97,10 @@ export default async function CustomerDetailPage({
   const activeSubCount = customer.subscriptions.filter(
     s => s.status === 'ACTIVE' || s.status === 'TRIAL',
   ).length;
+  const totalRevenue = customer.revenueEvents
+    .filter(e => e.eventType === 'SALE' || e.eventType === 'REBILL')
+    .reduce((sum, e) => sum + e.amount, 0);
+  const totalOrders = customer.orders.length;
 
   const displayName = customer.fullName ?? customer.email;
 
@@ -111,8 +113,8 @@ export default async function CustomerDetailPage({
 
       {/* KPI strip */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <KpiCard label="Total Revenue" value={fmt$(customer.totalRevenue)} />
-        <KpiCard label="Total Orders" value={customer.totalOrders.toLocaleString()} />
+        <KpiCard label="Total Revenue" value={fmt$(totalRevenue)} />
+        <KpiCard label="Total Orders" value={totalOrders.toLocaleString()} />
         <KpiCard label="Active Subscriptions" value={activeSubCount.toLocaleString()} />
         <KpiCard
           label="Customer Since"
