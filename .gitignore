@@ -46,3 +46,4 @@ prisma/generated/
 
 # temp
 tsx
+.worktrees/
