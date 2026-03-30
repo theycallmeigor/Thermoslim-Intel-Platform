@@ -1,4 +1,6 @@
 // app/(dashboard)/subscriptions/cohorts/page.tsx
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Cohort Retention — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import { format, startOfMonth, addMonths, differenceInMonths } from 'date-fns';

@@ -1,4 +1,6 @@
 export const dynamic = 'force-dynamic';
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Analytics — ThermoSlim' };
 
 import { prisma } from '@/lib/prisma';
 import { toYMD, parseRange, fmtDollars } from '@/lib/dashboard/formatting';

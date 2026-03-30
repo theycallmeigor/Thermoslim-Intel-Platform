@@ -1,4 +1,6 @@
 export const dynamic = 'force-dynamic';
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'All Orders — ThermoSlim' };
 
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';

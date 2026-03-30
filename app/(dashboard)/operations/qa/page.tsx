@@ -1,4 +1,6 @@
 // app/(dashboard)/operations/qa/page.tsx
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Order QA — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import Link from 'next/link';

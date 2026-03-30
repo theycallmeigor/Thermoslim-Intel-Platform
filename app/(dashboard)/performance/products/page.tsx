@@ -1,4 +1,6 @@
 // app/(dashboard)/performance/products/page.tsx
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Products — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import { prisma } from '@/lib/prisma';

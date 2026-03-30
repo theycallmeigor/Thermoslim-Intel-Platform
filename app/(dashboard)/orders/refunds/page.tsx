@@ -1,4 +1,6 @@
 // app/(dashboard)/orders/refunds/page.tsx
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Refunds & Chargebacks — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import { format } from 'date-fns';

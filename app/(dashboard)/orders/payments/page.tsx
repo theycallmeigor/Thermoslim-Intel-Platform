@@ -1,4 +1,6 @@
 // app/(dashboard)/orders/payments/page.tsx
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Payment Health — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import { format } from 'date-fns';

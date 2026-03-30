@@ -1,4 +1,6 @@
 export const dynamic = 'force-dynamic';
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Dashboard — ThermoSlim' };
 
 import { prisma } from '@/lib/prisma';
 import { RevenueChart, type DailyRevenue } from './RevenueChart';
@@ -291,6 +293,10 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
     subActivityData,
     recentOrders,
     totalOrders,
+    cancelledCount: cancelledSubsRaw.length,
+    churnRate: activeSubscriptions > 0
+      ? ((cancelledSubsRaw.length / activeSubscriptions) * 100).toFixed(1) + '%'
+      : '—',
   };
 }
 
@@ -339,9 +345,9 @@ export default async function DashboardPage({
           sub={`${fromStr} → ${toStr}`}
         />
         <KpiCard
-          label="Orders"
-          value={data.shopifyOrders.toLocaleString()}
-          sub={`Unmatched CC: ${data.ccOrders.toLocaleString()}`}
+          label="Churn Rate"
+          value={data.churnRate}
+          sub={`${data.cancelledCount} cancelled / ${data.activeSubscriptions} active`}
         />
       </div>
 

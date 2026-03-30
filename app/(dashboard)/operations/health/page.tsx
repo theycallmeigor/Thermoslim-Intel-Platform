@@ -1,4 +1,6 @@
 // app/(dashboard)/operations/health/page.tsx
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Ingestion Health — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import { prisma } from '@/lib/prisma';

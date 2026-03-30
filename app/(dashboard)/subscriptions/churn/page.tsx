@@ -1,4 +1,6 @@
 // app/(dashboard)/subscriptions/churn/page.tsx
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Churn Analytics — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import { format } from 'date-fns';

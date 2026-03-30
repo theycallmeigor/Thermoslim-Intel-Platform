@@ -1,4 +1,6 @@
 // app/(dashboard)/performance/attribution/page.tsx
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Attribution — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import { prisma } from '@/lib/prisma';

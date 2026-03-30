@@ -1,4 +1,6 @@
 // app/(dashboard)/subscriptions/frequency/page.tsx
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Frequency Analysis — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import { prisma } from '@/lib/prisma';

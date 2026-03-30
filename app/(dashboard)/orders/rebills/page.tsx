@@ -1,4 +1,6 @@
 export const dynamic = 'force-dynamic';
+import type { Metadata } from 'next';
+export const metadata: Metadata = { title: 'Upcoming Rebills — ThermoSlim' };
 
 import { format, addDays, startOfDay, differenceInDays } from 'date-fns';
 import { prisma } from '@/lib/prisma';
