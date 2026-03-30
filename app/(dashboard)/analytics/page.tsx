@@ -1,7 +1,9 @@
 export const dynamic = 'force-dynamic';
 
 import { prisma } from '@/lib/prisma';
+import { toYMD, parseRange, fmtDollars } from '@/lib/dashboard/formatting';
 import { AnalyticsFilters } from './AnalyticsFilters';
+import { KpiCard } from '@/components/ui/KpiCard';
 import {
   DowChart, type DowData,
   RollingChart, type RollingData,
@@ -11,21 +13,6 @@ import {
 } from './charts';
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
-
-function toYMD(d: Date) { return d.toISOString().slice(0, 10); }
-
-function parseRange(from?: string, to?: string) {
-  const endDate = to ? new Date(to + 'T23:59:59Z') : new Date();
-  const startDate = from ? new Date(from + 'T00:00:00Z') : new Date(Date.now() - 30 * 86400000);
-  return { startDate, endDate };
-}
-
-function fmtDollars(cents: number) {
-  const d = cents / 100;
-  if (d >= 1_000_000) return `$${(d / 1_000_000).toFixed(1)}M`;
-  if (d >= 1000) return `$${(d / 1000).toFixed(1)}k`;
-  return `$${d.toFixed(0)}`;
-}
 
 const DAY_NAMES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -44,6 +31,7 @@ async function getAnalyticsData(filters: Filters) {
   const { startDate, endDate } = parseRange(filters.from, filters.to);
 
   // Build where clause for DailySnapshot
+  // Snapshots only contain deduplicated SHOPIFY/MERGED COMPLETE orders (no raw CC rows)
   const where: Record<string, unknown> = {
     date: { gte: startDate, lte: endDate },
   };
@@ -261,30 +249,24 @@ async function getAnalyticsData(filters: Filters) {
 export default async function AnalyticsPage({
   searchParams,
 }: {
-  searchParams: { from?: string; to?: string; campaign?: string; product?: string; channel?: string; funnel?: string };
+  searchParams: Promise<{ from?: string; to?: string; campaign?: string; product?: string; channel?: string; funnel?: string }>;
 }) {
-  const data = await getAnalyticsData(searchParams);
+  const sp = await searchParams;
+  const data = await getAnalyticsData(sp);
   const { kpis, dowData, rollingData, channelData, heatmapData, topCampaigns, topProducts, anomalyData, filterOptions, dateRange } = data;
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 p-4 md:p-6 space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Analytics</h1>
-        <a href="/dashboard" className="text-xs text-gray-500 hover:text-gray-300">← Dashboard</a>
-      </div>
-
-      {/* Filters */}
+    <div className="space-y-6">
+      {/* Dimension filters (date range handled by TopBar) */}
       <AnalyticsFilters
-        from={dateRange.from}
-        to={dateRange.to}
         campaigns={filterOptions.campaigns}
         products={filterOptions.products}
         channels={filterOptions.channels}
         funnels={filterOptions.funnels}
-        activeCampaign={searchParams.campaign ?? null}
-        activeProduct={searchParams.product ?? null}
-        activeChannel={searchParams.channel ?? null}
-        activeFunnel={searchParams.funnel ?? null}
+        activeCampaign={sp.campaign ?? null}
+        activeProduct={sp.product ?? null}
+        activeChannel={sp.channel ?? null}
+        activeFunnel={sp.funnel ?? null}
       />
 
       {/* Anomalies */}
@@ -376,17 +358,6 @@ export default async function AnalyticsPage({
           </div>
         )}
       </div>
-    </div>
-  );
-}
-
-// ─── Sub-components ─────────────────────────────────────────────────────────
-
-function KpiCard({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="bg-gray-900 rounded-lg border border-gray-800 p-3">
-      <p className="text-[10px] text-gray-500 uppercase tracking-wider">{label}</p>
-      <p className="text-lg font-semibold mt-0.5">{value}</p>
     </div>
   );
 }

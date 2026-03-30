@@ -4,13 +4,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, Legend, Cell, PieChart, Pie,
 } from 'recharts';
-
-function fmtDollars(cents: number) {
-  const d = cents / 100;
-  if (d >= 1_000_000) return `$${(d / 1_000_000).toFixed(1)}M`;
-  if (d >= 1000) return `$${(d / 1000).toFixed(1)}k`;
-  return `$${d.toFixed(0)}`;
-}
+import { fmtDollars } from '@/lib/dashboard/formatting';
 
 const CHART_STYLE = {
   grid: '#1f2937',
