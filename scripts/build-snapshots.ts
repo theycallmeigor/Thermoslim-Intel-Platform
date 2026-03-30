@@ -206,7 +206,13 @@ async function main() {
           if (!uniqueDims.has(dk)) uniqueDims.set(dk, dim);
         }
 
-        for (const dim of uniqueDims.values()) {
+        // Use only the FIRST product dimension for order-level metrics
+        // to avoid counting one order multiple times across buckets.
+        // If an order has items in multiple product lines, the order/revenue
+        // goes to the first dimension only.
+        const dims = [...uniqueDims.values()];
+        for (let i = 0; i < dims.length; i++) {
+          const dim = dims[i];
           const bucket = ensureBucket(
             order.source,
             campaignId,
@@ -218,19 +224,18 @@ async function main() {
             pageUrl
           );
 
-          bucket.totalOrders += 1;
-          bucket.totalRevenue += order.totalPrice;
-          if (isRecurring) {
-            bucket.recurringRevenue += order.totalPrice;
-          } else {
-            bucket.checkoutRevenue += order.totalPrice;
-          }
-
-          if (isRefunded) bucket.refunds += 1;
-          if (isRecurring) {
-            bucket.recurringOrders += 1;
-          } else {
-            bucket.newOrders += 1;
+          // Only count order + revenue in the first dimension bucket
+          if (i === 0) {
+            bucket.totalOrders += 1;
+            bucket.totalRevenue += order.totalPrice;
+            if (isRecurring) {
+              bucket.recurringRevenue += order.totalPrice;
+              bucket.recurringOrders += 1;
+            } else {
+              bucket.checkoutRevenue += order.totalPrice;
+              bucket.newOrders += 1;
+            }
+            if (isRefunded) bucket.refunds += 1;
           }
         }
       }
