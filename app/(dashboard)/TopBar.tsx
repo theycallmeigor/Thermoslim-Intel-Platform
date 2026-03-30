@@ -6,6 +6,8 @@ import { toYMD } from '@/lib/dashboard/formatting';
 import SyncButton from './SyncButton';
 
 const PRESETS = [
+  { label: 'Today', days: -2 },
+  { label: 'Tmrw', days: -3 },
   { label: '7d', days: 7 },
   { label: '30d', days: 30 },
   { label: '90d', days: 90 },
@@ -30,10 +32,16 @@ export function TopBar() {
   }
 
   function applyPreset(days: number) {
-    const t = toYMD(new Date());
-    if (days === 0) { apply('2000-01-01', t); return; }
-    if (days === -1) { apply(toYMD(new Date(new Date().getFullYear(), 0, 1)), t); return; }
-    apply(toYMD(new Date(Date.now() - days * 86400000)), t);
+    const today = toYMD(new Date());
+    if (days === 0) { apply('2000-01-01', today); return; }
+    if (days === -1) { apply(toYMD(new Date(new Date().getFullYear(), 0, 1)), today); return; }
+    if (days === -2) { apply(today, today); return; } // Today
+    if (days === -3) { // Tomorrow
+      const tmrw = toYMD(new Date(Date.now() + 86400000));
+      apply(tmrw, tmrw);
+      return;
+    }
+    apply(toYMD(new Date(Date.now() - days * 86400000)), today);
   }
 
   const segments = pathname.split('/').filter(Boolean);
