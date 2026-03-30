@@ -15,29 +15,29 @@ export default async function CustomersPage({
   const sp = await searchParams;
   const q = sp.q ?? '';
 
-  const customers =
-    q.length >= 2
-      ? await prisma.customer.findMany({
-          where: {
-            OR: [
-              { email: { contains: q, mode: 'insensitive' } },
-              { fullName: { contains: q, mode: 'insensitive' } },
-              { phone: { contains: q } },
-            ],
-          },
-          select: {
-            id: true,
-            email: true,
-            fullName: true,
-            phone: true,
-            totalOrders: true,
-            totalRevenue: true,
-            createdAt: true,
-          },
-          take: 25,
-          orderBy: { totalRevenue: 'desc' },
-        })
-      : [];
+  const isSearch = q.length >= 2;
+  const customers = await prisma.customer.findMany({
+    where: isSearch
+      ? {
+          OR: [
+            { email: { contains: q, mode: 'insensitive' } },
+            { fullName: { contains: q, mode: 'insensitive' } },
+            { phone: { contains: q } },
+          ],
+        }
+      : {},
+    select: {
+      id: true,
+      email: true,
+      fullName: true,
+      phone: true,
+      totalOrders: true,
+      totalRevenue: true,
+      createdAt: true,
+    },
+    take: 50,
+    orderBy: isSearch ? { totalRevenue: 'desc' } : { createdAt: 'desc' },
+  });
 
   return (
     <div className="space-y-6">
@@ -47,20 +47,14 @@ export default async function CustomersPage({
         <SearchForm />
       </Suspense>
 
-      {q.length < 2 ? (
+      {customers.length === 0 ? (
         <div className="bg-gray-900 border border-gray-800 rounded-xl px-6 py-16 text-center">
-          <p className="text-gray-500 text-sm">
-            Search for a customer by email, name, or phone number
-          </p>
-        </div>
-      ) : customers.length === 0 ? (
-        <div className="bg-gray-900 border border-gray-800 rounded-xl px-6 py-16 text-center">
-          <p className="text-gray-500 text-sm">No customers found for &ldquo;{q}&rdquo;</p>
+          <p className="text-gray-500 text-sm">{isSearch ? `No customers found for "${q}"` : 'No customers yet'}</p>
         </div>
       ) : (
         <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-800 flex items-center justify-between">
-            <h2 className="text-sm font-semibold text-white">Results</h2>
+            <h2 className="text-sm font-semibold text-white">{isSearch ? 'Results' : 'Recent Customers'}</h2>
             <span className="text-xs text-gray-500">{customers.length} customer{customers.length !== 1 ? 's' : ''}</span>
           </div>
           <div className="overflow-x-auto">

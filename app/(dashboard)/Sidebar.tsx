@@ -33,6 +33,7 @@ const NAV: NavGroup[] = [
   {
     title: 'Orders',
     items: [
+      { label: 'All Orders', href: '/orders' },
       { label: 'Upcoming Rebills', href: '/orders/rebills' },
       { label: 'Refunds & Chargebacks', href: '/orders/refunds' },
       { label: 'Payment Health', href: '/orders/payments' },
