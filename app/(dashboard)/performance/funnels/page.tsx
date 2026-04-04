@@ -173,12 +173,26 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
     let otoNum = 1;
     for (const [slot, slotProducts] of sortedSlots) {
       const pageVisitors = ordersPerSlot.get(slot)?.size ?? totalOrders;
-      const prods = [...slotProducts.entries()]
-        .map(([key, v]) => ({
+
+      // Each OTO page has ONE product — group all price variants of the dominant product
+      // Other products in the same slot are from funnel routing variations (A/B tests)
+      const byProductLine = new Map<string, { name: string; count: number; revenue: number; prices: Set<number>; frequency: string | null; isSubscription: boolean }>();
+      for (const [key, v] of slotProducts) {
+        const existing = byProductLine.get(v.name) ?? { name: v.name, count: 0, revenue: 0, prices: new Set(), frequency: v.frequency, isSubscription: v.isSubscription };
+        existing.count += v.count;
+        existing.revenue += v.revenue;
+        existing.prices.add(v.price);
+        if (v.frequency) existing.frequency = v.frequency;
+        if (v.isSubscription) existing.isSubscription = true;
+        byProductLine.set(v.name, existing);
+      }
+
+      const prods = [...byProductLine.values()]
+        .map(v => ({
           name: v.name,
           count: v.count,
           rate: pageVisitors > 0 ? v.count / pageVisitors : 0,
-          prices: [v.price],
+          prices: [...v.prices].sort((a, b) => a - b),
           frequency: v.frequency,
           isSubscription: v.isSubscription,
         }))
