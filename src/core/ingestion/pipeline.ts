@@ -364,10 +364,19 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
 
       // --- Merge items ---
       for (const ccItem of data.items) {
-        // Try to find a matching existing item by externalId
-        const matchingItem = ccItem.externalId
-          ? targetOrder.items.find(i => i.externalId === ccItem.externalId)
-          : null;
+        // Try to find a matching existing item — check externalId first,
+        // then ccCrmId, then sku. This prevents duplicate rows when the
+        // merge path is re-triggered (e.g. backfill) on an already-merged order.
+        const matchingItem =
+          (ccItem.externalId
+            ? targetOrder.items.find(i => i.externalId === ccItem.externalId)
+            : null) ??
+          (ccItem.ccCrmId
+            ? targetOrder.items.find(i => i.ccCrmId === ccItem.ccCrmId)
+            : null) ??
+          (ccItem.sku
+            ? targetOrder.items.find(i => i.sku === ccItem.sku)
+            : null);
 
         if (matchingItem) {
           // Update existing item with CC-specific fields
