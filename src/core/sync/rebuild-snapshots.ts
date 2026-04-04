@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -162,13 +162,13 @@ export async function rebuildSnapshots(
       const campaignName = order.campaignName ?? '';
       const isRecurring =
         order.ccOrderType === 'REBILL' ||
-        order.items.some(i => (i.billingCycleNumber ?? 0) > 1) ||
-        (order.tags?.split(',').map(t => t.trim()).includes('Recurring') ?? false);
+        order.items.some((i: any) => (i.billingCycleNumber ?? 0) > 1) ||
+        (order.tags?.split(',').map((t: string) => t.trim()).includes('Recurring') ?? false);
       const isRefunded = order.status === 'REFUNDED';
 
       // Determine product-level dimensions from order items
       const itemDimensions = order.items.length > 0
-        ? order.items.map((item) => ({
+        ? order.items.map((item: any) => ({
             productLine: item.productMap?.productLine ?? '',
             frequency: item.productMap?.frequency ?? '',
           }))

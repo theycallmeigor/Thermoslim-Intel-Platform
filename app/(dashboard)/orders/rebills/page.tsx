@@ -29,8 +29,8 @@ async function getRebillData(
 
   const statusWhere =
     statusFilter === 'all'
-      ? { status: { in: ['ACTIVE', 'TRIAL', 'RECYCLE_BILLING'] as const } }
-      : { status: statusFilter.toUpperCase() as string };
+      ? { status: { in: ['ACTIVE', 'TRIAL', 'RECYCLE_BILLING'] as ('ACTIVE' | 'TRIAL' | 'RECYCLE_BILLING')[] } }
+      : { status: statusFilter.toUpperCase() as any };
 
   const [kpi7, kpi30, totalCount, upcoming] = await Promise.all([
     // KPI: next 7 days (ACTIVE + TRIAL only)
@@ -134,10 +134,10 @@ export default async function RebillsPage({
   const dailyVolume = Array.from(dayMap.values());
 
   // ── KPI values ──────────────────────────────────────────────────────────────
-  const count7 = kpi7._count.id ?? 0;
-  const rev7 = kpi7._sum.recurringPrice ?? 0;
-  const count30 = kpi30._count.id ?? 0;
-  const rev30 = kpi30._sum.recurringPrice ?? 0;
+  const count7 = (kpi7._count as any)?.id ?? 0;
+  const rev7 = (kpi7._sum as any)?.recurringPrice ?? 0;
+  const count30 = (kpi30._count as any)?.id ?? 0;
+  const rev30 = (kpi30._sum as any)?.recurringPrice ?? 0;
 
   return (
     <div className="space-y-6">
