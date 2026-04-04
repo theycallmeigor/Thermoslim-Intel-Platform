@@ -45,6 +45,7 @@ const NAV: NavGroup[] = [
       { label: 'Campaigns', href: '/performance/campaigns' },
       { label: 'Products', href: '/performance/products' },
       { label: 'Funnels', href: '/performance/funnels' },
+      { label: 'Funnel Drop-off', href: '/performance/funnels/dropoff' },
       { label: 'Upsell & AOV', href: '/performance/upsells' },
       { label: 'Attribution', href: '/performance/attribution' },
     ],
