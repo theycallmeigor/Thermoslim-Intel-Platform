@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { initRegistry, getAdapter } from '@/core/ingestion/registry';
+import { rebuildSnapshots } from '@/core/sync/rebuild-snapshots';
 
 export const maxDuration = 120; // Allow up to 2 minutes for CC API pagination
 
@@ -27,6 +28,13 @@ export async function GET(req: NextRequest) {
     const result = await adapter.sync({ fullSync: false, startDate });
 
     console.log(`[cron:sync-cc] done: ${result.recordsProcessed} processed, ${result.recordsCreated} created, ${result.recordsUpdated} updated, ${result.errors.length} errors`);
+
+    // Rebuild snapshots for the synced period (fire-and-forget, don't block response)
+    const syncEnd = new Date();
+    const syncRebuildStart = new Date(syncEnd.getTime() - 5 * 60 * 60 * 1000);
+    rebuildSnapshots(syncRebuildStart, syncEnd).catch(err =>
+      console.error('[sync] snapshot rebuild failed:', err instanceof Error ? err.message : err)
+    );
 
     return NextResponse.json({ success: true, result });
   } catch (err) {
