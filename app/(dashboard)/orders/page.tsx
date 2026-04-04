@@ -8,6 +8,7 @@ import { fmt$ } from '@/lib/dashboard/formatting';
 import { statusColors, sourceColors, humanizeSource, humanizeStatus, getOrderType } from '@/lib/dashboard/colors';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Badge } from '@/components/ui/Badge';
+import { OrderRow } from './OrderQuickView';
 import { format } from 'date-fns';
 
 export default async function OrdersPage({
@@ -33,13 +34,21 @@ export default async function OrdersPage({
       id: true,
       source: true,
       sourceOrderId: true,
+      shopifyOrderId: true,
+      ccSourceOrderId: true,
       status: true,
       orderTotal: true,
+      totalPrice: true,
+      totalShipping: true,
+      totalDiscount: true,
+      salesTax: true,
       ccOrderType: true,
       tags: true,
       campaignName: true,
+      paySource: true,
       createdAt: true,
       customer: { select: { email: true, fullName: true } },
+      items: { select: { name: true, sku: true, price: true, quantity: true, productType: true } },
     },
     take: 50,
     orderBy: { createdAt: 'desc' },
@@ -98,18 +107,20 @@ export default async function OrdersPage({
               <tbody className="divide-y divide-gray-800/60">
                 {orders.map((order) => {
                   const orderType = getOrderType(order);
+                  const quickViewData = {
+                    ...order,
+                    createdAt: order.createdAt.toISOString(),
+                    customer: order.customer ?? null,
+                  };
                   return (
-                    <tr key={order.id} className="hover:bg-gray-800/40 transition-colors">
+                    <OrderRow key={order.id} order={quickViewData}>
                       <td className="px-6 py-3.5 text-gray-400 text-xs whitespace-nowrap">
                         {format(new Date(order.createdAt), 'MMM d, yyyy')}
                       </td>
                       <td className="px-6 py-3.5">
-                        <Link
-                          href={`/orders/${order.id}`}
-                          className="text-blue-400 hover:text-blue-300 font-medium font-mono text-xs transition-colors"
-                        >
+                        <span className="text-blue-400 font-medium font-mono text-xs">
                           {order.sourceOrderId}
-                        </Link>
+                        </span>
                       </td>
                       <td className="px-6 py-3.5 text-gray-300 text-xs">
                         {order.customer.fullName || order.customer.email}
@@ -134,7 +145,7 @@ export default async function OrdersPage({
                       <td className="px-6 py-3.5 text-gray-500 text-xs truncate max-w-[140px]">
                         {order.campaignName ?? '—'}
                       </td>
-                    </tr>
+                    </OrderRow>
                   );
                 })}
               </tbody>
