@@ -51,6 +51,20 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
   const totalUpsellOffered = totalUpsellAccepted + totalUpsellDeclined;
   const overallTakeRate = totalUpsellOffered > 0 ? totalUpsellAccepted / totalUpsellOffered : 0;
 
+  // Load funnel page titles from DB (set by funnel-sync)
+  const funnelPages = await prisma.funnelPage.findMany({
+    select: { funnelId: true, ccPageId: true, title: true, pageType: true, sortOrder: true,
+      funnel: { select: { ccReferenceId: true } } },
+    orderBy: { sortOrder: 'asc' },
+  });
+  // Build lookup: funnelReferenceId → slot → { title, pageType }
+  const slotTitleMap = new Map<string, Map<string, { title: string; pageType: string }>>();
+  for (const fp of funnelPages) {
+    const fid = fp.funnel.ccReferenceId;
+    if (!slotTitleMap.has(fid)) slotTitleMap.set(fid, new Map());
+    slotTitleMap.get(fid)!.set(fp.ccPageId, { title: fp.title, pageType: fp.pageType ?? 'other' });
+  }
+
   // Group orders by checkout page (salesUrl slug)
   const checkoutGroups = new Map<string, typeof orders>();
   for (const order of orders) {
@@ -173,10 +187,12 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
       const slotRevenue = [...slotProducts.values()].reduce((s, v) => s + v.revenue, 0);
       const slotAccepted = [...slotProducts.values()].reduce((s, v) => s + v.count, 0);
 
-      // Determine if this is an upsell or downsell based on dominant product name
+      // Use funnel page title from DB if available, else generate from slot
+      const fid = groupOrders[0]?.funnelReferenceId;
+      const dbPageInfo = fid ? slotTitleMap.get(fid)?.get(`slot-${slot}`) : null;
       const dominantName = prods[0]?.name?.toLowerCase() ?? '';
-      const isDownsell = dominantName.includes('downsell');
-      const pageLabel = isDownsell ? `Downsell ${otoNum}` : `OTO ${otoNum}`;
+      const isDownsell = dbPageInfo?.pageType === 'downsell' || dominantName.includes('downsell');
+      const pageLabel = dbPageInfo?.title ?? (isDownsell ? `Downsell ${otoNum}` : `OTO ${otoNum}`);
 
       pages.push({
         pageType: pageLabel,
