@@ -67,25 +67,45 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
 
     // Build pages from productSlot ordering
     // OFFER items = checkout page, UPSALE items grouped by slot = OTO pages
-    type ProdAgg = { name: string; count: number; revenue: number; prices: Set<number>; frequency: string | null; isSubscription: boolean };
+    // Key by ccCampaignProductId for granular offer-level breakdown
+    type ProdAgg = { name: string; campaignProductId: string | null; count: number; revenue: number; price: number; frequency: string | null; isSubscription: boolean };
     const checkoutProducts = new Map<string, ProdAgg>();
     const otoSlots = new Map<number, Map<string, ProdAgg>>();
+    // Track which orders reached each slot (for true take rate)
+    const ordersPerSlot = new Map<number, Set<string>>();
     let ordersWithUpsells = 0;
 
     for (const order of groupOrders) {
       let hasUpsell = false;
+      // Track max slot this order has items in — order reached all slots up to max
+      let maxSlot = 0;
       for (const item of order.items) {
-        const prodName = item.productMap?.productLine ?? item.name ?? 'Unknown';
-        const priceDisplay = item.price;
+        if (item.productType === 'UPSALE' && item.productSlot > maxSlot) {
+          maxSlot = item.productSlot;
+        }
+      }
+      // Mark this order as having reached all upsell slots up to maxSlot
+      // (customer saw each page even if they declined)
+      if (maxSlot > 0) {
+        const allSlots = groupOrders.flatMap(o => o.items.filter(i => i.productType === 'UPSALE').map(i => i.productSlot));
+        const uniqueSlots = [...new Set(allSlots)].sort((a, b) => a - b);
+        for (const slot of uniqueSlots) {
+          if (slot <= maxSlot) {
+            if (!ordersPerSlot.has(slot)) ordersPerSlot.set(slot, new Set());
+            ordersPerSlot.get(slot)!.add(order.id);
+          }
+        }
+      }
 
+      for (const item of order.items) {
         const freq = item.productMap?.frequency ?? null;
         const isSub = item.productMap?.isSubscription ?? false;
 
         if (item.productType === 'OFFER' || !item.productType) {
-          const existing = checkoutProducts.get(prodName) ?? { name: prodName, count: 0, revenue: 0, prices: new Set(), frequency: freq, isSubscription: isSub };
+          const prodName = item.productMap?.productLine ?? item.name ?? 'Unknown';
+          const existing = checkoutProducts.get(prodName) ?? { name: prodName, campaignProductId: null, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: isSub };
           existing.count += 1;
           existing.revenue += item.price;
-          existing.prices.add(item.price);
           if (freq) existing.frequency = freq;
           if (isSub) existing.isSubscription = true;
           checkoutProducts.set(prodName, existing);
@@ -94,13 +114,15 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
           const slot = item.productSlot;
           if (!otoSlots.has(slot)) otoSlots.set(slot, new Map());
           const slotProducts = otoSlots.get(slot)!;
-          const existing = slotProducts.get(prodName) ?? { name: prodName, count: 0, revenue: 0, prices: new Set(), frequency: freq, isSubscription: isSub };
+          // Key by campaignProductId for granular breakdown
+          const key = item.ccCampaignProductId ?? item.ccCrmId ?? item.name ?? 'unknown';
+          const displayName = item.name ?? item.productMap?.productLine ?? 'Unknown';
+          const existing = slotProducts.get(key) ?? { name: displayName, campaignProductId: item.ccCampaignProductId, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: isSub };
           existing.count += 1;
           existing.revenue += item.price;
-          existing.prices.add(item.price);
           if (freq) existing.frequency = freq;
           if (isSub) existing.isSubscription = true;
-          slotProducts.set(prodName, existing);
+          slotProducts.set(key, existing);
         }
       }
       if (hasUpsell) ordersWithUpsells++;
@@ -115,7 +137,7 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
         name,
         count: v.count,
         rate: totalOrders > 0 ? v.count / totalOrders : 0,
-        prices: [...v.prices].sort((a, b) => a - b),
+        prices: [v.price],
         frequency: v.frequency,
         isSubscription: v.isSubscription,
       }))
@@ -136,19 +158,20 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
     const sortedSlots = [...otoSlots.entries()].sort((a, b) => a[0] - b[0]);
     let otoNum = 1;
     for (const [slot, slotProducts] of sortedSlots) {
+      const pageVisitors = ordersPerSlot.get(slot)?.size ?? totalOrders;
       const prods = [...slotProducts.entries()]
-        .map(([name, v]) => ({
-          name,
+        .map(([key, v]) => ({
+          name: v.name,
           count: v.count,
-          rate: totalOrders > 0 ? v.count / totalOrders : 0,
-          prices: [...v.prices].sort((a, b) => a - b),
+          rate: pageVisitors > 0 ? v.count / pageVisitors : 0,
+          prices: [v.price],
           frequency: v.frequency,
           isSubscription: v.isSubscription,
         }))
         .sort((a, b) => b.count - a.count);
 
       const slotRevenue = [...slotProducts.values()].reduce((s, v) => s + v.revenue, 0);
-      const slotOrders = [...slotProducts.values()].reduce((s, v) => s + v.count, 0);
+      const slotAccepted = [...slotProducts.values()].reduce((s, v) => s + v.count, 0);
 
       // Determine if this is an upsell or downsell based on dominant product name
       const dominantName = prods[0]?.name?.toLowerCase() ?? '';
@@ -157,8 +180,8 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
 
       pages.push({
         pageType: pageLabel,
-        slug: `slot ${slot}`,
-        orders: slotOrders,
+        slug: `${pageVisitors} visitors → ${slotAccepted} accepted`,
+        orders: slotAccepted,
         revenue: slotRevenue,
         products: prods,
       });
