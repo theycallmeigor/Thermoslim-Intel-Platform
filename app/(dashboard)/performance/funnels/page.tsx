@@ -128,10 +128,12 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
           const slot = item.productSlot;
           if (!otoSlots.has(slot)) otoSlots.set(slot, new Map());
           const slotProducts = otoSlots.get(slot)!;
-          // Key by ccCampaignProductId — each is a unique offer on the page
-          const displayName = item.name ?? item.productMap?.productLine ?? 'Unknown';
-          const key = item.ccCampaignProductId ?? `${displayName}|${item.price}`;
-          const existing = slotProducts.get(key) ?? { name: displayName, campaignProductId: item.ccCampaignProductId, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: isSub };
+          // Key by ccCrmId + price — same base product at same price = same offer
+          // Different ccCampaignProductIds and item names are just funnel version variants
+          const productLine = item.productMap?.productLine ?? 'Unknown';
+          const displayName = freq ? `${productLine} (${freq})` : productLine;
+          const key = `${item.ccCrmId ?? item.name}|${item.price}`;
+          const existing = slotProducts.get(key) ?? { name: displayName, campaignProductId: item.ccCrmId, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: isSub };
           existing.count += 1;
           existing.revenue += item.price;
           if (freq) existing.frequency = freq;
