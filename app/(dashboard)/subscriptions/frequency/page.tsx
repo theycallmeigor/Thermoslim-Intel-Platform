@@ -36,19 +36,26 @@ export default async function FrequencyPage({ searchParams }: { searchParams: Pr
   // Get expected prices for $0 trial subs so they count in MRR
   const trialPrices = await getTrialExpectedPrices();
 
-  // Get only active subs for MRR (exclude cancelled)
-  const activeSubs = await prisma.subscription.findMany({
-    where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-    select: { recurringPrice: true, frequency: true, productMapId: true },
+  // Use only active subs for all frequency analysis (not cancelled)
+  const activeSubs = subs.filter(s => {
+    // Check if sub is in active status by looking at the original query results
+    // The query includes cancelled subs — filter them out for active metrics
+    return true; // All subs from the query are relevant for the period
   });
-  const activeMrr = activeSubs.reduce((s, sub) => {
+  const activeOnlySubs = await prisma.subscription.findMany({
+    where: { status: { in: ['ACTIVE', 'TRIAL'] } },
+    select: { id: true, recurringPrice: true, frequency: true, productMapId: true,
+      currentBillingCycle: true, productMap: { select: { name: true, productLine: true } } },
+  });
+  const activeMrr = activeOnlySubs.reduce((s, sub) => {
     const expected = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
     return s + toMonthlyMrr(sub.recurringPrice, sub.frequency, expected);
   }, 0);
+  const trialCount = activeOnlySubs.filter(s => s.recurringPrice === 0).length;
 
-  // Group by frequency (includes recently cancelled for distribution view)
+  // Group by frequency — use active subs only
   const freqMap = new Map<string, { count: number; totalPrice: number; totalMrr: number; avgCycle: number; cycleSum: number }>();
-  for (const sub of subs) {
+  for (const sub of activeOnlySubs) {
     const freq = sub.frequency ?? 'unknown';
     const expectedPrice = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
     const entry = freqMap.get(freq) ?? { count: 0, totalPrice: 0, totalMrr: 0, avgCycle: 0, cycleSum: 0 };
@@ -63,7 +70,7 @@ export default async function FrequencyPage({ searchParams }: { searchParams: Pr
   const matrixMap = new Map<string, Map<string, { count: number; mrr: number }>>();
   const allFrequencies = new Set<string>();
 
-  for (const sub of subs) {
+  for (const sub of activeOnlySubs) {
     const product = sub.productMap?.productLine ?? 'Unlinked';
     const freq = sub.frequency ?? 'unknown';
     allFrequencies.add(freq);
@@ -98,8 +105,8 @@ export default async function FrequencyPage({ searchParams }: { searchParams: Pr
     }))
     .sort((a, b) => b.mrr - a.mrr);
 
-  const totalMrr = activeMrr; // Only ACTIVE + TRIAL subs, not cancelled
-  const totalSubs = activeSubs.length;
+  const totalMrr = activeMrr;
+  const totalSubs = activeOnlySubs.length;
   const topFreq = frequencies[0]?.label ?? '—';
 
   const donutData: FreqSlice[] = frequencies.map(f => ({
@@ -112,9 +119,10 @@ export default async function FrequencyPage({ searchParams }: { searchParams: Pr
     <div className="space-y-6">
       <PageHeader title="Frequency Analysis" subtitle="Subscription frequency distribution and MRR impact" />
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-5 gap-4">
         <KpiCard label="Total MRR" value={fmtK(totalMrr)} />
         <KpiCard label="Active Subs" value={totalSubs.toLocaleString()} />
+        <KpiCard label="Trials ($0)" value={trialCount.toLocaleString()} />
         <KpiCard label="Frequency Types" value={frequencies.length.toLocaleString()} />
         <KpiCard label="Top Frequency" value={topFreq} />
       </div>
