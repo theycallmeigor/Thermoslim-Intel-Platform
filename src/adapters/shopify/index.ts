@@ -5,6 +5,7 @@ import { config } from '../../core/config';
 import type { IAdapter, NormalizedRecord, SyncOptions, SyncResult, SyncError } from '../../core/types';
 import { orderStatusMap, paySourceMap, responseTypeMap } from './field-map';
 import { runIngestion } from '../../core/ingestion/pipeline';
+import { prisma } from '../../lib/prisma';
 
 // --- Shopify REST API raw types ---
 
@@ -172,6 +173,22 @@ export class ShopifyAdapter implements IAdapter {
     } else if (event.topic === 'products/update' || event.topic === 'products/create') {
       const records = this.mapProductToSchema(event.data as ShopifyProduct);
       await runIngestion(records);
+    } else if (event.topic === 'refunds/create') {
+      const refund = event.data as { order_id: number };
+      if (!refund.order_id) return;
+      const shopifyOrderId = String(refund.order_id);
+      // Update whichever row owns this Shopify order (SHOPIFY or MERGED)
+      const result = await prisma.order.updateMany({
+        where: {
+          sourceOrderId: shopifyOrderId,
+          source: { in: ['SHOPIFY', 'MERGED'] },
+        },
+        data: { status: 'REFUNDED' },
+      });
+      console.log(`[shopify adapter] refunds/create: updated ${result.count} order(s) to REFUNDED for shopifyOrderId=${shopifyOrderId}`);
+    } else if (event.topic === 'products/delete') {
+      const product = event.data as { id: number };
+      console.log(`[shopify adapter] products/delete received for productId=${product.id} — ProductMap entry retained for order history`);
     }
   }
 

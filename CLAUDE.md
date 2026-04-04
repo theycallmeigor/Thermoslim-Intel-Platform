@@ -112,33 +112,9 @@ See `.env.example` for all required variables. Critical ones:
 
 ---
 
-## SYNC SYSTEM
-<!-- This section connects this file to the multi-project sync infrastructure -->
-
-**This project's files:**
-- `CLAUDE.md` — you are here (Claude Code instructions)
-- `GEMINI.md` — Gemini CLI instructions (market research/API docs role)
-
-**Sync source of truth:** `/Users/igordviniatin/Documents/CROMaxLabs/CLAUDE.md` (vault root)
-
-**What stays in sync across all projects:**
-- Igor Model Snapshot (propagated by vault orchestrator)
-- Priority order (CROMaxLabs > ThermoSlim > Second Brain > cc-expert)
-- Igor's working rules and correction log
-- Session Export format
-- Life context updates
-
-**What is project-specific (not synced):**
-- Tech stack, architecture principles, coding conventions
-- Environment variables, testing commands
-- File naming rules, common tasks
-
-**Companion files across projects:**
-
-| Project | CLAUDE.md | GEMINI.md |
-|---------|-----------|-----------|
-| CROMaxLabs vault | `/Users/igordviniatin/Documents/CROMaxLabs/CLAUDE.md` | `/Users/igordviniatin/Documents/CROMaxLabs/GEMINI.md` |
-| Second Brain | `.../CROMaxLabs/Second Brain/CLAUDE.md` | `.../CROMaxLabs/Second Brain/GEMINI.md` |
-| ThermoSlim | `/Users/igordviniatin/Documents/thermoslim-platform/CLAUDE.md` | `/Users/igordviniatin/Documents/thermoslim-platform/GEMINI.md` |
-| cc-expert | `/Users/igordviniatin/cc-expert/CLAUDE.md` | `/Users/igordviniatin/cc-expert/GEMINI.md` |
-| MasterApp | `~/Library/Mobile Documents/com~apple~CloudDocs/MasterApp/CLAUDE.md` | Same path `/GEMINI.md` |
+## KNOWLEDGE SYSTEM
+- **Global rules** (profile, guardrails, quality gate, session rhythm): `~/.claude/CLAUDE.md` (auto-loaded)
+- **Cross-project gotchas:** `~/Vaults/CROMaxLabs/shared-gotchas.md` — read before bug fixes
+- **Decision journal:** `~/Vaults/CROMaxLabs/decision-journal.md` — read before architectural choices
+- **Vault domain docs:** `~/Vaults/CROMaxLabs/thermoslim-platform/_INDEX.md`
+- **Any agent** (Claude Code, Gemini CLI, OpenClaw) reads the same shared knowledge files

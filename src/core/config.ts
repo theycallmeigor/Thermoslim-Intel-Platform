@@ -18,6 +18,9 @@ export const config = {
     apiUsername: process.env.CC_API_USERNAME!,
     webhookSecret: process.env.CC_WEBHOOK_SECRET!,
   },
+  proxy: {
+    quoteguardUrl: process.env.QUOTEGUARD_URL || '',
+  },
   klaviyo: {
     apiKey: process.env.KLAVIYO_API_KEY!,
   },

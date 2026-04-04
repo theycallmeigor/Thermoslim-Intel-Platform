@@ -166,6 +166,9 @@ interface OrderData {
   // CC custom fields
   ccCustom1?: string | null;
   ccCustom2?: string | null;
+  ccCustom3?: string | null;
+  ccCustom4?: string | null;
+  ccCustom5?: string | null;
   // Fulfillment
   fulfillmentData?: unknown | null;
   tags?: string | null;
@@ -519,6 +522,9 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
     // CC custom
     ccCustom1: data.ccCustom1 ?? null,
     ccCustom2: data.ccCustom2 ?? null,
+    ccCustom3: data.ccCustom3 ?? null,
+    ccCustom4: data.ccCustom4 ?? null,
+    ccCustom5: data.ccCustom5 ?? null,
     // Fulfillment
     fulfillmentData: data.fulfillmentData ?? undefined,
     tags: data.tags ?? null,
@@ -637,6 +643,12 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
         geoCountry: waitingCCOrder.geoCountry,
         ccCustom1: waitingCCOrder.ccCustom1,
         ccCustom2: waitingCCOrder.ccCustom2,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ccCustom3: (waitingCCOrder as any).ccCustom3 as string | null ?? null,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ccCustom4: (waitingCCOrder as any).ccCustom4 as string | null ?? null,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ccCustom5: (waitingCCOrder as any).ccCustom5 as string | null ?? null,
         fulfillmentData: waitingCCOrder.fulfillmentData,
         refundRemaining: waitingCCOrder.refundRemaining,
         createdAt: waitingCCOrder.createdAt.toISOString(),

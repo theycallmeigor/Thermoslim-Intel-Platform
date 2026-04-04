@@ -1,10 +1,16 @@
 // CheckoutChamp adapter — implements IAdapter
 // See docs/adapters/checkoutchamp-adapter.md for spec
 
+import { ProxyAgent } from 'undici';
 import { config } from '../../core/config';
 import type { IAdapter, NormalizedRecord, SyncOptions, SyncResult, SyncError } from '../../core/types';
 import { orderStatusMap, paySourceMap, responseTypeMap, subscriptionStatusMap } from './field-map';
 import { runIngestion } from '../../core/ingestion/pipeline';
+
+// Route CC API calls through QuoteGuard static IP proxy
+const proxyDispatcher = config.proxy.quoteguardUrl
+  ? new ProxyAgent(config.proxy.quoteguardUrl)
+  : undefined;
 
 // ─── CC API raw types (actual response shape) ────────────────────────────────
 
@@ -18,8 +24,9 @@ interface CCItem {
   qty: string;
   shipping: string;
   price: string;
-  purchaseId: string;          // Non-empty = subscription item
-  purchaseStatus: string;      // ACTIVE, CANCELLED, etc.
+  purchaseId: string;           // Non-empty = subscription item
+  clientPurchaseId: string;     // Client-assigned purchase ID
+  purchaseStatus: string;       // ACTIVE, CANCELLED, etc.
   nextBillDate: string;
   cancelAfterDate: string;
   txnType: string;             // SALE, REBILL, CHARGEBACK
@@ -107,6 +114,11 @@ interface CCOrder {
   custom3: string | null;
   custom4: string | null;
   custom5: string | null;
+  // Top-level subscription fields (Profiles 3 & 4 — not available in CC API order response)
+  purchaseId: string | null;         // Subscription ID (top-level, for lifecycle events)
+  clientPurchaseId: string | null;   // Client purchase ID (top-level)
+  recurringPrice: string | null;     // Subscription recurring price
+  originalOrderId: string | null;    // Original order that started the subscription
   // Payment verification
   avsResponse: string | null;
   cvvResponse: string | null;
@@ -265,11 +277,14 @@ export class CheckoutChampAdapter implements IAdapter {
     if (raw.clientOrderId && !normalized.orderId) normalized.orderId = raw.clientOrderId;
 
     // CC GET postbacks are thin (no totalAmount/items) — try to fetch full order from API.
+    // PARTIAL events are abandoned checkouts — no complete order exists in CC,
+    // so skip the API fetch and save the thin record as-is.
     // If the CC API call fails, fall back to saving the thin record so the order at least
     // lands in the DB; the scheduled sync will enrich it with full details later.
     let order: CCOrder = normalized as unknown as CCOrder;
+    const isPartial = raw.orderStatus === 'PARTIAL';
     const isThin = !raw.orderTotal && !raw.totalAmount && !raw.items;
-    if (isThin) {
+    if (isThin && !isPartial) {
       try {
         const full = await this.fetchOrderById(raw.orderId, raw.dateCreated);
         if (full) {
@@ -320,7 +335,7 @@ export class CheckoutChampAdapter implements IAdapter {
   private async apiGet(path: string, params: Record<string, string>): Promise<CCApiResponse> {
     const qs = new URLSearchParams({ ...this.authParams, ...params });
     const url = `${this.baseUrl}${path}?${qs}`;
-    const res = await fetch(url, { method: 'GET' });
+    const res = await fetch(url, { method: 'GET', dispatcher: proxyDispatcher } as RequestInit);
     if (!res.ok) throw new Error(`CC API HTTP error ${res.status} on ${path}`);
     return res.json() as Promise<CCApiResponse>;
   }
@@ -450,6 +465,9 @@ export class CheckoutChampAdapter implements IAdapter {
         // Custom fields
         ccCustom1: order.custom1 || null,
         ccCustom2: order.custom2 || null,
+        ccCustom3: order.custom3 || null,
+        ccCustom4: order.custom4 || null,
+        ccCustom5: order.custom5 || null,
         // Fulfillment
         fulfillmentData: order.fulfillments || null,
         createdAt: ccDateToIso(order.dateCreated),
@@ -477,21 +495,34 @@ export class CheckoutChampAdapter implements IAdapter {
     // Subscriptions: one record per item that has a purchaseId
     for (const item of items) {
       if (!item.ccPurchaseId) continue;
+
+      const billingCycle = item.billingCycleNumber as number | null;
+      // orderType is not available as a CC webhook token — infer REBILL from billingCycleNumber
+      const inferredOrderType = billingCycle != null && billingCycle > 1 ? 'REBILL' : (order.orderType || null);
+
+      // Prefer item-level recurringPrice; fall back to top-level recurringPrice field (Profile 3)
+      const recurringPrice = (item.price as number) || toCents(order.recurringPrice);
+
+      // Use top-level originalOrderId if present (Profile 4 lifecycle events)
+      const originalOrderId = order.originalOrderId || order.orderId;
+
       records.push({
         type: 'subscription',
         data: {
           customerEmail: order.emailAddress,
           ccPurchaseId: item.ccPurchaseId as string,
-          ccClientPurchaseId: null,
-          originalOrderId: order.orderId,
+          ccClientPurchaseId: (item.ccClientPurchaseId as string | null) || null,
+          originalOrderId,
           status: subscriptionStatusMap[item.purchaseStatus as string] ?? 'ACTIVE',
-          recurringPrice: item.price as number,
+          recurringPrice,
           campaignId: order.campaignId ? String(order.campaignId) : null,
           startedAt: ccDateToIso(order.dateCreated),
           nextBillDate: item.nextBillDate
             ? ccDateToIso(item.nextBillDate as string)
             : null,
           shopifyExternalId: item.externalId as string | null,
+          billingCycleNumber: billingCycle,
+          orderType: inferredOrderType,
         },
       });
     }
@@ -516,6 +547,7 @@ export class CheckoutChampAdapter implements IAdapter {
           price: toCents(flat[`product${i}_price`]),
           quantity: parseInt(flat[`product${i}_qty`] || '1', 10),
           ccPurchaseId: flat[`product${i}_purchaseId`] || null,
+          ccClientPurchaseId: flat[`product${i}_clientPurchaseId`] || null,
           purchaseStatus: flat[`product${i}_recurringstatus`] || null,
           nextBillDate: flat[`product${i}_nextBillDate`] || null,
           recurringstatus: flat[`product${i}_recurringstatus`] || null,
@@ -529,7 +561,37 @@ export class CheckoutChampAdapter implements IAdapter {
           productDescription: null,
         });
       }
-      return items;
+      if (items.length > 0) return items;
+
+      // No product slots — fall back to top-level subscription fields.
+      // Profile 4 lifecycle events (Cancel/Pause/Deactivate) may not include product rows.
+      if (order.purchaseId) {
+        return [{
+          productSlot: 1,
+          ccCrmId: null,
+          ccCampaignProductId: null,
+          externalId: null,
+          name: flat.campaignName || 'Subscription',
+          sku: null,
+          price: toCents(order.recurringPrice),
+          quantity: 1,
+          ccPurchaseId: order.purchaseId,
+          ccClientPurchaseId: order.clientPurchaseId || null,
+          purchaseStatus: flat.orderStatus || null,
+          nextBillDate: null,
+          recurringstatus: flat.orderStatus || null,
+          billingCycleNumber: null,
+          productCategoryId: null,
+          productCategoryName: null,
+          merchantId: null,
+          responseType: null,
+          txnType: null,
+          productType: null,
+          productDescription: null,
+        }];
+      }
+
+      return [];
     }
 
     if (!order.items || typeof order.items !== 'object') return [];
@@ -544,6 +606,7 @@ export class CheckoutChampAdapter implements IAdapter {
       price: toCents(item.price),
       quantity: parseInt(item.qty || '1', 10),
       ccPurchaseId: item.purchaseId || null,         // present = subscription item
+      ccClientPurchaseId: item.clientPurchaseId || null,
       purchaseStatus: item.purchaseStatus || null,
       nextBillDate: item.nextBillDate || null,
       recurringstatus: item.purchaseStatus || null,

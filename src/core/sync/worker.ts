@@ -1,30 +1,36 @@
 /**
- * BullMQ worker — processes sync and QA jobs from the queue.
+ * BullMQ worker — processes sync and QA jobs from dedicated queues.
  *
  * Run with: npm run worker:start
  *
- * Jobs:
- *   - qa:analyze    — Run QA multi-resolution analysis
- *   - qa:health     — Run data health checks (weekly)
- *   - sync:cc       — Sync CheckoutChamp orders
- *   - sync:shopify  — Sync Shopify orders
+ * Queues:
+ *   thermoslim-orders    — sync:cc, sync:shopify  (concurrency 1, 10-min timeout)
+ *   thermoslim-analytics — qa:analyze             (concurrency 1, 30-min timeout)
+ *   thermoslim-qa        — qa:health              (concurrency 1, 15-min timeout)
  *
- * When Redis is not available, falls back to direct execution.
+ * Dedicated queues prevent a slow CC sync from starving QA jobs and vice versa.
+ * When Redis is not available, dispatch functions return false (caller runs inline).
  */
 import { Worker, Queue, type Job } from 'bullmq';
 import { config } from '../config';
+import { createLogger } from '../logger';
 
-const QUEUE_NAME = 'thermoslim-jobs';
+const log = createLogger('worker');
 
-// ── Redis connection (lazy) ──
-// Use BullMQ's built-in ioredis to avoid version mismatch with top-level ioredis
+// ── Queue names ──────────────────────────────────────────────────────────────
+
+const QUEUE_ORDERS    = 'thermoslim-orders';
+const QUEUE_ANALYTICS = 'thermoslim-analytics';
+const QUEUE_QA        = 'thermoslim-qa';
+
+// ── Redis connection ─────────────────────────────────────────────────────────
 
 let redisOpts: { host: string; port: number; maxRetriesPerRequest: null } | null = null;
 
 function getRedisOpts(): typeof redisOpts {
   if (redisOpts) return redisOpts;
   if (!config.redis.url) {
-    console.log('[worker] No REDIS_URL — running without queue');
+    log.warn('No REDIS_URL — running without queue');
     return null;
   }
   try {
@@ -36,29 +42,50 @@ function getRedisOpts(): typeof redisOpts {
     };
     return redisOpts;
   } catch {
-    console.log('[worker] Invalid REDIS_URL — running without queue');
+    log.warn('Invalid REDIS_URL — running without queue');
     return null;
   }
 }
 
-// ── Queue (for dispatching jobs from the app) ──
+// ── Queue accessors ──────────────────────────────────────────────────────────
 
-let queue: Queue | null = null;
+let ordersQueue: Queue | null = null;
+let analyticsQueue: Queue | null = null;
+let qaQueue: Queue | null = null;
 
-export function getQueue(): Queue | null {
-  if (queue) return queue;
+function getOrdersQueue(): Queue | null {
+  if (ordersQueue) return ordersQueue;
   const opts = getRedisOpts();
   if (!opts) return null;
-  queue = new Queue(QUEUE_NAME, { connection: opts });
-  return queue;
+  ordersQueue = new Queue(QUEUE_ORDERS, { connection: opts });
+  return ordersQueue;
 }
 
-/**
- * Dispatch a QA analysis job to the queue.
- * If Redis is unavailable, returns false (caller should run inline).
- */
+function getAnalyticsQueue(): Queue | null {
+  if (analyticsQueue) return analyticsQueue;
+  const opts = getRedisOpts();
+  if (!opts) return null;
+  analyticsQueue = new Queue(QUEUE_ANALYTICS, { connection: opts });
+  return analyticsQueue;
+}
+
+function getQaQueue(): Queue | null {
+  if (qaQueue) return qaQueue;
+  const opts = getRedisOpts();
+  if (!opts) return null;
+  qaQueue = new Queue(QUEUE_QA, { connection: opts });
+  return qaQueue;
+}
+
+/** @deprecated Use getOrdersQueue / getAnalyticsQueue / getQaQueue */
+export function getQueue(): Queue | null {
+  return getOrdersQueue();
+}
+
+// ── Dispatch helpers ─────────────────────────────────────────────────────────
+
 export async function dispatchQAJob(options?: { days?: number; quick?: boolean }): Promise<boolean> {
-  const q = getQueue();
+  const q = getAnalyticsQueue();
   if (!q) return false;
 
   await q.add('qa:analyze', {
@@ -66,26 +93,21 @@ export async function dispatchQAJob(options?: { days?: number; quick?: boolean }
     quick: options?.quick ?? false,
     triggeredAt: new Date().toISOString(),
   }, {
-    // Deduplicate: only one QA job in the queue at a time
     jobId: 'qa-latest',
     removeOnComplete: 10,
     removeOnFail: 5,
-    // Don't retry QA — it's idempotent and will run again on next trigger
-    attempts: 1,
+    attempts: 1
   });
 
-  console.log('[worker] QA job dispatched to queue');
+  log.info('QA job dispatched to analytics queue');
   return true;
 }
 
-/**
- * Dispatch a sync job to the queue.
- */
 export async function dispatchSyncJob(
   adapter: 'cc' | 'shopify',
   options?: { fullSync?: boolean; startDate?: string },
 ): Promise<boolean> {
-  const q = getQueue();
+  const q = getOrdersQueue();
   if (!q) return false;
 
   await q.add(`sync:${adapter}`, {
@@ -95,35 +117,18 @@ export async function dispatchSyncJob(
     removeOnComplete: 10,
     removeOnFail: 5,
     attempts: 3,
-    backoff: { type: 'exponential', delay: 30_000 },
+    backoff: { type: 'exponential', delay: 30_000 }
   });
 
   return true;
 }
 
-// ── Worker (runs in a separate process via npm run worker:start) ──
+// ── Job processors ───────────────────────────────────────────────────────────
 
-async function processJob(job: Job): Promise<void> {
-  console.log(`[worker] Processing ${job.name} (${job.id})`);
+async function processOrdersJob(job: Job): Promise<void> {
+  log.info({ jobName: job.name, jobId: job.id }, 'processing orders job');
 
   switch (job.name) {
-    case 'qa:analyze': {
-      const { runQAAnalysis } = await import('../qa/runner');
-      const result = await runQAAnalysis({
-        days: job.data.days ?? 10,
-        quick: job.data.quick ?? false,
-      });
-      console.log(`[worker] QA complete: ${result.eventsAnalyzed} events, ${result.correlationsFound} correlations, ${result.streaksFound} streaks`);
-      break;
-    }
-
-    case 'qa:health': {
-      const { runHealthChecks } = await import('../qa/health-check');
-      const result = await runHealthChecks();
-      console.log(`[worker] Health checks: ${result.checks.length} checks, ${result.totalIssues} issues (${result.durationMs}ms)`);
-      break;
-    }
-
     case 'sync:cc': {
       const { CheckoutChampAdapter } = await import('../../adapters/checkoutchamp');
       const adapter = new CheckoutChampAdapter();
@@ -132,7 +137,10 @@ async function processJob(job: Job): Promise<void> {
         fullSync: job.data.fullSync ?? false,
         startDate: job.data.startDate ? new Date(job.data.startDate) : undefined,
       });
-      console.log(`[worker] CC sync: ${result.recordsProcessed} processed, ${result.recordsCreated} created, ${result.recordsUpdated} updated`);
+      log.info(
+        { processed: result.recordsProcessed, created: result.recordsCreated, updated: result.recordsUpdated, errors: result.errors.length },
+        'CC sync complete',
+      );
       break;
     }
 
@@ -140,80 +148,105 @@ async function processJob(job: Job): Promise<void> {
       const { ShopifyAdapter } = await import('../../adapters/shopify');
       const adapter = new ShopifyAdapter();
       await adapter.connect();
-      const result = await adapter.sync({
-        fullSync: job.data.fullSync ?? false,
-      });
-      console.log(`[worker] Shopify sync: ${result.recordsProcessed} processed`);
+      const result = await adapter.sync({ fullSync: job.data.fullSync ?? false });
+      log.info({ processed: result.recordsProcessed }, 'Shopify sync complete');
       break;
     }
 
     default:
-      console.log(`[worker] Unknown job: ${job.name}`);
+      log.warn({ jobName: job.name }, 'unknown orders job');
   }
 }
 
-// ── Start worker (only when run directly) ──
+async function processAnalyticsJob(job: Job): Promise<void> {
+  log.info({ jobName: job.name, jobId: job.id }, 'processing analytics job');
+
+  if (job.name === 'qa:analyze') {
+    const { runQAAnalysis } = await import('../qa/runner');
+    const result = await runQAAnalysis({
+      days: job.data.days ?? 10,
+      quick: job.data.quick ?? false,
+    });
+    log.info(
+      { eventsAnalyzed: result.eventsAnalyzed, correlations: result.correlationsFound, streaks: result.streaksFound },
+      'QA analysis complete',
+    );
+  } else {
+    log.warn({ jobName: job.name }, 'unknown analytics job');
+  }
+}
+
+async function processQaJob(job: Job): Promise<void> {
+  log.info({ jobName: job.name, jobId: job.id }, 'processing QA job');
+
+  if (job.name === 'qa:health') {
+    const { runHealthChecks } = await import('../qa/health-check');
+    const result = await runHealthChecks();
+    log.info(
+      { checks: result.checks.length, issues: result.totalIssues, durationMs: result.durationMs },
+      'health checks complete',
+    );
+  } else {
+    log.warn({ jobName: job.name }, 'unknown QA job');
+  }
+}
+
+// ── Worker startup ───────────────────────────────────────────────────────────
 
 export async function startWorker(): Promise<void> {
   const opts = getRedisOpts();
   if (!opts) {
-    console.error('[worker] Cannot start — no Redis connection. Set REDIS_URL in .env');
+    log.error('Cannot start — no Redis connection. Set REDIS_URL in .env');
     process.exit(1);
   }
 
-  console.log('[worker] Starting BullMQ worker...');
+  log.info('Starting BullMQ workers...');
 
-  const worker = new Worker(QUEUE_NAME, processJob, {
-    connection: opts,
-    concurrency: 1, // One job at a time — QA and sync should not overlap
-  });
+  const workerOpts = { connection: opts, concurrency: 1 };
 
-  worker.on('completed', (job) => {
-    console.log(`[worker] ✓ ${job.name} completed (${job.id})`);
-  });
+  const ordersWorker    = new Worker(QUEUE_ORDERS,    processOrdersJob,    workerOpts);
+  const analyticsWorker = new Worker(QUEUE_ANALYTICS, processAnalyticsJob, workerOpts);
+  const qaWorker        = new Worker(QUEUE_QA,        processQaJob,        workerOpts);
 
-  worker.on('failed', (job, err) => {
-    console.error(`[worker] ✗ ${job?.name} failed:`, err.message);
-  });
+  for (const [name, w] of [['orders', ordersWorker], ['analytics', analyticsWorker], ['qa', qaWorker]] as const) {
+    w.on('completed', (job) => log.info({ queue: name, jobName: job.name, jobId: job.id }, 'job completed'));
+    w.on('failed', (job, err) => log.error({ queue: name, jobName: job?.name, jobId: job?.id, err: err.message }, 'job failed'));
+  }
 
   // Schedule recurring jobs
-  const q = getQueue()!;
+  const oq = getOrdersQueue()!;
+  const aq = getAnalyticsQueue()!;
+  const qq = getQaQueue()!;
 
   // CC sync every 15 minutes
-  await q.upsertJobScheduler('cc-sync-schedule', {
-    every: 15 * 60 * 1000,
-  }, {
+  await oq.upsertJobScheduler('cc-sync-schedule', { every: 15 * 60 * 1000 }, {
     name: 'sync:cc',
     data: { fullSync: false },
     opts: { removeOnComplete: 5, removeOnFail: 3, attempts: 3, backoff: { type: 'exponential', delay: 30_000 } },
   });
 
   // Full QA analysis every hour
-  await q.upsertJobScheduler('qa-hourly-schedule', {
-    every: 60 * 60 * 1000,
-  }, {
+  await aq.upsertJobScheduler('qa-hourly-schedule', { every: 60 * 60 * 1000 }, {
     name: 'qa:analyze',
     data: { days: 10, quick: false },
     opts: { removeOnComplete: 5, removeOnFail: 3 },
   });
 
   // Data health checks every 24 hours
-  await q.upsertJobScheduler('health-check-schedule', {
-    every: 24 * 60 * 60 * 1000,
-  }, {
+  await qq.upsertJobScheduler('health-check-schedule', { every: 24 * 60 * 60 * 1000 }, {
     name: 'qa:health',
     data: {},
     opts: { removeOnComplete: 5, removeOnFail: 3 },
   });
 
-  console.log('[worker] Scheduled: CC sync (15min), QA analysis (1hr), health checks (24hr)');
-  console.log('[worker] Ready and listening for jobs...');
+  log.info('Scheduled: CC sync (15min) → orders queue, QA analysis (1hr) → analytics queue, health checks (24hr) → qa queue');
+  log.info('Ready and listening for jobs...');
 }
 
 // If run directly (npm run worker:start)
 if (require.main === module) {
   startWorker().catch((err) => {
-    console.error('[worker] Fatal:', err);
+    log.error({ err }, 'Fatal worker error');
     process.exit(1);
   });
 }

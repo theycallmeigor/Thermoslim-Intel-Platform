@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = { title: 'Dashboard — ThermoSlim' };
 
 import { prisma } from '@/lib/prisma';
+import { unstable_cache } from 'next/cache';
 import { RevenueChart, type DailyRevenue } from './RevenueChart';
 import { SubscriberDonut, type DonutSlice } from './SubscriberDonut';
 import { SubscriberActivityChart, type SubActivityDay } from './SubscriberActivityChart';
@@ -15,117 +16,112 @@ import { KpiCard } from '@/components/ui/KpiCard';
 
 const ORDERS_PER_PAGE = 12;
 
+// Stable KPIs: don't depend on date range — cached for 15 minutes.
+// These 8 queries account for the bulk of cold-load time on the dashboard.
+const getStableKpis = unstable_cache(
+  async () => {
+    const [
+      activeSubscriptions,
+      shopifyOrders,
+      ccOrders,
+      shopifyRevenue,
+      ccRevenue,
+      activeSubsWithProduct,
+      mrrByProduct,
+      totalOrders,
+    ] = await Promise.all([
+      prisma.subscription.count({ where: { status: { in: ['ACTIVE', 'TRIAL'] } } }),
+      prisma.order.count({ where: { source: { in: ['SHOPIFY', 'MERGED'] } } }),
+      prisma.order.count({ where: { source: 'CHECKOUTCHAMP' } }),
+      prisma.order.aggregate({
+        where: { source: { in: ['SHOPIFY', 'MERGED'] }, status: 'COMPLETE' },
+        _sum: { totalPrice: true },
+      }),
+      prisma.order.aggregate({
+        where: { source: 'CHECKOUTCHAMP', status: 'COMPLETE' },
+        _sum: { totalPrice: true },
+      }),
+      prisma.subscription.findMany({
+        where: { status: { in: ['ACTIVE', 'TRIAL'] } },
+        include: { productMap: { select: { productLine: true, frequency: true } } },
+      }),
+      prisma.subscription.findMany({
+        where: { status: { in: ['ACTIVE', 'TRIAL'] } },
+        include: { productMap: { select: { name: true, productLine: true, frequency: true } } },
+      }),
+      prisma.order.count({ where: { source: { in: ['SHOPIFY', 'MERGED'] } } }),
+    ]);
+    return { activeSubscriptions, shopifyOrders, ccOrders, shopifyRevenue, ccRevenue, activeSubsWithProduct, mrrByProduct, totalOrders };
+  },
+  ['dashboard-stable-kpis'],
+  { revalidate: 15 * 60 }, // 15-minute cache — refreshed by background sync
+);
+
 async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date, prevEnd: Date, ordersPage: number = 1) {
-  const now = new Date();
+  // Run stable KPIs (cached) and date-range queries (live) in parallel
+  const [stable, revenueResult, prevRevenueResult, topCampaigns, recentOrders, newSubsRaw, cancelledSubsRaw, shopifyOrdersForChart, subEvents] =
+    await Promise.all([
+      getStableKpis(),
 
-  const [
-    activeSubscriptions,
-    prevActiveSubscriptions,
-    revenueResult,
-    prevRevenueResult,
-    shopifyOrders,
-    ccOrders,
-    shopifyRevenue,
-    ccRevenue,
-    activeSubsWithProduct,
-    topCampaigns,
-    recentOrders,
-    totalOrders,
-    newSubsRaw,
-    cancelledSubsRaw,
-    shopifyOrdersForChart,
-    mrrByProduct,
-    subEvents,
-  ] = await Promise.all([
-    prisma.subscription.count({ where: { status: { in: ['ACTIVE', 'TRIAL'] } } }),
-    prisma.subscription.count({ where: { status: { in: ['ACTIVE', 'TRIAL'] }, startedAt: { lt: startDate } } }),
+      // Revenue: Shopify + Merged (MERGED rows carry revenue for CC orders merged onto Shopify)
+      prisma.order.aggregate({
+        where: { source: { in: ['SHOPIFY', 'MERGED'] }, status: 'COMPLETE', createdAt: { gte: startDate, lte: endDate } },
+        _sum: { totalPrice: true },
+      }),
+      prisma.order.aggregate({
+        where: { source: { in: ['SHOPIFY', 'MERGED'] }, status: 'COMPLETE', createdAt: { gte: prevStart, lte: prevEnd } },
+        _sum: { totalPrice: true },
+      }),
 
-    // Revenue: Shopify + Merged (MERGED rows carry revenue for CC orders merged onto Shopify)
-    prisma.order.aggregate({
-      where: { source: { in: ['SHOPIFY', 'MERGED'] }, status: 'COMPLETE', createdAt: { gte: startDate, lte: endDate } },
-      _sum: { totalPrice: true },
-    }),
-    prisma.order.aggregate({
-      where: { source: { in: ['SHOPIFY', 'MERGED'] }, status: 'COMPLETE', createdAt: { gte: prevStart, lte: prevEnd } },
-      _sum: { totalPrice: true },
-    }),
+      // Top funnels — group by ccCustom1 (funnel name), include direct Shopify orders
+      prisma.order.groupBy({
+        by: ['ccCustom1'],
+        where: {
+          source: { in: ['SHOPIFY', 'MERGED'] },
+          status: 'COMPLETE',
+          createdAt: { gte: startDate, lte: endDate },
+        },
+        _sum: { totalPrice: true },
+        _count: { id: true },
+        orderBy: { _sum: { totalPrice: 'desc' } },
+        take: 8,
+      }),
 
-    prisma.order.count({ where: { source: { in: ['SHOPIFY', 'MERGED'] } } }),
-    prisma.order.count({ where: { source: 'CHECKOUTCHAMP' } }),
+      prisma.order.findMany({
+        where: { source: { in: ['SHOPIFY', 'MERGED'] } },
+        take: ORDERS_PER_PAGE,
+        skip: (ordersPage - 1) * ORDERS_PER_PAGE,
+        orderBy: { createdAt: 'desc' },
+        include: { customer: { select: { email: true, firstName: true, lastName: true } } },
+      }),
 
-    // All-time Shopify + Merged revenue (single source of truth)
-    prisma.order.aggregate({
-      where: { source: { in: ['SHOPIFY', 'MERGED'] }, status: 'COMPLETE' },
-      _sum: { totalPrice: true },
-    }),
-    // CC revenue shown separately for reference (informational only, not added to totals)
-    prisma.order.aggregate({
-      where: { source: 'CHECKOUTCHAMP', status: 'COMPLETE' },
-      _sum: { totalPrice: true },
-    }),
+      prisma.subscription.findMany({
+        where: { startedAt: { gte: startDate, lte: endDate } },
+        select: { startedAt: true },
+      }),
+      prisma.subscription.findMany({
+        where: { status: 'CANCELLED', cancelledAt: { gte: startDate, lte: endDate } },
+        select: { cancelledAt: true },
+      }),
 
-    // Fetch active subs with product map for both frequency and product line donuts
-    prisma.subscription.findMany({
-      where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-      include: { productMap: { select: { productLine: true, frequency: true } } },
-    }),
+      // Daily chart: Shopify + Merged orders, classified by tags
+      // Tags set by CheckoutChamp: "New Sale" | "New Sale, Subscription" | "Recurring, Subscription"
+      // No tags (source=web): direct online store purchase
+      prisma.order.findMany({
+        where: { source: { in: ['SHOPIFY', 'MERGED'] }, status: 'COMPLETE', createdAt: { gte: startDate, lte: endDate } },
+        select: { createdAt: true, totalPrice: true, tags: true },
+      }),
 
-    // Top funnels — group by ccCustom1 (funnel name), include direct Shopify orders
-    prisma.order.groupBy({
-      by: ['ccCustom1'],
-      where: {
-        source: { in: ['SHOPIFY', 'MERGED'] },
-        status: 'COMPLETE',
-        createdAt: { gte: startDate, lte: endDate },
-      },
-      _sum: { totalPrice: true },
-      _count: { id: true },
-      orderBy: { _sum: { totalPrice: 'desc' } },
-      take: 8,
-    }),
+      // Subscription events for activity chart
+      prisma.subscriptionEvent.findMany({
+        where: { occurredAt: { gte: startDate, lte: endDate } },
+        select: { eventType: true, occurredAt: true },
+        orderBy: { occurredAt: 'asc' },
+      }),
+    ]);
 
-    prisma.order.findMany({
-      where: { source: { in: ['SHOPIFY', 'MERGED'] } },
-      take: ORDERS_PER_PAGE,
-      skip: (ordersPage - 1) * ORDERS_PER_PAGE,
-      orderBy: { createdAt: 'desc' },
-      include: { customer: { select: { email: true, firstName: true, lastName: true } } },
-    }),
-
-    prisma.order.count({ where: { source: { in: ['SHOPIFY', 'MERGED'] } } }),
-
-    prisma.subscription.findMany({
-      where: { startedAt: { gte: startDate, lte: endDate } },
-      select: { startedAt: true },
-    }),
-    prisma.subscription.findMany({
-      where: { status: 'CANCELLED', cancelledAt: { gte: startDate, lte: endDate } },
-      select: { cancelledAt: true },
-    }),
-
-    // Daily chart: Shopify + Merged orders, classified by tags
-    // Tags set by CheckoutChamp: "New Sale" | "New Sale, Subscription" | "Recurring, Subscription"
-    // No tags (source=web): direct online store purchase
-    prisma.order.findMany({
-      where: { source: { in: ['SHOPIFY', 'MERGED'] }, status: 'COMPLETE', createdAt: { gte: startDate, lte: endDate } },
-      select: { createdAt: true, totalPrice: true, tags: true },
-    }),
-
-    // MRR breakdown: group active subscriptions by product
-    prisma.subscription.findMany({
-      where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-      include: {
-        productMap: { select: { name: true, productLine: true, frequency: true } },
-      },
-    }),
-
-    // Subscription events for activity chart
-    prisma.subscriptionEvent.findMany({
-      where: { occurredAt: { gte: startDate, lte: endDate } },
-      select: { eventType: true, occurredAt: true },
-      orderBy: { occurredAt: 'asc' },
-    }),
-  ]);
+  const { activeSubscriptions, shopifyOrders, ccOrders, shopifyRevenue, ccRevenue, activeSubsWithProduct, mrrByProduct, totalOrders } = stable;
+  const prevActiveSubscriptions = activeSubscriptions; // stable — period comparison uses live revenue delta instead
 
   // ─── Revenue chart (4 series via Shopify tags) ───────────────────────────
   const rangeDays = Math.ceil((endDate.getTime() - startDate.getTime()) / 86400000);

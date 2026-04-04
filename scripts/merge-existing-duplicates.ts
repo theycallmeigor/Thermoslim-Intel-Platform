@@ -6,19 +6,22 @@
  * CC order and all its child records.
  *
  * Usage:
- *   npx tsx scripts/merge-existing-duplicates.ts [--dry-run]
+ *   npx tsx scripts/merge-existing-duplicates.ts           # dry-run (default — safe)
+ *   npx tsx scripts/merge-existing-duplicates.ts --execute  # live writes
  */
 
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const envProd = path.resolve(__dirname, '../.env.production');
-dotenv.config({ path: envProd });
+const envPath = ['.env.local', '.env.production', '.env']
+  .map(f => path.resolve(__dirname, '..', f))
+  .find(p => fs.existsSync(p));
+dotenv.config({ path: envPath });
 
 import { prisma } from '../src/lib/prisma';
 
-const DRY_RUN = process.argv.includes('--dry-run');
+const DRY_RUN = !process.argv.includes('--execute');
 
 async function main() {
   console.log(`\n=== Merge Existing CC↔Shopify Duplicates ===`);
@@ -79,11 +82,11 @@ async function main() {
         };
 
         const ccWinsFields = [
-          'campaignId', 'campaignName', 'salesUrl', 'ccOrderType',
-          'funnelReferenceId', 'avsResponse', 'cvvResponse', 'cardType',
-          'cardLast4', 'cardIsDebit', 'cardIsPrepaid', 'isDeclineSave',
-          'userAgent', 'device', 'browser', 'geoState', 'geoCountry',
-          'ccCustom1', 'ccCustom2', 'fulfillmentData', 'refundRemaining',
+          'paySource', 'declineReason', 'campaignId', 'campaignName',
+          'salesUrl', 'ccOrderType', 'funnelReferenceId', 'avsResponse',
+          'cvvResponse', 'cardType', 'cardLast4', 'cardIsDebit', 'cardIsPrepaid',
+          'isDeclineSave', 'userAgent', 'device', 'browser', 'geoState',
+          'geoCountry', 'ccCustom1', 'ccCustom2', 'fulfillmentData', 'refundRemaining',
         ] as const;
 
         for (const field of ccWinsFields) {
@@ -204,14 +207,47 @@ async function main() {
     }
   }
 
+  // --- Fuzzy candidates: CC orders with no shopifyOrderId that might match by customer+time ---
+  const orphanCCOrders = await prisma.order.findMany({
+    where: { source: 'CHECKOUTCHAMP', shopifyOrderId: null },
+    select: {
+      id: true,
+      sourceOrderId: true,
+      customerId: true,
+      createdAt: true,
+      customer: { select: { email: true } },
+    },
+  });
+
+  console.log(`\nChecking ${orphanCCOrders.length} orphan CC orders (no shopifyOrderId) for fuzzy matches...`);
+
+  let fuzzyCandidates = 0;
+  for (const ccOrder of orphanCCOrders) {
+    const windowStart = new Date(ccOrder.createdAt.getTime() - 24 * 3600000);
+    const windowEnd = new Date(ccOrder.createdAt.getTime() + 24 * 3600000);
+    const shopifyMatch = await prisma.order.findFirst({
+      where: {
+        source: { in: ['SHOPIFY', 'MERGED'] },
+        customerId: ccOrder.customerId,
+        createdAt: { gte: windowStart, lte: windowEnd },
+      },
+      select: { sourceOrderId: true },
+    });
+    if (shopifyMatch) {
+      console.log(`  FUZZY CANDIDATE: CC ${ccOrder.sourceOrderId} (${ccOrder.customer?.email}) ↔ Shopify ${shopifyMatch.sourceOrderId}`);
+      fuzzyCandidates++;
+    }
+  }
+
   // Summary
   console.log(`\n=== Summary ===`);
-  console.log(`  Merged:  ${merged}`);
-  console.log(`  Skipped: ${skipped}`);
-  console.log(`  Errors:  ${errors}`);
-  console.log(`  Total:   ${ccOrders.length}`);
+  console.log(`  Merged:                     ${merged}`);
+  console.log(`  Skipped (no Shopify match): ${skipped}`);
+  console.log(`  Fuzzy candidates (manual):  ${fuzzyCandidates}`);
+  console.log(`  Errors:                     ${errors}`);
+  console.log(`  Total CC orders scanned:    ${ccOrders.length}`);
   if (DRY_RUN) {
-    console.log(`\n  (Dry run — no changes were made)`);
+    console.log(`\n  (Dry run — no changes were made. Re-run with --execute to apply.)`);
   }
   console.log('');
 }

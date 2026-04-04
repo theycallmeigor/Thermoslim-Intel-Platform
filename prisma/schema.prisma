@@ -142,6 +142,9 @@ model Order {
   // CC custom fields
   ccCustom1           String?       // Brand identifier
   ccCustom2           String?       // Checkout variant name
+  ccCustom3           String?
+  ccCustom4           String?
+  ccCustom5           String?
   // Fulfillment
   fulfillmentData     Json?         // Full fulfillment array from CC
   refundRemaining     Int?          // Remaining refundable amount (cents)

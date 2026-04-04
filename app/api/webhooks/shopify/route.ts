@@ -14,7 +14,17 @@ export async function POST(req: NextRequest) {
     .update(body, 'utf8')
     .digest('base64');
 
-  if (computed !== hmac) {
+  let isValid = false;
+  try {
+    isValid = !!hmac && crypto.timingSafeEqual(
+      Buffer.from(computed, 'base64'),
+      Buffer.from(hmac, 'base64'),
+    );
+  } catch {
+    // Malformed base64 or length mismatch — reject
+    isValid = false;
+  }
+  if (!isValid) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
