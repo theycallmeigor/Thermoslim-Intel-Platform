@@ -1,7 +1,7 @@
 // CheckoutChamp adapter — implements IAdapter
 // See docs/adapters/checkoutchamp-adapter.md for spec
 
-import { ProxyAgent } from 'undici';
+import { ProxyAgent, fetch as undiciFetch } from 'undici';
 import { config } from '../../core/config';
 import type { IAdapter, NormalizedRecord, SyncOptions, SyncResult, SyncError } from '../../core/types';
 import { orderStatusMap, paySourceMap, responseTypeMap, subscriptionStatusMap } from './field-map';
@@ -11,6 +11,11 @@ import { runIngestion } from '../../core/ingestion/pipeline';
 const proxyDispatcher = config.proxy.quoteguardUrl
   ? new ProxyAgent(config.proxy.quoteguardUrl)
   : undefined;
+
+// Use undici's fetch directly so the dispatcher option works on Vercel
+const proxyFetch = proxyDispatcher
+  ? (url: string) => undiciFetch(url, { dispatcher: proxyDispatcher })
+  : (url: string) => fetch(url);
 
 // ─── CC API raw types (actual response shape) ────────────────────────────────
 
@@ -335,7 +340,7 @@ export class CheckoutChampAdapter implements IAdapter {
   private async apiGet(path: string, params: Record<string, string>): Promise<CCApiResponse> {
     const qs = new URLSearchParams({ ...this.authParams, ...params });
     const url = `${this.baseUrl}${path}?${qs}`;
-    const res = await fetch(url, { method: 'GET', dispatcher: proxyDispatcher } as RequestInit);
+    const res = await proxyFetch(url);
     if (!res.ok) throw new Error(`CC API HTTP error ${res.status} on ${path}`);
     return res.json() as Promise<CCApiResponse>;
   }
