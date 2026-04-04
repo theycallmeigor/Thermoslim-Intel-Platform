@@ -106,9 +106,6 @@ export default async function OrderDetailPage({
 
   if (!order) notFound();
 
-  const shopifyStoreUrl = process.env.SHOPIFY_STORE_URL;
-  const ccApiUrl = process.env.CC_API_URL;
-
   const hasAttribution =
     order.attribution &&
     Object.values(order.attribution).some(v => v !== null && v !== undefined && v !== '');
@@ -119,9 +116,9 @@ export default async function OrderDetailPage({
         title={`Order ${order.sourceOrderId}`}
         subtitle={`${humanizeSource(order.source)} · ${fmtDateTime(order.createdAt)}`}
       >
-        {order.shopifyOrderId && shopifyStoreUrl && (
+        {order.shopifyOrderId && (
           <a
-            href={`https://${shopifyStoreUrl}/admin/orders/${order.shopifyOrderId}`}
+            href={`https://admin.shopify.com/store/tvbczb-ie/orders/${order.shopifyOrderId}`}
             target="_blank"
             rel="noopener noreferrer"
             className="px-3 py-1.5 text-xs font-medium rounded-md bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-colors"
@@ -129,9 +126,9 @@ export default async function OrderDetailPage({
             View in Shopify
           </a>
         )}
-        {(order.source === 'CHECKOUTCHAMP' || order.source === 'MERGED') && ccApiUrl && (
+        {(order.source === 'CHECKOUTCHAMP' || order.source === 'MERGED') && order.ccSourceOrderId && (
           <a
-            href={`${ccApiUrl}/admin/ordersummary.php?orderId=${order.ccSourceOrderId || order.sourceOrderId}`}
+            href={`https://crm.checkoutchamp.com/customer/cs/orders/?orderId=${order.ccSourceOrderId}`}
             target="_blank"
             rel="noopener noreferrer"
             className="px-3 py-1.5 text-xs font-medium rounded-md bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"
