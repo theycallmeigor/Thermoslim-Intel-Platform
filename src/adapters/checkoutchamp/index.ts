@@ -317,6 +317,140 @@ export class CheckoutChampAdapter implements IAdapter {
     // Stateless HTTP
   }
 
+  /**
+   * Fetch campaign products from CC API and upsert into ProductMap.
+   * This replaces the hardcoded CC_CRM_TO_LINE map in seed.ts.
+   */
+  async syncCampaignProducts(): Promise<{ found: number; created: number; updated: number }> {
+    const { PrismaClient } = await import('@prisma/client');
+    const prisma = new PrismaClient();
+
+    try {
+      const qs = new URLSearchParams({
+        ...this.authParams,
+        campaignId: config.checkoutChamp.campaignId ?? '2',
+      });
+      const url = `${this.baseUrl}/campaign/find/?${qs}`;
+      const res = await proxyFetch(url);
+      if (!res.ok) throw new Error(`CC campaign/find HTTP error ${res.status}`);
+      const json = await res.json() as any;
+
+      if (json.result !== 'SUCCESS') {
+        throw new Error(`CC campaign/find error: ${JSON.stringify(json.message)}`);
+      }
+
+      // CC returns campaign with products array
+      const campaign = typeof json.message === 'string' ? null : json.message;
+      if (!campaign) throw new Error('No campaign data returned');
+
+      // Products can be in campaign.products or campaign.offers
+      const products: any[] = campaign.products ?? campaign.offers ?? [];
+      if (!Array.isArray(products)) {
+        console.log('[cc adapter] campaign/find returned no products array, checking nested structure...');
+        console.log('[cc adapter] campaign keys:', Object.keys(campaign).join(', '));
+        return { found: 0, created: 0, updated: 0 };
+      }
+
+      console.log(`[cc adapter] Found ${products.length} campaign products`);
+
+      let created = 0;
+      let updated = 0;
+
+      for (const prod of products) {
+        const ccCrmId = String(prod.productId ?? prod.campaignProductId ?? prod.id);
+        const name = prod.name ?? prod.productName ?? 'Unknown';
+        const sku = prod.sku ?? prod.productSku ?? null;
+        const price = prod.price ? Math.round(parseFloat(prod.price) * 100) : null;
+        const rebillPrice = prod.rebillPrice ? Math.round(parseFloat(prod.rebillPrice) * 100) : null;
+        const rebillDays = prod.rebillDays ? parseInt(prod.rebillDays, 10) : null;
+        const externalId = prod.externalId ?? prod.externalProductId ?? null;
+        const billingType = prod.billingType ?? null;
+        const isSubscription = billingType === 'Recurring' || !!rebillDays;
+        const campaignProductId = String(prod.campaignProductId ?? prod.id ?? ccCrmId);
+
+        // Derive frequency from rebillDays
+        let frequency: string | null = null;
+        if (rebillDays) {
+          if (rebillDays <= 35) frequency = '1-month';
+          else if (rebillDays <= 65) frequency = '2-month';
+          else if (rebillDays <= 95) frequency = '3-month';
+          else if (rebillDays <= 185) frequency = '6-month';
+          else frequency = `${rebillDays}-days`;
+        }
+
+        // Derive productLine from name keywords
+        let productLine: string | null = null;
+        let category: string | null = null;
+        const lower = name.toLowerCase();
+        if (lower.includes('sculpting device') || lower.includes('bundle') || lower.includes('starter')) {
+          productLine = 'Body Sculpting Device';
+          category = 'Device';
+        } else if (lower.includes('gel') || lower.includes('conductive')) {
+          productLine = 'Sculpt+ Conductive Gel';
+          category = 'Consumable';
+        } else if (lower.includes('cream') || lower.includes('maintenance')) {
+          productLine = 'Maintenance Cream';
+          category = 'Consumable';
+        } else if (lower.includes('smooth skin')) {
+          productLine = 'Smooth Skin+';
+          category = 'Consumable';
+        } else if (lower.includes('glp') || lower.includes('support+')) {
+          productLine = 'GLP-1 Support+';
+          category = 'Supplement';
+        } else if (lower.includes('scrub') || lower.includes('cellulite')) {
+          productLine = 'Sculpt+ Cellulite Scrub';
+          category = 'Consumable';
+        } else if (lower.includes('filter') || lower.includes('replacement')) {
+          productLine = 'Replacement Filter';
+          category = 'Accessory';
+        }
+
+        // Upsert by ccCrmId
+        const existing = await prisma.productMap.findFirst({ where: { ccCrmId } });
+
+        if (existing) {
+          await prisma.productMap.update({
+            where: { id: existing.id },
+            data: {
+              name: name,
+              ...(sku && { sku }),
+              ...(externalId && { externalId, shopifyProductId: externalId }),
+              ...(productLine && !existing.productLine && { productLine }),
+              ...(category && !existing.category && { category }),
+              ...(frequency && { frequency }),
+              isSubscription,
+              ccCampaignProductIds: existing.ccCampaignProductIds
+                ? [...new Set([...(existing.ccCampaignProductIds as string[]), campaignProductId])]
+                : [campaignProductId],
+            },
+          });
+          updated++;
+        } else {
+          await prisma.productMap.create({
+            data: {
+              ccCrmId,
+              name,
+              sku,
+              externalId,
+              shopifyProductId: externalId,
+              productLine,
+              category,
+              frequency,
+              isSubscription,
+              ccCampaignProductIds: [campaignProductId],
+            },
+          });
+          created++;
+        }
+      }
+
+      console.log(`[cc adapter] Campaign products synced: ${created} created, ${updated} updated`);
+      return { found: products.length, created, updated };
+    } finally {
+      await prisma.$disconnect();
+    }
+  }
+
   // ─── Private: API ──────────────────────────────────────────────────────────
 
   private async fetchOrderById(orderId: string, dateCreated?: string): Promise<CCOrder | null> {

@@ -17,6 +17,7 @@ export const config = {
     apiKey: process.env.CC_API_KEY!,
     apiUsername: process.env.CC_API_USERNAME!,
     webhookSecret: process.env.CC_WEBHOOK_SECRET!,
+    campaignId: process.env.CC_CAMPAIGN_ID || '2',
   },
   proxy: {
     quoteguardUrl: process.env.QUOTEGUARD_URL || '',
