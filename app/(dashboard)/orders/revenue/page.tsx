@@ -4,7 +4,7 @@ export const metadata: Metadata = { title: 'Revenue Waterfall — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import Link from 'next/link';
-import { format } from 'date-fns';
+import { addMonths, format, startOfDay, subDays } from 'date-fns';
 import { prisma } from '@/lib/prisma';
 import { fmt$, fmtK, parseRange, toMonthlyMrr } from '@/lib/dashboard/formatting';
 import { getTrialExpectedPrices } from '@/lib/dashboard/trial-prices';
@@ -32,6 +32,42 @@ export default async function RevenueWaterfallPage({
     const expected = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
     return s + toMonthlyMrr(sub.recurringPrice, sub.frequency, expected);
   }, 0);
+
+  const activeCount = activeSubs.length;
+
+  // Forecast: avg daily new sales from last 30 days
+  const last30Start = startOfDay(subDays(new Date(), 30));
+  const last30Snaps = await prisma.dailySnapshot.findMany({
+    where: { date: { gte: last30Start }, source: { in: ['SHOPIFY', 'MERGED'] } as any },
+    select: { totalRevenue: true, date: true },
+  });
+  const dayRevMap = new Map<string, number>();
+  for (const snap of last30Snaps) {
+    const key = snap.date.toISOString().slice(0, 10);
+    dayRevMap.set(key, (dayRevMap.get(key) ?? 0) + snap.totalRevenue);
+  }
+  const dailyRevValues = [...dayRevMap.values()];
+  const avgDailyNewRevenue = dailyRevValues.length > 0
+    ? Math.round(dailyRevValues.reduce((s, v) => s + v, 0) / dailyRevValues.length) : 0;
+
+  // Churn rate from last 90 days
+  const last90Start = startOfDay(subDays(new Date(), 90));
+  const cancelCount = await prisma.subscriptionEvent.count({
+    where: { eventType: 'CANCELLED', occurredAt: { gte: last90Start } },
+  });
+  const monthlyChurnRate = activeCount > 0 ? Math.min(cancelCount / 3 / activeCount, 1) : 0.05;
+
+  // 6-month projection
+  type ProjMonth = { label: string; recurring: number; newSales: number; churn: number; total: number };
+  const projMonths: ProjMonth[] = [];
+  let runMrr = totalMrr;
+  for (let i = 1; i <= 6; i++) {
+    const recurring = runMrr;
+    const newSales = avgDailyNewRevenue * 30;
+    const churn = Math.round(runMrr * monthlyChurnRate);
+    projMonths.push({ label: format(addMonths(new Date(), i), 'MMM yyyy'), recurring, newSales, churn, total: recurring + newSales - churn });
+    runMrr = Math.max(0, runMrr - churn);
+  }
 
   // Aggregate by event type
   const byType = await prisma.revenueEvent.groupBy({
@@ -289,6 +325,38 @@ export default async function RevenueWaterfallPage({
                   <td className="px-6 py-3.5 text-right tabular-nums font-semibold">
                     <span className={row.net >= 0 ? 'text-white' : 'text-red-400'}>{fmtK(row.net)}</span>
                   </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Revenue Forecast */}
+      <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+        <div className="px-6 py-4 border-b border-gray-800">
+          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">6-Month Revenue Forecast</h3>
+          <p className="text-xs text-gray-600 mt-1">Based on current MRR ({fmtK(totalMrr)}), {activeCount} active subs, {(monthlyChurnRate * 100).toFixed(1)}% monthly churn</p>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-gray-800">
+                <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Month</th>
+                <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Recurring</th>
+                <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">New Sales</th>
+                <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Churn</th>
+                <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Projected</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-800/60">
+              {projMonths.map(row => (
+                <tr key={row.label} className="hover:bg-gray-800/40 transition-colors">
+                  <td className="px-6 py-3.5 text-gray-300 font-medium">{row.label}</td>
+                  <td className="px-6 py-3.5 text-right text-blue-400 tabular-nums">{fmtK(row.recurring)}</td>
+                  <td className="px-6 py-3.5 text-right text-green-400 tabular-nums">{fmtK(row.newSales)}</td>
+                  <td className="px-6 py-3.5 text-right text-red-400 tabular-nums">−{fmtK(row.churn)}</td>
+                  <td className="px-6 py-3.5 text-right tabular-nums font-semibold text-white">{fmtK(row.total)}</td>
                 </tr>
               ))}
             </tbody>
