@@ -7,12 +7,13 @@ import { fmt$, fmtK, parseRange } from '@/lib/dashboard/formatting';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { FunnelCard, type FunnelData, type FunnelPageData } from './FunnelCard';
+import { FUNNEL_CONFIGS, findFunnelConfig, type FunnelPageConfig } from '@/config/funnel-config';
 
 export default async function FunnelPerformancePage({ searchParams }: { searchParams: Promise<{ from?: string; to?: string }> }) {
   const sp = await searchParams;
   const { startDate, endDate } = parseRange(sp.from, sp.to);
 
-  // Get orders with items including productSlot for page mapping
+  // Get orders with items
   const orders = await prisma.order.findMany({
     where: {
       createdAt: { gte: startDate, lte: endDate },
@@ -43,7 +44,7 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
         status: 'COMPLETE',
       },
     },
-    select: { upsellsAccepted: true, upsellsDeclined: true, revenueAdded: true },
+    select: { upsellsAccepted: true, upsellsDeclined: true },
   });
 
   const totalUpsellAccepted = upsellPaths.reduce((s, p) => s + p.upsellsAccepted, 0);
@@ -51,173 +52,158 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
   const totalUpsellOffered = totalUpsellAccepted + totalUpsellDeclined;
   const overallTakeRate = totalUpsellOffered > 0 ? totalUpsellAccepted / totalUpsellOffered : 0;
 
-  // Load funnel page titles from DB (set by funnel-sync)
-  const funnelPages = await prisma.funnelPage.findMany({
-    select: { funnelId: true, ccPageId: true, title: true, pageType: true, sortOrder: true,
-      funnel: { select: { ccReferenceId: true } } },
-    orderBy: { sortOrder: 'asc' },
-  });
-  // Build lookup: funnelReferenceId → slot → { title, pageType }
-  const slotTitleMap = new Map<string, Map<string, { title: string; pageType: string }>>();
-  for (const fp of funnelPages) {
-    const fid = fp.funnel.ccReferenceId;
-    if (!slotTitleMap.has(fid)) slotTitleMap.set(fid, new Map());
-    slotTitleMap.get(fid)!.set(fp.ccPageId, { title: fp.title, pageType: fp.pageType ?? 'other' });
-  }
+  // Group orders by funnel (using config or checkout slug)
+  type OrderGroup = { config: typeof FUNNEL_CONFIGS[0] | null; orders: typeof orders; checkoutSlug: string };
+  const funnelGroups = new Map<string, OrderGroup>();
 
-  // Group orders by checkout page (salesUrl slug)
-  const checkoutGroups = new Map<string, typeof orders>();
   for (const order of orders) {
     const slug = getCheckoutSlug(order.salesUrl);
-    if (!checkoutGroups.has(slug)) checkoutGroups.set(slug, []);
-    checkoutGroups.get(slug)!.push(order);
+    const config = findFunnelConfig(order.funnelReferenceId, slug);
+    const groupKey = config?.referenceId ?? slug;
+
+    if (!funnelGroups.has(groupKey)) {
+      funnelGroups.set(groupKey, { config, orders: [], checkoutSlug: slug });
+    }
+    funnelGroups.get(groupKey)!.orders.push(order);
   }
 
-  // Build funnel data — each checkout page variant is a "funnel"
-  const funnelData: FunnelData[] = [...checkoutGroups.entries()].map(([checkoutSlug, groupOrders]) => {
+  // Build funnel data
+  const funnelData: FunnelData[] = [...funnelGroups.entries()].map(([key, group]) => {
+    const { config, orders: groupOrders, checkoutSlug } = group;
     const totalOrders = groupOrders.length;
     const totalRevenue = groupOrders.reduce((s, o) => s + o.totalPrice, 0);
     const aov = totalOrders > 0 ? Math.round(totalRevenue / totalOrders) : 0;
 
-    // Build pages from productSlot ordering
-    // OFFER items = checkout page, UPSALE items grouped by slot = OTO pages
-    // Key by ccCampaignProductId for granular offer-level breakdown
-    type ProdAgg = { name: string; campaignProductId: string | null; count: number; revenue: number; price: number; frequency: string | null; isSubscription: boolean };
-    const checkoutProducts = new Map<string, ProdAgg>();
-    const otoSlots = new Map<number, Map<string, ProdAgg>>();
-    // Track which orders reached each slot (for true take rate)
-    const ordersPerSlot = new Map<number, Set<string>>();
-    let ordersWithUpsells = 0;
-
-    for (const order of groupOrders) {
-      let hasUpsell = false;
-      // Track max slot this order has items in — order reached all slots up to max
-      let maxSlot = 0;
-      for (const item of order.items) {
-        if (item.productType === 'UPSALE' && item.productSlot > maxSlot) {
-          maxSlot = item.productSlot;
-        }
-      }
-      // Mark this order as having reached all upsell slots up to maxSlot
-      // (customer saw each page even if they declined)
-      if (maxSlot > 0) {
-        const allSlots = groupOrders.flatMap(o => o.items.filter(i => i.productType === 'UPSALE').map(i => i.productSlot));
-        const uniqueSlots = [...new Set(allSlots)].sort((a, b) => a - b);
-        for (const slot of uniqueSlots) {
-          if (slot <= maxSlot) {
-            if (!ordersPerSlot.has(slot)) ordersPerSlot.set(slot, new Set());
-            ordersPerSlot.get(slot)!.add(order.id);
-          }
-        }
-      }
-
-      for (const item of order.items) {
-        const freq = item.productMap?.frequency ?? null;
-        const isSub = item.productMap?.isSubscription ?? false;
-
-        if (item.productType === 'OFFER' || !item.productType) {
-          const prodName = item.productMap?.productLine ?? item.name ?? 'Unknown';
-          const existing = checkoutProducts.get(prodName) ?? { name: prodName, campaignProductId: null, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: isSub };
-          existing.count += 1;
-          existing.revenue += item.price;
-          if (freq) existing.frequency = freq;
-          if (isSub) existing.isSubscription = true;
-          checkoutProducts.set(prodName, existing);
-        } else if (item.productType === 'UPSALE') {
-          hasUpsell = true;
-          const slot = item.productSlot;
-          if (!otoSlots.has(slot)) otoSlots.set(slot, new Map());
-          const slotProducts = otoSlots.get(slot)!;
-          // Key by ccCrmId + price — same base product at same price = same offer
-          // Different ccCampaignProductIds and item names are just funnel version variants
-          const productLine = item.productMap?.productLine ?? 'Unknown';
-          const displayName = freq ? `${productLine} (${freq})` : productLine;
-          const key = `${item.ccCrmId ?? item.name}|${item.price}`;
-          const existing = slotProducts.get(key) ?? { name: displayName, campaignProductId: item.ccCrmId, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: isSub };
-          existing.count += 1;
-          existing.revenue += item.price;
-          if (freq) existing.frequency = freq;
-          if (isSub) existing.isSubscription = true;
-          slotProducts.set(key, existing);
-        }
-      }
-      if (hasUpsell) ordersWithUpsells++;
-    }
-
-    // Build page array
     const pages: FunnelPageData[] = [];
 
-    // Checkout page
-    const checkoutProds = [...checkoutProducts.entries()]
-      .map(([name, v]) => ({
-        name,
-        campaignProductId: v.campaignProductId,
-        count: v.count,
-        rate: totalOrders > 0 ? v.count / totalOrders : 0,
-        prices: [v.price],
-        frequency: v.frequency,
-        isSubscription: v.isSubscription,
-      }))
-      .sort((a, b) => b.count - a.count);
+    if (config) {
+      // ─── CONFIG-BASED: match UPSALE items to configured pages by ccCrmId ───
+      const configPages = config.pages;
 
-    pages.push({
-      pageType: 'Checkout',
-      slug: checkoutSlug,
-      orders: totalOrders,
-      revenue: groupOrders.reduce((s, o) => {
-        const offerRev = o.items.filter(i => i.productType === 'OFFER' || !i.productType).reduce((s2, i) => s2 + i.price, 0);
-        return s + offerRev;
-      }, 0),
-      products: checkoutProds,
-    });
+      for (const pageConfig of configPages) {
+        const crmIdSet = new Set(pageConfig.productCrmIds);
 
-    // OTO pages — sorted by slot number
-    const sortedSlots = [...otoSlots.entries()].sort((a, b) => a[0] - b[0]);
-    let otoNum = 1;
-    for (const [slot, slotProducts] of sortedSlots) {
-      const pageVisitors = ordersPerSlot.get(slot)?.size ?? totalOrders;
+        if (pageConfig.type === 'checkout') {
+          // Checkout: count all orders, show OFFER items
+          const offerProducts = new Map<string, { name: string; count: number; revenue: number; price: number; frequency: string | null; isSubscription: boolean }>();
+          for (const order of groupOrders) {
+            for (const item of order.items) {
+              if (item.productType !== 'OFFER' && item.productType !== null) continue;
+              const prodLine = item.productMap?.productLine ?? item.name ?? 'Unknown';
+              const prodKey = `${prodLine}|${item.price}`;
+              const existing = offerProducts.get(prodKey) ?? { name: prodLine, count: 0, revenue: 0, price: item.price, frequency: item.productMap?.frequency ?? null, isSubscription: item.productMap?.isSubscription ?? false };
+              existing.count++;
+              existing.revenue += item.price;
+              offerProducts.set(prodKey, existing);
+            }
+          }
 
-      // Each offer is a distinct campaignProductId
-      const prods = [...slotProducts.values()]
-        .map(v => ({
-          name: v.name,
-          campaignProductId: v.campaignProductId,
-          count: v.count,
-          rate: pageVisitors > 0 ? v.count / pageVisitors : 0,
-          prices: [v.price],
-          frequency: v.frequency,
-          isSubscription: v.isSubscription,
-        }))
-        .sort((a, b) => b.count - a.count);
+          pages.push({
+            pageType: pageConfig.name,
+            slug: checkoutSlug,
+            orders: totalOrders,
+            revenue: [...offerProducts.values()].reduce((s, v) => s + v.revenue, 0),
+            products: [...offerProducts.values()]
+              .map(v => ({ name: v.name, campaignProductId: null, count: v.count, rate: totalOrders > 0 ? v.count / totalOrders : 0, prices: [v.price], frequency: v.frequency, isSubscription: v.isSubscription }))
+              .sort((a, b) => b.count - a.count),
+          });
+        } else {
+          // OTO/Downsell: match UPSALE items by ccCrmId
+          let pageAccepted = 0;
+          let pageRevenue = 0;
+          let ordersReached = 0;
+          const products = new Map<string, { name: string; crmId: string | null; count: number; revenue: number; price: number; frequency: string | null; isSubscription: boolean }>();
 
-      const slotRevenue = [...slotProducts.values()].reduce((s, v) => s + v.revenue, 0);
-      const slotAccepted = [...slotProducts.values()].reduce((s, v) => s + v.count, 0);
+          for (const order of groupOrders) {
+            const upsaleItems = order.items.filter(i => i.productType === 'UPSALE');
+            if (upsaleItems.length === 0) continue;
 
-      // Use funnel page title from DB if available, else generate from slot
-      const fid = groupOrders[0]?.funnelReferenceId;
-      const dbPageInfo = fid ? slotTitleMap.get(fid)?.get(`slot-${slot}`) : null;
-      const dominantName = prods[0]?.name?.toLowerCase() ?? '';
-      const isDownsell = dbPageInfo?.pageType === 'downsell' || dominantName.includes('downsell');
-      const pageLabel = dbPageInfo?.title ?? (isDownsell ? `Downsell ${otoNum}` : `OTO ${otoNum}`);
+            // Did this order have any UPSALE item that could match this page or a later page?
+            // An order "reached" this page if it has upsale items matching this page OR any later page
+            const thisPageIdx = configPages.indexOf(pageConfig);
+            const laterPages = configPages.slice(thisPageIdx);
+            const laterCrmIds = new Set(laterPages.flatMap(p => p.productCrmIds));
 
+            const hasLaterMatch = upsaleItems.some(i => i.ccCrmId && laterCrmIds.has(i.ccCrmId));
+            const hasThisMatch = upsaleItems.some(i => i.ccCrmId && crmIdSet.has(i.ccCrmId));
+
+            if (hasThisMatch || hasLaterMatch) ordersReached++;
+
+            // Count items matching this page
+            for (const item of upsaleItems) {
+              if (!item.ccCrmId || !crmIdSet.has(item.ccCrmId)) continue;
+              pageAccepted++;
+              pageRevenue += item.price;
+
+              const prodLine = item.productMap?.productLine ?? 'Unknown';
+              const freq = item.productMap?.frequency ?? null;
+              const key = `${item.ccCrmId}|${item.price}`;
+              const existing = products.get(key) ?? { name: freq ? `${prodLine} (${freq})` : prodLine, crmId: item.ccCrmId, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: item.productMap?.isSubscription ?? false };
+              existing.count++;
+              existing.revenue += item.price;
+              products.set(key, existing);
+            }
+          }
+
+          pages.push({
+            pageType: pageConfig.name,
+            slug: `${ordersReached} reached → ${pageAccepted} accepted`,
+            orders: pageAccepted,
+            revenue: pageRevenue,
+            products: [...products.values()]
+              .map(v => ({ name: v.name, campaignProductId: v.crmId, count: v.count, rate: ordersReached > 0 ? v.count / ordersReached : 0, prices: [v.price], frequency: v.frequency, isSubscription: v.isSubscription }))
+              .sort((a, b) => b.count - a.count),
+          });
+        }
+      }
+    } else {
+      // ─── FALLBACK: slot-based grouping for unconfigured funnels ────────────
+      const slotProducts = new Map<number, Map<string, { name: string; crmId: string | null; count: number; revenue: number; price: number; frequency: string | null; isSubscription: boolean }>>();
+
+      for (const order of groupOrders) {
+        for (const item of order.items) {
+          if (item.productType !== 'UPSALE') continue;
+          const slot = item.productSlot;
+          if (!slotProducts.has(slot)) slotProducts.set(slot, new Map());
+          const prods = slotProducts.get(slot)!;
+          const key = `${item.ccCrmId ?? item.name}|${item.price}`;
+          const prodLine = item.productMap?.productLine ?? 'Unknown';
+          const freq = item.productMap?.frequency ?? null;
+          const existing = prods.get(key) ?? { name: freq ? `${prodLine} (${freq})` : prodLine, crmId: item.ccCrmId, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: item.productMap?.isSubscription ?? false };
+          existing.count++;
+          existing.revenue += item.price;
+          prods.set(key, existing);
+        }
+      }
+
+      // Checkout
       pages.push({
-        pageType: pageLabel,
-        slug: `${pageVisitors} visitors → ${slotAccepted} accepted`,
-        orders: slotAccepted,
-        revenue: slotRevenue,
-        products: prods,
+        pageType: 'Checkout',
+        slug: checkoutSlug,
+        orders: totalOrders,
+        revenue: totalRevenue,
+        products: [{ name: 'Body Sculpting Device', campaignProductId: null, count: totalOrders, rate: 1, prices: [9995], frequency: null, isSubscription: false }],
       });
 
-      if (!isDownsell) otoNum++;
+      // OTO pages from slots
+      let otoNum = 1;
+      for (const [slot, prods] of [...slotProducts.entries()].sort((a, b) => a[0] - b[0])) {
+        pages.push({
+          pageType: `OTO ${otoNum}`,
+          slug: `slot ${slot}`,
+          orders: [...prods.values()].reduce((s, v) => s + v.count, 0),
+          revenue: [...prods.values()].reduce((s, v) => s + v.revenue, 0),
+          products: [...prods.values()]
+            .map(v => ({ name: v.name, campaignProductId: v.crmId, count: v.count, rate: totalOrders > 0 ? v.count / totalOrders : 0, prices: [v.price], frequency: v.frequency, isSubscription: v.isSubscription }))
+            .sort((a, b) => b.count - a.count),
+        });
+        otoNum++;
+      }
     }
 
-    const displayName = checkoutSlug
-      .replace(/-/g, ' ')
-      .replace(/\b\w/g, c => c.toUpperCase());
-
     return {
-      name: displayName,
-      ccReferenceId: groupOrders[0]?.funnelReferenceId ?? null,
+      name: config?.name ?? titleCase(checkoutSlug),
+      ccReferenceId: config?.referenceId ?? groupOrders[0]?.funnelReferenceId ?? null,
       totalOrders,
       totalRevenue,
       aov,
@@ -243,7 +229,7 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
       <div className="space-y-3">
         {funnelData.length === 0 ? (
           <div className="bg-gray-900 border border-gray-800 rounded-xl px-6 py-10 text-center">
-            <p className="text-gray-600 text-sm">No funnel data found. Check date range or run a sync.</p>
+            <p className="text-gray-600 text-sm">No funnel data found. Check date range.</p>
           </div>
         ) : (
           funnelData.map((funnel, i) => <FunnelCard key={i} funnel={funnel} />)
@@ -259,12 +245,13 @@ function getCheckoutSlug(salesUrl: string | null): string {
   if (!salesUrl) return 'unknown';
   try {
     const url = new URL(salesUrl);
-    // Get the last meaningful path segment (the checkout page name)
     const parts = url.pathname.split('/').filter(Boolean);
-    // Skip UUID-like segments, take the last human-readable slug
-    const slug = parts.filter(p => !p.match(/^[0-9a-f]{8}-/i)).pop() ?? parts.pop() ?? 'unknown';
-    return slug;
+    return parts.filter(p => !p.match(/^[0-9a-f]{8}-/i)).pop() ?? parts.pop() ?? 'unknown';
   } catch {
     return 'unknown';
   }
+}
+
+function titleCase(s: string): string {
+  return s.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 }
