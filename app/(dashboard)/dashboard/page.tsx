@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 export const metadata: Metadata = { title: 'Dashboard — ThermoSlim' };
 
+import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { unstable_cache } from 'next/cache';
 import { RevenueChart, type DailyRevenue } from './RevenueChart';
@@ -486,8 +487,10 @@ export default async function DashboardPage({
                   <tbody className="divide-y divide-gray-800/60">
                     {data.recentOrders.map(order => (
                       <tr key={order.id} className="hover:bg-gray-800/40 transition-colors">
-                        <td className="px-6 py-3.5 font-mono text-xs text-gray-400">
-                          #{order.sourceOrderId.slice(-8)}
+                        <td className="px-6 py-3.5 font-mono text-xs">
+                          <Link href={`/orders/${order.id}`} className="text-blue-400 hover:text-blue-300 transition-colors">
+                            #{order.sourceOrderId.slice(-8)}
+                          </Link>
                         </td>
                         <td className="px-6 py-3.5">
                           {(() => {
