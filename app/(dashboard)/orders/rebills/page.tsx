@@ -110,7 +110,7 @@ export default async function RebillsPage({
     },
   });
 
-  // ── Daily volume chart data (next 30 days) ──────────────────────────────────
+  // ── Daily volume chart data — project future rebills from frequency ────────
   const dayMap = new Map<string, DayVolume>();
   const rangeDays = Math.min(60, Math.max(1, differenceInDays(windowEnd, windowStart)));
   for (let d = 0; d <= rangeDays; d++) {
@@ -119,15 +119,53 @@ export default async function RebillsPage({
     dayMap.set(key, { date: key, count: 0, revenue: 0 });
   }
 
-  for (const sub of upcoming) {
+  // Query ALL active subs for chart projection (not just paginated list)
+  const allActiveSubs = await prisma.subscription.findMany({
+    where: {
+      status: { in: ['ACTIVE', 'TRIAL', 'RECYCLE_BILLING'] },
+      nextBillDate: { not: null },
+    },
+    select: { nextBillDate: true, recurringPrice: true, frequency: true },
+  });
+
+  // Parse frequency string to days (e.g., "30-days" → 30, "1-month" → 30, "3-month" → 90)
+  function freqToDays(freq: string | null): number | null {
+    if (!freq) return null;
+    const lower = freq.toLowerCase();
+    const dayMatch = lower.match(/^(\d+)-?days?$/);
+    if (dayMatch) return parseInt(dayMatch[1], 10);
+    const monthMatch = lower.match(/^(\d+)-?months?$/);
+    if (monthMatch) return parseInt(monthMatch[1], 10) * 30;
+    // Common patterns
+    if (lower === 'monthly' || lower === '1-month') return 30;
+    if (lower === 'bi-monthly' || lower === '2-month') return 60;
+    if (lower === 'quarterly' || lower === '3-month') return 90;
+    if (lower === '6-month') return 180;
+    return null;
+  }
+
+  for (const sub of allActiveSubs) {
     if (!sub.nextBillDate) continue;
-    const billDay = startOfDay(sub.nextBillDate);
-    if (billDay < startOfDay(windowStart) || billDay > windowEnd) continue;
-    const key = format(billDay, 'MMM d');
-    const existing = dayMap.get(key);
-    if (existing) {
-      existing.count += 1;
-      existing.revenue += sub.recurringPrice;
+    const intervalDays = freqToDays(sub.frequency);
+    let billDay = startOfDay(sub.nextBillDate);
+
+    // Project forward: add each billing occurrence within the window
+    // Start from the known nextBillDate and keep adding frequency intervals
+    const maxProjections = 5; // safety cap
+    let projections = 0;
+    while (billDay <= windowEnd && projections < maxProjections) {
+      if (billDay >= startOfDay(windowStart)) {
+        const key = format(billDay, 'MMM d');
+        const existing = dayMap.get(key);
+        if (existing) {
+          existing.count += 1;
+          existing.revenue += sub.recurringPrice;
+        }
+      }
+      // If we have a frequency, project the next occurrence; otherwise stop
+      if (!intervalDays) break;
+      billDay = addDays(billDay, intervalDays);
+      projections++;
     }
   }
 
