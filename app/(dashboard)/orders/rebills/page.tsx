@@ -292,7 +292,11 @@ export default async function RebillsPage({
                       {sub.currentBillingCycle}
                     </td>
                     <td className="px-6 py-3 text-gray-300 tabular-nums">
-                      {fmt$(sub.recurringPrice)}
+                      {sub.recurringPrice === 0 ? (
+                        <span className="text-yellow-400">$0 trial</span>
+                      ) : (
+                        fmt$(sub.recurringPrice)
+                      )}
                     </td>
                     <td className="px-6 py-3 text-gray-400">
                       {sub.frequency ?? '—'}
