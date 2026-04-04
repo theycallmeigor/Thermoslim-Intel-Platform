@@ -112,7 +112,7 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
           let pageAccepted = 0;
           let pageRevenue = 0;
           let ordersReached = 0;
-          const products = new Map<string, { name: string; crmId: string | null; count: number; revenue: number; price: number; frequency: string | null; isSubscription: boolean }>();
+          const products = new Map<string, { name: string; crmId: string | null; count: number; revenue: number; prices: Set<number>; frequency: string | null; isSubscription: boolean }>();
 
           for (const order of groupOrders) {
             const upsaleItems = order.items.filter(i => i.productType === 'UPSALE');
@@ -137,10 +137,12 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
 
               const prodLine = item.productMap?.productLine ?? 'Unknown';
               const freq = item.productMap?.frequency ?? null;
-              const key = `${item.ccCrmId}|${item.price}`;
-              const existing = products.get(key) ?? { name: freq ? `${prodLine} (${freq})` : prodLine, crmId: item.ccCrmId, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: item.productMap?.isSubscription ?? false };
+              // Group by ccCrmId — each CC product is a distinct offer
+              const key = item.ccCrmId ?? `${prodLine}|${item.price}`;
+              const existing = products.get(key) ?? { name: freq ? `${prodLine} (${freq})` : prodLine, crmId: item.ccCrmId, count: 0, revenue: 0, prices: new Set(), frequency: freq, isSubscription: item.productMap?.isSubscription ?? false };
               existing.count++;
               existing.revenue += item.price;
+              existing.prices.add(item.price);
               products.set(key, existing);
             }
           }
@@ -151,7 +153,7 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
             orders: pageAccepted,
             revenue: pageRevenue,
             products: [...products.values()]
-              .map(v => ({ name: v.name, campaignProductId: v.crmId, count: v.count, rate: ordersReached > 0 ? v.count / ordersReached : 0, prices: [v.price], frequency: v.frequency, isSubscription: v.isSubscription }))
+              .map(v => ({ name: v.name, campaignProductId: v.crmId, count: v.count, rate: ordersReached > 0 ? v.count / ordersReached : 0, prices: [...v.prices].sort((a, b) => a - b), frequency: v.frequency, isSubscription: v.isSubscription }))
               .sort((a, b) => b.count - a.count),
           });
         }
@@ -166,8 +168,8 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
           const slot = item.productSlot;
           if (!slotProducts.has(slot)) slotProducts.set(slot, new Map());
           const prods = slotProducts.get(slot)!;
-          const key = `${item.ccCrmId ?? item.name}|${item.price}`;
           const prodLine = item.productMap?.productLine ?? 'Unknown';
+          const key = `${prodLine}|${item.price}`;
           const freq = item.productMap?.frequency ?? null;
           const existing = prods.get(key) ?? { name: freq ? `${prodLine} (${freq})` : prodLine, crmId: item.ccCrmId, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: item.productMap?.isSubscription ?? false };
           existing.count++;
