@@ -19,6 +19,7 @@ const NAV: NavGroup[] = [
     items: [
       { label: 'Dashboard', href: '/dashboard' },
       { label: 'Analytics', href: '/analytics' },
+      { label: 'Forecast', href: '/analytics/forecast' },
     ],
   },
   {

@@ -6,7 +6,8 @@ export const dynamic = 'force-dynamic';
 import Link from 'next/link';
 import { format } from 'date-fns';
 import { prisma } from '@/lib/prisma';
-import { fmt$, fmtK, parseRange } from '@/lib/dashboard/formatting';
+import { fmt$, fmtK, parseRange, toMonthlyMrr } from '@/lib/dashboard/formatting';
+import { getTrialExpectedPrices } from '@/lib/dashboard/trial-prices';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Badge } from '@/components/ui/Badge';
@@ -20,6 +21,17 @@ export default async function RevenueWaterfallPage({
   const { startDate, endDate } = parseRange(sp.from, sp.to);
 
   const dateFilter = { occurredAt: { gte: startDate, lte: endDate } };
+
+  // MRR from active subscriptions
+  const activeSubs = await prisma.subscription.findMany({
+    where: { status: { in: ['ACTIVE', 'TRIAL'] } },
+    select: { recurringPrice: true, frequency: true, productMapId: true },
+  });
+  const trialPrices = await getTrialExpectedPrices();
+  const totalMrr = activeSubs.reduce((s, sub) => {
+    const expected = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
+    return s + toMonthlyMrr(sub.recurringPrice, sub.frequency, expected);
+  }, 0);
 
   // Aggregate by event type
   const byType = await prisma.revenueEvent.groupBy({
@@ -113,11 +125,12 @@ export default async function RevenueWaterfallPage({
       <PageHeader title="Revenue Waterfall" subtitle="Gross to net revenue breakdown" />
 
       {/* KPI Strip */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-5 gap-4">
         <KpiCard label="Gross Revenue" value={fmtK(grossRevenue)} sub="Sales + Rebills" />
         <KpiCard label="Refunds" value={fmtK(refundAmt)} sub={`${typeMap['REFUND']?.count ?? 0} events`} />
         <KpiCard label="Chargebacks" value={fmtK(cbAmt)} sub={`${typeMap['CHARGEBACK']?.count ?? 0} events`} />
         <KpiCard label="Net Revenue" value={fmtK(netRevenue)} sub="Gross − Refunds − Chargebacks" />
+        <KpiCard label="Current MRR" value={fmtK(totalMrr)} sub="Active + Trial subs" />
       </div>
 
       {/* Waterfall Chart */}
