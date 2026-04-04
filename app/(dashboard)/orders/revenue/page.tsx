@@ -6,8 +6,8 @@ export const dynamic = 'force-dynamic';
 import Link from 'next/link';
 import { addMonths, format, startOfDay, subDays } from 'date-fns';
 import { prisma } from '@/lib/prisma';
-import { fmt$, fmtK, parseRange, toMonthlyMrr } from '@/lib/dashboard/formatting';
-import { getTrialExpectedPrices } from '@/lib/dashboard/trial-prices';
+import { fmt$, fmtK, parseRange } from '@/lib/dashboard/formatting';
+import { calculateMrr } from '@/lib/dashboard/mrr';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { Badge } from '@/components/ui/Badge';
@@ -22,18 +22,8 @@ export default async function RevenueWaterfallPage({
 
   const dateFilter = { occurredAt: { gte: startDate, lte: endDate } };
 
-  // MRR from active subscriptions
-  const activeSubs = await prisma.subscription.findMany({
-    where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-    select: { recurringPrice: true, frequency: true, productMapId: true },
-  });
-  const trialPrices = await getTrialExpectedPrices();
-  const totalMrr = activeSubs.reduce((s, sub) => {
-    const expected = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
-    return s + toMonthlyMrr(sub.recurringPrice, sub.frequency, expected);
-  }, 0);
-
-  const activeCount = activeSubs.length;
+  // MRR from shared calculator
+  const { totalMrr, activeCount } = await calculateMrr();
 
   // Forecast: avg daily new sales from last 30 days
   const last30Start = startOfDay(subDays(new Date(), 30));
