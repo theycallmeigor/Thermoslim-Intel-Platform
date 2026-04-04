@@ -2,14 +2,10 @@ export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 export const metadata: Metadata = { title: 'All Orders — ThermoSlim' };
 
-import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
-import { fmt$ } from '@/lib/dashboard/formatting';
 import { statusColors, sourceColors, humanizeSource, humanizeStatus, getOrderType } from '@/lib/dashboard/colors';
 import { PageHeader } from '@/components/ui/PageHeader';
-import { Badge } from '@/components/ui/Badge';
-import { OrderRow } from './OrderQuickView';
-import { format } from 'date-fns';
+import { OrderTable } from './OrderTable';
 
 export default async function OrdersPage({
   searchParams,
@@ -54,6 +50,17 @@ export default async function OrdersPage({
     orderBy: { createdAt: 'desc' },
   });
 
+  // Serialize for client component
+  const serializedOrders = orders.map(order => ({
+    ...order,
+    createdAt: order.createdAt.toISOString(),
+    orderType: getOrderType(order),
+    sourceLabel: humanizeSource(order.source),
+    sourceColor: sourceColors[order.source] ?? 'bg-gray-500/10 text-gray-400',
+    statusLabel: humanizeStatus(order.status),
+    statusColor: statusColors[order.status] ?? 'bg-gray-500/10 text-gray-400',
+  }));
+
   return (
     <div className="space-y-6">
       <PageHeader title="Orders" subtitle="Browse and search all orders" />
@@ -91,65 +98,7 @@ export default async function OrdersPage({
             </span>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-gray-800">
-                  <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Date</th>
-                  <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Order ID</th>
-                  <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Customer</th>
-                  <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Source</th>
-                  <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Type</th>
-                  <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Status</th>
-                  <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Total</th>
-                  <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Campaign</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-800/60">
-                {orders.map((order) => {
-                  const orderType = getOrderType(order);
-                  const quickViewData = {
-                    ...order,
-                    createdAt: order.createdAt.toISOString(),
-                    customer: order.customer ?? null,
-                  };
-                  return (
-                    <OrderRow key={order.id} order={quickViewData}>
-                      <td className="px-6 py-3.5 text-gray-400 text-xs whitespace-nowrap">
-                        {format(new Date(order.createdAt), 'MMM d, yyyy')}
-                      </td>
-                      <td className="px-6 py-3.5">
-                        <span className="text-blue-400 font-medium font-mono text-xs">
-                          {order.sourceOrderId}
-                        </span>
-                      </td>
-                      <td className="px-6 py-3.5 text-gray-300 text-xs">
-                        {order.customer.fullName || order.customer.email}
-                      </td>
-                      <td className="px-6 py-3.5">
-                        <Badge label={humanizeSource(order.source)} colorClass={sourceColors[order.source]} />
-                      </td>
-                      <td className="px-6 py-3.5">
-                        {orderType !== 'one-time' && (
-                          <Badge
-                            label={orderType === 'rebill' ? 'Rebill' : 'Subscription'}
-                            colorClass={orderType === 'rebill' ? 'bg-orange-500/10 text-orange-400' : 'bg-purple-500/10 text-purple-400'}
-                          />
-                        )}
-                      </td>
-                      <td className="px-6 py-3.5">
-                        <Badge label={humanizeStatus(order.status)} colorClass={statusColors[order.status]} />
-                      </td>
-                      <td className="px-6 py-3.5 text-right text-gray-200 tabular-nums font-medium">
-                        {fmt$(order.orderTotal)}
-                      </td>
-                      <td className="px-6 py-3.5 text-gray-500 text-xs truncate max-w-[140px]">
-                        {order.campaignName ?? '—'}
-                      </td>
-                    </OrderRow>
-                  );
-                })}
-              </tbody>
-            </table>
+            <OrderTable orders={serializedOrders} />
           </div>
         </div>
       )}
