@@ -114,9 +114,9 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
           const slot = item.productSlot;
           if (!otoSlots.has(slot)) otoSlots.set(slot, new Map());
           const slotProducts = otoSlots.get(slot)!;
-          // Key by campaignProductId for granular breakdown
-          const key = item.ccCampaignProductId ?? item.ccCrmId ?? item.name ?? 'unknown';
+          // Key by name + price to aggregate same product across campaign IDs
           const displayName = item.name ?? item.productMap?.productLine ?? 'Unknown';
+          const key = `${displayName}|${item.price}`;
           const existing = slotProducts.get(key) ?? { name: displayName, campaignProductId: item.ccCampaignProductId, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: isSub };
           existing.count += 1;
           existing.revenue += item.price;
