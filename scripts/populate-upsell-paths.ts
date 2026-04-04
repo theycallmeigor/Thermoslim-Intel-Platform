@@ -119,13 +119,20 @@ async function main() {
         const lastItem = items.length > 0 ? items[items.length - 1] : null;
         const finalProductMapId = lastItem?.productMapId ?? null;
 
-        await prisma.upsellPath.create({
-          data: {
+        await prisma.upsellPath.upsert({
+          where: { orderId: order.id },
+          create: {
             orderId: order.id,
             initialProductMapId,
             finalProductMapId,
             upsellsAccepted,
             upsellsDeclined: 0,
+            revenueAdded,
+          },
+          update: {
+            initialProductMapId,
+            finalProductMapId,
+            upsellsAccepted,
             revenueAdded,
           },
         });
