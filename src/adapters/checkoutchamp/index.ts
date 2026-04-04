@@ -188,6 +188,7 @@ export class CheckoutChampAdapter implements IAdapter {
       loginId: config.checkoutChamp.apiUsername,
       password: config.checkoutChamp.apiKey,
     };
+    console.log(`[cc adapter] init: baseUrl=${this.baseUrl}, loginId=${this.authParams.loginId}, keyLen=${this.authParams.password?.length}`);
   }
 
   async connect(): Promise<void> {
