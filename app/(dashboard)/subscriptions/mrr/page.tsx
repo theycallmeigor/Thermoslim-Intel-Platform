@@ -5,6 +5,7 @@ export const metadata: Metadata = { title: 'MRR Waterfall — ThermoSlim' };
 import { format } from 'date-fns';
 import { prisma } from '@/lib/prisma';
 import { fmt$, fmtK, parseRange, toMonthlyMrr } from '@/lib/dashboard/formatting';
+import { calculateMrr } from '@/lib/dashboard/mrr';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { Badge } from '@/components/ui/Badge';
 import { PageHeader } from '@/components/ui/PageHeader';
@@ -98,12 +99,8 @@ export default async function MrrWaterfallPage({
   const { startDate, endDate } = parseRange(sp.from, sp.to);
   const { activeSubs, periodEvents, recentEvents } = await getMrrData(startDate, endDate);
 
-  // ── KPI: Current MRR ────────────────────────────────────────────────────────
-  const currentMrr = activeSubs.reduce(
-    (sum, s) => sum + toMonthlyMrr(s.recurringPrice, s.frequency),
-    0,
-  );
-  const activeCount = activeSubs.length;
+  // ── KPI: Current MRR (from shared calculator — includes trial prices) ──────
+  const { totalMrr: currentMrr, activeCount } = await calculateMrr();
 
   // ── KPI: Period new / churned MRR ──────────────────────────────────────────
   let newMrrPeriod = 0;
