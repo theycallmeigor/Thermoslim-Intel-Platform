@@ -10,6 +10,7 @@ import { SubscriberDonut, type DonutSlice } from './SubscriberDonut';
 import { SubscriberActivityChart, type SubActivityDay } from './SubscriberActivityChart';
 import { subDays, format } from 'date-fns';
 import { fmt$, fmtK, pctChange, parseRange, toMonthlyMrr } from '@/lib/dashboard/formatting';
+import { getTrialExpectedPrices } from '@/lib/dashboard/trial-prices';
 import { statusColors, getSourceLabel, getOrderType } from '@/lib/dashboard/colors';
 import { KpiCard } from '@/components/ui/KpiCard';
 
@@ -44,11 +45,13 @@ const getStableKpis = unstable_cache(
       }),
       prisma.subscription.findMany({
         where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-        include: { productMap: { select: { productLine: true, frequency: true } } },
+        select: { recurringPrice: true, frequency: true, productMapId: true, startedAt: true,
+          productMap: { select: { productLine: true, frequency: true } } },
       }),
       prisma.subscription.findMany({
         where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-        include: { productMap: { select: { name: true, productLine: true, frequency: true } } },
+        select: { recurringPrice: true, frequency: true, productMapId: true, ccPurchaseId: true, startedAt: true,
+          productMap: { select: { name: true, productLine: true, frequency: true } } },
       }),
       prisma.order.count({ where: { source: { in: ['SHOPIFY', 'MERGED'] } } }),
     ]);
@@ -203,18 +206,20 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
     .sort((a, b) => b[1] - a[1])
     .map(([name, value]) => ({ name, value }));
 
-  // ─── MRR breakdown by product (normalized by frequency) ───────────────────
+  // ─── MRR breakdown by product (normalized by frequency, with trial prices) ─
+  const trialPrices = await getTrialExpectedPrices();
   const mrrProductMap = new Map<string, { name: string; mrr: number; count: number }>();
   for (const sub of mrrByProduct) {
-    const key = sub.productMap?.name ?? sub.ccPurchaseId ?? 'Unknown';
-    const monthlyMrr = toMonthlyMrr(sub.recurringPrice, sub.frequency);
+    const key = sub.productMap?.productLine ?? 'Unknown';
+    const expected = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
+    const monthlyMrr = toMonthlyMrr(sub.recurringPrice, sub.frequency, expected);
     const existing = mrrProductMap.get(key);
     if (existing) {
       existing.mrr += monthlyMrr;
       existing.count += 1;
     } else {
       mrrProductMap.set(key, {
-        name: sub.productMap?.name ?? 'Unknown Product',
+        name: key,
         mrr: monthlyMrr,
         count: 1,
       });
@@ -227,11 +232,17 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
   // ─── Pct changes ──────────────────────────────────────────────────────────
   const currRevenue = revenueResult._sum.totalPrice ?? 0;
   const prevRevenue = prevRevenueResult._sum.totalPrice ?? 0;
-  // MRR normalized by frequency
-  const currMrr = activeSubsWithProduct.reduce((sum, s) => sum + toMonthlyMrr(s.recurringPrice, s.frequency), 0);
+  // MRR normalized by frequency with trial price adjustment
+  const currMrr = activeSubsWithProduct.reduce((sum, s) => {
+    const expected = s.productMapId ? trialPrices.get(s.productMapId) : undefined;
+    return sum + toMonthlyMrr(s.recurringPrice, s.frequency, expected);
+  }, 0);
   const prevMrr = activeSubsWithProduct
     .filter(s => s.startedAt < startDate)
-    .reduce((sum, s) => sum + toMonthlyMrr(s.recurringPrice, s.frequency), 0);
+    .reduce((sum, s) => {
+      const expected = s.productMapId ? trialPrices.get(s.productMapId) : undefined;
+      return sum + toMonthlyMrr(s.recurringPrice, s.frequency, expected);
+    }, 0);
 
   // ─── Subscriber activity chart ───────────────────────────────────────────
   const additionTypes = new Set(['CREATED', 'REACTIVATED', 'RESUMED']);
