@@ -188,7 +188,10 @@ async function main() {
         const pageUrl = order.salesUrl ?? '';
         const campaignId = order.campaignId ?? '';
         const campaignName = order.campaignName ?? '';
-        const isRecurring = order.ccOrderType === 'REBILL';
+        const isRecurring =
+          order.ccOrderType === 'REBILL' ||
+          order.items.some(i => (i.billingCycleNumber ?? 0) > 1) ||
+          (order.tags?.split(',').map(t => t.trim()).includes('Recurring') ?? false);
         const isRefunded = order.status === 'REFUNDED';
 
         // Determine product-level dimensions from order items
