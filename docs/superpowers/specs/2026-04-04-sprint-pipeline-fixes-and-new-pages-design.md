@@ -11,8 +11,10 @@
 4. Upcoming rebills — pagination + unknown resolution + status filter
 5. Product mapping audit UI (new page)
 6. Funnel performance page (new page)
+7. DailySnapshot automation (post-sync rebuild)
+8. Duplicate line items investigation + fix
 
-**Out of scope:** Loop Subscriptions, analytics audit dashboards, BullMQ dashboard, alert thresholds, CC flat field webhook fix, duplicate line items investigation.
+**Out of scope:** Loop Subscriptions, analytics audit dashboards, BullMQ dashboard, alert thresholds, CC flat field webhook fix.
 
 ---
 
@@ -194,14 +196,46 @@ Pure CC data: `Order` + `OrderItem` + `UpsellPath` tables. No GA4/Clarity depend
 7. **New page 5** — Product mapping audit
 8. Run `npx tsx src/adapters/checkoutchamp/funnel-sync.ts` to populate funnel tables
 9. **New page 6** — Funnel performance
+10. **Fix 7** — DailySnapshot automation
+11. **Fix 8** — Investigate + fix duplicate line items
 
-Items 1-4 are quick fixes (~2 hrs total). Items 5-6 are new builds (~2-3 hrs total).
+Items 1-4 are quick fixes (~2 hrs total). Items 5-6 are new builds (~2-3 hrs total). Items 7-8 are infrastructure fixes (~1 hr total).
+
+---
+
+## 7. DailySnapshot Automation
+
+**Problem:** `build-snapshots.ts` is a manual CLI script. After CC or Shopify sync, snapshots go stale until someone manually runs it. All dashboard pages that read from DailySnapshot show outdated numbers.
+
+**Fix:** Add a post-sync snapshot rebuild step to the sync API routes:
+- After `adapter.sync()` completes successfully in `/api/sync/checkoutchamp/route.ts` and `/api/sync/shopify/route.ts` (if exists), call a lightweight snapshot rebuild for the affected date range.
+- Extract the snapshot-building logic from `scripts/build-snapshots.ts` into a shared module (`src/core/sync/rebuild-snapshots.ts`) that both the script and the API routes can call.
+- The API route rebuild should only process the synced date range (not the full 90 days), using the sync's `startDate`/`endDate` params.
+- Also add snapshot rebuild to the cron sync route (`/api/cron/sync-cc`) so scheduled syncs keep snapshots fresh.
+
+**Alternative (simpler):** Instead of extracting shared logic, just shell out to the build-snapshots script with `--from=` and `--today` args from the API route. Simpler but less clean.
+
+**Recommendation:** Extract the shared module. It's more work upfront but avoids shelling out from an API route, which is fragile on serverless (Vercel).
+
+---
+
+## 8. Duplicate Line Items — Investigation + Fix
+
+**Problem:** Order detail page shows 8 identical "Thermoslim Body Sculpting Device (Starter Bundle)" rows with the same SKU, price ($99.95), qty (1), all type OFFER. This is a data bug — duplicate OrderItem rows are being created.
+
+**Investigation plan:**
+1. Query the specific order to see if all 8 rows are truly identical (same fields) or subtly different
+2. Check if the CC adapter's `extractItems()` function is producing duplicates from the API response
+3. Check if the backfill endpoint (`/api/sync/backfill-cc`) re-creates items on orders that already have them (missing dedup check)
+4. Check if the merge logic (Shopify + CC → MERGED) appends items from both sides without deduplicating
+
+**Likely fix (based on hypothesis):** The backfill endpoint re-syncs orders that already have items, and the ingestion pipeline's upsert logic creates new OrderItem rows instead of updating existing ones. Fix: add a `deleteMany` for existing OrderItems before re-creating them during sync, or add a unique constraint on `(orderId, ccCrmId, productType)` to prevent duplicates.
+
+**If investigation reveals a different root cause:** Adjust fix accordingly. If the fix is > 30 min, document findings and defer the fix.
 
 ---
 
 ## Known Issues Flagged But Not In Scope
 
-- **Duplicate line items** on order detail (8 identical rows) — data/ingestion bug, needs separate investigation
 - **Merge-duplicates script** — flagged urgent March 27, status unknown, should be run on production
 - **CC webhook flat fields** — webhook-path issue, not blocking sync-path
-- **DailySnapshot not automated** — `build-snapshots.ts` is manual/cron, not triggered after sync
