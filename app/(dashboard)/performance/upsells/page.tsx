@@ -12,7 +12,7 @@ export default async function UpsellsPage({ searchParams }: { searchParams: Prom
   const sp = await searchParams;
   const { startDate, endDate, prevStart, prevEnd } = parseRange(sp.from, sp.to);
 
-  const baseOrderWhere = { createdAt: { gte: startDate, lte: endDate }, status: 'COMPLETE' as const, source: { in: ['SHOPIFY', 'MERGED'] as const } };
+  const baseOrderWhere = { createdAt: { gte: startDate, lte: endDate }, status: 'COMPLETE' as any, source: { in: ['SHOPIFY', 'MERGED'] } as any };
 
   const [upsellPaths, prevUpsellPathCount, allOrders, aovWithUpsell, aovWithoutUpsell] = await Promise.all([
     // All UpsellPath records in this period — source of truth for all upsell KPIs

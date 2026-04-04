@@ -74,7 +74,28 @@ async function getRebillData(
     }),
   ]);
 
-  return { kpi7, kpi30, totalCount, upcoming, windowStart, windowEnd };
+  // For $0 trial subs, look up expected rebill price from same-product subs
+  const trialProductMapIds = [...new Set(
+    upcoming.filter(s => s.recurringPrice === 0 && s.productMap).map(s => s.productMap!.name)
+  )];
+  const expectedPrices = new Map<string, number>();
+  if (trialProductMapIds.length > 0) {
+    // Get the most common non-zero price for each productMapId with $0 subs
+    const zeroSubs = upcoming.filter(s => s.recurringPrice === 0);
+    const pmIds = [...new Set(zeroSubs.map(s => s.productMapId).filter(Boolean))] as string[];
+    for (const pmId of pmIds) {
+      const prices = await prisma.subscription.groupBy({
+        by: ['recurringPrice'],
+        where: { productMapId: pmId, recurringPrice: { gt: 0 } },
+        _count: { id: true },
+        orderBy: { _count: { id: 'desc' } },
+        take: 1,
+      });
+      if (prices[0]) expectedPrices.set(pmId, prices[0].recurringPrice);
+    }
+  }
+
+  return { kpi7, kpi30, totalCount, upcoming, windowStart, windowEnd, expectedPrices };
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -96,7 +117,7 @@ export default async function RebillsPage({
   const rangeStart = sp.from ? new Date(sp.from + 'T00:00:00Z') : now;
   const rangeEnd = sp.to ? new Date(sp.to + 'T23:59:59Z') : addDays(now, 30);
 
-  const { kpi7, kpi30, totalCount, upcoming, windowStart, windowEnd } = await getRebillData(
+  const { kpi7, kpi30, totalCount, upcoming, windowStart, windowEnd, expectedPrices } = await getRebillData(
     rangeStart,
     rangeEnd,
     statusFilter,
@@ -293,7 +314,14 @@ export default async function RebillsPage({
                     </td>
                     <td className="px-6 py-3 text-gray-300 tabular-nums">
                       {sub.recurringPrice === 0 ? (
-                        <span className="text-yellow-400">$0 trial</span>
+                        <div>
+                          <span className="text-yellow-400 text-xs">Trial →</span>
+                          <span className="text-gray-300 ml-1">
+                            {expectedPrices.get(sub.productMapId ?? '')
+                              ? fmt$(expectedPrices.get(sub.productMapId ?? '')!)
+                              : 'TBD'}
+                          </span>
+                        </div>
                       ) : (
                         fmt$(sub.recurringPrice)
                       )}
