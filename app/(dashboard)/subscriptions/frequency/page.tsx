@@ -36,7 +36,17 @@ export default async function FrequencyPage({ searchParams }: { searchParams: Pr
   // Get expected prices for $0 trial subs so they count in MRR
   const trialPrices = await getTrialExpectedPrices();
 
-  // Group by frequency
+  // Get only active subs for MRR (exclude cancelled)
+  const activeSubs = await prisma.subscription.findMany({
+    where: { status: { in: ['ACTIVE', 'TRIAL'] } },
+    select: { recurringPrice: true, frequency: true, productMapId: true },
+  });
+  const activeMrr = activeSubs.reduce((s, sub) => {
+    const expected = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
+    return s + toMonthlyMrr(sub.recurringPrice, sub.frequency, expected);
+  }, 0);
+
+  // Group by frequency (includes recently cancelled for distribution view)
   const freqMap = new Map<string, { count: number; totalPrice: number; totalMrr: number; avgCycle: number; cycleSum: number }>();
   for (const sub of subs) {
     const freq = sub.frequency ?? 'unknown';
@@ -88,8 +98,8 @@ export default async function FrequencyPage({ searchParams }: { searchParams: Pr
     }))
     .sort((a, b) => b.mrr - a.mrr);
 
-  const totalMrr = frequencies.reduce((s, f) => s + f.mrr, 0);
-  const totalSubs = subs.length;
+  const totalMrr = activeMrr; // Only ACTIVE + TRIAL subs, not cancelled
+  const totalSubs = activeSubs.length;
   const topFreq = frequencies[0]?.label ?? '—';
 
   const donutData: FreqSlice[] = frequencies.map(f => ({
