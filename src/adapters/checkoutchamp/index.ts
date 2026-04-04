@@ -565,6 +565,7 @@ export class CheckoutChampAdapter implements IAdapter {
       data: {
         source: 'CHECKOUTCHAMP',
         sourceOrderId: order.orderId,
+        ccNumericOrderId: String(order.actualOrderId) || null,
         sourceClientOrderId: order.clientOrderId || null,
         customerEmail: order.emailAddress,
         status: orderStatusMap[order.orderStatus] ?? 'PENDING',

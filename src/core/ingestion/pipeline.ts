@@ -328,7 +328,7 @@ async function upsertOrder(data: OrderData): Promise<{ created: boolean }> {
       // Build the CC-wins enrichment payload (only overwrite if CC provides a value)
       const ccEnrichment: Record<string, unknown> = {
         source: 'MERGED' as const,
-        ccSourceOrderId: data.sourceOrderId,
+        ccSourceOrderId: (data as any).ccNumericOrderId ?? data.sourceOrderId,
       };
 
       // CC wins for these fields — only set if CC provides a non-null value
