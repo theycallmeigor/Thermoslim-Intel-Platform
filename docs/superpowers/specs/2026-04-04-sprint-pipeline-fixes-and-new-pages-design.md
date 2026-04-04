@@ -43,11 +43,13 @@
   const isRecurring =
     order.ccOrderType === 'REBILL' ||
     order.items.some(i => (i.billingCycleNumber ?? 0) > 1) ||
-    (order.tags?.includes('Recurring') ?? false);
+    (order.tags?.split(',').map(t => t.trim()).includes('Recurring') ?? false);
   ```
-- **Add `billingCycleNumber` to the items include** (line 96) since it's not currently selected.
+- **Note:** `billingCycleNumber` is already available on items (no `select` clause restricts the include), so no schema change needed.
 
 **Result:** Recurring orders are correctly classified using three signals: ccOrderType, billingCycleNumber, and tags.
+
+**Known gap:** Pure Shopify subscription rebills (never in CC) may not have any of these three signals. This is acceptable for now — CC is the subscription engine for ThermoSlim. If Loop Subscriptions are added later, a fourth signal (e.g., Shopify selling_plan presence) would be needed.
 
 ### Post-Fix Steps
 
@@ -66,9 +68,9 @@ After deploying both fixes:
 
 **Changes:**
 - **Remove env var lookups** (lines 109-110)
-- **Hardcode URLs:**
+- **Hardcode URLs** (single-tenant platform, store handle won't change):
   - Shopify: `https://admin.shopify.com/store/tvbczb-ie/orders/{shopifyOrderId}`
-  - CC CRM: `https://crm.checkoutchamp.com/customer/cs/orders/?orderId={ccSourceOrderId}`
+  - CC CRM: `https://crm.checkoutchamp.com/customer/cs/orders/?orderId={ccSourceOrderId}` (note: this is the CRM customer service view, replacing the previous admin order summary link)
 - **Conditions remain the same:** Shopify link shows when `shopifyOrderId` exists, CC link shows when source is CHECKOUTCHAMP or MERGED
 
 **Scope:** Detail page only, not the All Orders table.
@@ -96,7 +98,7 @@ After deploying both fixes:
 
 **File:** `app/(dashboard)/orders/rebills/page.tsx`
 
-### 4A: Cursor-Based Pagination
+### 4A: Offset-Based Pagination
 - Add `page` URL search param (default 1)
 - 50 items per page
 - Add prev/next buttons below table
@@ -153,7 +155,7 @@ OrderItems where `productMapId IS NULL`, grouped by `ccCrmId` + `name`, with cou
 ### Data Source
 Pure CC data: `Order` + `OrderItem` + `UpsellPath` tables. No GA4/Clarity dependency.
 
-**Prerequisite:** Run `funnel-sync.ts` to populate `Funnel` and `FunnelPage` tables. If empty, derive funnel structure on-the-fly from order `salesUrl` patterns.
+**Prerequisite:** Run `npx tsx src/adapters/checkoutchamp/funnel-sync.ts` to populate `Funnel` and `FunnelPage` tables. If empty, derive funnel structure on-the-fly from order `salesUrl` patterns.
 
 ### Layout
 
@@ -177,7 +179,7 @@ Pure CC data: `Order` + `OrderItem` + `UpsellPath` tables. No GA4/Clarity depend
 - **Funnel identification:** Group by `Funnel.ccReferenceId` if populated, else group orders by `salesUrl` path prefix
 - **Page sequence:** From `FunnelPage.pageType` + `sortOrder` if populated, else infer from slug patterns (checkout, upsell, downsell, thankyou)
 - **Products per page:** Join OrderItem on order, use `productType` (OFFER vs UPSALE) to distinguish checkout vs upsell products
-- **Take rates:** From `UpsellPath` records (`upsellsAccepted` / `upsellsOffered`)
+- **Take rates:** From `UpsellPath` records: `upsellsAccepted / (upsellsAccepted + upsellsDeclined)`. Note: there is no `upsellsOffered` field — total offered must be computed as the sum of accepted + declined.
 
 ---
 
@@ -190,7 +192,8 @@ Pure CC data: `Order` + `OrderItem` + `UpsellPath` tables. No GA4/Clarity depend
 5. **Fix 3** — Frequency analysis matrix
 6. **Fix 4** — Rebills pagination + unknowns + status filter
 7. **New page 5** — Product mapping audit
-8. **New page 6** — Funnel performance
+8. Run `npx tsx src/adapters/checkoutchamp/funnel-sync.ts` to populate funnel tables
+9. **New page 6** — Funnel performance
 
 Items 1-4 are quick fixes (~2 hrs total). Items 5-6 are new builds (~2-3 hrs total).
 
