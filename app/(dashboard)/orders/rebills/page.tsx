@@ -11,20 +11,32 @@ import { Badge } from '@/components/ui/Badge';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { RebillCalendar, type DayVolume } from './RebillCalendar';
 
+const PAGE_SIZE = 50;
+
 // ─── Data fetching ────────────────────────────────────────────────────────────
 
-async function getRebillData(rangeStart: Date, rangeEnd: Date) {
+async function getRebillData(
+  rangeStart: Date,
+  rangeEnd: Date,
+  statusFilter: string,
+  page: number,
+) {
   const now = new Date();
   // Use TopBar date range if set, otherwise default to next 30 days
   const windowStart = rangeStart > now ? rangeStart : now;
   const windowEnd = rangeEnd;
   const in7Days = addDays(windowStart, 7);
 
-  const [kpi7, kpi30, upcoming] = await Promise.all([
+  const statusWhere =
+    statusFilter === 'all'
+      ? { status: { in: ['ACTIVE', 'TRIAL', 'RECYCLE_BILLING'] as const } }
+      : { status: statusFilter.toUpperCase() as string };
+
+  const [kpi7, kpi30, totalCount, upcoming] = await Promise.all([
     // KPI: next 7 days (ACTIVE + TRIAL only)
     prisma.subscription.aggregate({
       where: {
-        status: { in: ['ACTIVE', 'TRIAL'] },
+        ...statusWhere,
         nextBillDate: { gte: windowStart, lte: in7Days },
       },
       _count: { id: true },
@@ -34,21 +46,27 @@ async function getRebillData(rangeStart: Date, rangeEnd: Date) {
     // KPI: next 30 days (ACTIVE + TRIAL only)
     prisma.subscription.aggregate({
       where: {
-        status: { in: ['ACTIVE', 'TRIAL'] },
+        ...statusWhere,
         nextBillDate: { gte: windowStart, lte: windowEnd },
       },
       _count: { id: true },
       _sum: { recurringPrice: true },
     }),
 
-    // Full table: ACTIVE + TRIAL + RECYCLE_BILLING, sorted by nextBillDate
+    // Total count for pagination
+    prisma.subscription.count({
+      where: { ...statusWhere, nextBillDate: { not: null } },
+    }),
+
+    // Full table: sorted by nextBillDate, paginated
     prisma.subscription.findMany({
       where: {
-        status: { in: ['ACTIVE', 'TRIAL', 'RECYCLE_BILLING'] },
+        ...statusWhere,
         nextBillDate: { not: null },
       },
       orderBy: { nextBillDate: 'asc' },
-      take: 50,
+      skip: (page - 1) * PAGE_SIZE,
+      take: PAGE_SIZE,
       include: {
         customer: { select: { email: true, firstName: true, lastName: true } },
         productMap: { select: { name: true, productLine: true, frequency: true } },
@@ -56,18 +74,41 @@ async function getRebillData(rangeStart: Date, rangeEnd: Date) {
     }),
   ]);
 
-  return { kpi7, kpi30, upcoming, windowStart, windowEnd };
+  return { kpi7, kpi30, totalCount, upcoming, windowStart, windowEnd };
 }
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default async function RebillsPage({ searchParams }: { searchParams: Promise<{ from?: string; to?: string }> }) {
+export default async function RebillsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ from?: string; to?: string; page?: string; status?: string }>;
+}) {
   const sp = await searchParams;
+  const page = Math.max(1, parseInt(sp.page ?? '1', 10));
+  const validStatuses = ['ACTIVE', 'TRIAL', 'RECYCLE_BILLING'];
+  const rawStatus = sp.status ?? 'all';
+  const statusFilter =
+    rawStatus === 'all' || validStatuses.includes(rawStatus.toUpperCase()) ? rawStatus : 'all';
+
   // Default to next 30 days if no date range selected
   const now = new Date();
   const rangeStart = sp.from ? new Date(sp.from + 'T00:00:00Z') : now;
   const rangeEnd = sp.to ? new Date(sp.to + 'T23:59:59Z') : addDays(now, 30);
-  const { kpi7, kpi30, upcoming, windowStart, windowEnd } = await getRebillData(rangeStart, rangeEnd);
+
+  const { kpi7, kpi30, totalCount, upcoming, windowStart, windowEnd } = await getRebillData(
+    rangeStart,
+    rangeEnd,
+    statusFilter,
+    page,
+  );
+
+  const unlinkedCount = await prisma.subscription.count({
+    where: {
+      productMapId: null,
+      status: { in: ['ACTIVE', 'TRIAL', 'RECYCLE_BILLING'] },
+    },
+  });
 
   // ── Daily volume chart data (next 30 days) ──────────────────────────────────
   const dayMap = new Map<string, DayVolume>();
@@ -105,6 +146,29 @@ export default async function RebillsPage({ searchParams }: { searchParams: Prom
         subtitle="Active subscriptions billing in the next 30 days"
       />
 
+      {/* Status filter tabs */}
+      <div className="flex gap-1 bg-gray-900 border border-gray-800 rounded-lg p-1 w-fit">
+        {[
+          { key: 'all', label: 'All' },
+          { key: 'ACTIVE', label: 'Active' },
+          { key: 'TRIAL', label: 'Trial' },
+          { key: 'RECYCLE_BILLING', label: 'Recycle Billing' },
+        ].map(tab => {
+          const isActive = statusFilter === tab.key;
+          return (
+            <a
+              key={tab.key}
+              href={`?status=${tab.key}&page=1${sp.from ? `&from=${sp.from}` : ''}${sp.to ? `&to=${sp.to}` : ''}`}
+              className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
+                isActive ? 'bg-gray-700 text-white' : 'text-gray-500 hover:text-gray-300'
+              }`}
+            >
+              {tab.label}
+            </a>
+          );
+        })}
+      </div>
+
       {/* KPI strip */}
       <div className="grid grid-cols-4 gap-4">
         <KpiCard label="Upcoming 7d" value={count7.toLocaleString()} />
@@ -112,6 +176,13 @@ export default async function RebillsPage({ searchParams }: { searchParams: Prom
         <KpiCard label="Upcoming 30d" value={count30.toLocaleString()} />
         <KpiCard label="Revenue at Risk (30d)" value={fmtK(rev30)} />
       </div>
+
+      {/* Unlinked warning */}
+      {unlinkedCount > 0 && (
+        <div className="text-xs text-yellow-500 bg-yellow-500/10 border border-yellow-500/20 rounded-lg px-4 py-2">
+          {unlinkedCount} subscription{unlinkedCount !== 1 ? 's' : ''} have no product mapping — run seed script to backfill
+        </div>
+      )}
 
       {/* Chart */}
       <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
@@ -162,7 +233,8 @@ export default async function RebillsPage({ searchParams }: { searchParams: Prom
                 const truncatedEmail =
                   email.length > 32 ? email.slice(0, 29) + '…' : email;
 
-                const productName = sub.productMap?.name ?? 'Unknown';
+                const productName =
+                  sub.productMap?.name ?? sub.productMap?.productLine ?? sub.frequency ?? 'Unlinked';
                 const statusColor =
                   subscriptionStatusColors[sub.status] ?? 'bg-gray-500/10 text-gray-400';
 
@@ -199,6 +271,31 @@ export default async function RebillsPage({ searchParams }: { searchParams: Prom
             )}
           </tbody>
         </table>
+
+        {/* Pagination */}
+        <div className="flex items-center justify-between px-6 py-3 border-t border-gray-800">
+          <span className="text-xs text-gray-500">
+            Showing {Math.min((page - 1) * PAGE_SIZE + 1, totalCount)}–{Math.min(page * PAGE_SIZE, totalCount)} of {totalCount}
+          </span>
+          <div className="flex gap-2">
+            {page > 1 && (
+              <a
+                href={`?page=${page - 1}&status=${statusFilter}${sp.from ? `&from=${sp.from}` : ''}${sp.to ? `&to=${sp.to}` : ''}`}
+                className="px-3 py-1 text-xs font-medium rounded-md bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors"
+              >
+                Previous
+              </a>
+            )}
+            {page * PAGE_SIZE < totalCount && (
+              <a
+                href={`?page=${page + 1}&status=${statusFilter}${sp.from ? `&from=${sp.from}` : ''}${sp.to ? `&to=${sp.to}` : ''}`}
+                className="px-3 py-1 text-xs font-medium rounded-md bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors"
+              >
+                Next
+              </a>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
