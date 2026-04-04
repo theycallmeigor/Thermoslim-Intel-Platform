@@ -1,0 +1,309 @@
+[     162ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/dashboard:0
+[     626ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     629ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     629ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     629ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     629ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     629ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     629ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     629ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     633ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     633ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     633ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     634ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     634ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     634ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     634ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     634ms] Error: 
+Invalid `prisma.order.count()` invocation:
+
+
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at $n.handleRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/Users/igordviniatin/Documents/thermoslim-platform/.worktrees/foundation-shell/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async Promise.all (index 4)
+    at async getDashboardData (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:40:288)
+    at async DashboardPage (webpack-internal:///(rsc)/./app/(dashboard)/dashboard/page.tsx:478:18)
+[     636ms] [ERROR] The above error occurred in the <NotFoundErrorBoundary> component:
+
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at main
+    at div
+    at div
+    at DashboardLayout (Server)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at body
+    at html
+    at RootLayout (Server)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at DevRootNotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:33:11)
+    at ReactDevOverlay (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/ReactDevOverlay.js:87:9)
+    at HotReload (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:321:11)
+    at Router (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:207:11)
+    at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:113:9)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:585:13)
+    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:112:27)
+    at Root (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:117:11)
+    at ReactDevOverlay (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/ReactDevOverlay.js:87:9)
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ReactDevOverlay. @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[     652ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ http://localhost:3000/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=Error%3A+%0AInvalid+%60prisma.order.count%28%29%60+invocation%3A%0A%0A%0ACan%27t+reach+database+server+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60%0A%0APlease+make+sure+your+database+server+is+running+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60.&file=%2FUsers%2Figordviniatin%2FDocuments%2Fthermoslim-platform%2F.worktrees%2Ffoundation-shell%2Fnode_modules%2F%40prisma%2Fclient%2Fruntime%2Flibrary.js&methodName=%24n.handleRequestError&arguments=&lineNumber=121&column=7315:0
+[     653ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ http://localhost:3000/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=Error%3A+%0AInvalid+%60prisma.order.count%28%29%60+invocation%3A%0A%0A%0ACan%27t+reach+database+server+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60%0A%0APlease+make+sure+your+database+server+is+running+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60.&file=%2FUsers%2Figordviniatin%2FDocuments%2Fthermoslim-platform%2F.worktrees%2Ffoundation-shell%2Fnode_modules%2F%40prisma%2Fclient%2Fruntime%2Flibrary.js&methodName=%24n.handleAndLogRequestError&arguments=&lineNumber=121&column=6623:0
+[     653ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ http://localhost:3000/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=Error%3A+%0AInvalid+%60prisma.order.count%28%29%60+invocation%3A%0A%0A%0ACan%27t+reach+database+server+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60%0A%0APlease+make+sure+your+database+server+is+running+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60.&file=%2FUsers%2Figordviniatin%2FDocuments%2Fthermoslim-platform%2F.worktrees%2Ffoundation-shell%2Fnode_modules%2F%40prisma%2Fclient%2Fruntime%2Flibrary.js&methodName=%24n.request&arguments=&lineNumber=121&column=6307:0
+[     653ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ http://localhost:3000/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=Error%3A+%0AInvalid+%60prisma.order.count%28%29%60+invocation%3A%0A%0A%0ACan%27t+reach+database+server+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60%0A%0APlease+make+sure+your+database+server+is+running+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60.&file=%2FUsers%2Figordviniatin%2FDocuments%2Fthermoslim-platform%2F.worktrees%2Ffoundation-shell%2Fnode_modules%2F%40prisma%2Fclient%2Fruntime%2Flibrary.js&methodName=%24n.handleAndLogRequestError&arguments=&lineNumber=121&column=6623:0
+[     653ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ http://localhost:3000/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=Error%3A+%0AInvalid+%60prisma.order.count%28%29%60+invocation%3A%0A%0A%0ACan%27t+reach+database+server+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60%0A%0APlease+make+sure+your+database+server+is+running+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60.&file=%2FUsers%2Figordviniatin%2FDocuments%2Fthermoslim-platform%2F.worktrees%2Ffoundation-shell%2Fnode_modules%2F%40prisma%2Fclient%2Fruntime%2Flibrary.js&methodName=async+l&arguments=&lineNumber=130&column=9633:0
+[     655ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ http://localhost:3000/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=Error%3A+%0AInvalid+%60prisma.order.count%28%29%60+invocation%3A%0A%0A%0ACan%27t+reach+database+server+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60%0A%0APlease+make+sure+your+database+server+is+running+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60.&file=%2FUsers%2Figordviniatin%2FDocuments%2Fthermoslim-platform%2F.worktrees%2Ffoundation-shell%2Fnode_modules%2F%40prisma%2Fclient%2Fruntime%2Flibrary.js&methodName=%24n.request&arguments=&lineNumber=121&column=6307:0
+[     659ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ http://localhost:3000/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=Error%3A+%0AInvalid+%60prisma.order.count%28%29%60+invocation%3A%0A%0A%0ACan%27t+reach+database+server+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60%0A%0APlease+make+sure+your+database+server+is+running+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60.&file=%2FUsers%2Figordviniatin%2FDocuments%2Fthermoslim-platform%2F.worktrees%2Ffoundation-shell%2Fnode_modules%2F%40prisma%2Fclient%2Fruntime%2Flibrary.js&methodName=async+l&arguments=&lineNumber=130&column=9633:0
+[     660ms] [ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request) @ http://localhost:3000/__nextjs_original-stack-frame?isServer=false&isEdgeServer=false&isAppDirectory=true&errorMessage=Error%3A+%0AInvalid+%60prisma.order.count%28%29%60+invocation%3A%0A%0A%0ACan%27t+reach+database+server+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60%0A%0APlease+make+sure+your+database+server+is+running+at+%60aws-1-us-east-1.pooler.supabase.com%3A6543%60.&file=%2FUsers%2Figordviniatin%2FDocuments%2Fthermoslim-platform%2F.worktrees%2Ffoundation-shell%2Fnode_modules%2F%40prisma%2Fclient%2Fruntime%2Flibrary.js&methodName=%24n.handleRequestError&arguments=&lineNumber=121&column=7315:0
+[     668ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/favicon.ico:0
+[    3730ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1774884142257 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/dashboard:0
+[   21541ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1774884142257 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/dashboard:0
+[  235900ms] [WARNING] No default component was found for a parallel route rendered on this page. Falling back to nearest NotFound boundary.
+Learn more: https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#defaultjs
+
+ @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/utils/warn-once.js:15
+[  236752ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/performance/campaigns?_rsc=78iqm:0
+[  236797ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/performance/campaigns:0
+[  238721ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/orders/refunds:0
+[  239091ms] [WARNING] No default component was found for a parallel route rendered on this page. Falling back to nearest NotFound boundary.
+Learn more: https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#defaultjs
+
+ @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/utils/warn-once.js:15
+[  258249ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/orders/refunds:0
+[  258485ms] [WARNING] No default component was found for a parallel route rendered on this page. Falling back to nearest NotFound boundary.
+Learn more: https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#defaultjs
+
+ @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/utils/warn-once.js:15

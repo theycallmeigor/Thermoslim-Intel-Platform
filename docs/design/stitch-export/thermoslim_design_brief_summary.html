@@ -1,0 +1,34 @@
+# ThermoSlim Platform — UI Design Brief
+
+## What This Is
+
+Design brief for the UI overhaul of the ThermoSlim Commerce Intelligence Platform. The platform unifies data from Shopify and CheckoutChamp (subscription CRM) into a single BI tool for a supplement e-commerce brand. Currently has 2 pages — needs to scale to 15+ dashboards.
+
+## The Business
+
+ThermoSlim sells health/weight-loss supplements through Shopify and CheckoutChamp (CC). Subscriptions are the core business — MRR, churn, and retention are the metrics that matter most.
+
+## Users
+
+Primary: Internal operations team (power users). Need high information density, filters everywhere, raw numbers, and ability to drill into anything. Deep links to Shopify and CC Admin are essential.
+
+## Visual Design (Established)
+
+- Dark theme only: `bg-gray-950` root, `bg-gray-900` cards
+- Card pattern: `bg-gray-900 rounded-xl border border-gray-800 p-6`
+- Color system:
+  - Blue `#3b82f6` — primary action, orders, links
+  - Green `#10b981` — revenue, success, positive change, Shopify
+  - Purple `#8b5cf6` — new subscriptions, direct sales
+  - Orange `#f59e0b` — rebills, paused, weekend
+  - Red `#ef4444` — cancelled, danger, negative change
+  - Cyan `#06b6d4` — subscription orders
+- Typography: System font, `text-2xl font-bold` for KPI values, `text-xs uppercase tracking-wider` for labels
+
+## Layout Rules
+
+1. Sidebar: ~220px, dark bg (`#0f1117`), collapsible.
+2. Top bar: Breadcrumb + date filter + sync trigger.
+3. KPI strip: Always first, 4 cards in a row.
+4. Charts: Recharts library, dark tooltip styling.
+5. Slide-over panel: ~380px from right edge for details.

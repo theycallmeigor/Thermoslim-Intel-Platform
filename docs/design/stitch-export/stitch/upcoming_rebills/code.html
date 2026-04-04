@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ThermoSlim Intelligence Platform | Upcoming Rebills</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#c4abff",
+                        "surface-container-low": "#161c28",
+                        "inverse-on-surface": "#2b303d",
+                        "on-primary": "#002e6a",
+                        "tertiary-fixed-dim": "#4cd7f6",
+                        "surface-bright": "#343946",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#001f26",
+                        "primary": "#adc6ff",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#001a42",
+                        "on-tertiary-fixed-variant": "#004e5c",
+                        "on-surface": "#dde2f3",
+                        "surface": "#0e131f",
+                        "on-background": "#dde2f3",
+                        "inverse-surface": "#dde2f3",
+                        "on-tertiary": "#003640",
+                        "surface-variant": "#2f3542",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "on-surface-variant": "#c2c6d6",
+                        "secondary": "#d0bcff",
+                        "on-secondary-fixed": "#23005c",
+                        "on-primary-container": "#00285d",
+                        "outline-variant": "#424754",
+                        "on-secondary": "#3c0091",
+                        "surface-container-high": "#242a36",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "surface-container-highest": "#2f3542",
+                        "surface-dim": "#0e131f",
+                        "on-tertiary-container": "#002f38",
+                        "primary-fixed": "#d8e2ff",
+                        "primary-container": "#4d8eff",
+                        "surface-container": "#1a202c",
+                        "surface-container-lowest": "#080e1a",
+                        "outline": "#8c909f",
+                        "tertiary-container": "#009eb9",
+                        "tertiary": "#4cd7f6",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-primary-fixed-variant": "#004395",
+                        "secondary-fixed": "#e9ddff",
+                        "surface-tint": "#adc6ff",
+                        "tertiary-fixed": "#acedff",
+                        "background": "#0e131f",
+                        "secondary-container": "#571bc1",
+                        "inverse-primary": "#005ac2"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #0e131f; color: #dde2f3; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0e131f; }
+        ::-webkit-scrollbar-thumb { background: #2f3542; border-radius: 10px; }
+        .glass-panel { background: rgba(47, 53, 66, 0.6); backdrop-filter: blur(12px); }
+        .ghost-border { border: 1px solid rgba(66, 71, 84, 0.15); }
+    </style>
+</head>
+<body class="flex overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-[220px] h-screen sticky top-0 left-0 bg-slate-950 flex flex-col py-6 px-4 gap-2 z-50">
+<div class="mb-8 px-2">
+<h1 class="text-xl font-black text-slate-100 tracking-tighter">ThermoSlim</h1>
+<p class="text-[10px] font-medium uppercase tracking-widest text-blue-300/60">Intelligence Platform</p>
+</div>
+<nav class="flex-1 space-y-1 overflow-y-auto no-scrollbar">
+<!-- Navigation Items Mapping from JSON -->
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-[11px] font-medium uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+<span class="text-[11px] font-medium uppercase tracking-wider">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">waterfall_chart</span>
+<span class="text-[11px] font-medium uppercase tracking-wider">MRR Waterfall</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">trending_down</span>
+<span class="text-[11px] font-medium uppercase tracking-wider">Churn Analytics</span>
+</a>
+<!-- ACTIVE ITEM -->
+<a class="flex items-center gap-3 px-3 py-2 text-blue-200 font-bold bg-slate-800/50 rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[20px]">event_repeat</span>
+<span class="text-[11px] font-medium uppercase tracking-wider">Upcoming Rebills</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="text-[11px] font-medium uppercase tracking-wider">Refunds &amp; Chargebacks</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">health_and_safety</span>
+<span class="text-[11px] font-medium uppercase tracking-wider">Payment Health</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">campaign</span>
+<span class="text-[11px] font-medium uppercase tracking-wider">Campaigns</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+<span class="text-[11px] font-medium uppercase tracking-wider">Products</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 space-y-1">
+<button class="w-full bg-primary-container text-on-primary-container rounded-xl py-2 px-4 text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-2 mb-4 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+                Sync Data
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings_input_component</span>
+<span class="text-[11px] font-medium uppercase tracking-wider">Connections</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden bg-surface relative">
+<!-- TopNavBar -->
+<header class="w-full sticky top-0 z-40 bg-slate-900/60 backdrop-blur-xl border-b border-slate-800/15 flex justify-between items-center px-8 h-16 shrink-0">
+<div class="flex items-center gap-4">
+<h2 class="text-sm font-bold tracking-tight text-on-surface uppercase tracking-widest">Orders / Upcoming Rebills</h2>
+</div>
+<div class="flex items-center gap-6">
+<nav class="flex items-center gap-6">
+<a class="text-slate-400 text-sm font-medium hover:text-slate-100 transition-all" href="#">7d</a>
+<a class="text-blue-300 border-b-2 border-blue-400 pb-1 text-sm font-medium" href="#">30d</a>
+<a class="text-slate-400 text-sm font-medium hover:text-slate-100 transition-all" href="#">90d</a>
+<a class="text-slate-400 text-sm font-medium hover:text-slate-100 transition-all" href="#">YTD</a>
+</nav>
+<div class="h-6 w-px bg-slate-800/50"></div>
+<div class="flex items-center gap-4">
+<button class="text-sm font-medium text-blue-300 hover:text-slate-100 transition-colors">Custom Range</button>
+<button class="bg-primary px-4 py-1.5 rounded-lg text-on-primary text-xs font-bold uppercase tracking-wider hover:bg-primary/90 transition-colors">Sync Now</button>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-white">notifications</span>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-white">help_outline</span>
+<div class="w-8 h-8 rounded-full bg-slate-800 overflow-hidden ring-1 ring-slate-700">
+<img alt="User Profile" data-alt="close-up portrait of professional executive man with clean minimalist aesthetic and soft cinematic studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-dOckC2PS1hu0dj-8VmqqhJC8OBDm0pR_ol4qK3Kr4xTlHgw-OCtq8QzaFn2B5Tb3q8qexhBTt69JI_Uei7Rx4iBd_bUqy3rcTqoWPOfRlqIDUFAWc4QQcEnh2MZ8qS6pdbqYJ7TSYmao0Bz6amg-C3qNvtuugvNyQ1ij_tvrIkaqZg0vdo6WYim83dWneybyzkvGjy1qhsxM7pdWwTthgHGG1sSotKhyKDmQWWuZBS9ZryerzzkOWczWXx30gf179cGx-heui2ZE"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 overflow-y-auto p-8 space-y-8">
+<!-- KPI Strip -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Expected Revenue -->
+<div class="bg-surface-container p-6 rounded-xl ghost-border relative overflow-hidden group">
+<p class="text-[10px] font-medium uppercase tracking-wider text-on-surface-variant mb-1">Expected Revenue (Next 30d)</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold tracking-tighter text-on-surface">$45,210.00</h3>
+<span class="text-tertiary text-xs font-bold flex items-center">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 12%
+                        </span>
+</div>
+<div class="absolute top-0 right-0 w-24 h-24 bg-tertiary/5 rounded-full -mr-8 -mt-8 group-hover:bg-tertiary/10 transition-colors"></div>
+</div>
+<!-- At-Risk Revenue -->
+<div class="bg-surface-container p-6 rounded-xl ghost-border relative overflow-hidden group">
+<p class="text-[10px] font-medium uppercase tracking-wider text-on-surface-variant mb-1">At-Risk Revenue</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold tracking-tighter text-on-surface">$3,420.50</h3>
+<span class="bg-on-secondary-container/20 text-on-secondary-container px-2 py-0.5 rounded text-[9px] font-bold tracking-tighter uppercase">RECYCLE_BILLING</span>
+</div>
+<p class="text-[10px] text-error mt-2 font-medium">8.2% of total projection</p>
+</div>
+<!-- Projected Count -->
+<div class="bg-surface-container p-6 rounded-xl ghost-border relative overflow-hidden group">
+<p class="text-[10px] font-medium uppercase tracking-wider text-on-surface-variant mb-1">Projected Count</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold tracking-tighter text-on-surface">1,240</h3>
+<span class="text-on-surface-variant/60 text-xs font-medium uppercase tracking-widest">Orders</span>
+</div>
+<div class="mt-3 w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+</div>
+<!-- Forecast Accuracy -->
+<div class="bg-surface-container p-6 rounded-xl ghost-border relative overflow-hidden group">
+<p class="text-[10px] font-medium uppercase tracking-wider text-on-surface-variant mb-1">Forecast Accuracy</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-3xl font-bold tracking-tighter text-on-surface">98.2%</h3>
+<span class="text-tertiary text-xs font-bold">Stable</span>
+</div>
+<div class="absolute bottom-0 right-0 p-2">
+<span class="material-symbols-outlined text-slate-800 text-4xl">verified</span>
+</div>
+</div>
+</section>
+<!-- Row 1: Bar Chart -->
+<section class="bg-surface-container p-8 rounded-xl ghost-border">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h4 class="text-lg font-bold tracking-tight text-on-surface">Expected Revenue by Day</h4>
+<p class="text-xs text-on-surface-variant">Daily projected capture volume for the next 30 days</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="text-[10px] font-medium uppercase text-on-surface-variant tracking-wider">Active</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-on-secondary-container"></span>
+<span class="text-[10px] font-medium uppercase text-on-surface-variant tracking-wider">At-Risk</span>
+</div>
+</div>
+</div>
+<div class="h-64 flex items-end gap-2">
+<!-- Chart Bars Placeholder Logic -->
+<div class="flex-1 bg-primary-container/40 h-[60%] rounded-t hover:bg-primary-container transition-colors relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface-container-highest px-2 py-1 rounded text-[10px] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">$1,450</div>
+</div>
+<div class="flex-1 bg-primary-container/40 h-[75%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-on-secondary-container/40 h-[90%] rounded-t hover:bg-on-secondary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[65%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[40%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-on-secondary-container/40 h-[55%] rounded-t hover:bg-on-secondary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[80%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[70%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[85%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-on-secondary-container/40 h-[95%] rounded-t hover:bg-on-secondary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[60%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[50%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[75%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-on-secondary-container/40 h-[45%] rounded-t hover:bg-on-secondary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[80%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[65%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-on-secondary-container/40 h-[30%] rounded-t hover:bg-on-secondary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[55%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[90%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[75%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-on-secondary-container/40 h-[60%] rounded-t hover:bg-on-secondary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[85%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[70%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[40%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[65%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-on-secondary-container/40 h-[50%] rounded-t hover:bg-on-secondary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[80%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[55%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[95%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+<div class="flex-1 bg-primary-container/40 h-[70%] rounded-t hover:bg-primary-container transition-colors relative group"></div>
+</div>
+</section>
+<!-- Row 2: Grid -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Breakdown by Product -->
+<div class="bg-surface-container p-8 rounded-xl ghost-border">
+<h4 class="text-sm font-bold uppercase tracking-widest text-on-surface mb-6">Breakdown by Product</h4>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-on-surface">ThermoSlim Max (30-day)</span>
+<span class="text-on-surface-variant">$18,450.00</span>
+</div>
+<div class="w-full bg-slate-800 h-2 rounded-full">
+<div class="bg-primary h-full w-[65%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-on-surface">Night Burn Formula</span>
+<span class="text-on-surface-variant">$12,210.50</span>
+</div>
+<div class="w-full bg-slate-800 h-2 rounded-full">
+<div class="bg-secondary h-full w-[45%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-on-surface">Metabolism Booster Pack</span>
+<span class="text-on-surface-variant">$9,540.00</span>
+</div>
+<div class="w-full bg-slate-800 h-2 rounded-full">
+<div class="bg-tertiary h-full w-[35%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Breakdown by Frequency -->
+<div class="bg-surface-container p-8 rounded-xl ghost-border flex flex-col">
+<h4 class="text-sm font-bold uppercase tracking-widest text-on-surface mb-6">Breakdown by Frequency</h4>
+<div class="flex-1 flex items-center justify-center gap-12">
+<div class="relative w-40 h-40">
+<!-- SVG Donut Chart -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#161c28" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#adc6ff" stroke-dasharray="70 100" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#d0bcff" stroke-dasharray="20 100" stroke-dashoffset="-70" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="transparent" r="16" stroke="#4cd7f6" stroke-dasharray="10 100" stroke-dashoffset="-90" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-[10px] font-bold uppercase text-on-surface-variant">Total</span>
+<span class="text-lg font-bold">1.2k</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-xs text-on-surface-variant">1-Month (70%)</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-xs text-on-surface-variant">3-Month (20%)</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="text-xs text-on-surface-variant">6-Month (10%)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Row 3: Table -->
+<section class="bg-surface-container rounded-xl overflow-hidden ghost-border">
+<div class="p-6 border-b border-slate-800/30 flex justify-between items-center">
+<h4 class="text-sm font-bold uppercase tracking-widest text-on-surface">Individual Upcoming Rebills</h4>
+<div class="flex gap-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">search</span>
+<input class="bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-1.5 text-xs text-on-surface focus:ring-1 focus:ring-primary w-64" placeholder="Search customers..." type="text"/>
+</div>
+<button class="bg-surface-container-high p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead class="bg-surface-container-highest/30 text-on-surface-variant uppercase tracking-wider font-bold">
+<tr>
+<th class="px-6 py-4">Date</th>
+<th class="px-6 py-4">Customer</th>
+<th class="px-6 py-4">Product</th>
+<th class="px-6 py-4">Frequency</th>
+<th class="px-6 py-4 text-right">Amount</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Risk</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-800/30">
+<!-- Table Row -->
+<tr class="hover:bg-slate-800/20 cursor-pointer transition-colors group">
+<td class="px-6 py-4 text-on-surface font-medium">Oct 24, 2023</td>
+<td class="px-6 py-4 text-primary font-bold hover:underline">Marcus Thorne</td>
+<td class="px-6 py-4 text-on-surface-variant">ThermoSlim Max</td>
+<td class="px-6 py-4 text-on-surface-variant">1-Month</td>
+<td class="px-6 py-4 text-right font-bold text-on-surface">$89.00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary text-[10px] font-bold uppercase">Active</span>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Low
+                                    </span>
+</td>
+</tr>
+<tr class="hover:bg-slate-800/20 cursor-pointer transition-colors group">
+<td class="px-6 py-4 text-on-surface font-medium">Oct 25, 2023</td>
+<td class="px-6 py-4 text-primary font-bold hover:underline">Elena Rodriguez</td>
+<td class="px-6 py-4 text-on-surface-variant">Night Burn Formula</td>
+<td class="px-6 py-4 text-on-surface-variant">3-Month</td>
+<td class="px-6 py-4 text-right font-bold text-on-surface">$145.00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-on-secondary-container text-[10px] font-bold uppercase">Recycle Billing</span>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-on-secondary-container"></span> High
+                                    </span>
+</td>
+</tr>
+<tr class="hover:bg-slate-800/20 cursor-pointer transition-colors group">
+<td class="px-6 py-4 text-on-surface font-medium">Oct 25, 2023</td>
+<td class="px-6 py-4 text-primary font-bold hover:underline">David Sterling</td>
+<td class="px-6 py-4 text-on-surface-variant">ThermoSlim Max</td>
+<td class="px-6 py-4 text-on-surface-variant">1-Month</td>
+<td class="px-6 py-4 text-right font-bold text-on-surface">$89.00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/20 text-tertiary text-[10px] font-bold uppercase">Active</span>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Low
+                                    </span>
+</td>
+</tr>
+<tr class="hover:bg-slate-800/20 cursor-pointer transition-colors group bg-slate-800/10">
+<td class="px-6 py-4 text-on-surface font-medium">Oct 26, 2023</td>
+<td class="px-6 py-4 text-primary font-bold hover:underline">Sarah Jenkins</td>
+<td class="px-6 py-4 text-on-surface-variant">Metabolism Booster</td>
+<td class="px-6 py-4 text-on-surface-variant">1-Month</td>
+<td class="px-6 py-4 text-right font-bold text-on-surface">$59.00</td>
+<td class="px-6 py-4">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-on-secondary-container text-[10px] font-bold uppercase">Recycle Billing</span>
+</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-on-secondary-container"></span> High
+                                    </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Slide-over Panel (Simulated Visual Overlay) -->
+<div class="absolute inset-y-0 right-0 w-[400px] glass-panel border-l border-slate-700/50 shadow-2xl z-50 transform translate-x-0 transition-transform flex flex-col">
+<div class="p-6 border-b border-slate-700/50 flex justify-between items-center">
+<h5 class="text-sm font-bold uppercase tracking-widest text-on-surface">Order Detail: #94210</h5>
+<button class="text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-8 space-y-8 overflow-y-auto">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-xl bg-slate-800 overflow-hidden ring-1 ring-slate-700">
+<img alt="Elena Rodriguez" data-alt="close-up portrait of professional woman with warm friendly smile against neutral background and soft daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgLh8sXA5_cNd-SsPYzXwNVmDeHObEAPnPoPUUg-lbBU2qT0AvJ03MikVNMOI7YvmoZi6ljIx38XGm-RxISPOeoKFTxhokeaOar2eLnuN0GUZA5Cx_xCWo8g32MyFQ_4L1qDkYwt0W1klVM4HcIiLu9XVik5SK1ZYsNw7IPHTJv4tA6VxiZEWXCmco6zGvKBp44Ev8VttW9ikLcJ5bVD8hNM4U9mFjmKVCB1rLvwQQ90arcJF-_SWHgfpA1hMNevef3IR8jQ-4r9l7"/>
+</div>
+<div>
+<h6 class="text-lg font-bold text-on-surface leading-tight">Elena Rodriguez</h6>
+<p class="text-xs text-on-surface-variant">Customer since Aug 2022</p>
+</div>
+</div>
+<div class="space-y-4">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Intelligence Audit</p>
+<div class="bg-surface-container-lowest p-4 rounded-xl space-y-4 border border-slate-800/50">
+<div class="flex justify-between items-center">
+<span class="text-xs text-on-surface-variant">Risk Status</span>
+<span class="px-2 py-0.5 rounded bg-on-secondary-container/20 text-on-secondary-container text-[9px] font-black uppercase">Critical Risk</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-on-surface-variant">Last Rebill Attempt</span>
+<span class="text-xs text-on-surface font-bold">Oct 20, 2023 (Failed)</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-on-surface-variant">Reason Code</span>
+<span class="text-xs text-on-surface font-bold">Insufficient Funds</span>
+</div>
+<div class="pt-2">
+<p class="text-[10px] text-on-surface-variant leading-relaxed">System currently executing <span class="text-on-secondary-container font-bold">Recycle Billing Routine B-4</span>. Next attempt scheduled in 48 hours.</p>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Subscription Profile</p>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs text-on-surface-variant">Product</span>
+<span class="text-xs text-on-surface font-bold">Night Burn Formula</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs text-on-surface-variant">Cycle</span>
+<span class="text-xs text-on-surface font-bold">Quarterly (90 Day)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs text-on-surface-variant">LTV Estimate</span>
+<span class="text-xs text-tertiary font-bold">$1,240.00</span>
+</div>
+</div>
+</div>
+<div class="pt-6">
+<button class="w-full bg-slate-800 hover:bg-slate-700 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-colors mb-3">View Full Timeline</button>
+<button class="w-full bg-primary-container text-on-primary-container py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-opacity hover:opacity-90">Retry Payment Now</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

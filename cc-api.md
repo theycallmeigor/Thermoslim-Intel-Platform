@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 # Configuration
 CC_LOGIN_ID = "igor.ai"  # Your CC login
-CC_API_KEY = "your_api_key_here"  # From CC dashboard
+CC_API_KEY = "thermoslimapi345"  # From CC dashboard
 BASE_URL = "https://api.checkoutchamp.com"
 # Common headers/params
 API_PARAMS = {

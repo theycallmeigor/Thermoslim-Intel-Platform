@@ -188,7 +188,6 @@ export class CheckoutChampAdapter implements IAdapter {
       loginId: config.checkoutChamp.apiUsername,
       password: config.checkoutChamp.apiKey,
     };
-    console.log(`[cc adapter] init: baseUrl=${this.baseUrl}, loginId=${this.authParams.loginId}, keyLen=${this.authParams.password?.length}`);
   }
 
   async connect(): Promise<void> {
@@ -341,15 +340,9 @@ export class CheckoutChampAdapter implements IAdapter {
   private async apiGet(path: string, params: Record<string, string>): Promise<CCApiResponse> {
     const qs = new URLSearchParams({ ...this.authParams, ...params });
     const url = `${this.baseUrl}${path}?${qs}`;
-    console.log(`[cc adapter] apiGet: ${path}, proxy=${!!proxyDispatcher}, proxyUrl=${config.proxy.quoteguardUrl ? 'SET' : 'EMPTY'}`);
-    try {
-      const res = await proxyFetch(url);
-      if (!res.ok) throw new Error(`CC API HTTP error ${res.status} on ${path}`);
-      return res.json() as Promise<CCApiResponse>;
-    } catch (err) {
-      console.error(`[cc adapter] apiGet failed:`, err instanceof Error ? err.message : err);
-      throw err;
-    }
+    const res = await proxyFetch(url);
+    if (!res.ok) throw new Error(`CC API HTTP error ${res.status} on ${path}`);
+    return res.json() as Promise<CCApiResponse>;
   }
 
   private async fetchOrders(startDate: Date, endDate: Date): Promise<CCOrder[]> {

@@ -1,0 +1,33 @@
+# ThermoSlim Platform — UI Design Brief
+
+## What This Is
+Design brief for the UI overhaul of the ThermoSlim Commerce Intelligence Platform. The platform unifies data from Shopify and CheckoutChamp (subscription CRM) into a single BI tool for a supplement e-commerce brand. Currently has 2 pages — needs to scale to 15+ dashboards.
+
+## The Business
+ThermoSlim sells health/weight-loss supplements through Shopify and CheckoutChamp (CC). The platform merges and deduplicates this data. Subscriptions are the core business — MRR, churn, and retention are key metrics.
+
+## Users
+Internal operations team (power users). High information density, filters everywhere, raw numbers, and deep links to Shopify/CC Admin are essential.
+
+## Current State
+- **Tech Stack:** Next.js 14, TypeScript, Tailwind CSS, Recharts.
+- **Visual Design:** Dark theme (`bg-gray-950` root, `bg-gray-900` cards), `rounded-xl border border-gray-800`.
+- **Color System:** Blue (Primary/Orders), Green (Revenue/Shopify), Purple (New Subs), Orange (Rebills), Red (Cancelled/Danger), Cyan (Sub Orders).
+- **Typography:** System font, `text-2xl font-bold` for KPIs, `text-xs uppercase` for labels.
+
+## Design Decisions
+1. **Sidebar Navigation:** Persistent, collapsible, grouped by domain (Overview, Subscriptions, Orders, Performance, Operations, Settings).
+2. **Order Detail:** Slide-over panel (~380px) + dedicated full-width page.
+3. **Top Bar:** Breadcrumbs, last sync, date range presets, sync trigger.
+
+## Key Screens to Design
+- **Upcoming Rebills:** Expected revenue by day, risk indicators, sortable tables.
+- **Order Detail Page (`/orders/{id}`):** Full financials, items, attribution, fulfillment, and deep links.
+- **Customer 360 (`/customers/{id}`):** Profile, order history, subscription timeline, and LTV summary.
+- **MRR Waterfall, Churn Analytics, Cohort Retention, etc.** (Tier 2).
+
+## Layout Rules
+- Sidebar: ~220px, dark bg (`#0f1117`).
+- KPI strip: First element, 4-card grid.
+- Tables: Clickable rows, source/status badges.
+- Charts: Recharts-based, dark tooltips.
