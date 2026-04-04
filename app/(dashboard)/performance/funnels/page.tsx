@@ -78,16 +78,25 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
         const crmIdSet = new Set(pageConfig.productCrmIds);
 
         if (pageConfig.type === 'checkout') {
-          // Checkout: count all orders, show OFFER items
+          // Checkout: only show items matching checkout config productCrmIds
+          // Subscription add-ons at checkout (Gel, Cream) belong to OTO sections
           const offerProducts = new Map<string, { name: string; count: number; revenue: number; price: number; frequency: string | null; isSubscription: boolean }>();
+          let checkoutRevenue = 0;
           for (const order of groupOrders) {
             for (const item of order.items) {
               if (item.productType !== 'OFFER' && item.productType !== null) continue;
+              // Only include items matching checkout's configured product CRM IDs
+              // Items without ccCrmId (Shopify-originated) are included if their productLine matches
+              const matchesCrmId = item.ccCrmId && crmIdSet.has(item.ccCrmId);
+              const matchesProductLine = !item.ccCrmId && (item.productMap?.productLine === pageConfig.productLabel || item.name?.includes('Sculpting'));
+              if (!matchesCrmId && !matchesProductLine) continue;
+
               const prodLine = item.productMap?.productLine ?? item.name ?? 'Unknown';
               const prodKey = `${prodLine}|${item.price}`;
               const existing = offerProducts.get(prodKey) ?? { name: prodLine, count: 0, revenue: 0, price: item.price, frequency: item.productMap?.frequency ?? null, isSubscription: item.productMap?.isSubscription ?? false };
               existing.count++;
               existing.revenue += item.price;
+              checkoutRevenue += item.price;
               offerProducts.set(prodKey, existing);
             }
           }
@@ -96,7 +105,7 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
             pageType: pageConfig.name,
             slug: checkoutSlug,
             orders: totalOrders,
-            revenue: [...offerProducts.values()].reduce((s, v) => s + v.revenue, 0),
+            revenue: checkoutRevenue,
             products: [...offerProducts.values()]
               .map(v => ({ name: v.name, campaignProductId: null, count: v.count, rate: totalOrders > 0 ? v.count / totalOrders : 0, prices: [v.price], frequency: v.frequency, isSubscription: v.isSubscription }))
               .sort((a, b) => b.count - a.count),
@@ -108,23 +117,31 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
           let ordersReached = 0;
           const products = new Map<string, { name: string; crmId: string | null; count: number; revenue: number; prices: Set<number>; frequency: string | null; isSubscription: boolean }>();
 
-          for (const order of groupOrders) {
-            const upsaleItems = order.items.filter(i => i.productType === 'UPSALE');
-            if (upsaleItems.length === 0) continue;
+          // Collect checkout config CrmIds to exclude from OTO matching
+          const checkoutConfig = configPages.find(p => p.type === 'checkout');
+          const checkoutCrmIds = new Set(checkoutConfig?.productCrmIds ?? []);
 
-            // Did this order have any UPSALE item that could match this page or a later page?
-            // An order "reached" this page if it has upsale items matching this page OR any later page
+          for (const order of groupOrders) {
+            // Match UPSALE items AND OFFER items whose ccCrmId matches this OTO (subscription add-ons at checkout)
+            const matchableItems = order.items.filter(i => {
+              if (i.productType === 'UPSALE') return true;
+              // Include OFFER items that match an OTO page (not checkout device)
+              if ((i.productType === 'OFFER' || !i.productType) && i.ccCrmId && !checkoutCrmIds.has(i.ccCrmId)) return true;
+              return false;
+            });
+            if (matchableItems.length === 0) continue;
+
             const thisPageIdx = configPages.indexOf(pageConfig);
             const laterPages = configPages.slice(thisPageIdx);
             const laterCrmIds = new Set(laterPages.flatMap(p => p.productCrmIds));
 
-            const hasLaterMatch = upsaleItems.some(i => i.ccCrmId && laterCrmIds.has(i.ccCrmId));
-            const hasThisMatch = upsaleItems.some(i => i.ccCrmId && crmIdSet.has(i.ccCrmId));
+            const hasLaterMatch = matchableItems.some(i => i.ccCrmId && laterCrmIds.has(i.ccCrmId));
+            const hasThisMatch = matchableItems.some(i => i.ccCrmId && crmIdSet.has(i.ccCrmId));
 
             if (hasThisMatch || hasLaterMatch) ordersReached++;
 
             // Count items matching this page
-            for (const item of upsaleItems) {
+            for (const item of matchableItems) {
               if (!item.ccCrmId || !crmIdSet.has(item.ccCrmId)) continue;
               pageAccepted++;
               pageRevenue += item.price;
