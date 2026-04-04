@@ -5,6 +5,7 @@ export const dynamic = 'force-dynamic';
 
 import { prisma } from '@/lib/prisma';
 import { fmt$, fmtK, toMonthlyMrr, parseRange } from '@/lib/dashboard/formatting';
+import { getTrialExpectedPrices } from '@/lib/dashboard/trial-prices';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { FrequencyDonut, type FreqSlice } from './FrequencyDonut';
@@ -26,19 +27,24 @@ export default async function FrequencyPage({ searchParams }: { searchParams: Pr
       id: true,
       recurringPrice: true,
       frequency: true,
+      productMapId: true,
       currentBillingCycle: true,
       productMap: { select: { name: true, productLine: true } },
     },
   });
 
+  // Get expected prices for $0 trial subs so they count in MRR
+  const trialPrices = await getTrialExpectedPrices();
+
   // Group by frequency
   const freqMap = new Map<string, { count: number; totalPrice: number; totalMrr: number; avgCycle: number; cycleSum: number }>();
   for (const sub of subs) {
     const freq = sub.frequency ?? 'unknown';
+    const expectedPrice = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
     const entry = freqMap.get(freq) ?? { count: 0, totalPrice: 0, totalMrr: 0, avgCycle: 0, cycleSum: 0 };
     entry.count += 1;
-    entry.totalPrice += sub.recurringPrice;
-    entry.totalMrr += toMonthlyMrr(sub.recurringPrice, sub.frequency);
+    entry.totalPrice += sub.recurringPrice || expectedPrice || 0;
+    entry.totalMrr += toMonthlyMrr(sub.recurringPrice, sub.frequency, expectedPrice);
     entry.cycleSum += sub.currentBillingCycle;
     freqMap.set(freq, entry);
   }
@@ -56,7 +62,8 @@ export default async function FrequencyPage({ searchParams }: { searchParams: Pr
     const freqRow = matrixMap.get(product)!;
     const cell = freqRow.get(freq) ?? { count: 0, mrr: 0 };
     cell.count += 1;
-    cell.mrr += toMonthlyMrr(sub.recurringPrice, sub.frequency);
+    const expectedPrice = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
+    cell.mrr += toMonthlyMrr(sub.recurringPrice, sub.frequency, expectedPrice);
     freqRow.set(freq, cell);
   }
 
