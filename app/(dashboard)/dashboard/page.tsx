@@ -12,6 +12,7 @@ import { subDays, format } from 'date-fns';
 import { fmt$, fmtK, pctChange, parseRange, toMonthlyMrr } from '@/lib/dashboard/formatting';
 import { getTrialExpectedPrices } from '@/lib/dashboard/trial-prices';
 import { statusColors, getSourceLabel, getOrderType } from '@/lib/dashboard/colors';
+import { calculateMrr } from '@/lib/dashboard/mrr';
 import { KpiCard } from '@/components/ui/KpiCard';
 
 // ─── Data fetching ────────────────────────────────────────────────────────────
@@ -29,7 +30,6 @@ const getStableKpis = unstable_cache(
       shopifyRevenue,
       ccRevenue,
       activeSubsWithProduct,
-      mrrByProduct,
       totalOrders,
     ] = await Promise.all([
       prisma.subscription.count({ where: { status: { in: ['ACTIVE', 'TRIAL'] } } }),
@@ -48,14 +48,9 @@ const getStableKpis = unstable_cache(
         select: { recurringPrice: true, frequency: true, productMapId: true, startedAt: true,
           productMap: { select: { productLine: true, frequency: true } } },
       }),
-      prisma.subscription.findMany({
-        where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-        select: { recurringPrice: true, frequency: true, productMapId: true, ccPurchaseId: true, startedAt: true,
-          productMap: { select: { name: true, productLine: true, frequency: true } } },
-      }),
       prisma.order.count({ where: { source: { in: ['SHOPIFY', 'MERGED'] } } }),
     ]);
-    return { activeSubscriptions, shopifyOrders, ccOrders, shopifyRevenue, ccRevenue, activeSubsWithProduct, mrrByProduct, totalOrders };
+    return { activeSubscriptions, shopifyOrders, ccOrders, shopifyRevenue, ccRevenue, activeSubsWithProduct, totalOrders };
   },
   ['dashboard-stable-kpis'],
   { revalidate: 15 * 60 }, // 15-minute cache — refreshed by background sync
@@ -124,7 +119,7 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
       }),
     ]);
 
-  const { activeSubscriptions, shopifyOrders, ccOrders, shopifyRevenue, ccRevenue, activeSubsWithProduct, mrrByProduct, totalOrders } = stable;
+  const { activeSubscriptions, shopifyOrders, ccOrders, shopifyRevenue, ccRevenue, activeSubsWithProduct, totalOrders } = stable;
   const prevActiveSubscriptions = activeSubscriptions; // stable — period comparison uses live revenue delta instead
 
   // ─── Revenue chart (4 series via Shopify tags) ───────────────────────────
@@ -206,37 +201,18 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
     .sort((a, b) => b[1] - a[1])
     .map(([name, value]) => ({ name, value }));
 
-  // ─── MRR breakdown by product (normalized by frequency, with trial prices) ─
-  const trialPrices = await getTrialExpectedPrices();
-  const mrrProductMap = new Map<string, { name: string; mrr: number; count: number }>();
-  for (const sub of mrrByProduct) {
-    const key = sub.productMap?.productLine ?? 'Unknown';
-    const expected = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
-    const monthlyMrr = toMonthlyMrr(sub.recurringPrice, sub.frequency, expected);
-    const existing = mrrProductMap.get(key);
-    if (existing) {
-      existing.mrr += monthlyMrr;
-      existing.count += 1;
-    } else {
-      mrrProductMap.set(key, {
-        name: key,
-        mrr: monthlyMrr,
-        count: 1,
-      });
-    }
-  }
-  const mrrBreakdown = Array.from(mrrProductMap.values())
+  // ─── MRR breakdown by product (centralized calculation) ──────────────────
+  const { totalMrr: currMrr, byProductLine } = await calculateMrr();
+  const mrrBreakdown = Array.from(byProductLine.entries())
+    .map(([name, v]) => ({ name, mrr: v.mrr, count: v.count }))
     .sort((a, b) => b.mrr - a.mrr)
     .slice(0, 6);
 
   // ─── Pct changes ──────────────────────────────────────────────────────────
   const currRevenue = revenueResult._sum.totalPrice ?? 0;
   const prevRevenue = prevRevenueResult._sum.totalPrice ?? 0;
-  // MRR normalized by frequency with trial price adjustment
-  const currMrr = activeSubsWithProduct.reduce((sum, s) => {
-    const expected = s.productMapId ? trialPrices.get(s.productMapId) : undefined;
-    return sum + toMonthlyMrr(s.recurringPrice, s.frequency, expected);
-  }, 0);
+  // prevMrr: subs active before the period start (for period-over-period comparison)
+  const trialPrices = await getTrialExpectedPrices();
   const prevMrr = activeSubsWithProduct
     .filter(s => s.startedAt < startDate)
     .reduce((sum, s) => {

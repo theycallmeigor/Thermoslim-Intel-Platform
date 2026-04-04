@@ -5,26 +5,21 @@ export const dynamic = 'force-dynamic';
 
 import { addMonths, format, startOfDay, subDays } from 'date-fns';
 import { prisma } from '@/lib/prisma';
-import { fmt$, fmtK, toMonthlyMrr } from '@/lib/dashboard/formatting';
-import { getTrialExpectedPrices } from '@/lib/dashboard/trial-prices';
+import { fmt$, fmtK } from '@/lib/dashboard/formatting';
+import { calculateMrr } from '@/lib/dashboard/mrr';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { PageHeader } from '@/components/ui/PageHeader';
 
 export default async function RevenueForecastPage() {
   // ── 1. Active subscriptions → MRR ────────────────────────────────────────
-  const activeSubs = await prisma.subscription.findMany({
-    where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-    select: { recurringPrice: true, frequency: true, productMapId: true },
-  });
-  const trialPrices = await getTrialExpectedPrices();
-  const totalMrr = activeSubs.reduce((s, sub) => {
-    const expected = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
-    return s + toMonthlyMrr(sub.recurringPrice, sub.frequency, expected);
-  }, 0);
-
-  const activeCount = activeSubs.length;
+  const { totalMrr, activeCount } = await calculateMrr();
 
   // ── 2. Average subscription price (non-trial, non-zero) ──────────────────
+  // Need raw subs for avg price calculation (recurringPrice per sub)
+  const activeSubs = await prisma.subscription.findMany({
+    where: { status: { in: ['ACTIVE', 'TRIAL'] } },
+    select: { recurringPrice: true },
+  });
   const pricedSubs = activeSubs.filter((s) => s.recurringPrice > 0);
   const avgSubPrice =
     pricedSubs.length > 0

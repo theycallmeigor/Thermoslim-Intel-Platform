@@ -6,6 +6,7 @@ export const dynamic = 'force-dynamic';
 import { prisma } from '@/lib/prisma';
 import { fmt$, fmtK, toMonthlyMrr } from '@/lib/dashboard/formatting';
 import { getTrialExpectedPrices } from '@/lib/dashboard/trial-prices';
+import { calculateMrr } from '@/lib/dashboard/mrr';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { FrequencyDonut, type FreqSlice } from './FrequencyDonut';
@@ -27,14 +28,9 @@ export default async function FrequencyPage() {
   });
 
   const trialPrices = await getTrialExpectedPrices();
+  const { totalMrr, activeCount: totalSubs, trialCount } = await calculateMrr();
 
   // ── KPIs ──────────────────────────────────────────────────────────────
-  const totalSubs = subs.length;
-  const trialCount = subs.filter(s => s.recurringPrice === 0).length;
-  const totalMrr = subs.reduce((s, sub) => {
-    const expected = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
-    return s + toMonthlyMrr(sub.recurringPrice, sub.frequency, expected);
-  }, 0);
   const avgCycle = totalSubs > 0
     ? (subs.reduce((s, sub) => s + sub.currentBillingCycle, 0) / totalSubs).toFixed(1)
     : '0';

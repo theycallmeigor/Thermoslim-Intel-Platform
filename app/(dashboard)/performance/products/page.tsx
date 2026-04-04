@@ -4,8 +4,8 @@ export const metadata: Metadata = { title: 'Products — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import { prisma } from '@/lib/prisma';
-import { fmt$, fmtK, parseRange, toMonthlyMrr } from '@/lib/dashboard/formatting';
-import { getTrialExpectedPrices } from '@/lib/dashboard/trial-prices';
+import { fmt$, fmtK, parseRange } from '@/lib/dashboard/formatting';
+import { calculateMrr } from '@/lib/dashboard/mrr';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { ProductChart, type ProductBar } from './ProductChart';
@@ -20,24 +20,13 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
     select: { productLine: true, totalOrders: true, totalRevenue: true, newOrders: true, recurringOrders: true, newSubscribers: true },
   });
 
-  // Active subscriptions per product
-  const activeSubs = await prisma.subscription.findMany({
-    where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-    select: { recurringPrice: true, frequency: true, productMapId: true,
-      productMap: { select: { productLine: true } } },
-  });
-  const trialPrices = await getTrialExpectedPrices();
+  // Active subscriptions per product — centralized MRR calculation
+  const { totalMrr, activeCount: totalActiveSubs, byProductLine } = await calculateMrr();
 
-  // Aggregate subs by productLine
+  // Map byProductLine to subsByProduct shape for combining with snapshots
   const subsByProduct = new Map<string, { count: number; mrr: number; trials: number }>();
-  for (const sub of activeSubs) {
-    const pl = sub.productMap?.productLine ?? 'Unlinked';
-    const entry = subsByProduct.get(pl) ?? { count: 0, mrr: 0, trials: 0 };
-    entry.count++;
-    const expected = sub.productMapId ? trialPrices.get(sub.productMapId) : undefined;
-    entry.mrr += toMonthlyMrr(sub.recurringPrice, sub.frequency, expected);
-    if (sub.recurringPrice === 0) entry.trials++;
-    subsByProduct.set(pl, entry);
+  for (const [pl, v] of byProductLine.entries()) {
+    subsByProduct.set(pl, { count: v.count, mrr: v.mrr, trials: v.trials });
   }
 
   // Aggregate snapshots by product line
@@ -73,8 +62,6 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
 
   const totalRevenue = products.reduce((s, p) => s + p.revenue, 0);
   const totalOrders = products.reduce((s, p) => s + p.orders, 0);
-  const totalMrr = products.reduce((s, p) => s + p.mrr, 0);
-  const totalActiveSubs = activeSubs.length;
   const topProduct = products[0]?.name ?? '—';
 
   const chartData: ProductBar[] = products.slice(0, 8).map(p => ({ name: p.name, revenue: p.revenue, orders: p.orders }));
