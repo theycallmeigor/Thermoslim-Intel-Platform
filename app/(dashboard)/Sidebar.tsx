@@ -37,6 +37,7 @@ const NAV: NavGroup[] = [
       { label: 'Upcoming Rebills', href: '/orders/rebills' },
       { label: 'Refunds & Chargebacks', href: '/orders/refunds' },
       { label: 'Payment Health', href: '/orders/payments' },
+      { label: 'Revenue', href: '/orders/revenue' },
     ],
   },
   {
