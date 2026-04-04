@@ -8,7 +8,7 @@ export type FunnelPageData = {
   slug: string;
   orders: number;
   revenue: number;
-  products: { name: string; count: number; rate: number; prices: number[]; frequency: string | null; isSubscription: boolean }[];
+  products: { name: string; campaignProductId: string | null; count: number; rate: number; prices: number[]; frequency: string | null; isSubscription: boolean }[];
 };
 
 export type FunnelData = {
@@ -77,6 +77,9 @@ export function FunnelCard({ funnel }: { funnel: FunnelData }) {
                     <div key={j} className="flex items-center justify-between text-xs">
                       <div className="flex items-center gap-2">
                         <span className="text-gray-400">{prod.name}</span>
+                        {prod.campaignProductId && (
+                          <span className="text-[10px] font-mono text-gray-600">#{prod.campaignProductId}</span>
+                        )}
                         {prod.isSubscription && (
                           <span className="text-[10px] font-medium text-blue-400 bg-blue-500/10 rounded px-1.5 py-0.5">
                             SUB

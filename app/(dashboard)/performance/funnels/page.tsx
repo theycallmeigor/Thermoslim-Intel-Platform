@@ -128,9 +128,9 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
           const slot = item.productSlot;
           if (!otoSlots.has(slot)) otoSlots.set(slot, new Map());
           const slotProducts = otoSlots.get(slot)!;
-          // Key by item name + price — each campaignProduct variant is a distinct offer
+          // Key by ccCampaignProductId — each is a unique offer on the page
           const displayName = item.name ?? item.productMap?.productLine ?? 'Unknown';
-          const key = `${displayName}|${item.price}`;
+          const key = item.ccCampaignProductId ?? `${displayName}|${item.price}`;
           const existing = slotProducts.get(key) ?? { name: displayName, campaignProductId: item.ccCampaignProductId, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: isSub };
           existing.count += 1;
           existing.revenue += item.price;
@@ -149,6 +149,7 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
     const checkoutProds = [...checkoutProducts.entries()]
       .map(([name, v]) => ({
         name,
+        campaignProductId: v.campaignProductId,
         count: v.count,
         rate: totalOrders > 0 ? v.count / totalOrders : 0,
         prices: [v.price],
@@ -174,10 +175,11 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
     for (const [slot, slotProducts] of sortedSlots) {
       const pageVisitors = ordersPerSlot.get(slot)?.size ?? totalOrders;
 
-      // Each offer is a distinct name+price (campaignProduct level)
+      // Each offer is a distinct campaignProductId
       const prods = [...slotProducts.values()]
         .map(v => ({
           name: v.name,
+          campaignProductId: v.campaignProductId,
           count: v.count,
           rate: pageVisitors > 0 ? v.count / pageVisitors : 0,
           prices: [v.price],
