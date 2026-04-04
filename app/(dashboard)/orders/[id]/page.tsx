@@ -116,9 +116,9 @@ export default async function OrderDetailPage({
         title={`Order ${order.sourceOrderId}`}
         subtitle={`${humanizeSource(order.source)} · ${fmtDateTime(order.createdAt)}`}
       >
-        {order.shopifyOrderId && (
+        {(order.shopifyOrderId || order.source === 'SHOPIFY' || order.source === 'MERGED') && (
           <a
-            href={`https://admin.shopify.com/store/tvbczb-ie/orders/${order.shopifyOrderId}`}
+            href={`https://admin.shopify.com/store/tvbczb-ie/orders/${order.shopifyOrderId ?? order.sourceOrderId}`}
             target="_blank"
             rel="noopener noreferrer"
             className="px-3 py-1.5 text-xs font-medium rounded-md bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-colors"
@@ -152,6 +152,16 @@ export default async function OrderDetailPage({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-3 text-sm">
           {/* Left column */}
           <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <span className="text-gray-500">Shopify Order ID</span>
+              <span className="text-gray-300 text-xs font-mono">{order.shopifyOrderId ?? order.sourceOrderId ?? '—'}</span>
+            </div>
+            {order.ccSourceOrderId && (
+              <div className="flex items-center justify-between">
+                <span className="text-gray-500">CC Order ID</span>
+                <span className="text-gray-300 text-xs font-mono">{order.ccSourceOrderId}</span>
+              </div>
+            )}
             <div className="flex items-center justify-between">
               <span className="text-gray-500">Source</span>
               <Badge
