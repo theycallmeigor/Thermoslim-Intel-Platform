@@ -43,6 +43,32 @@ export default async function FrequencyPage({ searchParams }: { searchParams: Pr
     freqMap.set(freq, entry);
   }
 
+  // Product × Frequency matrix
+  const matrixMap = new Map<string, Map<string, { count: number; mrr: number }>>();
+  const allFrequencies = new Set<string>();
+
+  for (const sub of subs) {
+    const product = sub.productMap?.productLine ?? 'Unlinked';
+    const freq = sub.frequency ?? 'unknown';
+    allFrequencies.add(freq);
+
+    if (!matrixMap.has(product)) matrixMap.set(product, new Map());
+    const freqRow = matrixMap.get(product)!;
+    const cell = freqRow.get(freq) ?? { count: 0, mrr: 0 };
+    cell.count += 1;
+    cell.mrr += toMonthlyMrr(sub.recurringPrice, sub.frequency);
+    freqRow.set(freq, cell);
+  }
+
+  const freqColumns = [...allFrequencies].sort();
+  const matrixRows = [...matrixMap.entries()]
+    .map(([product, freqRow]) => {
+      const totalCount = [...freqRow.values()].reduce((s, c) => s + c.count, 0);
+      const totalMrr = [...freqRow.values()].reduce((s, c) => s + c.mrr, 0);
+      return { product, freqRow, totalCount, totalMrr };
+    })
+    .sort((a, b) => b.totalMrr - a.totalMrr);
+
   const frequencies = [...freqMap.entries()]
     .map(([freq, v]) => ({
       frequency: freq,
@@ -112,6 +138,54 @@ export default async function FrequencyPage({ searchParams }: { searchParams: Pr
               </tbody>
             </table>
           </div>
+        </div>
+      </div>
+
+      {/* Product × Frequency Matrix */}
+      <div className="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+        <div className="px-6 py-4 border-b border-gray-800">
+          <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Product × Frequency</h3>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-gray-800">
+                <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Product</th>
+                {freqColumns.map(f => (
+                  <th key={f} className="px-4 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">
+                    {f === 'unknown' ? 'Unknown' : f.replace('-', ' ')}
+                  </th>
+                ))}
+                <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Total</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-800/60">
+              {matrixRows.map(row => (
+                <tr key={row.product} className="hover:bg-gray-800/40 transition-colors">
+                  <td className="px-6 py-3.5 text-gray-300 font-medium">{row.product}</td>
+                  {freqColumns.map(f => {
+                    const cell = row.freqRow.get(f);
+                    return (
+                      <td key={f} className="px-4 py-3.5 text-right tabular-nums">
+                        {cell ? (
+                          <div>
+                            <span className="text-gray-300">{cell.count}</span>
+                            <span className="text-gray-600 text-xs ml-1">({fmtK(cell.mrr)})</span>
+                          </div>
+                        ) : (
+                          <span className="text-gray-700">—</span>
+                        )}
+                      </td>
+                    );
+                  })}
+                  <td className="px-6 py-3.5 text-right tabular-nums">
+                    <span className="text-gray-200 font-medium">{row.totalCount}</span>
+                    <span className="text-gray-500 text-xs ml-1">({fmtK(row.totalMrr)})</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
