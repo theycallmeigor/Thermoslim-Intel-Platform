@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { initRegistry, getAdapter } from '@/core/ingestion/registry';
 import { rebuildSnapshots } from '@/core/sync/rebuild-snapshots';
+import { linkUnlinkedSubscriptions } from '@/core/sync/link-subscriptions';
 
 export async function POST(req: NextRequest) {
   try {
@@ -21,6 +22,10 @@ export async function POST(req: NextRequest) {
     const syncStart = body?.startDate ? new Date(body.startDate) : new Date(syncEnd.getTime() - 5 * 60 * 60 * 1000);
     rebuildSnapshots(syncStart, syncEnd).catch(err =>
       console.error('[sync] snapshot rebuild failed:', err instanceof Error ? err.message : err)
+    );
+
+    linkUnlinkedSubscriptions().catch(err =>
+      console.error('[sync/cc] subscription linking failed:', err instanceof Error ? err.message : err)
     );
 
     return NextResponse.json({ success: true, result });

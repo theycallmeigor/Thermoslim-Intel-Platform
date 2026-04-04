@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { initRegistry, getAdapter } from '@/core/ingestion/registry';
 import { rebuildSnapshots } from '@/core/sync/rebuild-snapshots';
+import { linkUnlinkedSubscriptions } from '@/core/sync/link-subscriptions';
 
 export const maxDuration = 120; // Allow up to 2 minutes for CC API pagination
 
@@ -34,6 +35,10 @@ export async function GET(req: NextRequest) {
     const syncRebuildStart = new Date(syncEnd.getTime() - 5 * 60 * 60 * 1000);
     rebuildSnapshots(syncRebuildStart, syncEnd).catch(err =>
       console.error('[sync] snapshot rebuild failed:', err instanceof Error ? err.message : err)
+    );
+
+    linkUnlinkedSubscriptions().catch(err =>
+      console.error('[sync/cc] subscription linking failed:', err instanceof Error ? err.message : err)
     );
 
     return NextResponse.json({ success: true, result });
