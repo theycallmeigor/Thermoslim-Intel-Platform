@@ -52,6 +52,20 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
   const totalUpsellOffered = totalUpsellAccepted + totalUpsellDeclined;
   const overallTakeRate = totalUpsellOffered > 0 ? totalUpsellAccepted / totalUpsellOffered : 0;
 
+  // Load Funnel table for name resolution
+  const dbFunnels = await prisma.funnel.findMany({
+    include: { pages: { where: { pageType: 'checkout' }, orderBy: { sortOrder: 'asc' }, take: 1 } },
+  });
+  const funnelNameMap = new Map<string, string>();
+  for (const f of dbFunnels) {
+    // Use the checkout page slug as the display name (more useful than "Shopify Funnel")
+    const checkoutSlug = f.pages[0]?.slug;
+    const displayName = checkoutSlug
+      ? checkoutSlug.replace(/^\//, '').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+      : f.name;
+    funnelNameMap.set(f.ccReferenceId, displayName);
+  }
+
   // Group orders by funnel
   const funnelMap = new Map<string, { name: string; ccReferenceId: string | null; orders: typeof orders }>();
 
@@ -60,8 +74,9 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
     if (!funnelKey) continue;
 
     if (!funnelMap.has(funnelKey)) {
+      const resolvedName = funnelNameMap.get(funnelKey) ?? funnelKey;
       funnelMap.set(funnelKey, {
-        name: order.campaignName ?? funnelKey,
+        name: resolvedName,
         ccReferenceId: order.funnelReferenceId,
         orders: [],
       });
