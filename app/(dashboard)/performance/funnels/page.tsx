@@ -35,22 +35,16 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
     },
   });
 
-  // Get upsell paths for overall take rates
-  const upsellPaths = await prisma.upsellPath.findMany({
-    where: {
-      order: {
-        createdAt: { gte: startDate, lte: endDate },
-        source: { in: ['SHOPIFY', 'MERGED'] },
-        status: 'COMPLETE',
-      },
-    },
-    select: { upsellsAccepted: true, upsellsDeclined: true },
-  });
-
-  const totalUpsellAccepted = upsellPaths.reduce((s, p) => s + p.upsellsAccepted, 0);
-  const totalUpsellDeclined = upsellPaths.reduce((s, p) => s + p.upsellsDeclined, 0);
-  const totalUpsellOffered = totalUpsellAccepted + totalUpsellDeclined;
-  const overallTakeRate = totalUpsellOffered > 0 ? totalUpsellAccepted / totalUpsellOffered : 0;
+  // Calculate take rate from order items (UpsellPath table is empty)
+  // Take rate = orders with at least 1 UPSALE item / total orders
+  let ordersWithUpsell = 0;
+  let totalUpsaleItems = 0;
+  for (const order of orders) {
+    const upsaleCount = order.items.filter(i => i.productType === 'UPSALE').length;
+    if (upsaleCount > 0) ordersWithUpsell++;
+    totalUpsaleItems += upsaleCount;
+  }
+  const overallTakeRate = orders.length > 0 ? ordersWithUpsell / orders.length : 0;
 
   // Group orders by funnel (using config or checkout slug)
   type OrderGroup = { config: typeof FUNNEL_CONFIGS[0] | null; orders: typeof orders; checkoutSlug: string };
