@@ -128,8 +128,8 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
           const slot = item.productSlot;
           if (!otoSlots.has(slot)) otoSlots.set(slot, new Map());
           const slotProducts = otoSlots.get(slot)!;
-          // Key by productLine + price to aggregate all name variants of same product
-          const displayName = item.productMap?.productLine ?? item.name ?? 'Unknown';
+          // Key by item name + price — each campaignProduct variant is a distinct offer
+          const displayName = item.name ?? item.productMap?.productLine ?? 'Unknown';
           const key = `${displayName}|${item.price}`;
           const existing = slotProducts.get(key) ?? { name: displayName, campaignProductId: item.ccCampaignProductId, count: 0, revenue: 0, price: item.price, frequency: freq, isSubscription: isSub };
           existing.count += 1;
@@ -174,25 +174,13 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
     for (const [slot, slotProducts] of sortedSlots) {
       const pageVisitors = ordersPerSlot.get(slot)?.size ?? totalOrders;
 
-      // Each OTO page has ONE product — group all price variants of the dominant product
-      // Other products in the same slot are from funnel routing variations (A/B tests)
-      const byProductLine = new Map<string, { name: string; count: number; revenue: number; prices: Set<number>; frequency: string | null; isSubscription: boolean }>();
-      for (const [key, v] of slotProducts) {
-        const existing = byProductLine.get(v.name) ?? { name: v.name, count: 0, revenue: 0, prices: new Set(), frequency: v.frequency, isSubscription: v.isSubscription };
-        existing.count += v.count;
-        existing.revenue += v.revenue;
-        existing.prices.add(v.price);
-        if (v.frequency) existing.frequency = v.frequency;
-        if (v.isSubscription) existing.isSubscription = true;
-        byProductLine.set(v.name, existing);
-      }
-
-      const prods = [...byProductLine.values()]
+      // Each offer is a distinct name+price (campaignProduct level)
+      const prods = [...slotProducts.values()]
         .map(v => ({
           name: v.name,
           count: v.count,
           rate: pageVisitors > 0 ? v.count / pageVisitors : 0,
-          prices: [...v.prices].sort((a, b) => a - b),
+          prices: [v.price],
           frequency: v.frequency,
           isSubscription: v.isSubscription,
         }))
