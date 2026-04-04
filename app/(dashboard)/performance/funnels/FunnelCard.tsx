@@ -8,7 +8,7 @@ export type FunnelPageData = {
   slug: string;
   orders: number;
   revenue: number;
-  products: { name: string; count: number; rate: number }[];
+  products: { name: string; count: number; rate: number; prices: number[]; frequency: string | null; isSubscription: boolean }[];
 };
 
 export type FunnelData = {
@@ -72,10 +72,27 @@ export function FunnelCard({ funnel }: { funnel: FunnelData }) {
                 </div>
               </div>
               {page.products.length > 0 && (
-                <div className="ml-4 space-y-1">
+                <div className="ml-4 space-y-1.5">
                   {page.products.map((prod, j) => (
                     <div key={j} className="flex items-center justify-between text-xs">
-                      <span className="text-gray-400">{prod.name}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-400">{prod.name}</span>
+                        {prod.isSubscription && (
+                          <span className="text-[10px] font-medium text-blue-400 bg-blue-500/10 rounded px-1.5 py-0.5">
+                            SUB
+                          </span>
+                        )}
+                        {prod.frequency && (
+                          <span className="text-[10px] font-medium text-purple-400 bg-purple-500/10 rounded px-1.5 py-0.5">
+                            {prod.frequency}
+                          </span>
+                        )}
+                        {prod.prices.length > 0 && (
+                          <span className="text-gray-600">
+                            {prod.prices.map(p => fmt$(p)).join(' / ')}
+                          </span>
+                        )}
+                      </div>
                       <span className="tabular-nums">
                         <span className="text-gray-300">{prod.count}</span>
                         <span className="text-gray-600 ml-1">({(prod.rate * 100).toFixed(1)}%)</span>

@@ -27,7 +27,7 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
         select: {
           productSlot: true, name: true, price: true, quantity: true,
           productType: true, ccCrmId: true, ccCampaignProductId: true,
-          productMap: { select: { name: true, productLine: true } },
+          productMap: { select: { name: true, productLine: true, frequency: true, isSubscription: true } },
         },
         orderBy: { productSlot: 'asc' },
       },
@@ -67,8 +67,9 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
 
     // Build pages from productSlot ordering
     // OFFER items = checkout page, UPSALE items grouped by slot = OTO pages
-    const checkoutProducts = new Map<string, { name: string; count: number; revenue: number; prices: Set<number> }>();
-    const otoSlots = new Map<number, Map<string, { name: string; count: number; revenue: number; prices: Set<number> }>>();
+    type ProdAgg = { name: string; count: number; revenue: number; prices: Set<number>; frequency: string | null; isSubscription: boolean };
+    const checkoutProducts = new Map<string, ProdAgg>();
+    const otoSlots = new Map<number, Map<string, ProdAgg>>();
     let ordersWithUpsells = 0;
 
     for (const order of groupOrders) {
@@ -77,22 +78,28 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
         const prodName = item.productMap?.productLine ?? item.name ?? 'Unknown';
         const priceDisplay = item.price;
 
+        const freq = item.productMap?.frequency ?? null;
+        const isSub = item.productMap?.isSubscription ?? false;
+
         if (item.productType === 'OFFER' || !item.productType) {
-          // Checkout page product
-          const existing = checkoutProducts.get(prodName) ?? { name: prodName, count: 0, revenue: 0, prices: new Set() };
+          const existing = checkoutProducts.get(prodName) ?? { name: prodName, count: 0, revenue: 0, prices: new Set(), frequency: freq, isSubscription: isSub };
           existing.count += 1;
           existing.revenue += item.price;
           existing.prices.add(item.price);
+          if (freq) existing.frequency = freq;
+          if (isSub) existing.isSubscription = true;
           checkoutProducts.set(prodName, existing);
         } else if (item.productType === 'UPSALE') {
           hasUpsell = true;
           const slot = item.productSlot;
           if (!otoSlots.has(slot)) otoSlots.set(slot, new Map());
           const slotProducts = otoSlots.get(slot)!;
-          const existing = slotProducts.get(prodName) ?? { name: prodName, count: 0, revenue: 0, prices: new Set() };
+          const existing = slotProducts.get(prodName) ?? { name: prodName, count: 0, revenue: 0, prices: new Set(), frequency: freq, isSubscription: isSub };
           existing.count += 1;
           existing.revenue += item.price;
           existing.prices.add(item.price);
+          if (freq) existing.frequency = freq;
+          if (isSub) existing.isSubscription = true;
           slotProducts.set(prodName, existing);
         }
       }
@@ -109,6 +116,8 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
         count: v.count,
         rate: totalOrders > 0 ? v.count / totalOrders : 0,
         prices: [...v.prices].sort((a, b) => a - b),
+        frequency: v.frequency,
+        isSubscription: v.isSubscription,
       }))
       .sort((a, b) => b.count - a.count);
 
@@ -133,6 +142,8 @@ export default async function FunnelPerformancePage({ searchParams }: { searchPa
           count: v.count,
           rate: totalOrders > 0 ? v.count / totalOrders : 0,
           prices: [...v.prices].sort((a, b) => a - b),
+          frequency: v.frequency,
+          isSubscription: v.isSubscription,
         }))
         .sort((a, b) => b.count - a.count);
 
