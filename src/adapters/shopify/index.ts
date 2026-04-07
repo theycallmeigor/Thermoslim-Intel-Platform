@@ -125,6 +125,18 @@ function toCents(value: string | undefined | null): number {
   return Math.round(parseFloat(value || '0') * 100);
 }
 
+// Exported for use by sync-shopify-subscriptions service
+export function shopifyGraphQL(): { url: string; headers: Record<string, string> } {
+  const domain = config.shopify.storeUrl.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  return {
+    url: `https://${domain}/admin/api/2024-10/graphql.json`,
+    headers: {
+      'X-Shopify-Access-Token': config.shopify.accessToken,
+      'Content-Type': 'application/json',
+    },
+  };
+}
+
 export class ShopifyAdapter implements IAdapter {
   name = 'shopify';
   private baseUrl: string;

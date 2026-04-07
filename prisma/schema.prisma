@@ -67,6 +67,8 @@ enum SubscriptionEventType {
   PAUSED
   RESUMED
   REACTIVATED
+  EXPIRED
+  SKIPPED
 }
 
 enum RevenueEventType {
@@ -227,6 +229,9 @@ model Subscription {
   customer             Customer             @relation(fields: [customerId], references: [id])
   ccPurchaseId         String?              @unique
   ccClientPurchaseId   String?              @unique
+  shopifyContractId    String?              @unique  // Shopify SubscriptionContract GID — Loop dedup key
+  loopSubscriptionId   String?              @unique  // Reserved for future Loop API
+  sellingPlanName      String?                       // Shopify selling plan name
   originalOrderId      String?
   productMapId         String?
   productMap           ProductMap?          @relation(fields: [productMapId], references: [id])
