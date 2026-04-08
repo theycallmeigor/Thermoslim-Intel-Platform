@@ -750,6 +750,7 @@ async function upsertSubscription(data: SubscriptionData): Promise<{ created: bo
 
   const payload = {
     customerId: customer.id,
+    source: 'CHECKOUTCHAMP' as const,
     status: data.status,
     recurringPrice: data.recurringPrice,
     frequency: frequency ?? existing?.frequency ?? null,

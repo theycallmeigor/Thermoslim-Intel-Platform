@@ -6,9 +6,11 @@ import { format } from 'date-fns';
 import { prisma } from '@/lib/prisma';
 import { fmt$, fmtK, parseRange, toMonthlyMrr } from '@/lib/dashboard/formatting';
 import { calculateMrr } from '@/lib/dashboard/mrr';
+import type { Source } from '@prisma/client';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { Badge } from '@/components/ui/Badge';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { SourceFilter } from '@/components/ui/SourceFilter';
 import { WaterfallChart, type WaterfallMonth } from './WaterfallChart';
 
 // ─── Event type badge colors ──────────────────────────────────────────────────
@@ -29,11 +31,11 @@ function humanizeEventType(t: string): string {
 
 // ─── Data fetching ────────────────────────────────────────────────────────────
 
-async function getMrrData(startDate: Date, endDate: Date) {
+async function getMrrData(startDate: Date, endDate: Date, sourceWhere: Record<string, unknown>) {
   const [activeSubs, periodEvents, recentEvents] = await Promise.all([
     // All ACTIVE + TRIAL subscriptions for current MRR
     prisma.subscription.findMany({
-      where: { status: { in: ['ACTIVE', 'TRIAL'] } },
+      where: { status: { in: ['ACTIVE', 'TRIAL'] }, ...sourceWhere },
       select: { id: true, recurringPrice: true, frequency: true },
     }),
 
@@ -42,6 +44,7 @@ async function getMrrData(startDate: Date, endDate: Date) {
       where: {
         occurredAt: { gte: startDate, lte: endDate },
         eventType: { in: ['CREATED', 'CANCELLED', 'REACTIVATED', 'RESUMED'] },
+        subscription: sourceWhere,
       },
       select: {
         id: true,
@@ -62,6 +65,7 @@ async function getMrrData(startDate: Date, endDate: Date) {
     prisma.subscriptionEvent.findMany({
       where: {
         occurredAt: { gte: startDate, lte: endDate },
+        subscription: sourceWhere,
       },
       select: {
         id: true,
@@ -93,14 +97,15 @@ async function getMrrData(startDate: Date, endDate: Date) {
 export default async function MrrWaterfallPage({
   searchParams,
 }: {
-  searchParams: Promise<{ from?: string; to?: string }>;
+  searchParams: Promise<{ from?: string; to?: string; source?: string }>;
 }) {
   const sp = await searchParams;
   const { startDate, endDate } = parseRange(sp.from, sp.to);
-  const { activeSubs, periodEvents, recentEvents } = await getMrrData(startDate, endDate);
+  const sourceWhere = sp.source ? { source: sp.source as Source } : {};
+  const { activeSubs, periodEvents, recentEvents } = await getMrrData(startDate, endDate, sourceWhere);
 
   // ── KPI: Current MRR (from shared calculator — includes trial prices) ──────
-  const { totalMrr: currentMrr, activeCount } = await calculateMrr();
+  const { totalMrr: currentMrr, activeCount } = await calculateMrr(sourceWhere);
 
   // ── KPI: Period new / churned MRR ──────────────────────────────────────────
   let newMrrPeriod = 0;
@@ -159,7 +164,9 @@ export default async function MrrWaterfallPage({
       <PageHeader
         title="MRR Waterfall"
         subtitle="Monthly recurring revenue movement"
-      />
+      >
+        <SourceFilter />
+      </PageHeader>
 
       {/* KPI strip */}
       <div className="grid grid-cols-4 gap-4">

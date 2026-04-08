@@ -235,6 +235,7 @@ model Subscription {
   originalOrderId      String?
   productMapId         String?
   productMap           ProductMap?          @relation(fields: [productMapId], references: [id])
+  source               Source?
   status               SubscriptionStatus
   currentBillingCycle  Int                  @default(1)
   recurringPrice       Int
@@ -249,6 +250,7 @@ model Subscription {
 
   @@index([customerId])
   @@index([status])
+  @@index([source])
   @@index([campaignId])
 }
 

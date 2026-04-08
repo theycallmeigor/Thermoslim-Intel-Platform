@@ -13,10 +13,10 @@ export type MrrResult = {
  * Single source of truth for MRR calculation.
  * All pages should call this instead of computing MRR independently.
  */
-export async function calculateMrr(): Promise<MrrResult> {
+export async function calculateMrr(extraWhere: Record<string, unknown> = {}): Promise<MrrResult> {
   const [subs, trialPrices] = await Promise.all([
     prisma.subscription.findMany({
-      where: { status: { in: ['ACTIVE', 'TRIAL'] } },
+      where: { status: { in: ['ACTIVE', 'TRIAL'] }, ...extraWhere },
       select: {
         recurringPrice: true,
         frequency: true,

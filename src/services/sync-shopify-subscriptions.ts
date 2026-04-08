@@ -308,6 +308,7 @@ async function processSubscriptions(
 
     const fields = {
       customerId,
+      source: 'SHOPIFY' as const,
       status: 'ACTIVE' as const, // orders with selling plans are active subscriptions
       shopifyContractId: dedupKey,
       sellingPlanName: sub.sellingPlanName.trim(),

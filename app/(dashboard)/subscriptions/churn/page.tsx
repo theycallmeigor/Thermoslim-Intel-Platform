@@ -6,38 +6,42 @@ export const dynamic = 'force-dynamic';
 import { format } from 'date-fns';
 import { prisma } from '@/lib/prisma';
 import { parseRange, pctChange } from '@/lib/dashboard/formatting';
+import type { Source } from '@prisma/client';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { SourceFilter } from '@/components/ui/SourceFilter';
 import { ChurnTrendChart, type ChurnDay } from './ChurnTrendChart';
 import { CancelReasonsChart, type ReasonCount } from './CancelReasonsChart';
 import { CancelByMilestoneChart, type MilestoneBar } from './CancelByMilestoneChart';
 
-export default async function ChurnPage({ searchParams }: { searchParams: Promise<{ from?: string; to?: string }> }) {
+export default async function ChurnPage({ searchParams }: { searchParams: Promise<{ from?: string; to?: string; source?: string }> }) {
   const sp = await searchParams;
   const { startDate, endDate, prevStart, prevEnd } = parseRange(sp.from, sp.to);
+  const sourceWhere = sp.source ? { source: sp.source as Source } : {};
 
   const [cancelled, prevCancelled, paused, activeSubs, cancelledEvents, cancelReasons, milestoneData] = await Promise.all([
     // Cancelled in period
     prisma.subscription.count({
-      where: { status: 'CANCELLED', cancelledAt: { gte: startDate, lte: endDate } },
+      where: { status: 'CANCELLED', cancelledAt: { gte: startDate, lte: endDate }, ...sourceWhere },
     }),
     // Cancelled in previous period
     prisma.subscription.count({
-      where: { status: 'CANCELLED', cancelledAt: { gte: prevStart, lte: prevEnd } },
+      where: { status: 'CANCELLED', cancelledAt: { gte: prevStart, lte: prevEnd }, ...sourceWhere },
     }),
     // Paused in period (from events)
     prisma.subscriptionEvent.count({
-      where: { eventType: 'PAUSED', occurredAt: { gte: startDate, lte: endDate } },
+      where: { eventType: 'PAUSED', occurredAt: { gte: startDate, lte: endDate }, subscription: sourceWhere },
     }),
     // Active subs (for churn rate denominator)
     prisma.subscription.count({
-      where: { status: { in: ['ACTIVE', 'TRIAL'] } },
+      where: { status: { in: ['ACTIVE', 'TRIAL'] }, ...sourceWhere },
     }),
     // Daily cancel + pause events for trend chart
     prisma.subscriptionEvent.findMany({
       where: {
         eventType: { in: ['CANCELLED', 'PAUSED'] },
         occurredAt: { gte: startDate, lte: endDate },
+        subscription: sourceWhere,
       },
       select: { eventType: true, occurredAt: true },
       orderBy: { occurredAt: 'asc' },
@@ -45,7 +49,7 @@ export default async function ChurnPage({ searchParams }: { searchParams: Promis
     // Cancel reasons
     prisma.subscription.groupBy({
       by: ['cancelReason'],
-      where: { cancelledAt: { gte: startDate, lte: endDate }, cancelReason: { not: null } },
+      where: { cancelledAt: { gte: startDate, lte: endDate }, cancelReason: { not: null }, ...sourceWhere },
       _count: { id: true },
       orderBy: { _count: { id: 'desc' } },
       take: 10,
@@ -53,7 +57,7 @@ export default async function ChurnPage({ searchParams }: { searchParams: Promis
     // Cancellations by billing cycle milestone
     prisma.subscription.groupBy({
       by: ['currentBillingCycle'],
-      where: { status: 'CANCELLED', cancelledAt: { gte: startDate, lte: endDate } },
+      where: { status: 'CANCELLED', cancelledAt: { gte: startDate, lte: endDate }, ...sourceWhere },
       _count: { id: true },
       orderBy: { currentBillingCycle: 'asc' },
     }),
@@ -92,7 +96,9 @@ export default async function ChurnPage({ searchParams }: { searchParams: Promis
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Churn Analytics" subtitle="Subscription cancellations and pauses" />
+      <PageHeader title="Churn Analytics" subtitle="Subscription cancellations and pauses">
+        <SourceFilter />
+      </PageHeader>
 
       <div className="grid grid-cols-4 gap-4">
         <KpiCard label="Cancelled (Period)" value={cancelled.toLocaleString()} change={cancelChange} positive={cancelChange ? cancelChange.startsWith('-') : undefined} />
@@ -125,15 +131,15 @@ export default async function ChurnPage({ searchParams }: { searchParams: Promis
           <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Recent Cancellations</h3>
         </div>
         {/* Fetch inline for table to keep the Promise.all clean */}
-        <RecentCancellationsTable startDate={startDate} endDate={endDate} />
+        <RecentCancellationsTable startDate={startDate} endDate={endDate} sourceWhere={sourceWhere} />
       </div>
     </div>
   );
 }
 
-async function RecentCancellationsTable({ startDate, endDate }: { startDate: Date; endDate: Date }) {
+async function RecentCancellationsTable({ startDate, endDate, sourceWhere }: { startDate: Date; endDate: Date; sourceWhere: Record<string, unknown> }) {
   const cancellations = await prisma.subscription.findMany({
-    where: { status: 'CANCELLED', cancelledAt: { gte: startDate, lte: endDate } },
+    where: { status: 'CANCELLED', cancelledAt: { gte: startDate, lte: endDate }, ...sourceWhere },
     select: {
       id: true,
       cancelledAt: true,

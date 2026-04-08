@@ -6,12 +6,15 @@ export const dynamic = 'force-dynamic';
 import { format, startOfMonth, addMonths, differenceInMonths } from 'date-fns';
 import { prisma } from '@/lib/prisma';
 import { fmtK, fmt$ } from '@/lib/dashboard/formatting';
+import type { Source } from '@prisma/client';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { KpiCard } from '@/components/ui/KpiCard';
+import { SourceFilter } from '@/components/ui/SourceFilter';
 import { RetentionCurvesChart, type CohortCurve } from './RetentionCurvesChart';
 
-export default async function CohortsPage({ searchParams }: { searchParams: Promise<{ from?: string; to?: string }> }) {
+export default async function CohortsPage({ searchParams }: { searchParams: Promise<{ from?: string; to?: string; source?: string }> }) {
   const sp = await searchParams;
+  const sourceWhere = sp.source ? { source: sp.source as Source } : {};
   // If date range provided, only include cohorts that started within that range
   // Otherwise show all cohorts (default behavior)
   const startFilter = sp.from ? { gte: new Date(sp.from + 'T00:00:00Z') } : undefined;
@@ -19,7 +22,7 @@ export default async function CohortsPage({ searchParams }: { searchParams: Prom
   const dateWhere = startFilter || endFilter ? { startedAt: { ...startFilter, ...endFilter } } : {};
 
   const subs = await prisma.subscription.findMany({
-    where: dateWhere,
+    where: { ...dateWhere, ...sourceWhere },
     select: {
       id: true,
       startedAt: true,
@@ -71,7 +74,9 @@ export default async function CohortsPage({ searchParams }: { searchParams: Prom
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Cohort Retention" subtitle="Monthly subscription cohort retention rates" />
+      <PageHeader title="Cohort Retention" subtitle="Monthly subscription cohort retention rates">
+        <SourceFilter />
+      </PageHeader>
 
       <div className="grid grid-cols-4 gap-4">
         <KpiCard label="Total Subscribers" value={totalSubs.toLocaleString()} />

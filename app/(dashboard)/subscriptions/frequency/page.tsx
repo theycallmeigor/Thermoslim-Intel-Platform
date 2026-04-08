@@ -7,14 +7,18 @@ import { prisma } from '@/lib/prisma';
 import { fmt$, fmtK, toMonthlyMrr } from '@/lib/dashboard/formatting';
 import { getTrialExpectedPrices } from '@/lib/dashboard/trial-prices';
 import { calculateMrr } from '@/lib/dashboard/mrr';
+import type { Source } from '@prisma/client';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { SourceFilter } from '@/components/ui/SourceFilter';
 import { FrequencyDonut, type FreqSlice } from './FrequencyDonut';
 
-export default async function FrequencyPage() {
+export default async function FrequencyPage({ searchParams }: { searchParams: Promise<{ source?: string }> }) {
+  const sp = await searchParams;
+  const sourceWhere = sp.source ? { source: sp.source as Source } : {};
   // Only active subs — single source of truth
   const subs = await prisma.subscription.findMany({
-    where: { status: { in: ['ACTIVE', 'TRIAL'] } },
+    where: { status: { in: ['ACTIVE', 'TRIAL'] }, ...sourceWhere },
     select: {
       id: true,
       recurringPrice: true,
@@ -28,7 +32,7 @@ export default async function FrequencyPage() {
   });
 
   const trialPrices = await getTrialExpectedPrices();
-  const { totalMrr, activeCount: totalSubs, trialCount } = await calculateMrr();
+  const { totalMrr, activeCount: totalSubs, trialCount } = await calculateMrr(sourceWhere);
 
   // ── KPIs ──────────────────────────────────────────────────────────────
   const avgCycle = totalSubs > 0
@@ -141,7 +145,9 @@ export default async function FrequencyPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Frequency Analysis" subtitle="Subscription frequency distribution, MRR impact, and product breakdown" />
+      <PageHeader title="Frequency Analysis" subtitle="Subscription frequency distribution, MRR impact, and product breakdown">
+        <SourceFilter />
+      </PageHeader>
 
       <div className="grid grid-cols-5 gap-4">
         <KpiCard label="Total MRR" value={fmtK(totalMrr)} />
