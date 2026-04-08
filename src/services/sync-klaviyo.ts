@@ -87,7 +87,7 @@ async function fetchAllPages<T>(path: string): Promise<T[]> {
 async function syncCampaigns(): Promise<{ synced: number; errors: number }> {
   // Fetch all sent campaigns
   const campaigns = await fetchAllPages<KlaviyoCampaign>(
-    '/campaigns?fields[campaign]=name,status,send_time'
+    "/campaigns?filter=equals(messages.channel,'email')&fields[campaign]=name,status,send_time"
   );
 
   console.log(`[sync-klaviyo] fetched ${campaigns.length} campaigns`);
