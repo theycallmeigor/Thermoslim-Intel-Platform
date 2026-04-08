@@ -125,7 +125,7 @@ async function syncCampaigns(): Promise<{ synced: number; errors: number }> {
 
 // --- Flow sync ---
 
-async function syncFlows(): Promise<{ synced: number; errors: number }> {
+async function syncFlows(): Promise<{ synced: number; errors: number; errorDetails: string[] }> {
   const flows = await fetchAllPages<KlaviyoFlow>(
     '/flows?fields[flow]=name,status'
   );
@@ -135,31 +135,32 @@ async function syncFlows(): Promise<{ synced: number; errors: number }> {
   let synced = 0;
   let errors = 0;
 
-  const upserts = flows.map(flow =>
-    prisma.emailFlow.upsert({
-      where: { klaviyoFlowId: flow.id },
-      update: {
-        name: flow.attributes.name,
-        status: flow.attributes.status,
-        syncedAt: new Date(),
-      },
-      create: {
-        klaviyoFlowId: flow.id,
-        name: flow.attributes.name,
-        status: flow.attributes.status,
-      },
-    })
-  );
-
-  try {
-    await prisma.$transaction(upserts);
-    synced = flows.length;
-  } catch (err) {
-    console.error('[sync-klaviyo] flow batch error:', err instanceof Error ? err.message : err);
-    errors = flows.length;
+  const errorDetails: string[] = [];
+  for (const flow of flows) {
+    try {
+      await prisma.emailFlow.upsert({
+        where: { klaviyoFlowId: flow.id },
+        update: {
+          name: flow.attributes.name,
+          status: flow.attributes.status ?? 'unknown',
+          syncedAt: new Date(),
+        },
+        create: {
+          klaviyoFlowId: flow.id,
+          name: flow.attributes.name,
+          status: flow.attributes.status ?? 'unknown',
+        },
+      });
+      synced++;
+    } catch (err) {
+      const msg = `flow ${flow.id} (${flow.attributes.name}): ${err instanceof Error ? err.message : err}`;
+      console.error(`[sync-klaviyo] ${msg}`);
+      errorDetails.push(msg);
+      errors++;
+    }
   }
 
-  return { synced, errors };
+  return { synced, errors, errorDetails };
 }
 
 // --- Main export ---
