@@ -1,32 +1,51 @@
 import { describe, it, expect } from 'vitest';
 import {
-  toFrequency,
+  parseFrequency,
   calcBillingCycle,
-  resolveEventType,
-  STATUS_MAP,
+  buildDedupeKey,
 } from '../sync-shopify-subscriptions';
 
-// ── toFrequency ────────────────────────────────────────────────────────────
+// ── parseFrequency ──────────────────────────────────────────────────────
 
-describe('toFrequency', () => {
-  it('formats monthly interval', () => {
-    expect(toFrequency('MONTH', 1)).toBe('1-month');
-    expect(toFrequency('MONTH', 3)).toBe('3-month');
+describe('parseFrequency', () => {
+  it('parses "Delivery every month " → 1-month', () => {
+    expect(parseFrequency('Delivery every month ')).toBe('1-month');
   });
 
-  it('lowercases the interval', () => {
-    expect(toFrequency('WEEK', 2)).toBe('2-week');
-    expect(toFrequency('DAY', 30)).toBe('30-day');
+  it('parses "Delivery every two months " → 2-month', () => {
+    expect(parseFrequency('Delivery every two months ')).toBe('2-month');
   });
 
-  it('matches the format expected by toMonthlyMrr()', () => {
-    // toMonthlyMrr() expects "{count}-{interval}" — verify the exact delimiter
-    const result = toFrequency('MONTH', 1);
+  it('parses "Delivery every 3 months" → 3-month', () => {
+    expect(parseFrequency('Delivery every 3 months')).toBe('3-month');
+  });
+
+  it('parses "Delivery every three months" → 3-month', () => {
+    expect(parseFrequency('Delivery every three months')).toBe('3-month');
+  });
+
+  it('parses weekly plans', () => {
+    expect(parseFrequency('Delivery every 2 weeks')).toBe('2-week');
+    expect(parseFrequency('Delivery every week')).toBe('1-week');
+  });
+
+  it('handles case insensitivity and trimming', () => {
+    expect(parseFrequency('  DELIVERY EVERY MONTH  ')).toBe('1-month');
+    expect(parseFrequency('delivery every Two Months')).toBe('2-month');
+  });
+
+  it('defaults to 1-month for unparseable names', () => {
+    expect(parseFrequency('Subscribe & Save')).toBe('1-month');
+    expect(parseFrequency('')).toBe('1-month');
+  });
+
+  it('output format matches toMonthlyMrr() expectations', () => {
+    const result = parseFrequency('Delivery every month');
     expect(result).toMatch(/^\d+-\w+$/);
   });
 });
 
-// ── calcBillingCycle ────────────────────────────────────────────────────────
+// ── calcBillingCycle ────────────────────────────────────────────────────
 
 describe('calcBillingCycle', () => {
   it('returns 1 for a subscription created today', () => {
@@ -34,9 +53,9 @@ describe('calcBillingCycle', () => {
     expect(calcBillingCycle(now, 1)).toBe(1);
   });
 
-  it('returns correct cycle for a monthly sub started ~2 months ago', () => {
+  it('returns correct cycle for ~2 months ago', () => {
     const twoMonthsAgo = new Date(Date.now() - 62 * 24 * 60 * 60 * 1000).toISOString();
-    expect(calcBillingCycle(twoMonthsAgo, 1)).toBe(3); // ~2 months = cycle 3
+    expect(calcBillingCycle(twoMonthsAgo, 1)).toBe(3);
   });
 
   it('returns 1 minimum — never zero or negative', () => {
@@ -44,76 +63,29 @@ describe('calcBillingCycle', () => {
     expect(calcBillingCycle(future, 1)).toBe(1);
   });
 
-  it('accounts for interval count (quarterly sub)', () => {
-    // 3-month interval, sub started 4 months ago → cycle 2
+  it('accounts for interval count (bi-monthly)', () => {
     const fourMonthsAgo = new Date(Date.now() - 122 * 24 * 60 * 60 * 1000).toISOString();
-    expect(calcBillingCycle(fourMonthsAgo, 3)).toBe(2);
+    expect(calcBillingCycle(fourMonthsAgo, 2)).toBe(3);
   });
 });
 
-// ── STATUS_MAP ──────────────────────────────────────────────────────────────
+// ── buildDedupeKey ──────────────────────────────────────────────────────
 
-describe('STATUS_MAP', () => {
-  it('maps ACTIVE → ACTIVE', () => {
-    expect(STATUS_MAP['ACTIVE']).toBe('ACTIVE');
+describe('buildDedupeKey', () => {
+  it('builds stable key from email + productId + sellingPlanId', () => {
+    const key = buildDedupeKey('test@example.com', '12345', 'gid://shopify/SellingPlan/99');
+    expect(key).toBe('test@example.com::12345::gid://shopify/SellingPlan/99');
   });
 
-  it('maps PAUSED → PAUSED', () => {
-    expect(STATUS_MAP['PAUSED']).toBe('PAUSED');
+  it('produces different keys for different products', () => {
+    const k1 = buildDedupeKey('a@b.com', '111', 'sp1');
+    const k2 = buildDedupeKey('a@b.com', '222', 'sp1');
+    expect(k1).not.toBe(k2);
   });
 
-  it('maps CANCELLED → CANCELLED', () => {
-    expect(STATUS_MAP['CANCELLED']).toBe('CANCELLED');
-  });
-
-  it('maps EXPIRED → COMPLETE (Shopify expired = terminal, not cancelled)', () => {
-    expect(STATUS_MAP['EXPIRED']).toBe('COMPLETE');
-  });
-
-  it('returns undefined for unknown statuses (caller falls back to ACTIVE)', () => {
-    expect(STATUS_MAP['UNKNOWN_FUTURE_STATUS']).toBeUndefined();
-  });
-});
-
-// ── resolveEventType ────────────────────────────────────────────────────────
-
-describe('resolveEventType', () => {
-  it('returns CREATED for new subscriptions', () => {
-    expect(resolveEventType(undefined, 'ACTIVE', true)).toBe('CREATED');
-    expect(resolveEventType(undefined, 'PAUSED', true)).toBe('CREATED');
-  });
-
-  it('returns null when status has not changed', () => {
-    expect(resolveEventType('ACTIVE', 'ACTIVE', false)).toBeNull();
-    expect(resolveEventType('PAUSED', 'PAUSED', false)).toBeNull();
-  });
-
-  it('returns null when there is no previous status (not new)', () => {
-    expect(resolveEventType(undefined, 'ACTIVE', false)).toBeNull();
-  });
-
-  it('returns CANCELLED on ACTIVE → CANCELLED', () => {
-    expect(resolveEventType('ACTIVE', 'CANCELLED', false)).toBe('CANCELLED');
-  });
-
-  it('returns PAUSED on ACTIVE → PAUSED', () => {
-    expect(resolveEventType('ACTIVE', 'PAUSED', false)).toBe('PAUSED');
-  });
-
-  it('returns EXPIRED on ACTIVE → COMPLETE', () => {
-    expect(resolveEventType('ACTIVE', 'COMPLETE', false)).toBe('EXPIRED');
-  });
-
-  it('returns RESUMED on PAUSED → ACTIVE', () => {
-    expect(resolveEventType('PAUSED', 'ACTIVE', false)).toBe('RESUMED');
-  });
-
-  it('returns REACTIVATED on CANCELLED → ACTIVE', () => {
-    expect(resolveEventType('CANCELLED', 'ACTIVE', false)).toBe('REACTIVATED');
-  });
-
-  it('returns null for unmapped transitions', () => {
-    // e.g. COMPLETE → ACTIVE has no defined event type
-    expect(resolveEventType('COMPLETE', 'ACTIVE', false)).toBeNull();
+  it('produces different keys for different selling plans', () => {
+    const k1 = buildDedupeKey('a@b.com', '111', 'sp1');
+    const k2 = buildDedupeKey('a@b.com', '111', 'sp2');
+    expect(k1).not.toBe(k2);
   });
 });
