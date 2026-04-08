@@ -163,22 +163,159 @@ async function syncFlows(): Promise<{ synced: number; errors: number; errorDetai
   return { synced, errors, errorDetails };
 }
 
+// --- Subscriber profile sync ---
+
+interface KlaviyoProfile {
+  id: string;
+  attributes: {
+    email: string | null;
+    first_name: string | null;
+    last_name: string | null;
+    phone_number: string | null;
+    properties: Record<string, unknown>;
+  };
+}
+
+async function syncSubscriberProfiles(): Promise<{ synced: number; updated: number; errors: number }> {
+  // Fetch all profiles — Klaviyo paginates automatically
+  const profiles = await fetchAllPages<KlaviyoProfile>(
+    '/profiles?fields[profile]=email,first_name,last_name,phone_number,properties'
+  );
+
+  console.log(`[sync-klaviyo] fetched ${profiles.length} profiles`);
+
+  let synced = 0;
+  let updated = 0;
+  let errors = 0;
+
+  for (const profile of profiles) {
+    const email = profile.attributes.email;
+    if (!email) continue;
+
+    const props = profile.attributes.properties ?? {};
+
+    // Extract Loop subscription properties
+    const loopActive = props.$loop_active_subscriber as boolean | undefined;
+    const loopActiveSubCount = props.$loop_active_subscription_count as number | undefined;
+    const loopCancelledCount = props.$loop_cancelled_subscription_count as number | undefined;
+    const loopPausedCount = props.$loop_paused_subscription_count as number | undefined;
+    const loopNextBilling = props.$loop_next_billing_date as string | undefined;
+    const loopProcessedOrders = props.$loop_processed_order_count as number | undefined;
+    const loopSubRevenue = props.$loop_subscription_revenue as number | undefined;
+    const loopLineItems = props.$loop_subscribed_line_item_names as string | undefined;
+    const loopFirstSubDate = props.$loop_first_subscription_acquisition_date as string | undefined;
+    const loopLastOrderDate = props.$loop_last_subscription_order_date as string | undefined;
+
+    // Skip profiles with no Loop subscription data
+    const hasLoopData = loopActive !== undefined || loopActiveSubCount !== undefined;
+    if (!hasLoopData) continue;
+
+    try {
+      // Upsert customer with Klaviyo profile ID
+      const customer = await prisma.customer.upsert({
+        where: { email },
+        update: {
+          klaviyoProfileId: profile.id,
+          firstName: profile.attributes.first_name ?? undefined,
+          lastName: profile.attributes.last_name ?? undefined,
+          phone: profile.attributes.phone_number ?? undefined,
+        },
+        create: {
+          email,
+          klaviyoProfileId: profile.id,
+          firstName: profile.attributes.first_name ?? undefined,
+          lastName: profile.attributes.last_name ?? undefined,
+          phone: profile.attributes.phone_number ?? undefined,
+        },
+      });
+      synced++;
+
+      // Update Shopify subscriptions for this customer with Loop data
+      if (loopActive !== undefined) {
+        const shopifySubs = await prisma.subscription.findMany({
+          where: { customerId: customer.id, source: 'SHOPIFY' },
+          select: { id: true, status: true },
+        });
+
+        for (const sub of shopifySubs) {
+          // Infer status from Loop properties
+          let newStatus = sub.status;
+          if (loopActive === false && loopCancelledCount && loopCancelledCount > 0) {
+            newStatus = 'CANCELLED';
+          } else if (loopActive === false && loopPausedCount && loopPausedCount > 0) {
+            newStatus = 'PAUSED';
+          } else if (loopActive === true) {
+            newStatus = 'ACTIVE';
+          }
+
+          const updateData: Record<string, unknown> = {};
+          if (newStatus !== sub.status) updateData.status = newStatus;
+          if (loopNextBilling) updateData.nextBillDate = new Date(loopNextBilling);
+          if (loopProcessedOrders) updateData.currentBillingCycle = loopProcessedOrders;
+          if (newStatus === 'CANCELLED' && sub.status !== 'CANCELLED') {
+            updateData.cancelledAt = new Date();
+          }
+
+          if (Object.keys(updateData).length > 0) {
+            await prisma.subscription.update({
+              where: { id: sub.id },
+              data: updateData,
+            });
+
+            // Emit status change event
+            if (newStatus !== sub.status) {
+              const eventTypeMap: Record<string, string> = {
+                CANCELLED: 'CANCELLED',
+                PAUSED: 'PAUSED',
+                ACTIVE: sub.status === 'PAUSED' ? 'RESUMED' : sub.status === 'CANCELLED' ? 'REACTIVATED' : 'CREATED',
+              };
+              const eventType = eventTypeMap[newStatus];
+              if (eventType) {
+                await prisma.subscriptionEvent.create({
+                  data: {
+                    subscriptionId: sub.id,
+                    eventType: eventType as never,
+                    fromStatus: sub.status,
+                    toStatus: newStatus,
+                    occurredAt: new Date(),
+                  },
+                });
+              }
+            }
+            updated++;
+          }
+        }
+      }
+    } catch (err) {
+      console.error(`[sync-klaviyo] profile ${email} error:`, err instanceof Error ? err.message : err);
+      errors++;
+    }
+  }
+
+  console.log(`[sync-klaviyo] profiles: synced=${synced} updated=${updated} errors=${errors}`);
+  return { synced, updated, errors };
+}
+
 // --- Main export ---
 
 export async function syncKlaviyo(): Promise<{
   campaigns: { synced: number; errors: number };
   flows: { synced: number; errors: number };
+  profiles: { synced: number; updated: number; errors: number };
 }> {
   const start = Date.now();
   console.log('[sync-klaviyo] starting');
 
+  // Campaigns + flows in parallel (fast), then profiles (slower, sequential DB writes)
   const [campaigns, flows] = await Promise.all([
     syncCampaigns(),
     syncFlows(),
   ]);
+
+  const profiles = await syncSubscriberProfiles();
+
   console.log(`[sync-klaviyo] total time: ${((Date.now() - start) / 1000).toFixed(1)}s`);
+  console.log(`[sync-klaviyo] done: campaigns=${campaigns.synced} flows=${flows.synced} profiles=${profiles.synced} sub-updates=${profiles.updated}`);
 
-  console.log(`[sync-klaviyo] done: campaigns=${campaigns.synced}/${campaigns.errors}err flows=${flows.synced}/${flows.errors}err`);
-
-  return { campaigns, flows };
+  return { campaigns, flows, profiles };
 }
