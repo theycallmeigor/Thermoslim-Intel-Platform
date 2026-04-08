@@ -16,9 +16,7 @@ const QUERY = `
                 title
                 quantity
                 originalUnitPriceSet { shopMoney { amount currencyCode } }
-                sellingPlanAllocation {
-                  sellingPlan { id name }
-                }
+                sellingPlan { name sellingPlanId }
                 product { id }
                 variant { id }
               }
