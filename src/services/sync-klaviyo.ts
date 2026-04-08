@@ -127,7 +127,7 @@ async function syncCampaigns(): Promise<{ synced: number; errors: number }> {
 
 async function syncFlows(): Promise<{ synced: number; errors: number }> {
   const flows = await fetchAllPages<KlaviyoFlow>(
-    '/flows?fields[flow]=name,status,trigger_type'
+    '/flows?fields[flow]=name,status'
   );
 
   console.log(`[sync-klaviyo] fetched ${flows.length} flows`);
