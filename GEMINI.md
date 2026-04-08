@@ -105,3 +105,4 @@ Full profile: `/Users/igordviniatin/Vaults/CROMaxLabs/IGOR-PROFILE.md`
 
 This project's knowledge domain lives at `/Users/igordviniatin/Vaults/CROMaxLabs/thermoslim-platform/`.
 Parent vault: `/Users/igordviniatin/Vaults/CROMaxLabs/` — read its `CLAUDE.md` for full cross-domain map.
+Shared procedures (all agents): `~/.claude/docs/` — session rhythm, quality gate, export format, graph update, audit pipeline.

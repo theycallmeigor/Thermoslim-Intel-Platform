@@ -1,0 +1,394 @@
+WEBVTT
+
+1
+00:00:02.840 --> 00:00:04.960
+Ei, o que é que se passa, pessoal?
+
+2
+00:00:05.080 --> 00:00:07.000
+Aqui é o John, e eu vou fazer
+
+3
+00:00:07.080 --> 00:00:11.840
+este tutorial rápido para um
+membro, um membro recente do AdsRx.
+
+4
+00:00:12.000 --> 00:00:15.720
+Ele queria recriar este carrossel que
+
+5
+00:00:15.720 --> 00:00:20.120
+temos no meu sítio Web
+de produção de vídeo.
+
+6
+00:00:20.280 --> 00:00:21.920
+E assim
+
+7
+00:00:22.440 --> 00:00:26.360
+não temos um modelo exato para isso, mas
+vou mostrar-lhe uma solução alternativa
+
+8
+00:00:26.440 --> 00:00:31.880
+de criar algo semelhante a isso
+se tiver o pacote de acesso total.
+
+9
+00:00:32.800 --> 00:00:34.520
+Temos o carrossel,
+
+10
+00:00:34.680 --> 00:00:39.640
+temos o iPhone e temos um
+vídeo a passar no interior.
+
+11
+00:00:39.800 --> 00:00:43.880
+É bastante simples,
+bastante fácil de fazer.
+
+12
+00:00:44.040 --> 00:00:49.080
+Como há muito processamento, demorará
+um pouco de tempo a renderizar.
+
+13
+00:00:49.200 --> 00:00:51.840
+Mas deixem-me começar do zero.
+
+14
+00:00:52.000 --> 00:00:58.560
+Tenho aqui uma sequência de 16
+por 9 e vou escrever carrossel.
+
+15
+00:00:58.720 --> 00:01:00.880
+Na verdade, vou fazer 16 por 9, desculpem.
+
+16
+00:01:01.000 --> 00:01:01.920
+16 por 9.
+
+17
+00:01:02.120 --> 00:01:03.640
+Temos dois destes carrosséis.
+
+18
+00:01:03.800 --> 00:01:09.560
+Temos um em que não é plano.
+
+19
+00:01:09.960 --> 00:01:14.000
+Vou mostrar-vos as duas
+opções, mas não importa.
+
+20
+00:01:14.480 --> 00:01:16.200
+Cá vamos nós.
+
+21
+00:01:17.680 --> 00:01:22.480
+Temos esta versão aqui, que é a
+original que acabei de utilizar.
+
+22
+00:01:22.640 --> 00:01:29.840
+Temos esta versão, em que o
+produto está virado para a frente.
+
+23
+00:01:30.040 --> 00:01:33.600
+E os títulos dos produtos
+também estão por baixo.
+
+24
+00:01:34.480 --> 00:01:39.200
+Para recriar basicamente esse
+aspeto, preciso de outro modelo.
+
+25
+00:01:39.440 --> 00:01:42.320
+Aqui, normalmente, coloca-se uma imagem
+
+26
+00:01:42.320 --> 00:01:45.680
+ou, provavelmente, uma
+fotografia do produto.
+
+27
+00:01:45.800 --> 00:01:49.360
+Vou criar um novo elemento aqui.
+
+28
+00:01:49.560 --> 00:01:54.400
+Vou escrever iPhone e temos um
+iPhone com um aspeto 3D muito fixe.
+
+29
+00:01:54.520 --> 00:01:58.240
+Vou colocar isso na minha
+linha do tempo assim.
+
+30
+00:01:58.400 --> 00:02:00.400
+Vou alargar um pouco mais o meu ecrã.
+
+31
+00:02:00.520 --> 00:02:06.120
+Tenho o meu iPhone e tenho aqui
+um anúncio que já está a ser
+
+32
+00:02:06.200 --> 00:02:08.440
+Eu diria que é uma sequência.
+
+33
+00:02:08.600 --> 00:02:10.520
+Posso simplesmente arrastar
+esta sequência para aqui.
+
+34
+00:02:10.640 --> 00:02:12.440
+Vou pegar nessa sequência e vou
+
+35
+00:02:12.520 --> 00:02:16.520
+vou simplesmente arrastá-lo
+para o meu modelo do iPhone.
+
+36
+00:02:16.640 --> 00:02:23.040
+A partir daqui, tenho o meu iPhone com
+um anúncio dentro dele, o que é fixe.
+
+37
+00:02:23.200 --> 00:02:24.920
+Não me vou dar ao trabalho de fazer
+
+38
+00:02:24.920 --> 00:02:27.120
+ajustes a isto só por causa do tutorial.
+
+39
+00:02:27.160 --> 00:02:29.160
+Mas a partir daqui, vou realmente fazer
+
+40
+00:02:29.240 --> 00:02:34.040
+uma sub-sequência para
+que eu tenha isto isolado.
+
+41
+00:02:34.200 --> 00:02:36.920
+Pode vê-lo aqui agora.
+
+42
+00:02:37.120 --> 00:02:42.040
+Se quisesse, podia entrar aqui e mudar
+qualquer coisa, mas não o vou fazer.
+
+43
+00:02:42.160 --> 00:02:47.520
+A partir daqui, vou voltar ao meu
+modelo de carrossel de produtos.
+
+44
+00:02:47.920 --> 00:02:49.920
+Neste modelo, é fixe porque
+
+45
+00:02:49.920 --> 00:02:52.080
+pode escolher o número de
+produtos que pretende rodar.
+
+46
+00:02:52.200 --> 00:02:55.080
+Neste caso, vou ficar com seis.
+
+47
+00:02:55.240 --> 00:02:58.960
+Aqui, tem a animação, a distância.
+
+48
+00:02:59.120 --> 00:03:05.320
+Posso mantê-lo um pouco mais curto
+ou mais próximo, a escala, que é
+
+49
+00:03:05.400 --> 00:03:09.240
+Pode jogar com todas estas funcionalidades
+e definições da forma que quiser.
+
+50
+00:03:09.360 --> 00:03:10.880
+Mas aqui nos marcadores
+de posição do produto,
+
+51
+00:03:11.000 --> 00:03:13.920
+Na verdade, vou arrastar a
+minha sequência para aqui.
+
+52
+00:03:14.040 --> 00:03:17.200
+Digamos que queria seis
+estilos diferentes,
+
+53
+00:03:17.360 --> 00:03:21.720
+se fosse lá e criasse seis versões
+diferentes deste anúncio para o iPhone.
+
+54
+00:03:21.840 --> 00:03:24.840
+Mas, para este exemplo, vou
+manter as coisas muito simples.
+
+55
+00:03:24.960 --> 00:03:34.480
+Vou arrastar tudo isto para os
+marcadores de posição do produto.
+
+56
+00:03:35.120 --> 00:03:37.360
+Está a lidar com muita coisa aqui.
+
+57
+00:03:37.440 --> 00:03:39.040
+Tens tipo, Mogard em Mogard.
+
+58
+00:03:39.160 --> 00:03:46.360
+Vai simplesmente deixá-lo
+responder ao seu Mac ou PC.
+
+59
+00:03:46.560 --> 00:03:47.640
+Mas cá vamos nós.
+
+60
+00:03:47.760 --> 00:03:50.960
+Agora pode ver a animação atual aqui.
+
+61
+00:03:51.360 --> 00:03:53.600
+Se quiserem despir tudo isto
+
+62
+00:03:53.680 --> 00:03:59.040
+de todos os títulos e outras
+coisas, basta ir lá e pode
+
+63
+00:03:59.120 --> 00:04:02.520
+ou pode ativar e desativar o
+preenchimento de texto aqui.
+
+64
+00:04:03.360 --> 00:04:08.640
+Basta colocar tudo a zero ou
+apagar qualquer coisa aqui mesmo.
+
+65
+00:04:08.800 --> 00:04:13.600
+Eliminar isso, eliminar o traço
+ou ligar e desligar o traço.
+
+66
+00:04:14.480 --> 00:04:18.080
+O texto aqui, vou removê-lo.
+
+67
+00:04:18.280 --> 00:04:21.600
+E o logótipo, vou removê-lo também.
+
+68
+00:04:21.760 --> 00:04:25.400
+E depois, se quisesse, podia até
+remover o fundo por completo.
+
+69
+00:04:25.520 --> 00:04:29.520
+Assim, é um carrossel
+completamente transparente.
+
+70
+00:04:29.680 --> 00:04:30.920
+Célula.
+
+71
+00:04:31.200 --> 00:04:33.720
+Por isso, sim, é praticamente
+tudo o que tens de fazer.
+
+72
+00:04:33.840 --> 00:04:37.520
+E depois pode renderizá-lo
+e colocá-lo noutro local.
+
+73
+00:04:37.680 --> 00:04:42.400
+Eu recomendaria, renderizando-o
+para um mp4 e depois usando
+
+74
+00:04:42.400 --> 00:04:45.440
+esse elemento noutro, num anúncio ou no
+que quer que seja que o queira utilizar
+
+75
+00:04:45.520 --> 00:04:51.120
+apenas por uma questão de eficiência,
+para que o processo fosse mais rápido.
+
+76
+00:04:51.280 --> 00:04:53.800
+Mas é basicamente isso, malta.
+
+77
+00:04:53.960 --> 00:04:55.440
+Se tiveres alguma dúvida sobre o assunto,
+
+78
+00:04:55.480 --> 00:04:58.240
+Vou reproduzi-la mais uma
+vez, porque a tornei pública.
+
+79
+00:04:58.360 --> 00:05:00.200
+Aqui está.
+
+80
+00:05:00.480 --> 00:05:02.840
+Um pequeno carrossel de produtos fixe.
+
+81
+00:05:02.880 --> 00:05:05.160
+Isto pode ser feito com uma
+série de coisas diferentes.
+
+82
+00:05:05.440 --> 00:05:06.880
+Se tiverem algum pedido,
+
+83
+00:05:06.960 --> 00:05:10.760
+qualquer pedido de modelo ou de tutorial
+de modelo, não hesite em contactar-me.
+
+84
+00:05:10.880 --> 00:05:12.200
+Deixa-a cair no canal.
+
+85
+00:05:12.320 --> 00:05:13.400
+É mais ou menos isso, malta.
+
+86
+00:05:13.440 --> 00:05:15.720
+Muito obrigado por terem assistido e
+espero que estejam a gostar dos modelos.
+

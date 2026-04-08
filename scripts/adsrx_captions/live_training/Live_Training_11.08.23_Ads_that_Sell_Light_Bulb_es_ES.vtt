@@ -1,0 +1,399 @@
+WEBVTT
+
+1
+00:00:02.840 --> 00:00:04.880
+¿Qué pasa, chicos?
+
+2
+00:00:05.080 --> 00:00:07.000
+Es John aquí, y voy a hacer
+
+3
+00:00:07.080 --> 00:00:11.880
+este tutorial rápido para un
+miembro, un miembro reciente a AdsRx.
+
+4
+00:00:12.000 --> 00:00:20.120
+Quería recrear este carrusel que tenemos
+en mi sitio web de producción de vídeo.
+
+5
+00:00:20.280 --> 00:00:21.920
+Y así
+
+6
+00:00:22.440 --> 00:00:26.320
+No tenemos una plantilla exacta para
+eso, pero voy a mostrarle una solución.
+
+7
+00:00:26.440 --> 00:00:31.880
+de crear algo parecido si tienes
+el paquete de acceso total.
+
+8
+00:00:32.800 --> 00:00:34.520
+Tenemos el carrusel,
+
+9
+00:00:34.680 --> 00:00:39.640
+tenemos el iPhone, y tenemos un
+vídeo reproduciéndose en el interior.
+
+10
+00:00:39.800 --> 00:00:43.880
+Esto es bastante sencillo,
+bastante fácil de hacer.
+
+11
+00:00:44.040 --> 00:00:49.040
+Como hay mucho procesamiento,
+tardará un poco en renderizarse.
+
+12
+00:00:49.200 --> 00:00:51.840
+Pero déjame empezar desde cero.
+
+13
+00:00:52.000 --> 00:00:58.560
+Tengo una secuencia de 16 por 9
+aquí, y voy a escribir en carrusel.
+
+14
+00:00:58.720 --> 00:01:00.880
+En realidad voy a hacer
+16 por 9, lo siento.
+
+15
+00:01:01.000 --> 00:01:01.920
+16 por 9.
+
+16
+00:01:02.120 --> 00:01:03.680
+Tenemos dos de estos carruseles.
+
+17
+00:01:03.800 --> 00:01:09.600
+Tenemos una en la que no es plana.
+
+18
+00:01:09.960 --> 00:01:14.000
+Te mostraré ambas
+opciones, pero no importa.
+
+19
+00:01:14.480 --> 00:01:16.160
+Allá vamos.
+
+20
+00:01:17.680 --> 00:01:22.520
+Tenemos esta versión aquí, que es
+el original que acabo de utilizar.
+
+21
+00:01:22.640 --> 00:01:29.880
+Tenemos esta versión, en la que el
+producto está orientado hacia delante.
+
+22
+00:01:30.040 --> 00:01:33.600
+Y debajo también están los
+títulos de los productos.
+
+23
+00:01:34.480 --> 00:01:39.200
+Para recrear básicamente ese
+aspecto, necesito otra plantilla.
+
+24
+00:01:39.440 --> 00:01:42.360
+Aquí dentro, normalmente colocarías una
+
+25
+00:01:42.360 --> 00:01:45.680
+imagen o probablemente
+una foto de producto.
+
+26
+00:01:45.800 --> 00:01:49.360
+Voy a crear un nuevo elemento aquí.
+
+27
+00:01:49.560 --> 00:01:54.400
+Voy a teclear iPhone, y tenemos este
+iPhone de aspecto 3D realmente genial.
+
+28
+00:01:54.520 --> 00:01:58.240
+Voy a dejar eso en mi línea de tiempo así.
+
+29
+00:01:58.400 --> 00:02:00.400
+Voy a ampliar mi pantalla un poco más.
+
+30
+00:02:00.520 --> 00:02:06.120
+Tengo mi iPhone, y tengo
+un anuncio por aquí que ya
+
+31
+00:02:06.200 --> 00:02:08.440
+Yo diría que es una secuencia.
+
+32
+00:02:08.600 --> 00:02:10.520
+Puedo arrastrar esta secuencia aquí.
+
+33
+00:02:10.640 --> 00:02:12.440
+Voy a tomar esa secuencia y voy a
+
+34
+00:02:12.520 --> 00:02:16.480
+sólo voy a arrastrarlo a
+mi plantilla de iPhone.
+
+35
+00:02:16.640 --> 00:02:23.040
+A partir de aquí, boom, tengo mi
+iPhone con un anuncio dentro, que mola.
+
+36
+00:02:23.200 --> 00:02:24.920
+No me voy a molestar y hacer cualquier
+
+37
+00:02:24.920 --> 00:02:27.120
+ajustes a esto sólo por
+el bien del tutorial.
+
+38
+00:02:27.160 --> 00:02:29.160
+Pero a partir de aquí,
+en realidad voy a hacer
+
+39
+00:02:29.240 --> 00:02:34.040
+una subsecuencia fuera de ella
+para que tenga esto aislado.
+
+40
+00:02:34.200 --> 00:02:36.920
+Puedes verlo aquí ahora.
+
+41
+00:02:37.120 --> 00:02:42.040
+Puedo entrar aquí y cambiar cualquier
+cosa si quisiera, pero no voy a hacerlo.
+
+42
+00:02:42.160 --> 00:02:47.520
+Desde aquí, voy a volver a mi
+plantilla de carrusel de productos.
+
+43
+00:02:47.920 --> 00:02:49.920
+En esta plantilla, es genial porque
+
+44
+00:02:49.920 --> 00:02:52.080
+puede elegir cuántos
+productos desea rotar.
+
+45
+00:02:52.200 --> 00:02:55.080
+En este caso, voy a quedarme con seis.
+
+46
+00:02:55.240 --> 00:02:58.960
+Aquí tienes la animación, la distancia.
+
+47
+00:02:59.120 --> 00:03:05.320
+Puedo mantenerla un poco más corta
+o más junta, la escala, que es
+
+48
+00:03:05.400 --> 00:03:09.240
+Puedes jugar con todas estas funciones
+y todos estos ajustes como quieras.
+
+49
+00:03:09.360 --> 00:03:10.880
+Pero aquí, en los marcadores
+de posición del producto,
+
+50
+00:03:11.000 --> 00:03:13.920
+En realidad voy a arrastrar
+mi subsecuencia aquí.
+
+51
+00:03:14.040 --> 00:03:17.200
+Digamos que quieres
+seis estilos diferentes,
+
+52
+00:03:17.360 --> 00:03:21.720
+entrarías ahí y crearías seis versiones
+diferentes de este anuncio para el iPhone.
+
+53
+00:03:21.840 --> 00:03:24.840
+Pero para este ejemplo, voy
+a mantenerlo muy simple.
+
+54
+00:03:24.960 --> 00:03:29.200
+Sólo voy a arrastrar todos estos en los
+
+55
+00:03:29.200 --> 00:03:34.520
+marcadores de posición
+del producto Al igual que.
+
+56
+00:03:35.120 --> 00:03:37.400
+Estás tratando con muchas cosas aquí.
+
+57
+00:03:37.440 --> 00:03:39.040
+Tienes como, Mogard en Mogard.
+
+58
+00:03:39.160 --> 00:03:46.320
+Vas a dejar que responda
+a tu Mac o a tu PC.
+
+59
+00:03:46.560 --> 00:03:47.640
+Pero allá vamos.
+
+60
+00:03:47.760 --> 00:03:50.960
+Ahora puedes ver la animación real aquí.
+
+61
+00:03:51.360 --> 00:03:53.600
+Si quieres desnudar todo esto
+
+62
+00:03:53.680 --> 00:03:59.040
+de todos los títulos y lo que no, sólo
+tienes que ir allí y usted puede bastante
+
+63
+00:03:59.120 --> 00:04:02.520
+mucho borrar o puede activar y
+desactivar el relleno de texto aquí.
+
+64
+00:04:03.360 --> 00:04:08.600
+Pon todo a cero o borra
+cualquier cosa aquí.
+
+65
+00:04:08.800 --> 00:04:13.600
+Borrar eso, borrar trazo o
+trazo encendido y apagado.
+
+66
+00:04:14.480 --> 00:04:18.080
+El texto aquí, voy a quitar eso.
+
+67
+00:04:18.280 --> 00:04:21.600
+Y logo, voy a quitar eso también.
+
+68
+00:04:21.760 --> 00:04:25.400
+Y si quisiera, podría incluso
+eliminar el fondo por completo.
+
+69
+00:04:25.520 --> 00:04:29.520
+Entonces es un carrusel
+completamente transparente.
+
+70
+00:04:29.680 --> 00:04:30.880
+Celda.
+
+71
+00:04:31.200 --> 00:04:33.720
+Así que sí, más o menos eso es
+todo lo que tienes que hacer.
+
+72
+00:04:33.840 --> 00:04:37.520
+Y luego puedes renderizarlo
+y colocarlo en otro lugar.
+
+73
+00:04:37.680 --> 00:04:42.400
+Yo recomendaría, renderizarlo
+a un mp4 y luego usar
+
+74
+00:04:42.400 --> 00:04:45.440
+ese elemento en otro, en un anuncio
+o lo que se quisiera utilizar
+
+75
+00:04:45.520 --> 00:04:51.120
+en aras de la eficiencia, sólo
+para que se procese más rápido.
+
+76
+00:04:51.280 --> 00:04:53.800
+Pero eso es todo, chicos.
+
+77
+00:04:53.960 --> 00:04:55.440
+Si tiene alguna pregunta al respecto,
+
+78
+00:04:55.480 --> 00:04:58.240
+Te lo reproduzco una vez más
+porque lo he renderizado.
+
+79
+00:04:58.360 --> 00:05:00.280
+Ahí lo tienen.
+
+80
+00:05:00.480 --> 00:05:02.800
+Bonito carrusel de productos.
+
+81
+00:05:02.880 --> 00:05:05.160
+Puedes hacer esto con un
+montón de cosas diferentes.
+
+82
+00:05:05.440 --> 00:05:06.880
+Si tenéis alguna petición,
+
+83
+00:05:06.960 --> 00:05:08.320
+cualquier solicitud de plantilla o
+
+84
+00:05:08.320 --> 00:05:10.760
+tutorial de plantilla, no dude
+en ponerse en contacto conmigo.
+
+85
+00:05:10.880 --> 00:05:12.200
+Tíralo en el canal.
+
+86
+00:05:12.320 --> 00:05:13.400
+Eso es todo, chicos.
+
+87
+00:05:13.440 --> 00:05:15.720
+Muchas gracias por mirar, y espero que
+estén disfrutando de las plantillas.
+

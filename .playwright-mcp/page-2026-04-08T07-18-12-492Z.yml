@@ -1,0 +1,208 @@
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#MainContent"
+  - banner [ref=e5]:
+    - link "AdsRx" [ref=e6] [cursor=pointer]:
+      - /url: /
+      - img "AdsRx" [ref=e8]
+    - navigation [ref=e9]:
+      - list [ref=e10]:
+        - listitem [ref=e11]:
+          - group [ref=e13]:
+            - button "Templates" [ref=e14] [cursor=pointer]:
+              - generic [ref=e15]: Templates
+              - img [ref=e16]
+        - listitem [ref=e17]:
+          - group [ref=e19]:
+            - button "Courses" [ref=e20] [cursor=pointer]:
+              - generic [ref=e21]: Courses
+              - img [ref=e22]
+        - listitem [ref=e23]:
+          - link "Get All Access" [ref=e24] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e25]: Get All Access
+        - listitem [ref=e26]:
+          - link "Free Assets" [ref=e27] [cursor=pointer]:
+            - /url: /collections/free-assets
+            - generic [ref=e28]: Free Assets
+    - generic [ref=e29]:
+      - generic [ref=e33]:
+        - heading "Country/region" [level=2] [ref=e34]
+        - button "USD $ | United States" [ref=e36] [cursor=pointer]:
+          - generic [ref=e37]: USD $ | United States
+          - img [ref=e38]
+      - group [ref=e40]:
+        - button "Search" [ref=e41] [cursor=pointer]:
+          - img [ref=e43]
+      - link "Log in" [ref=e45] [cursor=pointer]:
+        - /url: /account/login
+        - img [ref=e46]
+        - generic [ref=e47]: Log in
+      - button "Cart" [ref=e48] [cursor=pointer]:
+        - img [ref=e49]
+        - generic [ref=e51]: Cart
+  - main [ref=e52]:
+    - generic [ref=e54]:
+      - heading "Login" [level=1] [ref=e55]
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - textbox "Email" [ref=e59]
+          - generic: Email
+        - generic [ref=e60]:
+          - textbox "Password" [ref=e61]
+          - generic: Password
+        - link "Forgot your password?" [ref=e62] [cursor=pointer]:
+          - /url: "#recover"
+        - button "Sign in" [ref=e63] [cursor=pointer]
+        - link "Create account" [ref=e64] [cursor=pointer]:
+          - /url: /account/register
+  - contentinfo [ref=e66]:
+    - generic [ref=e67]:
+      - generic [ref=e68]:
+        - generic [ref=e69]:
+          - heading "Menu" [level=2] [ref=e70]
+          - list [ref=e71]:
+            - listitem [ref=e72]:
+              - link "EcomVids - Get Custom Ad Creative" [ref=e73] [cursor=pointer]:
+                - /url: https://ecomvids.com/
+            - listitem [ref=e74]:
+              - link "Search" [ref=e75] [cursor=pointer]:
+                - /url: /search
+            - listitem [ref=e76]:
+              - link "Shop All Assets" [ref=e77] [cursor=pointer]:
+                - /url: /collections
+            - listitem [ref=e78]:
+              - link "FREE Assets" [ref=e79] [cursor=pointer]:
+                - /url: /collections/free-assets
+            - listitem [ref=e80]:
+              - link "Get All Access" [ref=e81] [cursor=pointer]:
+                - /url: /products/all-access-membership
+            - listitem [ref=e82]:
+              - link "FAQ" [ref=e83] [cursor=pointer]:
+                - /url: /pages/faq
+            - listitem [ref=e84]:
+              - link "About Us" [ref=e85] [cursor=pointer]:
+                - /url: /pages/what-is-adsrx
+            - listitem [ref=e86]:
+              - link "Contact" [ref=e87] [cursor=pointer]:
+                - /url: /pages/contact
+            - listitem [ref=e88]:
+              - link "Become an Affiliate" [ref=e89] [cursor=pointer]:
+                - /url: https://af.uppromote.com/adsrx/register
+        - generic [ref=e90]:
+          - heading "Resources" [level=2] [ref=e91]
+          - list [ref=e92]:
+            - listitem [ref=e93]:
+              - link "Access Your Courses" [ref=e94] [cursor=pointer]:
+                - /url: /apps/my/courses/list
+            - listitem [ref=e95]:
+              - link "How to Install Templates" [ref=e96] [cursor=pointer]:
+                - /url: /pages/how-to-install-mogrt-templates-in-premiere-pro
+            - listitem [ref=e97]:
+              - link "How to Update Templates" [ref=e98] [cursor=pointer]:
+                - /url: /pages/how-to-update-mogrt-templates-in-premiere-pro
+            - listitem [ref=e99]:
+              - link "How to Use Premiere Composer" [ref=e100] [cursor=pointer]:
+                - /url: https://youtu.be/RxElvUoYFBE
+            - listitem [ref=e101]:
+              - link "Create An Account" [ref=e102] [cursor=pointer]:
+                - /url: https://shopify.com/72013087002/account
+        - generic [ref=e103]:
+          - heading "Contact" [level=2] [ref=e104]
+          - generic [ref=e105]:
+            - paragraph [ref=e106]: "For any billing, technical or others questions please contact:"
+            - paragraph [ref=e107]:
+              - strong [ref=e108]: hi@adsrx.co
+      - generic [ref=e112]:
+        - generic [ref=e113]:
+          - heading "Enter Email to Get 20% OFF + Free Template 🔻" [level=2] [ref=e114]
+          - generic [ref=e117]:
+            - textbox "Email" [ref=e118]
+            - generic: Email
+            - button "Subscribe" [ref=e119] [cursor=pointer]:
+              - img [ref=e120]
+        - list [ref=e121]:
+          - listitem [ref=e122]:
+            - link "Facebook" [ref=e123] [cursor=pointer]:
+              - /url: https://www.facebook.com/profile.php?id=100086763226935
+              - img [ref=e124]
+              - generic [ref=e125]: Facebook
+          - listitem [ref=e126]:
+            - link "Instagram" [ref=e127] [cursor=pointer]:
+              - /url: https://www.instagram.com/ads_rx/
+              - img [ref=e128]
+              - generic [ref=e130]: Instagram
+          - listitem [ref=e131]:
+            - link "YouTube" [ref=e132] [cursor=pointer]:
+              - /url: https://www.youtube.com/channel/UCArhmIOiwtHTGf8FIqZqMxg
+              - img [ref=e133]
+              - generic [ref=e134]: YouTube
+          - listitem [ref=e135]:
+            - link "TikTok" [ref=e136] [cursor=pointer]:
+              - /url: https://www.tiktok.com/@ads_rx
+              - img [ref=e137]
+              - generic [ref=e138]: TikTok
+          - listitem [ref=e139]:
+            - link "Twitter" [ref=e140] [cursor=pointer]:
+              - /url: https://twitter.com/jonfelixreyes
+              - img [ref=e141]
+              - generic [ref=e142]: Twitter
+    - generic [ref=e143]:
+      - generic [ref=e144]:
+        - generic [ref=e148]:
+          - heading "Country/region" [level=2] [ref=e149]
+          - button "USD $ | United States" [ref=e151] [cursor=pointer]:
+            - generic [ref=e152]: USD $ | United States
+            - img [ref=e153]
+        - generic [ref=e155]:
+          - generic [ref=e156]: Payment methods
+          - list [ref=e157]:
+            - listitem [ref=e158]:
+              - img "American Express" [ref=e159]
+            - listitem [ref=e168]:
+              - img "Apple Pay" [ref=e169]
+            - listitem [ref=e180]:
+              - img "Bancontact" [ref=e181]
+            - listitem [ref=e188]:
+              - img "Diners Club" [ref=e189]
+            - listitem [ref=e193]:
+              - img "Discover" [ref=e194]
+            - listitem [ref=e203]:
+              - img "Google Pay" [ref=e204]
+            - listitem [ref=e212]:
+              - img "iDEAL Wero" [ref=e213]
+            - listitem [ref=e228]:
+              - img "Mastercard" [ref=e229]
+            - listitem [ref=e235]:
+              - img "PayPal" [ref=e236]
+            - listitem [ref=e242]:
+              - img "Shop Pay" [ref=e243]
+            - listitem [ref=e247]:
+              - img "Visa" [ref=e248]
+      - generic [ref=e253]:
+        - generic [ref=e254]:
+          - text: © 2026,
+          - link "AdsRx" [ref=e255] [cursor=pointer]:
+            - /url: /
+        - link "Powered by Shopify" [ref=e257] [cursor=pointer]:
+          - /url: https://www.shopify.com?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore
+        - list [ref=e258]:
+          - listitem [ref=e259]:
+            - text: ·
+            - link "Refund policy" [ref=e261] [cursor=pointer]:
+              - /url: /policies/refund-policy
+          - listitem [ref=e262]:
+            - text: ·
+            - link "Privacy policy" [ref=e264] [cursor=pointer]:
+              - /url: /policies/privacy-policy
+          - listitem [ref=e265]:
+            - text: ·
+            - link "Terms of service" [ref=e267] [cursor=pointer]:
+              - /url: /policies/terms-of-service
+          - listitem [ref=e268]:
+            - text: ·
+            - link "Contact information" [ref=e270] [cursor=pointer]:
+              - /url: /policies/contact-information
+  - generic "Shopify online store chat" [ref=e271]:
+    - button [ref=e273] [cursor=pointer]:
+      - img [ref=e274]

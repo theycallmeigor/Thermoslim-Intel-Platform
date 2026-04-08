@@ -165,7 +165,7 @@ See `.env.example` for all required variables. Critical ones:
 ---
 
 ## KNOWLEDGE SYSTEM
-- **Global rules** (profile, guardrails, quality gate, session rhythm): `~/.claude/CLAUDE.md` (auto-loaded)
+- **Global rules** (profile, guardrails, model routing): `~/.claude/CLAUDE.md` (auto-loaded). Detailed procedures (session rhythm, quality gate, export format): `~/.claude/docs/`
 - **Cross-project gotchas:** `~/Vaults/CROMaxLabs/shared-gotchas.md` — read before bug fixes
 - **Decision journal:** `~/Vaults/CROMaxLabs/decision-journal.md` — read before architectural choices
 - **Vault domain docs:** `~/Vaults/CROMaxLabs/thermoslim-platform/_INDEX.md`

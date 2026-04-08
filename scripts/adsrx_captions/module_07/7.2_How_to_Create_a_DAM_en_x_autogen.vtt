@@ -1,0 +1,793 @@
+WEBVTT
+
+1
+00:00:02.965 --> 00:00:06.145
+All right, so moving on to Digital Asset Manager.
+
+2
+00:00:06.365 --> 00:00:09.265
+All right. This is also, um, called dams.
+
+3
+00:00:09.685 --> 00:00:10.985
+And these are very, very important,
+
+4
+00:00:10.985 --> 00:00:14.065
+especially if you're managing a ton of media, ton of assets.
+
+5
+00:00:14.605 --> 00:00:16.745
+Um, keeps it, everything, keeps everything in one place.
+
+6
+00:00:17.525 --> 00:00:19.825
+All right? Asset managers help organize
+
+7
+00:00:19.825 --> 00:00:21.585
+and showcase your files to share
+
+8
+00:00:21.585 --> 00:00:23.705
+with other collaborators or clients.
+
+9
+00:00:24.645 --> 00:00:28.025
+So there's, you know, I would say the typical way
+
+10
+00:00:28.025 --> 00:00:31.145
+of doing this, you've got your Dropbox and Google Drive, um,
+
+11
+00:00:31.765 --> 00:00:33.105
+or WeTransfer, whatever,
+
+12
+00:00:33.105 --> 00:00:37.425
+but there hasn't been a really strong asset management, um,
+
+13
+00:00:37.985 --> 00:00:39.185
+solution until recently.
+
+14
+00:00:39.485 --> 00:00:40.945
+And I'll share with you what that is.
+
+15
+00:00:41.405 --> 00:00:46.105
+So here are some options. You have your, you have Air Inc.
+
+16
+00:00:46.405 --> 00:00:49.505
+You have Google Drive, and you also have frame.io.
+
+17
+00:00:49.505 --> 00:00:51.905
+And I know there's a few, a few other ones out there.
+
+18
+00:00:51.905 --> 00:00:53.465
+Maybe we transfer and Dropbox,
+
+19
+00:00:53.725 --> 00:00:55.225
+but this is actually what we use.
+
+20
+00:00:55.885 --> 00:00:57.625
+Uh, and so I'm gonna go over
+
+21
+00:00:58.045 --> 00:01:00.145
+how we use these ones in our production.
+
+22
+00:01:00.685 --> 00:01:04.145
+So Air and I'll, I'll go through the website right now,
+
+23
+00:01:04.145 --> 00:01:06.905
+but the benefits are it's great ui, great ux,
+
+24
+00:01:07.075 --> 00:01:08.985
+great organizational structure, fast
+
+25
+00:01:08.985 --> 00:01:11.145
+and visual, easy to share, and very collaborative.
+
+26
+00:01:11.525 --> 00:01:13.105
+And we use Google Drive for Storage.
+
+27
+00:01:13.875 --> 00:01:16.345
+Large space, keeps all your assets in one place.
+
+28
+00:01:16.645 --> 00:01:18.185
+It streams assets directly.
+
+29
+00:01:18.245 --> 00:01:21.505
+You can link Google Drive to your, your hard drive
+
+30
+00:01:21.505 --> 00:01:22.785
+or to your computer directly.
+
+31
+00:01:22.805 --> 00:01:24.185
+So you can start streaming files.
+
+32
+00:01:24.245 --> 00:01:25.625
+If you have really strong internet,
+
+33
+00:01:25.805 --> 00:01:28.105
+you can actually just pull from Google Drive into
+
+34
+00:01:28.105 --> 00:01:29.345
+your, uh, project.
+
+35
+00:01:29.345 --> 00:01:30.465
+And that's actually what I like to do.
+
+36
+00:01:30.465 --> 00:01:34.065
+So I don't, so I save, save time, um, downloading the file
+
+37
+00:01:35.005 --> 00:01:36.785
+and it automatically dynamically updates
+
+38
+00:01:36.845 --> 00:01:38.025
+or dynamically updates.
+
+39
+00:01:38.645 --> 00:01:41.825
+Um, if you have make any changes in your Google Drive
+
+40
+00:01:41.825 --> 00:01:43.465
+folder, it'll change it in Google Drive.
+
+41
+00:01:43.485 --> 00:01:46.465
+So that's something I, uh, lastly you have frame.io,
+
+42
+00:01:46.805 --> 00:01:51.625
+and this is a, um, basically a revision review platform,
+
+43
+00:01:51.625 --> 00:01:54.825
+which helps, col obviously helps with collaborations,
+
+44
+00:01:54.825 --> 00:01:58.145
+helps you stay organized instead of using like a Google Doc
+
+45
+00:01:58.145 --> 00:02:01.425
+and like, um, counting the seconds, you know,
+
+46
+00:02:01.485 --> 00:02:03.225
+all those little details that are super annoying.
+
+47
+00:02:03.525 --> 00:02:05.385
+Uh, I can go through those one by one right now.
+
+48
+00:02:07.015 --> 00:02:11.615
+Okay, so let me pull up air.
+
+49
+00:02:11.925 --> 00:02:13.655
+Alright, so this is Air,
+
+50
+00:02:15.475 --> 00:02:17.175
+and so I'm already logged in right now,
+
+51
+00:02:17.315 --> 00:02:20.175
+but, um, what's really nice about it is
+
+52
+00:02:20.515 --> 00:02:22.415
+how quickly you can make these boards
+
+53
+00:02:23.195 --> 00:02:25.415
+and, um, start organizing.
+
+54
+00:02:25.515 --> 00:02:29.255
+So obviously you can see if here, if you look to my right,
+
+55
+00:02:31.405 --> 00:02:33.565
+I have the main folder, which is the brand,
+
+56
+00:02:33.945 --> 00:02:37.165
+and then I have the parent folders, design inspo products,
+
+57
+00:02:37.165 --> 00:02:38.805
+website assets, brand assets.
+
+58
+00:02:39.585 --> 00:02:41.365
+And from here, let's click on products
+
+59
+00:02:41.785 --> 00:02:43.965
+and it can sh shows you all the different products.
+
+60
+00:02:44.145 --> 00:02:46.885
+And so I, I have two ways of, of organizing my stuff.
+
+61
+00:02:46.885 --> 00:02:48.445
+So I have the left column,
+
+62
+00:02:49.105 --> 00:02:52.125
+and I also have this right column, which is more visual.
+
+63
+00:02:53.065 --> 00:02:56.165
+So from the products, I have the product name
+
+64
+00:02:56.305 --> 00:02:58.285
+and then ads, photos, and video.
+
+65
+00:02:58.985 --> 00:03:00.605
+And then if I break that down further,
+
+66
+00:03:01.355 --> 00:03:04.045
+then now I've got even more granular
+
+67
+00:03:04.065 --> 00:03:07.245
+and more clarity on the assets that I have.
+
+68
+00:03:07.985 --> 00:03:12.495
+So it's, it's another level of, of organization if you,
+
+69
+00:03:12.495 --> 00:03:14.975
+if you wanna take it that far, if you're working long time
+
+70
+00:03:14.975 --> 00:03:18.495
+with the brand or if you work, you know, if, if you work
+
+71
+00:03:18.515 --> 00:03:20.295
+for the brand, this is definitely something
+
+72
+00:03:20.385 --> 00:03:21.415
+worth putting together.
+
+73
+00:03:22.115 --> 00:03:24.575
+Um, it does take some time, but it's worth it.
+
+74
+00:03:25.155 --> 00:03:28.535
+So what's nice about it is when you,
+
+75
+00:03:28.535 --> 00:03:30.535
+when you double click on stuff, um,
+
+76
+00:03:30.635 --> 00:03:31.695
+you know, it's very visual.
+
+77
+00:03:32.355 --> 00:03:34.695
+So I can go in here
+
+78
+00:03:35.235 --> 00:03:37.415
+and then double click on an asset,
+
+79
+00:03:38.395 --> 00:03:41.375
+and right here I can preview it, which is very nice.
+
+80
+00:03:42.095 --> 00:03:45.215
+I can download this clip, um, directly from here.
+
+81
+00:03:45.295 --> 00:03:47.815
+I can share it, which is very cool too.
+
+82
+00:03:48.435 --> 00:03:50.855
+And, you know, there's a lot of different features.
+
+83
+00:03:50.895 --> 00:03:52.135
+I can leave comments on it.
+
+84
+00:03:52.835 --> 00:03:56.095
+Um, I can add tags to it, right?
+
+85
+00:03:56.095 --> 00:03:59.855
+There's much, so much depth that you can do with, with this,
+
+86
+00:03:59.915 --> 00:04:01.695
+uh, with this program, with this app.
+
+87
+00:04:02.355 --> 00:04:05.015
+Um, what I like doing, what I like using it best
+
+88
+00:04:05.035 --> 00:04:09.755
+for is actually, um, like presenting, like presenting stuff
+
+89
+00:04:09.775 --> 00:04:13.355
+to, to clients or like organizing my portfolio
+
+90
+00:04:13.655 --> 00:04:15.355
+or organizing clips for people
+
+91
+00:04:15.415 --> 00:04:17.395
+and then allowing them to download it.
+
+92
+00:04:17.395 --> 00:04:19.715
+So if I just click on share here, create a link,
+
+93
+00:04:20.415 --> 00:04:23.705
+and then I copy this link right here, you know,
+
+94
+00:04:23.815 --> 00:04:27.185
+it's very easy to download versus using, uh,
+
+95
+00:04:27.185 --> 00:04:28.265
+like Google Drive or something.
+
+96
+00:04:28.265 --> 00:04:31.025
+Google drives sucks when it comes to downloading
+
+97
+00:04:31.025 --> 00:04:32.825
+because it like zips it first
+
+98
+00:04:33.565 --> 00:04:36.985
+and then it, like, then you download it in chunks
+
+99
+00:04:37.125 --> 00:04:39.105
+and it's just, it's just very frustrating.
+
+100
+00:04:39.445 --> 00:04:40.905
+So I hate doing that.
+
+101
+00:04:41.125 --> 00:04:44.305
+But, um, ultimately I would say air is great if you're
+
+102
+00:04:44.305 --> 00:04:46.705
+working with a lot of assets and you like them visual
+
+103
+00:04:47.365 --> 00:04:49.825
+and, um, you have a lot of products, right?
+
+104
+00:04:49.885 --> 00:04:51.705
+So this is where it starts to get really,
+
+105
+00:04:51.705 --> 00:04:53.425
+like organization is key.
+
+106
+00:04:54.165 --> 00:04:57.025
+So the next thing is Google Drive.
+
+107
+00:04:57.605 --> 00:04:59.865
+So I won't go into like Google Drive, Google Drive,
+
+108
+00:05:00.285 --> 00:05:04.265
+but I will share what we use to keep all
+
+109
+00:05:04.265 --> 00:05:05.265
+of our assets organized.
+
+110
+00:05:05.265 --> 00:05:10.165
+And that is using, um, drive Stream.
+
+111
+00:05:10.345 --> 00:05:11.965
+And I'll talk about that in a second.
+
+112
+00:05:12.825 --> 00:05:14.805
+But let's just go into the rest
+
+113
+00:05:14.825 --> 00:05:16.605
+of this presentation right here
+
+114
+00:05:16.605 --> 00:05:17.765
+before I get ahead of myself.
+
+115
+00:05:19.665 --> 00:05:21.365
+All right, so we went over this in air,
+
+116
+00:05:22.065 --> 00:05:24.765
+and so you saw that you can organize it from
+
+117
+00:05:25.345 --> 00:05:27.045
+you just create these little folders
+
+118
+00:05:27.145 --> 00:05:29.285
+and continue to break down.
+
+119
+00:05:29.545 --> 00:05:34.085
+You know, a further, uh, organizational structure here is,
+
+120
+00:05:34.265 --> 00:05:37.645
+uh, Google Drive, obviously a little, you know, it's,
+
+121
+00:05:37.645 --> 00:05:40.605
+it's bigger, but at the same time it's a little clunkier.
+
+122
+00:05:41.055 --> 00:05:43.405
+Drive stream is really the key thing
+
+123
+00:05:43.405 --> 00:05:45.525
+that makes Google Drive worth it for me.
+
+124
+00:05:45.865 --> 00:05:47.165
+So I'll go over that in a second.
+
+125
+00:05:49.055 --> 00:05:50.475
+So it looks something like this.
+
+126
+00:05:50.735 --> 00:05:53.035
+You know, you just download this app drive stream,
+
+127
+00:05:53.215 --> 00:05:56.275
+you link it to your Google Drive just by logging in.
+
+128
+00:05:56.615 --> 00:05:59.525
+And then what happens is it automatically syncs all
+
+129
+00:05:59.525 --> 00:06:02.965
+of your files from Google Drive onto, uh,
+
+130
+00:06:03.365 --> 00:06:05.805
+a streaming folder, actually save onto your computer.
+
+131
+00:06:05.805 --> 00:06:07.765
+That's the key thing. So, you know, if you have
+
+132
+00:06:08.315 --> 00:06:09.645
+gigs upon gigs on Google Drive,
+
+133
+00:06:09.645 --> 00:06:11.165
+it's not gonna actually stay on your computer.
+
+134
+00:06:11.715 --> 00:06:13.725
+What it's gonna do, it's actually going to connect your,
+
+135
+00:06:13.755 --> 00:06:16.005
+your drive, um, virtually.
+
+136
+00:06:16.105 --> 00:06:19.165
+And so you can actually go into any folder in there
+
+137
+00:06:20.145 --> 00:06:22.085
+and treat it like it were on your computer.
+
+138
+00:06:22.585 --> 00:06:24.325
+So this is super valuable, um,
+
+139
+00:06:24.325 --> 00:06:25.605
+especially for sharing things.
+
+140
+00:06:25.605 --> 00:06:27.565
+We're keeping everything in one place, not having
+
+141
+00:06:27.565 --> 00:06:28.725
+to re-download stuff.
+
+142
+00:06:29.395 --> 00:06:34.175
+It's, it's nice. Lastly, you have Frame io
+
+143
+00:06:34.475 --> 00:06:35.655
+and if you haven't used this
+
+144
+00:06:35.655 --> 00:06:37.615
+before, like I said, it's a software
+
+145
+00:06:37.615 --> 00:06:40.335
+where you can easily just review footage
+
+146
+00:06:40.635 --> 00:06:43.175
+or review cuts, review Final, can make
+
+147
+00:06:43.915 --> 00:06:46.295
+any revisions on the certain timestamp.
+
+148
+00:06:46.715 --> 00:06:49.095
+Uh, I find it very, very valuable, uh,
+
+149
+00:06:49.505 --> 00:06:51.695
+especially when you're doing, like, when you're working
+
+150
+00:06:51.695 --> 00:06:54.055
+with different clients and, uh, you don't,
+
+151
+00:06:54.415 --> 00:06:56.775
+'cause you know, you don't wanna be putting together like a
+
+152
+00:06:56.775 --> 00:06:59.055
+Google Doc every single time you have revisions
+
+153
+00:06:59.115 --> 00:07:00.855
+or anybody, nobody wants to do that.
+
+154
+00:07:00.925 --> 00:07:05.555
+It's just not fun. Here's an example of a video we just did.
+
+155
+00:07:05.975 --> 00:07:10.235
+So you're able to go the timeline, leave your comments,
+
+156
+00:07:10.825 --> 00:07:13.395
+okay, change the color here,
+
+157
+00:07:14.695 --> 00:07:16.875
+da da da da da, click enter.
+
+158
+00:07:17.935 --> 00:07:20.435
+And, um, and yeah, so it, it works very nicely.
+
+159
+00:07:20.585 --> 00:07:22.355
+It's very simple to use.
+
+160
+00:07:23.575 --> 00:07:26.555
+Um, very similar project structure right there.
+
+161
+00:07:27.175 --> 00:07:29.275
+But yeah,
+
+162
+00:07:29.435 --> 00:07:31.795
+I would say this is very helpful if you have clients
+
+163
+00:07:32.095 --> 00:07:34.075
+and you work with a lot of revisions.
+
+164
+00:07:34.295 --> 00:07:36.435
+Um, definitely, definitely look into that.
+
+165
+00:07:38.725 --> 00:07:41.895
+Alright, so I wanted to show you really quick the,
+
+166
+00:07:42.195 --> 00:07:44.015
+the Google Drive aspect of things.
+
+167
+00:07:44.595 --> 00:07:46.535
+So in here I have my, my Drive,
+
+168
+00:07:47.235 --> 00:07:50.615
+and if I click on that, um, I'm able to see all
+
+169
+00:07:50.615 --> 00:07:51.815
+of my stuff right here.
+
+170
+00:07:52.245 --> 00:07:56.575
+Okay. And basically this is all streaming from Google, Dr.
+
+171
+00:07:56.575 --> 00:07:58.015
+Uh, yeah, from actual Google Drive,
+
+172
+00:07:58.075 --> 00:08:01.535
+but I'm able to, to look at it as if it was on my computer.
+
+173
+00:08:02.155 --> 00:08:03.455
+And I think that's super powerful
+
+174
+00:08:03.455 --> 00:08:04.935
+because, you know, if I were
+
+175
+00:08:04.935 --> 00:08:07.255
+to just go into Premiere from this point, I can just click
+
+176
+00:08:07.255 --> 00:08:09.855
+and drag any of these assets into per my Premier.
+
+177
+00:08:10.635 --> 00:08:13.495
+Uh, another thing too is I can use the search function up
+
+178
+00:08:13.495 --> 00:08:16.135
+here and type in, you know, logo
+
+179
+00:08:16.515 --> 00:08:20.455
+and all of the logos from my Google Drive will also appear.
+
+180
+00:08:20.725 --> 00:08:22.055
+This is huge, okay?
+
+181
+00:08:22.235 --> 00:08:25.495
+Versus like going into Google Drive and then looking for it.
+
+182
+00:08:25.995 --> 00:08:28.895
+That's one way to organize all your assets.
+
+183
+00:08:29.005 --> 00:08:33.025
+Obviously you can also in, um, in your,
+
+184
+00:08:33.245 --> 00:08:34.585
+in your air if you have one.
+
+185
+00:08:34.725 --> 00:08:37.145
+So if you type in logo, you're gonna see a lot
+
+186
+00:08:37.145 --> 00:08:39.425
+of different logo pop up as well.
+
+187
+00:08:39.985 --> 00:08:41.225
+I think that's also very valuable.
+
+188
+00:08:41.645 --> 00:08:44.745
+Um, but again, this isn't directly linked to your computer,
+
+189
+00:08:44.845 --> 00:08:47.825
+and I know they have a streaming thing going on right now,
+
+190
+00:08:47.845 --> 00:08:49.905
+but I haven't fully tested it, so I can't,
+
+191
+00:08:50.025 --> 00:08:51.585
+I can't make a tutorial on that yet.
+
+192
+00:08:52.445 --> 00:08:54.945
+But it's nice to have both in my opinion.
+
+193
+00:08:55.345 --> 00:08:58.805
+So I definitely recommend testing them yourself
+
+194
+00:08:58.945 --> 00:09:01.045
+and seeing which one is, is a better fit for you.
+
+195
+00:09:01.755 --> 00:09:04.845
+Okay, so that wraps up this tutorial.
+
+196
+00:09:04.975 --> 00:09:06.525
+Thank you so much for watching this.
+
+197
+00:09:06.785 --> 00:09:08.845
+And next we're gonna jump into video ads.
+
+198
+00:09:08.985 --> 00:09:09.845
+All right, see you there.

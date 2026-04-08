@@ -1,0 +1,449 @@
+WEBVTT
+
+1
+00:00:03.665 --> 00:00:04.645
+Hey, what's going on guys?
+
+2
+00:00:04.745 --> 00:00:05.805
+It is John here,
+
+3
+00:00:06.065 --> 00:00:09.845
+and I'm gonna make this quick tutorial for a member,
+
+4
+00:00:10.045 --> 00:00:11.845
+a recent member to Azer X.
+
+5
+00:00:12.105 --> 00:00:16.165
+Um, he wanted to recreate this, um, carousel
+
+6
+00:00:16.355 --> 00:00:19.805
+that we have on, on my video production website.
+
+7
+00:00:20.505 --> 00:00:24.525
+And so we don't have an exact like template for that,
+
+8
+00:00:24.545 --> 00:00:26.205
+but I'm gonna show you kind of a workaround
+
+9
+00:00:26.505 --> 00:00:29.245
+of creating something similar to that if you have the, uh,
+
+10
+00:00:29.265 --> 00:00:30.805
+all access bundle.
+
+11
+00:00:31.945 --> 00:00:34.965
+So, you know, we've got the carousel, we've got the, uh,
+
+12
+00:00:35.345 --> 00:00:39.325
+the iPhone, and we've got a video playing on the inside.
+
+13
+00:00:39.865 --> 00:00:44.365
+So this is pretty straightforward, pretty easy to make, um,
+
+14
+00:00:44.755 --> 00:00:46.725
+because there's a lot of processing.
+
+15
+00:00:46.725 --> 00:00:48.645
+It will take a little second to like render.
+
+16
+00:00:49.425 --> 00:00:51.405
+But let me just start it from scratch.
+
+17
+00:00:51.645 --> 00:00:53.405
+I have a 16 by nine sequence here
+
+18
+00:00:53.665 --> 00:00:56.165
+and I'm gonna type in Carousel
+
+19
+00:00:57.825 --> 00:01:01.765
+and I'm actually gonna do 16 by nine, sorry, 16 by nine.
+
+20
+00:01:02.065 --> 00:01:03.805
+And so we have two of these carousels.
+
+21
+00:01:03.825 --> 00:01:08.165
+We have, um, one where it's not like flat
+
+22
+00:01:08.745 --> 00:01:12.125
+and I'll show you both options, but it doesn't matter.
+
+23
+00:01:14.355 --> 00:01:18.165
+Here we go. And so
+
+24
+00:01:18.745 --> 00:01:20.125
+we have this version right here,
+
+25
+00:01:20.125 --> 00:01:21.925
+which is the original that I just used.
+
+26
+00:01:22.745 --> 00:01:27.565
+And we have this version, which kind of, um, the,
+
+27
+00:01:27.785 --> 00:01:29.685
+the product is facing the front, right?
+
+28
+00:01:29.945 --> 00:01:32.405
+And then the product titles are underneath it as well.
+
+29
+00:01:33.185 --> 00:01:36.965
+So to basically recreate that, look,
+
+30
+00:01:37.125 --> 00:01:38.285
+I need another template.
+
+31
+00:01:38.785 --> 00:01:41.965
+So inside here, normally you would place like, you know,
+
+32
+00:01:41.965 --> 00:01:45.165
+an image or yeah, probably like a product, product shot.
+
+33
+00:01:45.825 --> 00:01:48.845
+Um, I'm gonna go and create a new element here.
+
+34
+00:01:48.945 --> 00:01:50.045
+I'm gonna type in iPhone.
+
+35
+00:01:50.505 --> 00:01:54.045
+And we have this really cool like 3D looking iPhone.
+
+36
+00:01:54.345 --> 00:01:57.725
+So I'm gonna drop that into my timeline like this.
+
+37
+00:01:58.225 --> 00:01:59.885
+I'm just gonna expand my screen a little bit more.
+
+38
+00:02:00.505 --> 00:02:03.125
+So I've got my, uh, my iPhone
+
+39
+00:02:03.145 --> 00:02:06.325
+and I've got an ad over here that's already, um,
+
+40
+00:02:06.895 --> 00:02:08.285
+let's say it's a sequence.
+
+41
+00:02:08.365 --> 00:02:09.685
+I can just drag this sequence in here.
+
+42
+00:02:09.705 --> 00:02:11.845
+So I'm gonna take that sequence
+
+43
+00:02:11.845 --> 00:02:16.085
+and I'm just gonna drag it into my iPhone template.
+
+44
+00:02:16.705 --> 00:02:21.245
+And from here, boom, I've got my iPhone with an ad inside
+
+45
+00:02:21.245 --> 00:02:22.725
+of it, which is kind of cool.
+
+46
+00:02:23.265 --> 00:02:25.565
+I'm not gonna bother and make any adjustments to this just
+
+47
+00:02:25.565 --> 00:02:26.765
+for the sake of the tutorial.
+
+48
+00:02:26.945 --> 00:02:30.485
+But from here I'm actually going to make a subsequence out
+
+49
+00:02:30.485 --> 00:02:33.485
+of it so that I have this isolated
+
+50
+00:02:34.345 --> 00:02:36.125
+and you can see it over here now.
+
+51
+00:02:37.105 --> 00:02:38.205
+Um, so I can go in here
+
+52
+00:02:38.205 --> 00:02:39.685
+and like change anything if I wanted
+
+53
+00:02:39.685 --> 00:02:40.805
+to, but I'm not gonna do that.
+
+54
+00:02:41.545 --> 00:02:43.485
+So from here I'm gonna go back
+
+55
+00:02:43.485 --> 00:02:45.605
+to my product carousel template.
+
+56
+00:02:46.305 --> 00:02:49.525
+And in this template it's kind of cool
+
+57
+00:02:49.685 --> 00:02:52.285
+'cause you can choose how many products you want to rotate.
+
+58
+00:02:52.305 --> 00:02:54.165
+In this instance I'm gonna keep six.
+
+59
+00:02:55.265 --> 00:02:59.285
+Um, here you have animation, the distance, um, you know,
+
+60
+00:02:59.285 --> 00:03:00.405
+I can keep it a little shorter
+
+61
+00:03:00.505 --> 00:03:05.325
+or closer together, uh, the scale, which is, you know,
+
+62
+00:03:05.425 --> 00:03:06.685
+you can play with all these features
+
+63
+00:03:06.685 --> 00:03:08.765
+and all these, uh, settings however way you want.
+
+64
+00:03:09.425 --> 00:03:10.885
+But here in the product placeholders,
+
+65
+00:03:11.105 --> 00:03:13.365
+I'm gonna actually drag my subsequence into here.
+
+66
+00:03:13.785 --> 00:03:16.765
+So let's say you wanted six different styles.
+
+67
+00:03:16.765 --> 00:03:18.965
+You would go in there and create six different versions
+
+68
+00:03:18.965 --> 00:03:21.125
+of this iPhone ad.
+
+69
+00:03:21.865 --> 00:03:24.485
+But for this example, I'm just gonna keep it really simple.
+
+70
+00:03:24.865 --> 00:03:27.485
+So I'm just gonna drag these all into the product
+
+71
+00:03:27.485 --> 00:03:28.205
+placeholders
+
+72
+00:03:30.945 --> 00:03:32.845
+and just like that.
+
+73
+00:03:34.185 --> 00:03:37.485
+And you're dealing with a lot of stuff here, so you know,
+
+74
+00:03:37.485 --> 00:03:39.085
+you've got like Moger on Moger,
+
+75
+00:03:39.085 --> 00:03:43.205
+so you're gonna it just let it kind of respond to
+
+76
+00:03:44.075 --> 00:03:46.085
+your, your, your Mac or your pc.
+
+77
+00:03:46.545 --> 00:03:48.685
+But here we go. So now you can see the
+
+78
+00:03:48.685 --> 00:03:49.805
+actual animation here.
+
+79
+00:03:50.465 --> 00:03:53.245
+Um, and if you want to like strip this whole thing
+
+80
+00:03:53.245 --> 00:03:55.005
+of all the, you know, the titles
+
+81
+00:03:55.005 --> 00:03:56.245
+and whatnot, just go in there
+
+82
+00:03:56.865 --> 00:04:00.125
+and you can just pretty much delete or you can on
+
+83
+00:04:00.125 --> 00:04:01.365
+and off the text fill here.
+
+84
+00:04:02.505 --> 00:04:05.165
+Um, you know, just kind of set everything to zero
+
+85
+00:04:06.385 --> 00:04:08.365
+or delete anything right here.
+
+86
+00:04:08.425 --> 00:04:12.605
+Delete that, delete stroke or like on and off stroke.
+
+87
+00:04:14.545 --> 00:04:17.045
+Um, the text here, I'm gonna remove that
+
+88
+00:04:18.425 --> 00:04:21.005
+and logo, I'm gonna remove that as well.
+
+89
+00:04:21.665 --> 00:04:24.165
+And then if I wanted to, I could even like remove the
+
+90
+00:04:24.165 --> 00:04:27.165
+background entirely so then it's a completely transparent,
+
+91
+00:04:28.385 --> 00:04:30.205
+uh, carousel.
+
+92
+00:04:31.305 --> 00:04:33.245
+So yeah, pretty much that's all you have to do.
+
+93
+00:04:33.865 --> 00:04:36.405
+And then you can render this out, uh,
+
+94
+00:04:36.405 --> 00:04:37.445
+and place it somewhere else.
+
+95
+00:04:37.605 --> 00:04:40.525
+I would recommend, you know, rendering it out to an MP four
+
+96
+00:04:40.905 --> 00:04:44.605
+and then like using that element in another, in, in an ad
+
+97
+00:04:44.605 --> 00:04:45.885
+or whatever you wanted to use it in.
+
+98
+00:04:46.265 --> 00:04:49.245
+Um, just for the sake of like efficiency, just
+
+99
+00:04:49.245 --> 00:04:50.725
+so it like would process faster.
+
+100
+00:04:51.505 --> 00:04:53.885
+But that's pretty much it guys.
+
+101
+00:04:54.025 --> 00:04:55.445
+Uh, if you have any questions about it,
+
+102
+00:04:55.515 --> 00:04:56.685
+I'll just play it back for you one
+
+103
+00:04:56.685 --> 00:04:57.805
+more time 'cause I rendered it.
+
+104
+00:04:58.425 --> 00:04:59.725
+Um, there you have it.
+
+105
+00:05:00.435 --> 00:05:02.485
+Cool little uh, product carousel
+
+106
+00:05:02.485 --> 00:05:03.885
+and you can do this with a ton of different things.
+
+107
+00:05:04.545 --> 00:05:07.605
+So if you guys have any requests, any template requests
+
+108
+00:05:07.705 --> 00:05:10.645
+or template tutorial requests, feel free to reach out
+
+109
+00:05:10.645 --> 00:05:11.765
+to me, drop it in the channel.
+
+110
+00:05:12.265 --> 00:05:13.485
+Uh, that's pretty much it guys.
+
+111
+00:05:13.485 --> 00:05:15.165
+Thank you so much for watching and I hope you guys are
+
+112
+00:05:15.285 --> 00:05:15.925
+enjoying the templates.

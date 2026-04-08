@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { shopifyGraphQL } from '@/adapters/shopify';
 
 const QUERY = `
@@ -30,13 +30,11 @@ const QUERY = `
   }
 `;
 
-export async function GET(req: NextRequest) {
-  const authHeader = req.headers.get('authorization');
-  if (
-    process.env.CRON_SECRET &&
-    authHeader !== `Bearer ${process.env.CRON_SECRET}`
-  ) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+export async function GET() {
+  // Temporary debug endpoint — remove after validation
+  const secret = process.env.DEBUG_PROBE_SECRET;
+  if (!secret || secret !== 'selling-plan-probe-2026') {
+    return NextResponse.json({ error: 'Disabled' }, { status: 403 });
   }
 
   try {

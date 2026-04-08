@@ -1,0 +1,154 @@
+{
+  "course": "AdsRx - Advanced Direct Response Editor Training",
+  "total_lessons": 64,
+  "modules": [
+    {
+      "id": "module_01",
+      "name": "Module 1 - Program Overview",
+      "lessons": [
+        {"id": "133010", "title": "1.1 - Why You NEED This Training", "handle": "______Why_You_NEED_This_Training_133010", "vimeo_id": "818177818", "vimeo_hash": "d6b4ee69fd", "captions": "done"}
+      ]
+    },
+    {
+      "id": "module_02",
+      "name": "Module 2 - Direct Response Video 101",
+      "lessons": [
+        {"id": "133011", "title": "(2.1 - 2.3) What is Direct Response Marketing?", "handle": "____________What_is_Direct_Response_Marketing__133011", "vimeo_id": null, "vimeo_hash": null, "captions": "pending"}
+      ]
+    },
+    {
+      "id": "module_03",
+      "name": "Module 3 - Pre-reqs to Video Editing",
+      "lessons": [
+        {"id": "133013", "title": "3.1 - Pre-Reqs to Video Editing", "vimeo_id": null, "captions": "pending"},
+        {"id": "160235", "title": "3.2 - Your Responsibilities as an EDITOR", "vimeo_id": null, "captions": "pending"},
+        {"id": "160236", "title": "3.3 - 5 Levels of a Performance Creative", "vimeo_id": null, "captions": "pending"},
+        {"id": "160237", "title": "3.4 - 5 Stages of Performance Ad Creative", "vimeo_id": null, "captions": "pending"}
+      ]
+    },
+    {
+      "id": "module_04",
+      "name": "Module 4 - Mastering Mental, Emotional & Creative",
+      "lessons": [
+        {"id": "133015", "title": "4.1 - How to SUCCEED as a Creative", "vimeo_id": null, "captions": "pending"},
+        {"id": "160240", "title": "4.2 - How to Enter FLOW State", "vimeo_id": null, "captions": "pending"},
+        {"id": "160241", "title": "4.3 - Where to Find Inspiration", "vimeo_id": null, "captions": "pending"},
+        {"id": "160242", "title": "4.4 - How To LEVEL UP As an Editor", "vimeo_id": null, "captions": "pending"}
+      ]
+    },
+    {
+      "id": "module_05",
+      "name": "Module 5 - Product & Customer Research",
+      "lessons": [
+        {"id": "133016", "title": "5.1 - Do Your RESEARCH", "vimeo_id": null, "captions": "pending"},
+        {"id": "160243", "title": "5.2 - Customer Research", "vimeo_id": null, "captions": "pending"},
+        {"id": "160244", "title": "5.3 - Customer Awareness Level", "vimeo_id": null, "captions": "pending"},
+        {"id": "160245", "title": "5.4 - Customer Sophistication Level", "vimeo_id": null, "captions": "pending"},
+        {"id": "208915", "title": "5.5 - LIVE Full Creative Strategy Walkthrough", "vimeo_id": null, "captions": "pending"}
+      ]
+    },
+    {
+      "id": "module_06",
+      "name": "Module 6 - Performance Ad Creative Overview",
+      "lessons": [
+        {"id": "133017", "title": "6.1 - Truth About Performance Ads", "vimeo_id": null, "captions": "pending"},
+        {"id": "160246", "title": "6.2 - Video Ad Frameworks", "vimeo_id": null, "captions": "pending"},
+        {"id": "160247", "title": "6.3 - 3 Hook Types", "vimeo_id": null, "captions": "pending"},
+        {"id": "161840", "title": "6.4 - Video Ad Types", "vimeo_id": null, "captions": "pending"},
+        {"id": "155346", "title": "WINNING VIDEO AD BREAKDOWN #1", "vimeo_id": null, "captions": "pending"},
+        {"id": "155410", "title": "WINNING VIDEO AD BREAKDOWN #2", "vimeo_id": null, "captions": "pending"},
+        {"id": "156453", "title": "WINNING YOUTUBE AD BREAKDOWN", "vimeo_id": null, "captions": "pending"}
+      ]
+    },
+    {
+      "id": "module_07",
+      "name": "Module 7 - Organizing Your Assets",
+      "lessons": [
+        {"id": "133018", "title": "7.1 - How to Stay ORGANIZED", "vimeo_id": null, "captions": "pending"},
+        {"id": "160248", "title": "7.2 - How to Create a Digital Asset Manager (DAM)", "vimeo_id": null, "captions": "pending"}
+      ]
+    },
+    {
+      "id": "module_08",
+      "name": "Module 8 - Editing Video Ads That Sell",
+      "lessons": [
+        {"id": "133136", "title": "8.1 - 11 Step Video Ad Editing Process", "vimeo_id": null, "captions": "pending"},
+        {"id": "133137", "title": "8.2 - How to Create Modular Clips", "vimeo_id": null, "captions": "pending"},
+        {"id": "133139", "title": "8.3 - Assembling Your Timeline", "vimeo_id": null, "captions": "pending"},
+        {"id": "133141", "title": "8.4 - Adding Titles, Effects, Colors, & Overlays", "vimeo_id": null, "captions": "pending"},
+        {"id": "133145", "title": "8.5 Editing Voiceover Ads", "vimeo_id": null, "captions": "pending"},
+        {"id": "133149", "title": "8.6 Adding Scroll Stopper Variations + Exporting", "vimeo_id": null, "captions": "pending"},
+        {"id": "208923", "title": "Making Infinite Variations From 1 Video Shoot", "vimeo_id": null, "captions": "pending"},
+        {"id": "156947", "title": "FULL UGC VIDEO AD TUTORIAL", "vimeo_id": null, "captions": "pending"},
+        {"id": "156948", "title": "FULL COMMERCIAL VIDEO TUTORIAL", "vimeo_id": null, "captions": "pending"}
+      ]
+    },
+    {
+      "id": "module_09",
+      "name": "Module 9 - Performance Ad Tracking",
+      "lessons": [
+        {"id": "220726", "title": "How I Track Ad Performance in Airtable", "vimeo_id": null, "captions": "pending"}
+      ]
+    },
+    {
+      "id": "resources",
+      "name": "RESOURCES",
+      "lessons": [
+        {"id": "165609", "title": "Best Spytools", "vimeo_id": null, "captions": "pending"},
+        {"id": "165610", "title": "Video Editing Resources", "vimeo_id": null, "captions": "pending"},
+        {"id": "165611", "title": "Video Ad Scripting Tools", "vimeo_id": null, "captions": "pending"},
+        {"id": "165613", "title": "Winning Video Ad Inspo", "vimeo_id": null, "captions": "pending"},
+        {"id": "208894", "title": "UGC Creator Brief Example", "vimeo_id": null, "captions": "pending"},
+        {"id": "173218", "title": "Video Ad Guides, Cheat Sheets & Scripts", "vimeo_id": null, "captions": "pending"}
+      ]
+    },
+    {
+      "id": "live_training",
+      "name": "LIVE TRAINING CALLS",
+      "lessons": [
+        {"id": "133150", "title": "Live AdsRx Training", "vimeo_id": null, "captions": "pending"},
+        {"id": "154418", "title": "Live Training: 5 Lightbulbs Method", "vimeo_id": null, "captions": "pending"},
+        {"id": "162907", "title": "Live Training: Intro to Creative Team Building", "vimeo_id": null, "captions": "pending"},
+        {"id": "163995", "title": "LIVE TRAINING: Creative Workflows, Tools & Testing", "vimeo_id": null, "captions": "pending"},
+        {"id": "165612", "title": "LIVE TRAINING: Future of Brands, UGC Ad Breakdowns & Hiring Creative Teams", "vimeo_id": null, "captions": "pending"},
+        {"id": "166643", "title": "LIVE TRAINING - 10.11.23 - Deep Dive on Creative Testing & Editing Workflow", "vimeo_id": null, "captions": "pending"},
+        {"id": "173217", "title": "LIVE TRAINING - 10.18.23 - Video Ad Breakdowns & Marketing Principles", "vimeo_id": null, "captions": "pending"},
+        {"id": "190444", "title": "LIVE TRAINING - 11.03.23 - Ad Mastery: Testing, Dynamic Creatives and Optimization", "vimeo_id": null, "captions": "pending"},
+        {"id": "190467", "title": "LIVE TRAINING - 11.08.23 - Ads that Sell: The Light Bulb Concept", "vimeo_id": null, "captions": "pending"},
+        {"id": "195312", "title": "LIVE TRAINING - 11.15.23 - Lessons in Creativity, Business, and Self-Discovery", "vimeo_id": null, "captions": "pending"},
+        {"id": "195313", "title": "[SPECIAL] LIVE TRAINING - 11.29.23 - Deep Dive into the 5 Lightbulbs Framework with Billy Broas", "vimeo_id": null, "captions": "pending"},
+        {"id": "205931", "title": "LIVE TRAINING - 12.06.23 - Crafting Success: Approach to Advertising Mastery", "vimeo_id": null, "captions": "pending"},
+        {"id": "205932", "title": "LIVE TRAINING - 12.20.23 - Navigating the Creative Advertising Journey", "vimeo_id": null, "captions": "pending"},
+        {"id": "205933", "title": "LIVE TRAINING - 01.03.24 - Navigating Challenges, Fostering Growth", "vimeo_id": null, "captions": "pending"},
+        {"id": "207957", "title": "[SPECIAL] LIVE TRAINING - 01.17.24 - Video Editing, Creative Directing, Ecom, and all things CREATIVE!", "vimeo_id": null, "captions": "pending"},
+        {"id": "208936", "title": "[SPECIAL] LIVE TRAINING - 01.24.24 - Charlie on scaling and selling E-com brands for millions", "vimeo_id": null, "captions": "pending"},
+        {"id": "221061", "title": "[SPECIAL] LIVE TRAINING - 02.07.24 - Manson Expert Performance Marketing Tips!", "vimeo_id": null, "captions": "pending"},
+        {"id": "221062", "title": "[SPECIAL] LIVE TRAINING - 02.28.24 - Using AI to Supercharge Your Business ft. Jonathan Foltz", "vimeo_id": null, "captions": "pending"},
+        {"id": "222038", "title": "[SPECIAL] LIVE TRAINING - 03.13.24 - Ft. Laura Lalonde, Founder of GridBank.io", "vimeo_id": null, "captions": "pending"}
+      ]
+    },
+    {
+      "id": "template_trainings",
+      "name": "Template Trainings",
+      "lessons": [
+        {"id": "154958", "title": "Product Carousel Tutorial", "vimeo_id": null, "captions": "pending"}
+      ]
+    },
+    {
+      "id": "feedback_support",
+      "name": "FEEDBACK & SUPPORT",
+      "lessons": [
+        {"id": "173065", "title": "Schedule a FREE 30 Minute Call With Jon!", "vimeo_id": null, "captions": "pending"}
+      ]
+    },
+    {
+      "id": "video_ad_breakdowns",
+      "name": "VIDEO AD BREAKDOWNS",
+      "lessons": [
+        {"id": "192315", "title": "TRAINING - Beard Ad Breakdown + Bonus Copy", "vimeo_id": null, "captions": "pending"},
+        {"id": "192316", "title": "TRAINING - Cooking Pan Ad Breakdown", "vimeo_id": null, "captions": "pending"},
+        {"id": "192317", "title": "TRAINING - Trailer/Ad Timeline Breakdown", "vimeo_id": null, "captions": "pending"}
+      ]
+    }
+  ]
+}

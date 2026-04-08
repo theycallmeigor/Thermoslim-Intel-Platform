@@ -1,0 +1,1145 @@
+WEBVTT
+
+1
+00:00:06.200 --> 00:00:09.800
+If you want to get through these tutorials twice as fast just click
+
+2
+00:00:09.800 --> 00:00:12.900
+the gear icon on the bottom right of the video and under
+
+3
+00:00:12.900 --> 00:00:15.400
+speed. You can adjust the speed anywhere from normal speed
+
+4
+00:00:15.400 --> 00:00:16.900
+all the way up to 2X.
+
+5
+00:00:18.100 --> 00:00:21.400
+Hi there, welcome back to another adzorics tutorial. My name
+
+6
+00:00:21.400 --> 00:00:25.000
+is Adam. And today we're gonna be learning how to create modular
+
+7
+00:00:24.300 --> 00:00:27.900
+Clips so that we can create a edits at
+
+8
+00:00:27.900 --> 00:00:30.700
+lightning speed. The idea with modular Clips
+
+9
+00:00:30.700 --> 00:00:33.400
+is that we have our roles. We've already
+
+10
+00:00:33.400 --> 00:00:36.400
+gone through and we've scrubbed everything we've taken all
+
+11
+00:00:36.400 --> 00:00:39.600
+of the fat out and we put them in a folder that we can use a
+
+12
+00:00:39.600 --> 00:00:42.800
+later date for multiple different edits. And if
+
+13
+00:00:42.800 --> 00:00:46.600
+we use these modular Clips with adsrx
+
+14
+00:00:45.600 --> 00:00:48.300
+templates, the possibilities are
+
+15
+00:00:48.300 --> 00:00:51.900
+absolutely endless to create multiple different assets
+
+16
+00:00:51.900 --> 00:00:54.300
+for our ads. Okay. So
+
+17
+00:00:54.300 --> 00:00:57.700
+let's take a look at modularizing a clip and jump into Premiere.
+
+18
+00:00:57.700 --> 00:01:00.200
+Okay. So the first thing that we're gonna do is we're
+
+19
+00:01:00.200 --> 00:01:03.700
+going to import our raw Clips. So we're going
+
+20
+00:01:03.700 --> 00:01:06.100
+to locate that in our Media Browser down here
+
+21
+00:01:06.100 --> 00:01:09.600
+and the bottom left hand corner. So I have a bunch of nine
+
+22
+00:01:09.600 --> 00:01:12.600
+by 16 vertical raw clips that
+
+23
+00:01:12.600 --> 00:01:15.400
+we shot and I'm just going to highlight these
+
+24
+00:01:15.400 --> 00:01:17.700
+and I'm going to drag that and just
+
+25
+00:01:17.900 --> 00:01:20.500
+Like that over to my project and then
+
+26
+00:01:20.500 --> 00:01:23.300
+drag that into the rose folder that
+
+27
+00:01:23.300 --> 00:01:26.500
+I've already created. So I just drop that down and as
+
+28
+00:01:26.500 --> 00:01:29.300
+we can see we have those raw files there. So
+
+29
+00:01:29.300 --> 00:01:32.400
+if I just move this across here, so as you can see, I already
+
+30
+00:01:32.400 --> 00:01:35.200
+have some files pre-named and I have
+
+31
+00:01:35.200 --> 00:01:38.000
+some other files that haven't got any names. So I'm going to
+
+32
+00:01:38.200 --> 00:01:41.200
+be taking multiple clips from those files. I'm
+
+33
+00:01:41.200 --> 00:01:44.000
+just going to rename those clips as and when I need
+
+34
+00:01:44.200 --> 00:01:47.400
+to if I just close that for a second drop down sequence and
+
+35
+00:01:47.400 --> 00:01:50.900
+find a nine by 16 sequence. Now,
+
+36
+00:01:50.900 --> 00:01:53.900
+if you haven't already created your own premade
+
+37
+00:01:53.900 --> 00:01:56.500
+sequences, please go and check out that tutorial
+
+38
+00:01:56.500 --> 00:02:00.300
+where I run you through making your own custom sequences
+
+39
+00:01:59.300 --> 00:02:02.300
+go up to our Roars and
+
+40
+00:02:02.300 --> 00:02:05.500
+let's just collapse that for a second and I'm
+
+41
+00:02:05.500 --> 00:02:08.100
+going to double click this. So what we want to do is
+
+42
+00:02:08.100 --> 00:02:12.300
+just try and speak this up and make it a nice clean clip.
+
+43
+00:02:11.300 --> 00:02:14.300
+I don't want the audio from this clip.
+
+44
+00:02:14.300 --> 00:02:17.400
+So I'm just gonna select this video icon here.
+
+45
+00:02:17.900 --> 00:02:20.500
+Video only and I'm going to drag that into
+
+46
+00:02:20.500 --> 00:02:24.000
+my timeline keep existing settings now
+
+47
+00:02:23.500 --> 00:02:26.400
+depending on the aspect ratio that
+
+48
+00:02:26.400 --> 00:02:29.800
+this was filmed in you may need to adjust the scale
+
+49
+00:02:29.800 --> 00:02:32.600
+for this. So just go over to effects controls
+
+50
+00:02:32.600 --> 00:02:35.100
+and then grab the scale and then just bring
+
+51
+00:02:35.100 --> 00:02:38.500
+that down. Okay, so 50% there and what
+
+52
+00:02:38.500 --> 00:02:41.100
+we have with is iPhone footage is you can
+
+53
+00:02:41.100 --> 00:02:44.400
+see all of the whites really really strong whites here. So
+
+54
+00:02:44.400 --> 00:02:47.200
+what I want to do is come over to the left here. I'm going to
+
+55
+00:02:47.200 --> 00:02:50.600
+highlight these clips. I'm going to right click I'm
+
+56
+00:02:50.600 --> 00:02:53.000
+gonna go up to modify then go to
+
+57
+00:02:53.500 --> 00:02:56.400
+interpret footage. Now if you come all the way down to
+
+58
+00:02:56.400 --> 00:02:59.700
+the bottom here, you see the color space override you just
+
+59
+00:02:59.700 --> 00:03:02.300
+want to twirl that on and then if you see this
+
+60
+00:03:02.300 --> 00:03:05.300
+drop down files here, we can change the color
+
+61
+00:03:05.300 --> 00:03:09.300
+space override to rec 709
+
+62
+00:03:08.300 --> 00:03:11.600
+or maybe even Rec 2020.
+
+63
+00:03:11.600 --> 00:03:14.700
+I like what 2020 looks pretty good and
+
+64
+00:03:14.700 --> 00:03:17.200
+then press okay. So just to have a little play with
+
+65
+00:03:17.200 --> 00:03:17.500
+those and
+
+66
+00:03:17.800 --> 00:03:20.200
+Which colors you like best so we
+
+67
+00:03:20.200 --> 00:03:23.100
+can see there's a lot of shaking of the camera reframing.
+
+68
+00:03:23.800 --> 00:03:27.100
+This is where I want the scene to start with the
+
+69
+00:03:26.100 --> 00:03:29.200
+money and the diaper already there. So I'm going
+
+70
+00:03:29.200 --> 00:03:32.600
+to just drag that to the end there. Let's
+
+71
+00:03:32.600 --> 00:03:35.400
+zoom in now. I'm gonna stop that there. I'm gonna
+
+72
+00:03:35.400 --> 00:03:38.000
+press C and press cut and we're going to press play again.
+
+73
+00:03:40.100 --> 00:03:43.400
+Scrub that back just as the money comes in, press cut
+
+74
+00:03:43.400 --> 00:03:47.000
+select that delete is Right clip Ripple.
+
+75
+00:03:46.300 --> 00:03:49.000
+Delete take it to where the hand comes out.
+
+76
+00:03:50.600 --> 00:03:51.900
+See cut.
+
+77
+00:03:53.300 --> 00:03:56.300
+And then just as the diaper comes in see we've got
+
+78
+00:03:56.300 --> 00:03:59.300
+lots of Dead Space here. We want to get this nice and
+
+79
+00:03:59.300 --> 00:04:02.800
+cleanly timed so then C V. Delete
+
+80
+00:04:02.800 --> 00:04:05.400
+right? Click Ripple delete. So I'm
+
+81
+00:04:05.400 --> 00:04:08.600
+just going to do that for the rest of the clip. We just
+
+82
+00:04:08.600 --> 00:04:12.200
+got a scene where the actress swipes the money off just there.
+
+83
+00:04:11.200 --> 00:04:14.600
+We're gonna press V. Delete.
+
+84
+00:04:15.400 --> 00:04:16.200
+Ripple delete
+
+85
+00:04:16.900 --> 00:04:18.800
+sorry if I just cut that there.
+
+86
+00:04:19.500 --> 00:04:22.800
+And then we get rid of that last bit of the clip. So this
+
+87
+00:04:22.800 --> 00:04:25.200
+is like a pain point shot saying that we
+
+88
+00:04:25.200 --> 00:04:29.100
+don't want the diapers. It's costing too much money really great
+
+89
+00:04:28.100 --> 00:04:31.100
+scroll stopper. Okay. So now we're gonna
+
+90
+00:04:31.100 --> 00:04:35.000
+do this jump cut right here highlight that and again, I'm
+
+91
+00:04:34.200 --> 00:04:37.300
+going to drag that in with only the
+
+92
+00:04:37.300 --> 00:04:40.200
+video not the audio rough takes at the beginning
+
+93
+00:04:40.200 --> 00:04:43.200
+here. So we're just gonna trim all of that out. There we go.
+
+94
+00:04:43.200 --> 00:04:46.600
+Just as she's putting our hand in see just delete
+
+95
+00:04:46.600 --> 00:04:49.100
+that. Let's zoom in here a little
+
+96
+00:04:49.100 --> 00:04:52.400
+bit just so that we've got a little bit more space to play with there we
+
+97
+00:04:52.400 --> 00:04:54.500
+go opens the drawer.
+
+98
+00:04:55.500 --> 00:04:58.200
+And there's a bit of space there. So I think I want
+
+99
+00:04:58.200 --> 00:04:59.200
+to cut there.
+
+100
+00:05:00.600 --> 00:05:02.600
+Just as she brings a hand in there we go.
+
+101
+00:05:03.600 --> 00:05:06.400
+there so right click Ripple delete
+
+102
+00:05:08.800 --> 00:05:11.400
+Nice nice and smooth. So then just
+
+103
+00:05:11.400 --> 00:05:14.200
+as she clicks. There we go, make a switch
+
+104
+00:05:14.200 --> 00:05:17.100
+to the panties in the drawer. So we just want to get the
+
+105
+00:05:17.100 --> 00:05:20.200
+last bit of that click. There we go. So just there
+
+106
+00:05:20.200 --> 00:05:23.200
+and we want to get that movement in the hand. So it really
+
+107
+00:05:23.200 --> 00:05:24.500
+sells that jump cut.
+
+108
+00:05:25.800 --> 00:05:28.500
+There we go. Cut there select this right?
+
+109
+00:05:28.500 --> 00:05:30.100
+Click Ripple. Delete.
+
+110
+00:05:30.900 --> 00:05:31.200
+Okay.
+
+111
+00:05:32.800 --> 00:05:35.600
+So just got that movement when you turn the
+
+112
+00:05:35.600 --> 00:05:38.200
+camera off, there's sometimes a little bit of shake at
+
+113
+00:05:38.200 --> 00:05:41.100
+the end of the clip. So we just want to trim that
+
+114
+00:05:41.100 --> 00:05:44.200
+last little bit off there. So let's look at that clip all the
+
+115
+00:05:44.200 --> 00:05:44.400
+way through.
+
+116
+00:05:45.300 --> 00:05:46.200
+opens the drawer
+
+117
+00:05:48.000 --> 00:05:48.200
+Snap
+
+118
+00:05:49.100 --> 00:05:52.100
+boom picks up the panties shows it to the camera.
+
+119
+00:05:54.700 --> 00:05:58.000
+And the clip finishes so that's a jump cut modularized clip.
+
+120
+00:05:57.200 --> 00:06:00.200
+Bring that into an edit. We just add like a
+
+121
+00:06:00.200 --> 00:06:03.200
+snap sound effect to that really sells the clip. This could be
+
+122
+00:06:03.200 --> 00:06:04.600
+a b-roll shot right here.
+
+123
+00:06:05.500 --> 00:06:08.300
+So she's just picking up the panties from the
+
+124
+00:06:08.300 --> 00:06:11.300
+drawer. So I'm just gonna get that and cut that.
+
+125
+00:06:12.100 --> 00:06:15.400
+V hold oat and then click and drag
+
+126
+00:06:15.400 --> 00:06:16.900
+that to the right and now
+
+127
+00:06:19.300 --> 00:06:22.200
+we've got a b-roll shot of just picking up the panties out the drawer
+
+128
+00:06:22.200 --> 00:06:25.700
+showing it to the camera. Right? So now we're gonna go on
+
+129
+00:06:25.700 --> 00:06:28.100
+to a b-roll shot. I'm not
+
+130
+00:06:28.100 --> 00:06:31.200
+gonna bring the audio in with this. Yeah. She just
+
+131
+00:06:31.200 --> 00:06:34.300
+walks into the scene there. So we got a little bit of space at the
+
+132
+00:06:34.300 --> 00:06:37.300
+beginning just as she's about to walk in. Okay, there we
+
+133
+00:06:37.300 --> 00:06:40.800
+go. She walks into the scene drops the pads into the bin and
+
+134
+00:06:40.800 --> 00:06:43.500
+just as she walks out and the bin closes
+
+135
+00:06:43.500 --> 00:06:46.500
+boom trim off that end fat. So that's
+
+136
+00:06:46.500 --> 00:06:49.600
+another b-roll shot. Nice quick and simple. Okay. So
+
+137
+00:06:49.600 --> 00:06:53.300
+now we're going to select this clip here drag into
+
+138
+00:06:53.300 --> 00:06:56.300
+the timeline or we can play this
+
+139
+00:06:56.300 --> 00:06:59.300
+through in the top window here, which is what I like to
+
+140
+00:06:59.300 --> 00:07:00.900
+do. So, I'm just gonna press play.
+
+141
+00:07:03.100 --> 00:07:05.100
+all be disappointed I prom
+
+142
+00:07:05.300 --> 00:07:08.800
+ISE, okay, so she just missed the shot there the panties
+
+143
+00:07:08.800 --> 00:07:12.100
+didn't quite hit the camera lens real great
+
+144
+00:07:11.100 --> 00:07:14.500
+fun. So I'm pretty sure the last take here
+
+145
+00:07:14.500 --> 00:07:17.100
+is going to be the best one. So let's take a look
+
+146
+00:07:17.100 --> 00:07:17.400
+at this.
+
+147
+00:07:20.900 --> 00:07:23.500
+We can use this handle here to zoom
+
+148
+00:07:23.500 --> 00:07:23.600
+in.
+
+149
+00:07:24.600 --> 00:07:27.300
+And then we can drag here to just get to the start of her
+
+150
+00:07:27.300 --> 00:07:30.500
+talking. You can press I or you can just click this
+
+151
+00:07:30.500 --> 00:07:33.300
+button right here. So just as it hits the camera
+
+152
+00:07:33.300 --> 00:07:36.300
+lens just about there. I guess select the
+
+153
+00:07:36.300 --> 00:07:39.500
+out point you can have a press. Oh or you can select the
+
+154
+00:07:39.500 --> 00:07:42.400
+mark out Point button here. Okay. So now
+
+155
+00:07:42.400 --> 00:07:45.600
+I'm gonna select that clip and I'm
+
+156
+00:07:45.600 --> 00:07:48.600
+gonna drag that in just the framing
+
+157
+00:07:48.600 --> 00:07:51.200
+on this we can maybe just zoom in Just a
+
+158
+00:07:51.200 --> 00:07:54.800
+Touch Center her a little there we
+
+159
+00:07:54.800 --> 00:07:55.300
+go and then
+
+160
+00:07:56.400 --> 00:08:00.000
+You won't be disappointed. I promise that could
+
+161
+00:07:59.300 --> 00:08:02.200
+be the end of your ad. Okay, so now let's
+
+162
+00:08:02.200 --> 00:08:05.800
+look at how we can modularize a testimonial so
+
+163
+00:08:05.800 --> 00:08:07.100
+just as she starts.
+
+164
+00:08:08.800 --> 00:08:11.200
+I'm gonna press I for in point
+
+165
+00:08:11.200 --> 00:08:12.500
+then press play.
+
+166
+00:08:19.300 --> 00:08:22.300
+So I'm gonna select the out point there. We'll press
+
+167
+00:08:22.300 --> 00:08:25.300
+o and I'm going to drag that in and we're
+
+168
+00:08:25.300 --> 00:08:26.100
+gonna play that through.
+
+169
+00:08:28.100 --> 00:08:32.200
+After I had my first baby nobody talked about there's
+
+170
+00:08:31.200 --> 00:08:33.100
+a little pause there.
+
+171
+00:08:33.600 --> 00:08:36.400
+I'm gonna press C. So just before she
+
+172
+00:08:36.400 --> 00:08:37.600
+moves her eyes. There we go.
+
+173
+00:08:38.300 --> 00:08:39.100
+V
+
+174
+00:08:39.900 --> 00:08:41.700
+Right. Click Ripple. Delete
+
+175
+00:08:45.300 --> 00:08:46.700
+Again, there's another space.
+
+176
+00:08:49.100 --> 00:08:49.300
+see
+
+177
+00:08:52.100 --> 00:08:53.900
+just before she starts the next word.
+
+178
+00:08:55.300 --> 00:08:56.200
+V right click
+
+179
+00:08:57.100 --> 00:08:57.900
+Ripple delete
+
+180
+00:08:58.800 --> 00:09:00.400
+okay, and then let's play that through.
+
+181
+00:09:07.300 --> 00:09:11.000
+So what I would probably do is add some Crossfade effects
+
+182
+00:09:10.100 --> 00:09:13.400
+on this audio just to remove some audio
+
+183
+00:09:13.400 --> 00:09:16.300
+popping that you might hear. So I'm gonna go over
+
+184
+00:09:16.300 --> 00:09:19.800
+to effects. I'm gonna go to audio transitions cross
+
+185
+00:09:19.800 --> 00:09:22.600
+Fades now, we can select constant gain
+
+186
+00:09:22.600 --> 00:09:25.200
+or exponential fade. So let's give
+
+187
+00:09:25.200 --> 00:09:28.300
+that a shot and try that fudge. Just zoom in
+
+188
+00:09:28.300 --> 00:09:31.600
+here. You can see that so we can make that larger
+
+189
+00:09:31.600 --> 00:09:34.300
+or smaller. You want to keep that as small as possible.
+
+190
+00:09:35.400 --> 00:09:38.300
+Okay, that doesn't sound too bad
+
+191
+00:09:38.300 --> 00:09:41.100
+at all or what you could also do is select all of
+
+192
+00:09:41.100 --> 00:09:44.900
+the clips and press control shift d and
+
+193
+00:09:44.900 --> 00:09:47.800
+we see that we now have a Crossfade
+
+194
+00:09:47.800 --> 00:09:50.600
+there. So that's a modularized line
+
+195
+00:09:50.600 --> 00:09:51.300
+of a clip.
+
+196
+00:09:58.300 --> 00:10:01.600
+Nice tight lines now. If we go back over to our source
+
+197
+00:10:01.600 --> 00:10:03.000
+monitor, we could find the next line.
+
+198
+00:10:04.500 --> 00:10:07.800
+Okay, just at the end of there you're gonna bring that in again
+
+199
+00:10:07.800 --> 00:10:10.200
+come over and then do the similar sort
+
+200
+00:10:10.200 --> 00:10:13.600
+of thing, right? Okay, so I'm gonna do the same here control shift key
+
+201
+00:10:13.600 --> 00:10:16.100
+applies that fade just to make
+
+202
+00:10:16.100 --> 00:10:17.300
+sure that there's no pops.
+
+203
+00:10:18.800 --> 00:10:21.400
+Perfect. Okay. So now we have
+
+204
+00:10:21.400 --> 00:10:24.200
+a bunch of modularized Clips. You could go
+
+205
+00:10:24.200 --> 00:10:27.700
+through that entire testimonial and take out all of the separate lines.
+
+206
+00:10:27.700 --> 00:10:30.200
+And then you've got multiple different lines that you
+
+207
+00:10:30.200 --> 00:10:33.200
+can use in multiple different ads. So if I
+
+208
+00:10:33.200 --> 00:10:36.200
+just zoom in here and I'm gonna highlight all of my
+
+209
+00:10:36.200 --> 00:10:39.200
+cuts now, I'm gonna right click I'm gonna come
+
+210
+00:10:39.200 --> 00:10:42.500
+up to make subsequence and now we've
+
+211
+00:10:42.500 --> 00:10:45.400
+made a subsequence here. So what I can also do
+
+212
+00:10:45.400 --> 00:10:48.500
+here is then go to new bin
+
+213
+00:10:48.500 --> 00:10:51.500
+down in the bottom left-hand Corner, we're gonna
+
+214
+00:10:51.500 --> 00:10:53.000
+select that and we're gonna type
+
+215
+00:10:54.700 --> 00:10:58.100
+Subsequence. So now we've got subsequence and
+
+216
+00:10:57.100 --> 00:11:00.700
+we're just gonna drag that in there and I'm gonna highlight that
+
+217
+00:11:00.700 --> 00:11:03.700
+subsequence. So every time we make a subsequence
+
+218
+00:11:03.700 --> 00:11:06.200
+now that's highlighted. They're going to drop into that
+
+219
+00:11:06.200 --> 00:11:09.400
+folder. Okay. So we're just going to call this diapers costs
+
+220
+00:11:09.400 --> 00:11:12.400
+money. Now, we have a modularized clip in a subsequence.
+
+221
+00:11:12.400 --> 00:11:15.800
+So I'm going to do the same for this one. So this is pads to
+
+222
+00:11:15.800 --> 00:11:18.200
+panties jump cut. Okay. So next we're gonna
+
+223
+00:11:18.200 --> 00:11:21.300
+select our subsequence folder and we're gonna highlight that
+
+224
+00:11:21.300 --> 00:11:22.700
+pads to panties.
+
+225
+00:11:24.400 --> 00:11:27.700
+And now we've just got that panties b-roll shot. Okay. So
+
+226
+00:11:27.700 --> 00:11:31.300
+we're gonna right click that make subsequence panties
+
+227
+00:11:30.300 --> 00:11:33.400
+draw b-roll pads in
+
+228
+00:11:33.400 --> 00:11:36.900
+the trash can so again right click make subsequence
+
+229
+00:11:36.900 --> 00:11:39.400
+this one here. So again, we want to name
+
+230
+00:11:39.400 --> 00:11:41.400
+it similar to what is said in the clip.
+
+231
+00:11:42.100 --> 00:11:45.600
+after I had my first baby nobody talked about the fact
+
+232
+00:11:45.600 --> 00:11:46.800
+that there could be
+
+233
+00:11:48.100 --> 00:11:51.700
+some highlight right-click subsequence. Okay. Nobody
+
+234
+00:11:51.700 --> 00:11:54.400
+talked about leakage. There we go. Okay, so
+
+235
+00:11:54.400 --> 00:11:57.600
+I called that scared to laugh cough needed pads.
+
+236
+00:11:58.900 --> 00:12:01.900
+Okay, so if experience leakage try design
+
+237
+00:12:01.900 --> 00:12:04.400
+Comfort boom, okay, give yourself
+
+238
+00:12:04.400 --> 00:12:07.500
+a break try today simple simple and
+
+239
+00:12:07.500 --> 00:12:10.800
+easy. So the next thing to do is to export these so I'm
+
+240
+00:12:10.800 --> 00:12:13.100
+just gonna select this first one here and I'm
+
+241
+00:12:13.100 --> 00:12:16.700
+going to right click then select export media.
+
+242
+00:12:16.700 --> 00:12:19.600
+Okay, so that's gonna bring up the export window and
+
+243
+00:12:19.600 --> 00:12:22.100
+we have already had it named. So what we could
+
+244
+00:12:22.100 --> 00:12:25.100
+do is just if I just go up a folder we can see we've got the
+
+245
+00:12:25.100 --> 00:12:28.600
+rules folder and we've got the modularized clips folder.
+
+246
+00:12:28.600 --> 00:12:31.800
+So I'm just gonna select that modularized clips and I'm
+
+247
+00:12:31.800 --> 00:12:34.300
+going to click save because we already have
+
+248
+00:12:34.300 --> 00:12:35.200
+the named.
+
+249
+00:12:36.500 --> 00:12:39.600
+Okay. Now what we can do is just press export right
+
+250
+00:12:39.600 --> 00:12:43.100
+now and that will export it directly within Premiere
+
+251
+00:12:42.100 --> 00:12:46.000
+or if you have a full Adobe Creative
+
+252
+00:12:45.200 --> 00:12:49.600
+Cloud account. I would recommend downloading media
+
+253
+00:12:48.600 --> 00:12:51.300
+encoder. Okay. So what
+
+254
+00:12:51.300 --> 00:12:55.600
+we're gonna do is do that via media encoder and we're gonna select queue.
+
+255
+00:12:57.100 --> 00:13:00.300
+So what that's gonna do is bring up media encoder and place that in there.
+
+256
+00:13:00.300 --> 00:13:03.400
+So now that you've done that first one you've selected
+
+257
+00:13:03.400 --> 00:13:06.200
+that destination folder, you know where that's gonna
+
+258
+00:13:06.200 --> 00:13:09.200
+go. So we're just gonna minimize that and now we're
+
+259
+00:13:09.200 --> 00:13:13.000
+gonna come all the way over to the rest of these and we're going to highlight all
+
+260
+00:13:12.200 --> 00:13:15.400
+of these and then right click
+
+261
+00:13:15.400 --> 00:13:18.100
+then select export media. Now, you can
+
+262
+00:13:18.100 --> 00:13:21.200
+see it brings up a slightly different window here and you
+
+263
+00:13:21.200 --> 00:13:24.400
+can see that you can't select the destination folder. This is
+
+264
+00:13:24.400 --> 00:13:27.800
+the reason why we selected that destination folder
+
+265
+00:13:27.800 --> 00:13:30.100
+on that first clip. So now all we do
+
+266
+00:13:30.100 --> 00:13:33.400
+is we select queue and it's going to send all of these over
+
+267
+00:13:33.400 --> 00:13:36.100
+to Media encodile. We just
+
+268
+00:13:36.100 --> 00:13:39.300
+open up media and Coda. There we go. We can see that that
+
+269
+00:13:39.300 --> 00:13:42.700
+goes to modularized Clips because we please
+
+270
+00:13:42.700 --> 00:13:45.300
+selected that first clip. Okay. So now
+
+271
+00:13:45.300 --> 00:13:48.000
+I'm just gonna press play that will render all of those out.
+
+272
+00:13:48.700 --> 00:13:51.600
+Okay, so now they're all exported. All we
+
+273
+00:13:51.600 --> 00:13:53.300
+need to do is just click that folder here.
+
+274
+00:13:54.100 --> 00:13:57.500
+Okay. So now if I minimize that we now
+
+275
+00:13:57.500 --> 00:14:00.400
+have multiple different clips that we can use in
+
+276
+00:14:00.400 --> 00:14:03.300
+multiple different edits. We can combine them with our
+
+277
+00:14:03.300 --> 00:14:03.800
+templates.
+
+278
+00:14:04.400 --> 00:14:07.400
+And create new ads. They're ready
+
+279
+00:14:07.400 --> 00:14:10.600
+to rock. They're ready to go right there. And then enjoy making
+
+280
+00:14:10.600 --> 00:14:13.300
+new modularized clips. Enjoy having fun
+
+281
+00:14:13.300 --> 00:14:16.400
+making multiple different ads be creative. Have
+
+282
+00:14:16.400 --> 00:14:19.400
+fun. And remember guys. If you have any issues of
+
+283
+00:14:19.400 --> 00:14:22.200
+any of our templates, please get in touch with us, and we
+
+284
+00:14:22.200 --> 00:14:25.300
+will get back to you and try to fix those as soon as possible.
+
+285
+00:14:25.300 --> 00:14:28.000
+Thank you so much for watching and I will see you in the
+
+286
+00:14:28.300 --> 00:14:28.700
+next tutorial.
