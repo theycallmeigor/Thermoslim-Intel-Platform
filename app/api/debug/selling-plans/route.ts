@@ -30,11 +30,11 @@ const QUERY = `
   }
 `;
 
-export async function GET() {
+export async function GET(req: Request) {
   // Temporary debug endpoint — remove after validation
-  const secret = process.env.DEBUG_PROBE_SECRET;
-  if (!secret || secret !== 'selling-plan-probe-2026') {
-    return NextResponse.json({ error: 'Disabled' }, { status: 403 });
+  const authHeader = req.headers.get('authorization');
+  if (process.env.CRON_SECRET && authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
