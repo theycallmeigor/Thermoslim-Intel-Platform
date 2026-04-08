@@ -87,7 +87,7 @@ async function fetchAllPages<T>(path: string): Promise<T[]> {
 async function syncCampaigns(): Promise<{ synced: number; errors: number }> {
   // Fetch all sent campaigns
   const campaigns = await fetchAllPages<KlaviyoCampaign>(
-    '/campaigns?filter=equals(messages.channel,"email")&fields[campaign]=name,status,send_time'
+    '/campaigns?fields[campaign]=name,status,send_time'
   );
 
   console.log(`[sync-klaviyo] fetched ${campaigns.length} campaigns`);
@@ -168,12 +168,14 @@ export async function syncKlaviyo(): Promise<{
   campaigns: { synced: number; errors: number };
   flows: { synced: number; errors: number };
 }> {
+  const start = Date.now();
   console.log('[sync-klaviyo] starting');
 
   const [campaigns, flows] = await Promise.all([
     syncCampaigns(),
     syncFlows(),
   ]);
+  console.log(`[sync-klaviyo] total time: ${((Date.now() - start) / 1000).toFixed(1)}s`);
 
   console.log(`[sync-klaviyo] done: campaigns=${campaigns.synced}/${campaigns.errors}err flows=${flows.synced}/${flows.errors}err`);
 
