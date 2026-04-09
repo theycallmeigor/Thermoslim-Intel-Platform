@@ -118,7 +118,7 @@ export default async function MrrWaterfallPage({
     );
     if (ev.eventType === 'CREATED') {
       newMrrPeriod += mrrContrib;
-    } else if (ev.eventType === 'CANCELLED') {
+    } else if (ev.eventType === 'CANCELLED' || ev.eventType === 'PAUSED') {
       churnedMrrPeriod += mrrContrib;
     }
   }
