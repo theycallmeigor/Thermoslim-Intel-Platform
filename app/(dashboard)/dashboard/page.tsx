@@ -91,7 +91,7 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
         take: ORDERS_PER_PAGE,
         skip: (ordersPage - 1) * ORDERS_PER_PAGE,
         orderBy: { createdAt: 'desc' },
-        include: { customer: { select: { email: true, firstName: true, lastName: true } } },
+        include: { customer: { select: { id: true, email: true, firstName: true, lastName: true } } },
       }),
 
       prisma.subscription.findMany({
@@ -299,6 +299,18 @@ export default async function DashboardPage({
 
   const data = await getDashboardData(startDate, endDate, prevStart, prevEnd, ordersPage);
 
+  // Check which customers have Loop subscriptions (for order type badges)
+  const recentOrderCustomerIds = [...new Set(data.recentOrders.map(o => o.customerId))];
+  const loopSubCustomerIds = new Set(
+    recentOrderCustomerIds.length > 0
+      ? (await prisma.subscription.findMany({
+          where: { customerId: { in: recentOrderCustomerIds }, source: 'SHOPIFY' },
+          select: { customerId: true },
+          distinct: ['customerId'],
+        })).map(s => s.customerId)
+      : []
+  );
+
   const maxCampaignRev = data.topCampaigns.reduce(
     (max, c) => Math.max(max, c._sum.totalPrice ?? 0), 0,
   );
@@ -492,7 +504,8 @@ export default async function DashboardPage({
                         </td>
                         <td className="px-6 py-3.5">
                           {(() => {
-                            const subType = getOrderType(order);
+                            const isLoopSub = order.source === 'SHOPIFY' && loopSubCustomerIds.has(order.customerId);
+                            const subType = isLoopSub ? 'subscription' : getOrderType(order);
                             if (subType === 'rebill') return (
                               <span className="inline-flex px-2 py-0.5 rounded text-xs font-medium bg-amber-500/10 text-amber-400">Rebill</span>
                             );
