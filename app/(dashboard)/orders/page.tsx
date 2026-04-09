@@ -29,6 +29,7 @@ export default async function OrdersPage({
     select: {
       id: true,
       source: true,
+      customerId: true,
       sourceOrderId: true,
       shopifyOrderId: true,
       ccSourceOrderId: true,
@@ -50,11 +51,27 @@ export default async function OrdersPage({
     orderBy: { createdAt: 'desc' },
   });
 
+  // Check which customers have Loop (SHOPIFY-source) subscriptions
+  const shopifyCustomerIds = [...new Set(
+    orders.filter(o => o.source === 'SHOPIFY').map(o => o.customerId)
+  )];
+  const loopSubCustomerIds = new Set(
+    shopifyCustomerIds.length > 0
+      ? (await prisma.subscription.findMany({
+          where: { customerId: { in: shopifyCustomerIds }, source: 'SHOPIFY' },
+          select: { customerId: true },
+          distinct: ['customerId'],
+        })).map(s => s.customerId)
+      : []
+  );
+
   // Serialize for client component
   const serializedOrders = orders.map(order => ({
     ...order,
     createdAt: order.createdAt.toISOString(),
-    orderType: getOrderType(order),
+    orderType: (order.source === 'SHOPIFY' && loopSubCustomerIds.has(order.customerId))
+      ? 'subscription' as const
+      : getOrderType(order),
     sourceLabel: humanizeSource(order.source),
     sourceColor: sourceColors[order.source] ?? 'bg-gray-500/10 text-gray-400',
     statusLabel: humanizeStatus(order.status),
