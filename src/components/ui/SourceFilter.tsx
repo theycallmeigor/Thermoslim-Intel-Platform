@@ -4,7 +4,8 @@ import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 
 const OPTIONS = [
   { value: '', label: 'All' },
-  { value: 'SHOPIFY', label: 'Loop' },
+  { value: 'SHOPIFY', label: 'Shopify' },
+  { value: 'LOOP', label: 'Loop' },
   { value: 'CHECKOUTCHAMP', label: 'CC' },
 ] as const;
 

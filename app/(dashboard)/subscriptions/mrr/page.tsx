@@ -43,7 +43,7 @@ async function getMrrData(startDate: Date, endDate: Date, sourceWhere: Record<st
     prisma.subscriptionEvent.findMany({
       where: {
         occurredAt: { gte: startDate, lte: endDate },
-        eventType: { in: ['CREATED', 'CANCELLED', 'REACTIVATED', 'RESUMED'] },
+        eventType: { in: ['CREATED', 'CANCELLED', 'PAUSED', 'REACTIVATED', 'RESUMED'] },
         subscription: sourceWhere,
       },
       select: {
@@ -142,7 +142,7 @@ export default async function MrrWaterfallPage({
 
     if (ev.eventType === 'CREATED') {
       bucket.newMrr += mrrContrib;
-    } else if (ev.eventType === 'CANCELLED') {
+    } else if (ev.eventType === 'CANCELLED' || ev.eventType === 'PAUSED') {
       bucket.churn -= mrrContrib; // store as negative
     } else if (ev.eventType === 'REACTIVATED' || ev.eventType === 'RESUMED') {
       bucket.reactivation += mrrContrib;

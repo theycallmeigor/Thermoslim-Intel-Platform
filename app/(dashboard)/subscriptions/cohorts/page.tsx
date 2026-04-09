@@ -51,7 +51,8 @@ export default async function CohortsPage({ searchParams }: { searchParams: Prom
     entry.totalLtv += subLtv;
 
     // Determine which months this sub was active
-    const cancelMonth = sub.cancelledAt ? differenceInMonths(new Date(sub.cancelledAt), new Date(sub.startedAt)) : Infinity;
+    const churnedAt = sub.cancelledAt ?? (sub.status === 'PAUSED' ? new Date() : null);
+    const cancelMonth = churnedAt ? differenceInMonths(new Date(churnedAt), new Date(sub.startedAt)) : Infinity;
     for (let m = 0; m <= Math.min(maxMonths, monthsSinceStart); m++) {
       if (m < cancelMonth) entry.retained[m] += 1;
     }

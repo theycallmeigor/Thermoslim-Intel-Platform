@@ -54,7 +54,7 @@ export default async function RevenueForecastPage() {
   const last90Start = startOfDay(subDays(new Date(), 90));
   const cancelCount = await prisma.subscriptionEvent.count({
     where: {
-      eventType: 'CANCELLED',
+      eventType: { in: ['CANCELLED', 'PAUSED'] },
       occurredAt: { gte: last90Start },
     },
   });

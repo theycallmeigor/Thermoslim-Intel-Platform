@@ -39,7 +39,7 @@ export default async function ChurnPage({ searchParams }: { searchParams: Promis
     // Daily cancel + pause events for trend chart
     prisma.subscriptionEvent.findMany({
       where: {
-        eventType: { in: ['CANCELLED', 'PAUSED'] },
+        eventType: { in: ['CANCELLED', 'PAUSED', 'RESUMED'] },
         occurredAt: { gte: startDate, lte: endDate },
         subscription: sourceWhere,
       },
@@ -64,12 +64,13 @@ export default async function ChurnPage({ searchParams }: { searchParams: Promis
   ]);
 
   // Build trend data with churn rate (cancelled / active subs at period start)
-  const dayMap = new Map<string, { cancelled: number; paused: number }>();
+  const dayMap = new Map<string, { cancelled: number; paused: number; resumed: number }>();
   for (const e of cancelledEvents) {
     const dk = format(new Date(e.occurredAt), 'MMM d');
-    const entry = dayMap.get(dk) ?? { cancelled: 0, paused: 0 };
+    const entry = dayMap.get(dk) ?? { cancelled: 0, paused: 0, resumed: 0 };
     if (e.eventType === 'CANCELLED') entry.cancelled += 1;
-    else entry.paused += 1;
+    else if (e.eventType === 'PAUSED') entry.paused += 1;
+    else if (e.eventType === 'RESUMED') entry.resumed += 1;
     dayMap.set(dk, entry);
   }
   const trendData: ChurnDay[] = [...dayMap.entries()].map(([date, v]) => ({
