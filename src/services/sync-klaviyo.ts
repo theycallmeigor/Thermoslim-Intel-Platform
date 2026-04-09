@@ -266,7 +266,7 @@ export async function syncKlaviyo(): Promise<{
   campaigns: { synced: number; errors: number };
   flows: { synced: number; errors: number };
   profiles: { synced: number; updated: number; errors: number };
-  loopEvents: { synced: number; skipped: number; errors: number };
+  loopEvents: { processed: number; skipped: number; unmatched: number; errors: number };
 }> {
   const start = Date.now();
   console.log('[sync-klaviyo] starting');
@@ -281,7 +281,7 @@ export async function syncKlaviyo(): Promise<{
   const loopEvents = await syncLoopEvents();
 
   console.log(`[sync-klaviyo] total time: ${((Date.now() - start) / 1000).toFixed(1)}s`);
-  console.log(`[sync-klaviyo] done: campaigns=${campaigns.synced} flows=${flows.synced} profiles=${profiles.synced} sub-updates=${profiles.updated} loop-events=${loopEvents.synced} loop-skipped=${loopEvents.skipped} loop-errors=${loopEvents.errors}`);
+  console.log(`[sync-klaviyo] done: campaigns=${campaigns.synced} flows=${flows.synced} profiles=${profiles.synced} sub-updates=${profiles.updated} loop-events=${loopEvents.processed} loop-skipped=${loopEvents.skipped} loop-errors=${loopEvents.errors}`);
 
   return { campaigns, flows, profiles, loopEvents };
 }
