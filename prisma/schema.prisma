@@ -12,6 +12,7 @@ enum Source {
   SHOPIFY
   CHECKOUTCHAMP
   MERGED
+  LOOP
 }
 
 enum OrderStatus {
@@ -266,9 +267,12 @@ model SubscriptionEvent {
   declineReason      String?
   metadata           Json?
   occurredAt         DateTime
+  klaviyoEventId     String?              @unique
+  source             Source?
 
   @@index([subscriptionId])
   @@index([occurredAt])
+  @@index([source])
 }
 
 model RevenueEvent {
@@ -531,4 +535,11 @@ model FunnelPage {
   @@unique([funnelId, ccPageId])
   @@index([slug])
   @@index([externalUrl])
+}
+
+model SyncCursor {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  cursor    String
+  updatedAt DateTime @updatedAt
 }
