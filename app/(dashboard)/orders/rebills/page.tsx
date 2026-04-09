@@ -9,6 +9,7 @@ import { subscriptionStatusColors, humanizeStatus } from '@/lib/dashboard/colors
 import { KpiCard } from '@/components/ui/KpiCard';
 import { Badge } from '@/components/ui/Badge';
 import { PageHeader } from '@/components/ui/PageHeader';
+import { SourceFilter } from '@/components/ui/SourceFilter';
 import { RebillCalendar, type DayVolume } from './RebillCalendar';
 
 const PAGE_SIZE = 50;
@@ -20,6 +21,7 @@ async function getRebillData(
   rangeEnd: Date,
   statusFilter: string,
   page: number,
+  sourceWhere: Record<string, unknown>,
 ) {
   const now = new Date();
   // Use TopBar date range if set, otherwise default to next 30 days
@@ -27,10 +29,12 @@ async function getRebillData(
   const windowEnd = rangeEnd;
   const in7Days = addDays(windowStart, 7);
 
-  const statusWhere =
-    statusFilter === 'all'
+  const statusWhere = {
+    ...(statusFilter === 'all'
       ? { status: { in: ['ACTIVE', 'TRIAL', 'RECYCLE_BILLING'] as ('ACTIVE' | 'TRIAL' | 'RECYCLE_BILLING')[] } }
-      : { status: statusFilter.toUpperCase() as any };
+      : { status: statusFilter.toUpperCase() as any }),
+    ...sourceWhere,
+  };
 
   const [kpi7, kpi30, totalCount, upcoming] = await Promise.all([
     // KPI: next 7 days (ACTIVE + TRIAL only)
@@ -103,7 +107,7 @@ async function getRebillData(
 export default async function RebillsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ from?: string; to?: string; page?: string; status?: string }>;
+  searchParams: Promise<{ from?: string; to?: string; page?: string; status?: string; source?: string }>;
 }) {
   const sp = await searchParams;
   const page = Math.max(1, parseInt(sp.page ?? '1', 10));
@@ -116,12 +120,14 @@ export default async function RebillsPage({
   const now = new Date();
   const rangeStart = sp.from ? new Date(sp.from + 'T00:00:00Z') : now;
   const rangeEnd = sp.to ? new Date(sp.to + 'T23:59:59Z') : addDays(now, 30);
+  const sourceWhere = sp.source ? { source: sp.source as any } : {};
 
   const { kpi7, kpi30, totalCount, upcoming, windowStart, windowEnd, expectedPrices } = await getRebillData(
     rangeStart,
     rangeEnd,
     statusFilter,
     page,
+    sourceWhere,
   );
 
   const unlinkedCount = await prisma.subscription.count({
@@ -203,7 +209,9 @@ export default async function RebillsPage({
       <PageHeader
         title="Upcoming Rebills"
         subtitle="Active subscriptions billing in the next 30 days"
-      />
+      >
+        <SourceFilter />
+      </PageHeader>
 
       {/* Status filter tabs */}
       <div className="flex gap-1 bg-gray-900 border border-gray-800 rounded-lg p-1 w-fit">
@@ -262,6 +270,7 @@ export default async function RebillsPage({
           <thead>
             <tr className="border-b border-gray-800 text-gray-500 text-xs uppercase">
               <th className="text-left px-6 py-3 font-medium">Next Bill</th>
+              <th className="text-left px-6 py-3 font-medium">Source</th>
               <th className="text-left px-6 py-3 font-medium">Customer</th>
               <th className="text-left px-6 py-3 font-medium">Product</th>
               <th className="text-left px-6 py-3 font-medium">Cycle</th>
@@ -273,7 +282,7 @@ export default async function RebillsPage({
           <tbody>
             {upcoming.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-6 py-8 text-center text-gray-600 text-sm">
+                <td colSpan={8} className="px-6 py-8 text-center text-gray-600 text-sm">
                   No upcoming rebills found.
                 </td>
               </tr>
@@ -304,6 +313,15 @@ export default async function RebillsPage({
                   >
                     <td className={`px-6 py-3 whitespace-nowrap ${dateClass}`}>
                       {format(billDate, 'MMM d, yyyy')}
+                    </td>
+                    <td className="px-6 py-3">
+                      <span className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${
+                        sub.source === 'SHOPIFY'
+                          ? 'bg-emerald-500/10 text-emerald-400'
+                          : 'bg-blue-500/10 text-blue-400'
+                      }`}>
+                        {sub.source === 'SHOPIFY' ? 'Loop' : 'CC'}
+                      </span>
                     </td>
                     <td className="px-6 py-3 text-gray-300 font-mono text-xs">
                       {truncatedEmail}
