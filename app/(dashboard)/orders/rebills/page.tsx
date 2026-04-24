@@ -134,6 +134,7 @@ export default async function RebillsPage({
     where: {
       productMapId: null,
       status: { in: ['ACTIVE', 'TRIAL', 'RECYCLE_BILLING'] },
+      ...sourceWhere,
     },
   });
 
@@ -151,6 +152,7 @@ export default async function RebillsPage({
     where: {
       status: { in: ['ACTIVE', 'TRIAL', 'RECYCLE_BILLING'] },
       nextBillDate: { not: null },
+      ...sourceWhere,
     },
     select: { nextBillDate: true, recurringPrice: true, frequency: true },
   });
@@ -225,7 +227,7 @@ export default async function RebillsPage({
           return (
             <a
               key={tab.key}
-              href={`?status=${tab.key}&page=1${sp.from ? `&from=${sp.from}` : ''}${sp.to ? `&to=${sp.to}` : ''}`}
+              href={`?status=${tab.key}&page=1${sp.from ? `&from=${sp.from}` : ''}${sp.to ? `&to=${sp.to}` : ''}${sp.source ? `&source=${sp.source}` : ''}`}
               className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
                 isActive ? 'bg-gray-700 text-white' : 'text-gray-500 hover:text-gray-300'
               }`}
@@ -368,7 +370,7 @@ export default async function RebillsPage({
           <div className="flex gap-2">
             {page > 1 && (
               <a
-                href={`?page=${page - 1}&status=${statusFilter}${sp.from ? `&from=${sp.from}` : ''}${sp.to ? `&to=${sp.to}` : ''}`}
+                href={`?page=${page - 1}&status=${statusFilter}${sp.from ? `&from=${sp.from}` : ''}${sp.to ? `&to=${sp.to}` : ''}${sp.source ? `&source=${sp.source}` : ''}`}
                 className="px-3 py-1 text-xs font-medium rounded-md bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors"
               >
                 Previous
@@ -376,7 +378,7 @@ export default async function RebillsPage({
             )}
             {page * PAGE_SIZE < totalCount && (
               <a
-                href={`?page=${page + 1}&status=${statusFilter}${sp.from ? `&from=${sp.from}` : ''}${sp.to ? `&to=${sp.to}` : ''}`}
+                href={`?page=${page + 1}&status=${statusFilter}${sp.from ? `&from=${sp.from}` : ''}${sp.to ? `&to=${sp.to}` : ''}${sp.source ? `&source=${sp.source}` : ''}`}
                 className="px-3 py-1 text-xs font-medium rounded-md bg-gray-800 text-gray-300 hover:bg-gray-700 transition-colors"
               >
                 Next
