@@ -59,14 +59,14 @@ async function getRebillData(
 
     // Total count for pagination
     prisma.subscription.count({
-      where: { ...statusWhere, nextBillDate: { not: null } },
+      where: { ...statusWhere, nextBillDate: { gte: windowStart, lte: windowEnd } },
     }),
 
     // Full table: sorted by nextBillDate, paginated
     prisma.subscription.findMany({
       where: {
         ...statusWhere,
-        nextBillDate: { not: null },
+        nextBillDate: { gte: windowStart, lte: windowEnd },
       },
       orderBy: { nextBillDate: 'asc' },
       skip: (page - 1) * PAGE_SIZE,
