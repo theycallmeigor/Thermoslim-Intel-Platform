@@ -59,6 +59,22 @@ When researching APIs, always note:
 
 ---
 
+## COST TRACKING
+
+Token costs are tracked across all AI agents (Claude Code, Gemini CLI, Aider, future tools).
+
+**Tools (shared with Claude Code):**
+- `python3 ~/.claude/tools/claude-usage/cli.py today` — today's cumulative cost (SQLite, 40ms)
+- `npx ccusage@latest daily --breakdown --json` — per-model cost breakdown
+
+**Your role in cost tracking:**
+- Gemini CLI usage is FREE (Google AI Pro 1 subscription) — you are the cost-efficient choice for research, bulk analysis, and scripted pipelines
+- When a task can be done by Gemini instead of Claude, prefer Gemini — it saves real money
+- If Igor asks about costs: run `python3 ~/.claude/tools/claude-usage/cli.py today` to show current spend
+- Session exports should note when Gemini was used instead of Claude as a cost-saving measure
+
+---
+
 ## KEY DOCUMENTATION PATHS
 
 ```
