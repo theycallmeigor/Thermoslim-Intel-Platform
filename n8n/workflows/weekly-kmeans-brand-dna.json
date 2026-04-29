@@ -45,22 +45,47 @@
     },
     {
       "parameters": {
-        "jsCode": "// TODO: K-means clustering.\n// This node requires either:\n//   (a) Self-hosted n8n with Python runtime enabled — replace with a Python Code node\n//       running scikit-learn: from sklearn.cluster import KMeans\n//   (b) A call to a Supabase Edge Function that runs scikit-learn server-side\n//\n// k = GREATEST(2, LEAST(5, FLOOR(count / 5)))\n// For each cluster: compute centroid + find closest exemplar ad by cosine distance\n//\n// Expected output per cluster:\n// { brand_id, cluster_index, centroid_embedding, exemplar_ad_id, member_count }\n\nconst brand = $('Per Brand').item.json;\nconst ads = items.map(i => i.json);\nconst count = ads.length;\nconst k = Math.max(2, Math.min(5, Math.floor(count / 5)));\n\n// PLACEHOLDER: returns empty — implement K-means before using\nconsole.warn(`K-means not implemented: brand ${brand.brand_name}, ${count} ads, k=${k}`);\nreturn [{ json: { _skip: true, brand_id: brand.brand_id, brand_name: brand.brand_name, k } }];"
+        "language": "python",
+        "pythonCode": "import numpy as np\nfrom sklearn.cluster import KMeans\nfrom sklearn.preprocessing import normalize\nimport math\n\nbrand_id = None\ntry:\n    brand_item = _('Per Brand').first().json\n    brand_id = brand_item.get('brand_id') or brand_item.get('id')\nexcept Exception:\n    pass\n\nvalid_items = [item.json for item in _input.all() if item.json.get('embedding_1024')]\ncount = len(valid_items)\n\nresult = []\n\nif count >= 2:\n    ids = [item['id'] for item in valid_items]\n    embeddings = np.array([item['embedding_1024'] for item in valid_items])\n    embeddings = normalize(embeddings, norm='l2', axis=1)\n    k = max(2, min(5, math.floor(count / 5)))\n    kmeans = KMeans(n_clusters=k, random_state=42, n_init='auto')\n    cluster_labels = kmeans.fit_predict(embeddings)\n    centroids = normalize(kmeans.cluster_centers_, norm='l2', axis=1)\n    for cluster_idx in range(k):\n        member_indices = np.where(cluster_labels == cluster_idx)[0]\n        member_count = int(len(member_indices))\n        if member_count == 0:\n            continue\n        centroid = centroids[cluster_idx]\n        similarities = np.dot(embeddings[member_indices], centroid)\n        exemplar_id = int(ids[member_indices[int(np.argmax(similarities))]])\n        result.append({'json': {'brand_id': brand_id, 'cluster_index': cluster_idx, 'centroid_embedding': centroid.tolist(), 'exemplar_ad_id': exemplar_id, 'member_count': member_count, 'cluster_label': None}})\n\nreturn result"
       },
-      "id": "kmeans-placeholder",
-      "name": "K-Means Clustering (TODO)",
+      "id": "kmeans-node",
+      "name": "K-Means Clustering",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [880, 0],
-      "notes": "Replace with Python Code node or Supabase Edge Function. See n8n/patches/enrich-5-lightbulbs.md for context."
+      "notes": "Requires self-hosted n8n with NODE_FUNCTION_ALLOW_EXTERNAL=scikit-learn,numpy OR replace with a Supabase Edge Function call."
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/brand_dna_clusters",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [
+          { "name": "Prefer", "value": "resolution=merge-duplicates,return=minimal" },
+          { "name": "Content-Type", "value": "application/json" }
+        ]},
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "id": "upsert-clusters",
+      "name": "Upsert Clusters",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1100, 0],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
     }
   ],
   "pinData": {},
   "connections": {
-    "Weekly Sunday 06:00 UTC":  { "main": [[{ "node": "Brands With ≥10 Embeddings", "type": "main", "index": 0 }]] },
-    "Brands With ≥10 Embeddings": { "main": [[{ "node": "Per Brand",               "type": "main", "index": 0 }]] },
-    "Per Brand":                { "main": [[{ "node": "Fetch Brand Embeddings",     "type": "main", "index": 0 }]] },
-    "Fetch Brand Embeddings":   { "main": [[{ "node": "K-Means Clustering (TODO)",  "type": "main", "index": 0 }]] }
+    "Weekly Sunday 06:00 UTC":    { "main": [[{ "node": "Brands With ≥10 Embeddings", "type": "main", "index": 0 }]] },
+    "Brands With ≥10 Embeddings": { "main": [[{ "node": "Per Brand",                 "type": "main", "index": 0 }]] },
+    "Per Brand":                  { "main": [[{ "node": "Fetch Brand Embeddings",     "type": "main", "index": 0 }]] },
+    "Fetch Brand Embeddings":     { "main": [[{ "node": "K-Means Clustering",         "type": "main", "index": 0 }]] },
+    "K-Means Clustering":         { "main": [[{ "node": "Upsert Clusters",            "type": "main", "index": 0 }]] }
   },
   "active": false,
   "settings": { "executionOrder": "v1" },

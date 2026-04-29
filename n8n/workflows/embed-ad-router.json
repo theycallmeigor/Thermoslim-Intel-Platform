@@ -26,12 +26,12 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.voyageai.com/v1/multimodal/embeddings",
+        "url": "https://api.voyageai.com/v1/multimodalembeddings",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "contentType": "json",
-        "jsonBody": "={{ JSON.stringify({ model: 'voyage-multimodal-3', inputs: [{ content: [{ type: 'image_url', image_url: $json.media_url }, { type: 'text', text: $json.text_payload }] }] }) }}",
+        "jsonBody": "={{ JSON.stringify({ model: 'voyage-multimodal-3', input: [[ $json.text_payload, { image: $json.media_url } ]], input_type: 'document', output_dimension: 1024 }) }}",
         "options": {}
       },
       "id": "voyage-embed",
@@ -40,47 +40,91 @@
       "typeVersion": 4.2,
       "position": [440, 80],
       "credentials": { "httpHeaderAuth": { "id": "VOYAGE_API_KEY_CREDENTIAL_ID", "name": "Voyage API Key" } },
-      "notes": "TODO: create 'Voyage API Key' Header Auth credential in n8n (Authorization: Bearer <key>)"
+      "notes": "TODO: create 'Voyage API Key' Header Auth credential (Authorization: Bearer <key>). Endpoint confirmed: https://api.voyageai.com/v1/multimodalembeddings"
     },
     {
       "parameters": {
         "method": "POST",
-        "url": "https://api.twelvelabs.io/v1.3/embed",
+        "url": "https://api.twelvelabs.io/v1.3/embed/tasks",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "contentType": "json",
-        "jsonBody": "={{ JSON.stringify({ model_name: 'Marengo-retrieval-2.7', video_url: $json.media_url }) }}",
+        "jsonBody": "={{ JSON.stringify({ model_name: 'marengo-3.0', video_url: $json.media_url }) }}",
         "options": {}
       },
-      "id": "marengo-embed",
-      "name": "Twelve Labs Marengo 3",
+      "id": "marengo-create",
+      "name": "Marengo — Create Task",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [440, -80],
       "credentials": { "httpHeaderAuth": { "id": "MARENGO_API_KEY_CREDENTIAL_ID", "name": "Twelve Labs API Key" } },
-      "notes": "TODO: create 'Twelve Labs API Key' Header Auth credential (x-api-key: <key>). Marengo embed is async — add polling or webhook. See: https://docs.twelvelabs.io/reference/create-video-embeddings"
+      "notes": "TODO: create 'Twelve Labs API Key' Header Auth credential (x-api-key: <key>). Returns task_id — poll GET /v1.3/embed/tasks/{task_id} every 5s until status='ready'. Typical latency: 30-60s. Pricing: $0.042/min."
     },
     {
       "parameters": {
-        "jsCode": "const input = $input.first().json;\nconst isVideo = input.media_type === 'video';\nlet vector, dim, model_id;\nif (isVideo) {\n  // Marengo async: task_id returned, polling needed. This is a placeholder.\n  // In production: poll GET /v1.3/embed/{task_id} until status='ready', then read video_embedding.float\n  vector = null; dim = 512; model_id = 'marengo-3';\n} else {\n  const data = input.data?.[0]?.embedding;\n  vector = data || null; dim = 1024; model_id = 'voyage-multimodal-3';\n}\nreturn [{ json: { vector, dim, model_id } }];"
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "id": "poll-wait",
+      "name": "Wait 5s Before Poll",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [660, -80]
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://api.twelvelabs.io/v1.3/embed/tasks/' + $('Marengo — Create Task').first().json.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "marengo-poll",
+      "name": "Marengo — Poll Status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, -80],
+      "credentials": { "httpHeaderAuth": { "id": "MARENGO_API_KEY_CREDENTIAL_ID", "name": "Twelve Labs API Key" } }
+    },
+    {
+      "parameters": {
+        "rules": { "values": [
+          { "conditions": { "options": { "caseSensitive": true, "typeValidation": "strict", "version": 2 }, "conditions": [{ "leftValue": "={{ $json.status }}", "rightValue": "ready", "operator": { "type": "string", "operation": "equals" }, "id": "is-ready" }], "combinator": "and" }, "renameOutput": true, "outputKey": "ready" }
+        ]},
+        "options": { "fallbackOutput": "extra", "renameFallbackOutput": "not_ready" }
+      },
+      "id": "check-ready",
+      "name": "Task Ready?",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [1100, -80]
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\nconst isVideo = $('Route by Media Type').first().json?.media_type === 'video';\nlet vector, dim, model_id;\nif (isVideo) {\n  const embeddings = input.video_embeddings;\n  vector = Array.isArray(embeddings) ? embeddings : null;\n  dim = 512;\n  model_id = 'marengo-3.0';\n} else {\n  vector = input.data && input.data[0] ? input.data[0].embedding : null;\n  dim = 1024;\n  model_id = 'voyage-multimodal-3';\n}\nreturn [{ json: { vector, dim, model_id } }];"
       },
       "id": "normalize-output",
       "name": "Normalize Output",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [660, 0]
+      "position": [1320, 0]
     }
   ],
   "pinData": {},
   "connections": {
     "Execute Workflow Trigger": { "main": [[{ "node": "Route by Media Type", "type": "main", "index": 0 }]] },
     "Route by Media Type": { "main": [
-      [{ "node": "Twelve Labs Marengo 3", "type": "main", "index": 0 }],
-      [{ "node": "Voyage Multimodal 3",   "type": "main", "index": 0 }]
+      [{ "node": "Marengo — Create Task", "type": "main", "index": 0 }],
+      [{ "node": "Voyage Multimodal 3",  "type": "main", "index": 0 }]
     ]},
-    "Voyage Multimodal 3":   { "main": [[{ "node": "Normalize Output", "type": "main", "index": 0 }]] },
-    "Twelve Labs Marengo 3": { "main": [[{ "node": "Normalize Output", "type": "main", "index": 0 }]] }
+    "Marengo — Create Task": { "main": [[{ "node": "Wait 5s Before Poll",   "type": "main", "index": 0 }]] },
+    "Wait 5s Before Poll":   { "main": [[{ "node": "Marengo — Poll Status", "type": "main", "index": 0 }]] },
+    "Marengo — Poll Status": { "main": [[{ "node": "Task Ready?",           "type": "main", "index": 0 }]] },
+    "Task Ready?": { "main": [
+      [{ "node": "Normalize Output", "type": "main", "index": 0 }],
+      [{ "node": "Wait 5s Before Poll", "type": "main", "index": 0 }]
+    ]},
+    "Voyage Multimodal 3":   { "main": [[{ "node": "Normalize Output",      "type": "main", "index": 0 }]] }
   },
   "active": false,
   "settings": { "executionOrder": "v1" },
