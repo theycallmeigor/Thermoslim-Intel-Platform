@@ -9,3 +9,8 @@ UPDATE public.brands
    SET gethookd_brand_id = 138083
  WHERE name = 'My Derma Dream'
    AND (gethookd_brand_id IS NULL OR gethookd_brand_id <> 138083);
+
+UPDATE public.brands
+   SET gethookd_brand_id = 137961
+ WHERE name = 'Smooche'
+   AND (gethookd_brand_id IS NULL OR gethookd_brand_id <> 137961);
