@@ -13,8 +13,10 @@ SELECT
   ROUND(AVG(performance_score)::numeric, 1)              AS avg_score,
   MAX(performance_score)                                 AS top_score,
   COUNT(*) FILTER (WHERE performance_score > 70)         AS high_performers
+-- NOTE: no status column — uses analyzed_at IS NOT NULL as enrichment signal.
 FROM public.ads
-WHERE status = 'complete'
+WHERE analyzed_at IS NOT NULL
+  AND enrichment_error IS NULL
   AND hook IS NOT NULL
 GROUP BY hook, core_angle, funnel_stage, ad_type, brand_name
 ORDER BY avg_score DESC NULLS LAST;
