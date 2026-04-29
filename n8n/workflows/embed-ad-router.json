@@ -1,0 +1,88 @@
+{
+  "name": "Embed Ad (Router Sub-Workflow)",
+  "nodes": [
+    {
+      "parameters": { "inputSource": "workflowInputData" },
+      "id": "trigger",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [0, 0],
+      "notes": "Inputs: media_url (string), media_type ('image'|'video'|null), text_payload (string)\nOutputs: vector (float[]), dim (int), model_id (string)"
+    },
+    {
+      "parameters": {
+        "rules": { "values": [
+          { "conditions": { "options": { "caseSensitive": false, "typeValidation": "strict", "version": 2 }, "conditions": [{ "leftValue": "={{ $json.media_type }}", "rightValue": "video", "operator": { "type": "string", "operation": "equals" }, "id": "is-video" }], "combinator": "and" }, "renameOutput": true, "outputKey": "video" }
+        ]},
+        "options": { "fallbackOutput": "extra", "renameFallbackOutput": "image_or_text" }
+      },
+      "id": "route-by-type",
+      "name": "Route by Media Type",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.voyageai.com/v1/multimodal/embeddings",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={{ JSON.stringify({ model: 'voyage-multimodal-3', inputs: [{ content: [{ type: 'image_url', image_url: $json.media_url }, { type: 'text', text: $json.text_payload }] }] }) }}",
+        "options": {}
+      },
+      "id": "voyage-embed",
+      "name": "Voyage Multimodal 3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 80],
+      "credentials": { "httpHeaderAuth": { "id": "VOYAGE_API_KEY_CREDENTIAL_ID", "name": "Voyage API Key" } },
+      "notes": "TODO: create 'Voyage API Key' Header Auth credential in n8n (Authorization: Bearer <key>)"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.twelvelabs.io/v1.3/embed",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={{ JSON.stringify({ model_name: 'Marengo-retrieval-2.7', video_url: $json.media_url }) }}",
+        "options": {}
+      },
+      "id": "marengo-embed",
+      "name": "Twelve Labs Marengo 3",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, -80],
+      "credentials": { "httpHeaderAuth": { "id": "MARENGO_API_KEY_CREDENTIAL_ID", "name": "Twelve Labs API Key" } },
+      "notes": "TODO: create 'Twelve Labs API Key' Header Auth credential (x-api-key: <key>). Marengo embed is async — add polling or webhook. See: https://docs.twelvelabs.io/reference/create-video-embeddings"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\nconst isVideo = input.media_type === 'video';\nlet vector, dim, model_id;\nif (isVideo) {\n  // Marengo async: task_id returned, polling needed. This is a placeholder.\n  // In production: poll GET /v1.3/embed/{task_id} until status='ready', then read video_embedding.float\n  vector = null; dim = 512; model_id = 'marengo-3';\n} else {\n  const data = input.data?.[0]?.embedding;\n  vector = data || null; dim = 1024; model_id = 'voyage-multimodal-3';\n}\nreturn [{ json: { vector, dim, model_id } }];"
+      },
+      "id": "normalize-output",
+      "name": "Normalize Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 0]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Execute Workflow Trigger": { "main": [[{ "node": "Route by Media Type", "type": "main", "index": 0 }]] },
+    "Route by Media Type": { "main": [
+      [{ "node": "Twelve Labs Marengo 3", "type": "main", "index": 0 }],
+      [{ "node": "Voyage Multimodal 3",   "type": "main", "index": 0 }]
+    ]},
+    "Voyage Multimodal 3":   { "main": [[{ "node": "Normalize Output", "type": "main", "index": 0 }]] },
+    "Twelve Labs Marengo 3": { "main": [[{ "node": "Normalize Output", "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "ad-intelligence" }]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "GetHookd — Embedding Drift Monitor",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 7 * * 1" }] }
+      },
+      "id": "schedule-trigger",
+      "name": "Weekly Monday 07:00 UTC",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT query_text, expected_ad_id FROM public.benchmark_query_ad_pairs ORDER BY id LIMIT 50;"
+      },
+      "id": "get-benchmark",
+      "name": "Fetch Benchmark Pairs",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [220, 0],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } },
+      "notes": "TODO: Create table benchmark_query_ad_pairs(id, query_text, expected_ad_id) and seed 50 known-good pairs manually before activating this workflow."
+    },
+    {
+      "parameters": {
+        "jsCode": "// For each benchmark pair, call rag_candidates() and check if expected_ad_id appears in top-10.\n// Recall@10 = (hits in top-10) / total_pairs\n// If Recall@10 drops >10% vs last week, alert.\n//\n// TODO: implement Voyage embedding API call per query_text, then call rag_candidates RPC.\n// This is a placeholder that logs the benchmark count.\nconst pairs = items.map(i => i.json);\nconsole.log(`Drift monitor: ${pairs.length} benchmark pairs loaded. Recall@10 computation not yet implemented.`);\nreturn [{ json: { benchmark_count: pairs.length, recall_at_10: null, status: 'not_implemented' } }];"
+      },
+      "id": "compute-recall",
+      "name": "Compute Recall@10 (TODO)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0],
+      "notes": "Implement: embed each query_text via Voyage, call rag_candidates RPC, check if expected_ad_id in top-10."
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Weekly Monday 07:00 UTC": { "main": [[{ "node": "Fetch Benchmark Pairs",      "type": "main", "index": 0 }]] },
+    "Fetch Benchmark Pairs":   { "main": [[{ "node": "Compute Recall@10 (TODO)",   "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "ad-intelligence" }]
+}

@@ -1,0 +1,68 @@
+{
+  "name": "GetHookd — Weekly K-Means Brand DNA",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 6 * * 0" }] }
+      },
+      "id": "schedule-trigger",
+      "name": "Weekly Sunday 06:00 UTC",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT b.id AS brand_id, b.name AS brand_name, COUNT(a.id) AS ad_count FROM public.brands b JOIN public.ads a ON a.brand_id = b.id WHERE a.embedding_1024 IS NOT NULL GROUP BY b.id, b.name HAVING COUNT(a.id) >= 10 ORDER BY b.id;"
+      },
+      "id": "eligible-brands",
+      "name": "Brands With ≥10 Embeddings",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [220, 0],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    },
+    {
+      "parameters": { "batchSize": 1, "options": {} },
+      "id": "per-brand",
+      "name": "Per Brand",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id, embedding_1024 FROM public.ads WHERE brand_id = {{ $json.brand_id }} AND embedding_1024 IS NOT NULL;"
+      },
+      "id": "fetch-embeddings",
+      "name": "Fetch Brand Embeddings",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [660, 0],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "// TODO: K-means clustering.\n// This node requires either:\n//   (a) Self-hosted n8n with Python runtime enabled — replace with a Python Code node\n//       running scikit-learn: from sklearn.cluster import KMeans\n//   (b) A call to a Supabase Edge Function that runs scikit-learn server-side\n//\n// k = GREATEST(2, LEAST(5, FLOOR(count / 5)))\n// For each cluster: compute centroid + find closest exemplar ad by cosine distance\n//\n// Expected output per cluster:\n// { brand_id, cluster_index, centroid_embedding, exemplar_ad_id, member_count }\n\nconst brand = $('Per Brand').item.json;\nconst ads = items.map(i => i.json);\nconst count = ads.length;\nconst k = Math.max(2, Math.min(5, Math.floor(count / 5)));\n\n// PLACEHOLDER: returns empty — implement K-means before using\nconsole.warn(`K-means not implemented: brand ${brand.brand_name}, ${count} ads, k=${k}`);\nreturn [{ json: { _skip: true, brand_id: brand.brand_id, brand_name: brand.brand_name, k } }];"
+      },
+      "id": "kmeans-placeholder",
+      "name": "K-Means Clustering (TODO)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [880, 0],
+      "notes": "Replace with Python Code node or Supabase Edge Function. See n8n/patches/enrich-5-lightbulbs.md for context."
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Weekly Sunday 06:00 UTC":  { "main": [[{ "node": "Brands With ≥10 Embeddings", "type": "main", "index": 0 }]] },
+    "Brands With ≥10 Embeddings": { "main": [[{ "node": "Per Brand",               "type": "main", "index": 0 }]] },
+    "Per Brand":                { "main": [[{ "node": "Fetch Brand Embeddings",     "type": "main", "index": 0 }]] },
+    "Fetch Brand Embeddings":   { "main": [[{ "node": "K-Means Clustering (TODO)",  "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "ad-intelligence" }]
+}
