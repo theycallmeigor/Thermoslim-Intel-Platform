@@ -1,0 +1,209 @@
+{
+  "name": "GetHookd — Daily Delta",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "cronExpression", "expression": "0 9 * * *" }]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Daily 09:00 UTC",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id, name, gethookd_brand_id FROM public.brands WHERE status = 'active' AND gethookd_brand_id IS NOT NULL ORDER BY id;"
+      },
+      "id": "get-brands",
+      "name": "Get Active Brands",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [220, 0],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    },
+    {
+      "parameters": { "batchSize": 1, "options": {} },
+      "id": "split-brands",
+      "name": "Per Brand",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "url": "=https://fliqklclucdhjemdjatr.supabase.co/rest/v1/ads",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "select", "value": "external_id" },
+            { "name": "brand_external_id", "value": "=eq.{{ $json.name }}" },
+            { "name": "limit", "value": "5000" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "known-ids",
+      "name": "Fetch Known External IDs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [660, 0],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "const brand = $('Per Brand').item.json;\nconst rows = items.map((i) => i.json.external_id).filter(Boolean);\nreturn [{ json: { brand_id: brand.id, brand: brand.name, gethookd_brand_id: brand.gethookd_brand_id, known_external_ids: rows, page: 1, total_pages: 500, status_filter: 'active', _stop: false } }];"
+      },
+      "id": "init-state",
+      "name": "Init Delta State",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [880, 0]
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://app.gethookd.ai/api/v1/brandspy/' + $json.gethookd_brand_id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "query",    "value": "={{ $json.brand }}" },
+            { "name": "status",   "value": "={{ $json.status_filter }}" },
+            { "name": "per_page", "value": "50" },
+            { "name": "page",     "value": "={{ $json.page }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fetch-page",
+      "name": "GetHookd — Fetch Page",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1100, 0],
+      "credentials": { "httpHeaderAuth": { "id": "rG0rVvLzm0TAUBBC", "name": "Header Auth account" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "const state = $('Init Delta State').first().json;\nconst known = new Set(state.known_external_ids || []);\nconst pageJson = $('GetHookd — Fetch Page').first().json;\nconst meta = pageJson.meta || {};\nconst data = pageJson.data || [];\n\nconst newAds = [];\nlet hitKnown = false;\n\nfor (const ad of data) {\n  const ext = ad.external_id ?? null;\n  if (ext && known.has(String(ext))) { hitKnown = true; continue; }\n  newAds.push({ json: {\n    id: ad.id, external_id: ext, brand_name: state.brand,\n    brand_external_id: ad.brand ? ad.brand.external_id : null,\n    platform: ad.platform ?? null, display_format: ad.display_format ?? null,\n    title: ad.title ?? null, body: ad.body ?? null,\n    cta_type: ad.cta_type ?? null, cta_text: ad.cta_text ?? null,\n    landing_page: ad.landing_page ?? null, link_description: ad.link_description ?? null,\n    start_date: ad.start_date ?? null, end_date: ad.end_date ?? null,\n    days_active: ad.days_active ?? null, active_in_library: ad.active_in_library ?? null,\n    performance_score: ad.performance_score ?? null,\n    performance_score_title: ad.performance_score_title ?? null,\n    ad_spend_range_score: ad.ad_spend_range_score ?? null,\n    ad_spend_range_score_title: ad.ad_spend_range_score_title ?? null,\n    gender_audience: ad.gender_audience ?? null,\n    age_audience_min: ad.age_audience_min ?? null, age_audience_max: ad.age_audience_max ?? null,\n    media_type: ad.media && ad.media[0] ? ad.media[0].type : null,\n    media_url: ad.media && ad.media[0] ? ad.media[0].url : null,\n    thumbnail_url: ad.media && ad.media[0] ? ad.media[0].thumbnail_url : null,\n    share_url: ad.share_url ?? null,\n    updated_at: new Date().toISOString(),\n    _page: meta.current_page || meta.page || state.page,\n    _total_pages: meta.total_pages || state.total_pages,\n    _hit_known: hitKnown\n  }});\n}\n\nif (newAds.length === 0) {\n  return [{ json: { _empty: true, _hit_known: hitKnown, _page: meta.current_page || meta.page || state.page, _total_pages: meta.total_pages || state.total_pages } }];\n}\nreturn newAds;"
+      },
+      "id": "delta-filter",
+      "name": "Filter New vs Known",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1320, 0]
+    },
+    {
+      "parameters": {
+        "rules": { "values": [{ "conditions": { "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2 }, "conditions": [{ "leftValue": "={{ $json._empty }}", "rightValue": true, "operator": { "type": "boolean", "operation": "true" }, "id": "is-empty" }], "combinator": "and" }, "renameOutput": true, "outputKey": "skip_upsert" }] },
+        "options": { "fallbackOutput": "extra", "renameFallbackOutput": "do_upsert" }
+      },
+      "id": "should-upsert",
+      "name": "Has New Ads?",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [1540, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/ads",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Prefer", "value": "resolution=merge-duplicates, return=representation" }, { "name": "Content-Type", "value": "application/json" }] },
+        "sendBody": true,
+        "contentType": "json",
+        "jsonBody": "={{ JSON.stringify((({ _page, _total_pages, _hit_known, _empty, ...rest }) => rest)($json)) }}",
+        "options": {}
+      },
+      "id": "upsert-new",
+      "name": "Upsert New Ads",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1760, -80],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": { "assignments": [
+          { "id": "1", "name": "page", "value": "={{ ($json._page || $('Filter New vs Known').first().json._page) + 1 }}", "type": "number" },
+          { "id": "2", "name": "total_pages", "value": "={{ $json._total_pages || $('Filter New vs Known').first().json._total_pages }}", "type": "number" },
+          { "id": "3", "name": "_stop", "value": "={{ ($json._hit_known === true) || ($('Filter New vs Known').first().json._hit_known === true) }}", "type": "boolean" }
+        ]},
+        "options": {}
+      },
+      "id": "advance-page",
+      "name": "Advance / Mark Stop",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1980, 0],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "rules": { "values": [
+          { "conditions": { "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2 }, "conditions": [{ "leftValue": "={{ $json._stop }}", "rightValue": true, "operator": { "type": "boolean", "operation": "true" }, "id": "stop-cond" }], "combinator": "and" }, "renameOutput": true, "outputKey": "stop" },
+          { "conditions": { "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2 }, "conditions": [{ "leftValue": "={{ $json.page }}", "rightValue": "={{ $json.total_pages }}", "operator": { "type": "number", "operation": "gt" }, "id": "exhausted" }], "combinator": "and" }, "renameOutput": true, "outputKey": "exhausted" }
+        ]},
+        "options": { "fallbackOutput": "extra", "renameFallbackOutput": "next_page" }
+      },
+      "id": "should-continue",
+      "name": "Stop or Continue?",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [2200, 0]
+    },
+    {
+      "parameters": { "amount": 1 },
+      "id": "rate-wait",
+      "name": "Rate Limit Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [2420, 80]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "UPDATE public.brands SET last_delta_check_at = now() WHERE id = {{ $('Per Brand').item.json.id }};"
+      },
+      "id": "mark-checked",
+      "name": "Update last_delta_check_at",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [2420, -80],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Daily 09:00 UTC":           { "main": [[{ "node": "Get Active Brands",        "type": "main", "index": 0 }]] },
+    "Get Active Brands":         { "main": [[{ "node": "Per Brand",                "type": "main", "index": 0 }]] },
+    "Per Brand":                 { "main": [[{ "node": "Fetch Known External IDs", "type": "main", "index": 0 }]] },
+    "Fetch Known External IDs":  { "main": [[{ "node": "Init Delta State",         "type": "main", "index": 0 }]] },
+    "Init Delta State":          { "main": [[{ "node": "GetHookd — Fetch Page",    "type": "main", "index": 0 }]] },
+    "GetHookd — Fetch Page":     { "main": [[{ "node": "Filter New vs Known",      "type": "main", "index": 0 }]] },
+    "Filter New vs Known":       { "main": [[{ "node": "Has New Ads?",             "type": "main", "index": 0 }]] },
+    "Has New Ads?": { "main": [
+      [{ "node": "Advance / Mark Stop", "type": "main", "index": 0 }],
+      [{ "node": "Upsert New Ads",      "type": "main", "index": 0 }]
+    ]},
+    "Upsert New Ads":            { "main": [[{ "node": "Advance / Mark Stop",      "type": "main", "index": 0 }]] },
+    "Advance / Mark Stop":       { "main": [[{ "node": "Stop or Continue?",        "type": "main", "index": 0 }]] },
+    "Stop or Continue?": { "main": [
+      [{ "node": "Update last_delta_check_at", "type": "main", "index": 0 }],
+      [{ "node": "Update last_delta_check_at", "type": "main", "index": 0 }],
+      [{ "node": "Rate Limit Wait",            "type": "main", "index": 0 }]
+    ]},
+    "Rate Limit Wait":           { "main": [[{ "node": "GetHookd — Fetch Page",    "type": "main", "index": 0 }]] }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "tags": [{ "name": "ad-intelligence" }]
+}
