@@ -19,6 +19,7 @@ const NAV: NavGroup[] = [
     items: [
       { label: 'Dashboard', href: '/dashboard' },
       { label: 'Analytics', href: '/analytics' },
+      { label: 'Forecast', href: '/analytics/forecast' },
     ],
   },
   {
@@ -37,6 +38,7 @@ const NAV: NavGroup[] = [
       { label: 'Upcoming Rebills', href: '/orders/rebills' },
       { label: 'Refunds & Chargebacks', href: '/orders/refunds' },
       { label: 'Payment Health', href: '/orders/payments' },
+      { label: 'Revenue', href: '/orders/revenue' },
     ],
   },
   {
@@ -44,6 +46,8 @@ const NAV: NavGroup[] = [
     items: [
       { label: 'Campaigns', href: '/performance/campaigns' },
       { label: 'Products', href: '/performance/products' },
+      { label: 'Funnels', href: '/performance/funnels' },
+      { label: 'Funnel Drop-off', href: '/performance/funnels/dropoff' },
       { label: 'Upsell & AOV', href: '/performance/upsells' },
       { label: 'Attribution', href: '/performance/attribution' },
     ],
@@ -54,6 +58,7 @@ const NAV: NavGroup[] = [
       { label: 'Customer Lookup', href: '/operations/customers' },
       { label: 'Order QA', href: '/operations/qa' },
       { label: 'Ingestion Health', href: '/operations/health' },
+      { label: 'Product Mapping', href: '/operations/product-mapping' },
     ],
   },
 ];

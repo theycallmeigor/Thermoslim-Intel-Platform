@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = { title: 'Refunds & Chargebacks — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
+import Link from 'next/link';
 import { format } from 'date-fns';
 import { prisma } from '@/lib/prisma';
 import { fmt$, fmtK, parseRange, pctChange } from '@/lib/dashboard/formatting';
@@ -46,10 +47,10 @@ export default async function RefundsPage({ searchParams }: { searchParams: Prom
       select: { eventType: true, occurredAt: true, amount: true },
       orderBy: { occurredAt: 'asc' },
     }),
-    // Total revenue for refund rate calculation
+    // Total SALE count for refund rate calculation
     prisma.revenueEvent.aggregate({
-      where: { eventType: { in: ['SALE', 'REBILL'] }, occurredAt: { gte: startDate, lte: endDate } },
-      _sum: { amount: true },
+      where: { eventType: 'SALE', occurredAt: { gte: startDate, lte: endDate } },
+      _count: { id: true },
     }),
   ]);
 
@@ -66,9 +67,11 @@ export default async function RefundsPage({ searchParams }: { searchParams: Prom
 
   const refundAmt = refunds._sum.amount ?? 0;
   const cbAmt = chargebacks._sum.amount ?? 0;
-  const totalRev = totalRevenue._sum.amount ?? 0;
-  const refundRate = totalRev > 0 ? ((refundAmt / totalRev) * 100).toFixed(1) + '%' : '—';
-  const cbRate = totalRev > 0 ? ((cbAmt / totalRev) * 100).toFixed(2) + '%' : '—';
+  const refundCount = refunds._count.id;
+  const cbCount = chargebacks._count.id;
+  const totalSaleCount = totalRevenue._count.id;
+  const refundRate = totalSaleCount > 0 ? ((refundCount / totalSaleCount) * 100).toFixed(1) + '%' : '—';
+  const cbRate = totalSaleCount > 0 ? ((cbCount / totalSaleCount) * 100).toFixed(2) + '%' : '—';
 
   // Recent events table
   const recentEvents = await prisma.revenueEvent.findMany({
@@ -78,6 +81,7 @@ export default async function RefundsPage({ searchParams }: { searchParams: Prom
     },
     select: {
       id: true,
+      orderId: true,
       eventType: true,
       amount: true,
       source: true,
@@ -95,10 +99,10 @@ export default async function RefundsPage({ searchParams }: { searchParams: Prom
       <PageHeader title="Refunds & Chargebacks" subtitle="Money leaving the business" />
 
       <div className="grid grid-cols-4 gap-4">
-        <KpiCard label="Refunds" value={fmtK(refundAmt)} change={pctChange(refundAmt, prevRefunds._sum.amount ?? 0)} positive={false} sub={`${refunds._count.id} events`} />
-        <KpiCard label="Chargebacks" value={fmtK(cbAmt)} change={pctChange(cbAmt, prevChargebacks._sum.amount ?? 0)} positive={false} sub={`${chargebacks._count.id} events`} />
-        <KpiCard label="Refund Rate" value={refundRate} sub="refunds / gross revenue" />
-        <KpiCard label="Chargeback Rate" value={cbRate} sub="chargebacks / gross revenue" />
+        <KpiCard label="Total Refunds" value={fmtK(refundAmt)} change={pctChange(refundAmt, prevRefunds._sum.amount ?? 0)} positive={false} sub={`${refundCount} events`} />
+        <KpiCard label="Chargeback Count" value={String(cbCount)} change={pctChange(cbCount, prevChargebacks._count.id ?? 0)} positive={false} sub={`${fmtK(cbAmt)} total`} />
+        <KpiCard label="Refund Rate" value={refundRate} sub="refund count / sale count" />
+        <KpiCard label="Chargeback Rate" value={cbRate} sub="chargeback count / sale count" />
       </div>
 
       <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
@@ -115,6 +119,7 @@ export default async function RefundsPage({ searchParams }: { searchParams: Prom
             <thead>
               <tr className="border-b border-gray-800">
                 <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Date</th>
+                <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Order</th>
                 <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Type</th>
                 <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Customer</th>
                 <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Amount</th>
@@ -126,6 +131,15 @@ export default async function RefundsPage({ searchParams }: { searchParams: Prom
               {recentEvents.map(e => (
                 <tr key={e.id} className="hover:bg-gray-800/40 transition-colors">
                   <td className="px-6 py-3.5 text-gray-400 text-xs whitespace-nowrap">{format(new Date(e.occurredAt), 'MMM d, yyyy')}</td>
+                  <td className="px-6 py-3.5 text-xs">
+                    {e.orderId ? (
+                      <Link href={`/orders/${e.orderId}`} className="text-blue-400 hover:text-blue-300 font-mono truncate block max-w-[120px]">
+                        {e.orderId.slice(0, 8)}…
+                      </Link>
+                    ) : (
+                      <span className="text-gray-600">—</span>
+                    )}
+                  </td>
                   <td className="px-6 py-3.5">
                     <Badge label={e.eventType} colorClass={e.eventType === 'REFUND' ? 'bg-purple-500/10 text-purple-400' : 'bg-red-500/10 text-red-400'} />
                   </td>

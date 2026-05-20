@@ -63,9 +63,9 @@ export function getOrderType(order: {
   tags?: string | null;
 }): 'rebill' | 'subscription' | 'one-time' {
   if (order.ccOrderType === 'REBILL') return 'rebill';
-  const tags = order.tags ?? '';
-  if (tags.includes('Recurring')) return 'rebill';
-  if (tags.includes('Subscription')) return 'subscription';
+  const tags = (order.tags ?? '').toLowerCase();
+  if (tags.includes('recurring')) return 'rebill';
+  if (tags.includes('subscription') || tags.includes('loop') || tags.includes('prepaid')) return 'subscription';
   return 'one-time';
 }
 

@@ -4,6 +4,10 @@
     {
       "path": "/api/cron/sync-cc",
       "schedule": "0 */4 * * *"
+    },
+    {
+      "path": "/api/cron/sync-shopify-subs",
+      "schedule": "0 * * * *"
     }
   ]
 }

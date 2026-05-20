@@ -8,6 +8,7 @@ export interface ChurnDay {
   date: string;
   cancelled: number;
   paused: number;
+  resumed: number;
   churnRate: number;
 }
 
@@ -29,6 +30,7 @@ export function ChurnTrendChart({ data }: { data: ChurnDay[] }) {
         <Line yAxisId="rate" type="monotone" dataKey="churnRate" stroke={chartColors.primary} strokeWidth={2} dot={false} name="Churn Rate" />
         <Line yAxisId="count" type="monotone" dataKey="cancelled" stroke={chartColors.red} strokeWidth={1.5} dot={false} name="Cancelled" strokeDasharray="4 2" />
         <Line yAxisId="count" type="monotone" dataKey="paused" stroke={chartColors.orange} strokeWidth={1.5} dot={false} name="Paused" strokeDasharray="4 2" />
+        <Line yAxisId="count" type="monotone" dataKey="resumed" stroke="#22d3ee" strokeWidth={1.5} dot={false} name="Resumed" strokeDasharray="4 2" />
       </LineChart>
     </ResponsiveContainer>
   );

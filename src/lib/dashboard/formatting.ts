@@ -43,9 +43,11 @@ export function parseRange(from?: string, to?: string) {
   return { startDate, endDate, prevStart, prevEnd };
 }
 
-/** Normalize subscription recurring price to monthly MRR */
-export function toMonthlyMrr(recurringPrice: number, frequency: string | null): number {
+/** Normalize subscription recurring price to monthly MRR.
+ *  For $0 trial subs, pass expectedPrice (the rebill price from same-product subs). */
+export function toMonthlyMrr(recurringPrice: number, frequency: string | null, expectedPrice?: number): number {
   const freqMonths: Record<string, number> = { '1-month': 1, '3-month': 3, '6-month': 6 };
   const months = freqMonths[frequency ?? ''] ?? 1;
-  return Math.round(recurringPrice / months);
+  const price = recurringPrice === 0 && expectedPrice ? expectedPrice : recurringPrice;
+  return Math.round(price / months);
 }

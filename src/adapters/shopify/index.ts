@@ -21,6 +21,11 @@ interface ShopifyAddress {
   phone?: string;
 }
 
+interface ShopifySellingPlan {
+  selling_plan_id: number;
+  name: string;           // e.g., "Delivery every 30 days"
+}
+
 interface ShopifyLineItem {
   id: number;
   variant_id: number | null;
@@ -29,6 +34,10 @@ interface ShopifyLineItem {
   sku: string | null;
   price: string;
   quantity: number;
+  vendor: string | null;
+  selling_plan_allocation?: {
+    selling_plan: ShopifySellingPlan;
+  } | null;
 }
 
 interface ShopifyCustomer {
@@ -37,7 +46,34 @@ interface ShopifyCustomer {
   first_name: string | null;
   last_name: string | null;
   phone: string | null;
+  orders_count: number;
+  total_spent: string;
+  tags: string;
   default_address?: ShopifyAddress;
+}
+
+interface ShopifyRefundLineItem {
+  line_item_id: number;
+  quantity: number;
+  subtotal: string;
+}
+
+interface ShopifyRefund {
+  id: number;
+  created_at: string;
+  note: string | null;
+  refund_line_items: ShopifyRefundLineItem[];
+  transactions: Array<{ amount: string; kind: string }>;
+}
+
+interface ShopifyFulfillment {
+  id: number;
+  status: string;         // "success", "cancelled", "error", "failure"
+  tracking_number: string | null;
+  tracking_company: string | null;
+  tracking_url: string | null;
+  created_at: string;
+  shipment_status: string | null;
 }
 
 interface ShopifyOrder {
@@ -58,9 +94,15 @@ interface ShopifyOrder {
   line_items: ShopifyLineItem[];
   billing_address: ShopifyAddress | null;
   shipping_address: ShopifyAddress | null;
-  discount_codes: Array<{ code: string }>;
-  tags: string;        // Comma-separated: e.g. "New Sale, Subscription" | "Recurring, Subscription"
-  source_name: string; // "web" = direct Shopify, "285347840001" = CheckoutChamp
+  discount_codes: Array<{ code: string; amount: string; type: string }>;
+  discount_applications: Array<{ type: string; title: string; value: string; value_type: string; target_type: string }>;
+  tags: string;
+  source_name: string;
+  note: string | null;
+  note_attributes: Array<{ name: string; value: string }>;
+  fulfillment_status: string | null;
+  fulfillments: ShopifyFulfillment[];
+  refunds: ShopifyRefund[];
 }
 
 interface ShopifyProductVariant {
@@ -81,6 +123,18 @@ interface ShopifyProduct {
 // Convert Shopify price string ("99.99") to cents integer
 function toCents(value: string | undefined | null): number {
   return Math.round(parseFloat(value || '0') * 100);
+}
+
+// Exported for use by sync-shopify-subscriptions service
+export function shopifyGraphQL(): { url: string; headers: Record<string, string> } {
+  const domain = config.shopify.storeUrl.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  return {
+    url: `https://${domain}/admin/api/2024-10/graphql.json`,
+    headers: {
+      'X-Shopify-Access-Token': config.shopify.accessToken,
+      'Content-Type': 'application/json',
+    },
+  };
 }
 
 export class ShopifyAdapter implements IAdapter {
@@ -256,6 +310,9 @@ export class ShopifyAdapter implements IAdapter {
           phone: order.phone ?? order.customer?.phone ?? undefined,
           billingAddress: order.billing_address ?? undefined,
           shippingAddress: order.shipping_address ?? undefined,
+          shopifyOrdersCount: order.customer?.orders_count ?? undefined,
+          shopifyTotalSpent: order.customer?.total_spent ? toCents(order.customer.total_spent) : undefined,
+          customerTags: order.customer?.tags ?? undefined,
         },
       });
     }
@@ -279,6 +336,17 @@ export class ShopifyAdapter implements IAdapter {
         paySource: paySourceMap[order.payment_gateway] ?? null,
         tags: order.tags || null,
         createdAt: order.created_at,
+        // Fulfillment data
+        fulfillmentStatus: order.fulfillment_status ?? null,
+        fulfillmentData: order.fulfillments?.length > 0 ? JSON.stringify(order.fulfillments.map(f => ({
+          trackingNumber: f.tracking_number,
+          carrier: f.tracking_company,
+          trackingUrl: f.tracking_url,
+          status: f.status,
+          shippedAt: f.created_at,
+        }))) : null,
+        // Note/attributes
+        note: order.note ?? null,
         items: order.line_items.map((item, idx) => ({
           productSlot: idx + 1,
           shopifyVariantId: item.variant_id ? String(item.variant_id) : null,
@@ -287,9 +355,35 @@ export class ShopifyAdapter implements IAdapter {
           sku: item.sku ?? null,
           price: toCents(item.price),
           quantity: item.quantity,
+          vendor: item.vendor ?? null,
+          // Loop subscription detection via selling_plan
+          sellingPlan: item.selling_plan_allocation?.selling_plan?.name ?? null,
         })),
       },
     });
+
+    // Create RevenueEvent records for refunds
+    if (order.refunds?.length > 0) {
+      for (const refund of order.refunds) {
+        const refundAmount = refund.transactions
+          ?.filter(t => t.kind === 'refund')
+          .reduce((s, t) => s + toCents(t.amount), 0) ?? 0;
+
+        if (refundAmount > 0) {
+          records.push({
+            type: 'revenue_event' as any,
+            data: {
+              sourceOrderId: String(order.id),
+              customerEmail,
+              eventType: 'REFUND',
+              amount: refundAmount,
+              reason: refund.note ?? 'Shopify refund',
+              occurredAt: refund.created_at,
+            },
+          });
+        }
+      }
+    }
 
     return records;
   }

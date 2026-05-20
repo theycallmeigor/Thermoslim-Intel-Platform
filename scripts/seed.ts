@@ -73,13 +73,6 @@ function deriveFromSku(sku: string | null): {
     }
   }
 
-  // Detect if it's a bundle (multiple series codes in SKU)
-  const seriesCount = Object.keys(SERIES_TO_LINE).filter(s => sku.includes(s)).length;
-  if (seriesCount > 1) {
-    productLine = 'Bundle';
-    category = 'Bundle';
-  }
-
   // Derive frequency from qty suffix
   let frequency: string | null = null;
   for (const [suffix, freq] of Object.entries(SUFFIX_TO_FREQUENCY)) {
@@ -94,7 +87,7 @@ function deriveFromSku(sku: string | null): {
 
   // Devices are not subscriptions by default (they're one-time purchases)
   // Consumables and supplements can be subscriptions
-  const isSubscription = category !== 'Device' && category !== 'Bundle' && category !== 'Accessory';
+  const isSubscription = category !== 'Device' && category !== 'Accessory';
 
   return { productLine, category, frequency, isSubscription };
 }
@@ -122,8 +115,8 @@ async function main() {
 
     // Detect "Bundle" from name if not already caught by SKU
     const isBundleName = /bundle|starter|value|ultimate|all.in.one/i.test(pm.name);
-    const finalLine = isBundleName && !productLine ? 'Bundle' : productLine;
-    const finalCat  = isBundleName && !category    ? 'Bundle' : category;
+    const finalLine = isBundleName && !productLine ? 'Body Sculpting Device' : productLine;
+    const finalCat  = isBundleName && !category    ? 'Device' : category;
 
     // Skip test/draft entries
     if (/igor test|do not delete|draft/i.test(pm.name)) continue;
@@ -237,7 +230,7 @@ async function main() {
       } else if (lower.includes('cream')) {
         match = allMapsForCheck.find(m => m.productLine === 'Maintenance Cream');
       } else if (lower.includes('bundle')) {
-        match = allMapsForCheck.find(m => m.productLine === 'Bundle');
+        match = allMapsForCheck.find(m => m.productLine === 'Body Sculpting Device');
       } else if (lower.includes('glp') || lower.includes('support')) {
         match = allMapsForCheck.find(m => m.productLine === 'GLP-1 Support+');
       }

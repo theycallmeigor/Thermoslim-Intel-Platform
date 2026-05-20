@@ -40,15 +40,15 @@ export async function POST() {
 
     console.log(`[backfill-cc] Found ${thinOrders.length} thin orders to backfill`);
 
-    // Group by month to sync in date chunks
+    // Group into 7-day intervals to avoid timeouts on dense periods
+    const INTERVAL_MS = 7 * 24 * 60 * 60 * 1000;
     const dateRanges = new Map<string, { start: Date; end: Date }>();
     for (const order of thinOrders) {
-      const key = `${order.createdAt.getFullYear()}-${String(order.createdAt.getMonth() + 1).padStart(2, '0')}`;
-      const existing = dateRanges.get(key);
-      if (!existing) {
-        const monthStart = new Date(order.createdAt.getFullYear(), order.createdAt.getMonth(), 1);
-        const monthEnd = new Date(order.createdAt.getFullYear(), order.createdAt.getMonth() + 1, 1);
-        dateRanges.set(key, { start: monthStart, end: monthEnd });
+      const weekStart = new Date(Math.floor(order.createdAt.getTime() / INTERVAL_MS) * INTERVAL_MS);
+      const key = weekStart.toISOString().slice(0, 10);
+      if (!dateRanges.has(key)) {
+        const weekEnd = new Date(weekStart.getTime() + INTERVAL_MS);
+        dateRanges.set(key, { start: weekStart, end: weekEnd });
       }
     }
 
@@ -59,8 +59,8 @@ export async function POST() {
 
     // Sync each month range — CC API returns all orders in range,
     // pipeline upserts handle dedup, and thin records get enriched
-    for (const [month, range] of dateRanges) {
-      console.log(`[backfill-cc] Syncing ${month}: ${range.start.toISOString()} → ${range.end.toISOString()}`);
+    for (const [week, range] of dateRanges) {
+      console.log(`[backfill-cc] Syncing ${week}: ${range.start.toISOString()} → ${range.end.toISOString()}`);
       try {
         const result = await adapter.sync({
           fullSync: false,
@@ -71,9 +71,9 @@ export async function POST() {
         totalCreated += result.recordsCreated;
         totalUpdated += result.recordsUpdated;
         totalErrors += result.errors.length;
-        console.log(`[backfill-cc] ${month}: ${result.recordsProcessed} processed, ${result.recordsUpdated} updated`);
+        console.log(`[backfill-cc] ${week}: ${result.recordsProcessed} processed, ${result.recordsUpdated} updated`);
       } catch (err) {
-        console.error(`[backfill-cc] ${month} failed:`, err instanceof Error ? err.message : err);
+        console.error(`[backfill-cc] ${week} failed:`, err instanceof Error ? err.message : err);
         totalErrors++;
       }
     }
@@ -81,7 +81,7 @@ export async function POST() {
     return NextResponse.json({
       success: true,
       thinOrdersFound: thinOrders.length,
-      monthsScanned: dateRanges.size,
+      weeksScanned: dateRanges.size,
       totalProcessed,
       totalCreated,
       totalUpdated,

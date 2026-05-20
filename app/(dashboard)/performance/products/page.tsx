@@ -4,7 +4,8 @@ export const metadata: Metadata = { title: 'Products — ThermoSlim' };
 export const dynamic = 'force-dynamic';
 
 import { prisma } from '@/lib/prisma';
-import { fmt$, fmtK, fmtDollars, parseRange } from '@/lib/dashboard/formatting';
+import { fmt$, fmtK, parseRange } from '@/lib/dashboard/formatting';
+import { calculateMrr } from '@/lib/dashboard/mrr';
 import { KpiCard } from '@/components/ui/KpiCard';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { ProductChart, type ProductBar } from './ProductChart';
@@ -13,12 +14,22 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
   const sp = await searchParams;
   const { startDate, endDate } = parseRange(sp.from, sp.to);
 
+  // Revenue data from DailySnapshot
   const snapshots = await prisma.dailySnapshot.findMany({
     where: { date: { gte: startDate, lte: endDate }, productLine: { not: '' } },
     select: { productLine: true, totalOrders: true, totalRevenue: true, newOrders: true, recurringOrders: true, newSubscribers: true },
   });
 
-  // Aggregate by product line
+  // Active subscriptions per product — centralized MRR calculation
+  const { totalMrr, activeCount: totalActiveSubs, byProductLine } = await calculateMrr();
+
+  // Map byProductLine to subsByProduct shape for combining with snapshots
+  const subsByProduct = new Map<string, { count: number; mrr: number; trials: number }>();
+  for (const [pl, v] of byProductLine.entries()) {
+    subsByProduct.set(pl, { count: v.count, mrr: v.mrr, trials: v.trials });
+  }
+
+  // Aggregate snapshots by product line
   const prodMap = new Map<string, { orders: number; revenue: number; newOrders: number; recurringOrders: number; newSubs: number }>();
   for (const s of snapshots) {
     if (!s.productLine) continue;
@@ -31,8 +42,22 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
     prodMap.set(s.productLine, entry);
   }
 
-  const products = [...prodMap.entries()]
-    .map(([name, v]) => ({ name, ...v, aov: v.orders > 0 ? Math.round(v.revenue / v.orders) : 0 }))
+  // Combine into product rows
+  const allProductLines = new Set([...prodMap.keys(), ...subsByProduct.keys()]);
+  const products = [...allProductLines]
+    .map(name => {
+      const snap = prodMap.get(name) ?? { orders: 0, revenue: 0, newOrders: 0, recurringOrders: 0, newSubs: 0 };
+      const subs = subsByProduct.get(name) ?? { count: 0, mrr: 0, trials: 0 };
+      return {
+        name,
+        ...snap,
+        activeSubs: subs.count,
+        mrr: subs.mrr,
+        trials: subs.trials,
+        aov: snap.orders > 0 ? Math.round(snap.revenue / snap.orders) : 0,
+      };
+    })
+    .filter(p => p.name !== 'Unlinked')
     .sort((a, b) => b.revenue - a.revenue);
 
   const totalRevenue = products.reduce((s, p) => s + p.revenue, 0);
@@ -43,12 +68,13 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Product Performance" subtitle="Revenue and orders by product line" />
+      <PageHeader title="Product Performance" subtitle="Revenue, subscriptions, and MRR by product line" />
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-5 gap-4">
         <KpiCard label="Total Revenue" value={fmtK(totalRevenue)} />
         <KpiCard label="Total Orders" value={totalOrders.toLocaleString()} />
-        <KpiCard label="Product Lines" value={products.length.toLocaleString()} />
+        <KpiCard label="Active Subs" value={totalActiveSubs.toLocaleString()} />
+        <KpiCard label="Total MRR" value={fmtK(totalMrr)} />
         <KpiCard label="Top Product" value={topProduct} />
       </div>
 
@@ -66,24 +92,31 @@ export default async function ProductsPage({ searchParams }: { searchParams: Pro
             <thead>
               <tr className="border-b border-gray-800">
                 <th className="px-6 py-3 text-left text-xs text-gray-500 uppercase tracking-wider font-medium">Product Line</th>
-                <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Orders</th>
-                <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">New</th>
-                <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Recurring</th>
-                <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Revenue</th>
-                <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">AOV</th>
-                <th className="px-6 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">% of Total</th>
+                <th className="px-4 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Orders</th>
+                <th className="px-4 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">New</th>
+                <th className="px-4 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Recurring</th>
+                <th className="px-4 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Revenue</th>
+                <th className="px-4 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">AOV</th>
+                <th className="px-4 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">Active Subs</th>
+                <th className="px-4 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">MRR</th>
+                <th className="px-4 py-3 text-right text-xs text-gray-500 uppercase tracking-wider font-medium">% Rev</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-800/60">
               {products.map(p => (
                 <tr key={p.name} className="hover:bg-gray-800/40 transition-colors">
                   <td className="px-6 py-3.5 text-gray-300 font-medium">{p.name}</td>
-                  <td className="px-6 py-3.5 text-right text-gray-300 tabular-nums">{p.orders}</td>
-                  <td className="px-6 py-3.5 text-right text-gray-400 tabular-nums">{p.newOrders}</td>
-                  <td className="px-6 py-3.5 text-right text-gray-400 tabular-nums">{p.recurringOrders}</td>
-                  <td className="px-6 py-3.5 text-right text-gray-200 tabular-nums font-medium">{fmtK(p.revenue)}</td>
-                  <td className="px-6 py-3.5 text-right text-gray-400 tabular-nums">{fmt$(p.aov)}</td>
-                  <td className="px-6 py-3.5 text-right text-gray-500 tabular-nums">{totalRevenue > 0 ? ((p.revenue / totalRevenue) * 100).toFixed(1) + '%' : '—'}</td>
+                  <td className="px-4 py-3.5 text-right text-gray-300 tabular-nums">{p.orders}</td>
+                  <td className="px-4 py-3.5 text-right text-gray-400 tabular-nums">{p.newOrders}</td>
+                  <td className="px-4 py-3.5 text-right text-gray-400 tabular-nums">{p.recurringOrders}</td>
+                  <td className="px-4 py-3.5 text-right text-gray-200 tabular-nums font-medium">{fmtK(p.revenue)}</td>
+                  <td className="px-4 py-3.5 text-right text-gray-400 tabular-nums">{fmt$(p.aov)}</td>
+                  <td className="px-4 py-3.5 text-right tabular-nums">
+                    <span className="text-blue-400">{p.activeSubs}</span>
+                    {p.trials > 0 && <span className="text-yellow-500 text-xs ml-1">({p.trials} trial)</span>}
+                  </td>
+                  <td className="px-4 py-3.5 text-right text-blue-400 tabular-nums font-medium">{fmtK(p.mrr)}</td>
+                  <td className="px-4 py-3.5 text-right text-gray-500 tabular-nums">{totalRevenue > 0 ? ((p.revenue / totalRevenue) * 100).toFixed(1) + '%' : '—'}</td>
                 </tr>
               ))}
             </tbody>

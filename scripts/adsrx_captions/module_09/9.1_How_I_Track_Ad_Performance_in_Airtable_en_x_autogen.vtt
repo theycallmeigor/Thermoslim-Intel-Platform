@@ -1,0 +1,961 @@
+WEBVTT
+
+1
+00:00:04.355 --> 00:00:05.215
+Hey, how's it going guys?
+
+2
+00:00:05.405 --> 00:00:08.575
+John here. I hope y'all are having an amazing month.
+
+3
+00:00:08.895 --> 00:00:11.255
+I know it's been a while since I've released any, uh,
+
+4
+00:00:11.515 --> 00:00:13.935
+new trainings, but, uh, one thing that I wanted
+
+5
+00:00:13.935 --> 00:00:17.615
+to go over today was how I actually track ads, um,
+
+6
+00:00:17.955 --> 00:00:20.015
+as a video production company,
+
+7
+00:00:20.325 --> 00:00:23.375
+even though we don't run the ads ourselves, um,
+
+8
+00:00:23.765 --> 00:00:27.535
+it's really important that when, whether you're a freelancer
+
+9
+00:00:27.635 --> 00:00:30.415
+or an agency or you're a video production company,
+
+10
+00:00:30.565 --> 00:00:33.615
+that you are tracking, uh, all the ads
+
+11
+00:00:33.615 --> 00:00:35.335
+that you are launching,
+
+12
+00:00:35.835 --> 00:00:37.255
+and if you've been on LinkedIn,
+
+13
+00:00:37.255 --> 00:00:39.975
+if you follow other creative, uh, strategists
+
+14
+00:00:39.975 --> 00:00:42.615
+and such, such, you'll find that everybody has kind
+
+15
+00:00:42.615 --> 00:00:43.775
+of a different system for this.
+
+16
+00:00:43.835 --> 00:00:45.535
+And this is what has worked for me.
+
+17
+00:00:45.645 --> 00:00:46.895
+It's not the perfect system,
+
+18
+00:00:47.035 --> 00:00:50.455
+but it allows me, uh, granularity
+
+19
+00:00:50.715 --> 00:00:54.135
+and, um, specificity in terms of
+
+20
+00:00:54.525 --> 00:00:58.895
+what is moving the needle, um, in terms of creative, um,
+
+21
+00:00:59.025 --> 00:01:02.375
+especially if I'm not in the actual ad accounts myself.
+
+22
+00:01:02.635 --> 00:01:07.295
+So this is, um, this is a tool called Airtable,
+
+23
+00:01:07.875 --> 00:01:11.015
+and essentially it's very similar to Google Sheets.
+
+24
+00:01:11.425 --> 00:01:12.935
+There is a learning curve to it.
+
+25
+00:01:13.325 --> 00:01:16.815
+It's, um, it's, whoops, I just spilled my, my drink.
+
+26
+00:01:17.035 --> 00:01:20.655
+Um, uh, it's, it's like Google, Google Sheets on steroids,
+
+27
+00:01:21.155 --> 00:01:22.895
+and I prefer it because the sorting
+
+28
+00:01:22.895 --> 00:01:24.655
+and filtering of the data
+
+29
+00:01:25.235 --> 00:01:29.735
+is a lot more robust than let's say, um, Google Sheets.
+
+30
+00:01:30.355 --> 00:01:32.895
+And so I'll just do a quick
+
+31
+00:01:33.135 --> 00:01:34.255
+overview of what this looks like.
+
+32
+00:01:34.835 --> 00:01:39.575
+Um, so for example, anytime I have a new creative, um, one
+
+33
+00:01:39.575 --> 00:01:40.895
+of the key things that I'm testing
+
+34
+00:01:41.515 --> 00:01:44.775
+is we're testing a general style, obviously kind
+
+35
+00:01:44.775 --> 00:01:46.935
+of working backwards from what has worked.
+
+36
+00:01:47.475 --> 00:01:49.855
+So for this particular client and,
+
+37
+00:01:49.855 --> 00:01:53.935
+and project, um, mashups have been the style of edits
+
+38
+00:01:53.935 --> 00:01:55.135
+that I've been producing for them.
+
+39
+00:01:55.715 --> 00:01:57.735
+And so I always have like an ad name
+
+40
+00:01:57.735 --> 00:01:59.055
+naming convention for it.
+
+41
+00:01:59.715 --> 00:02:02.295
+And then there's some automations here.
+
+42
+00:02:02.435 --> 00:02:04.175
+But what, um,
+
+43
+00:02:04.175 --> 00:02:06.495
+what this all means is basically like this is the test
+
+44
+00:02:06.495 --> 00:02:09.335
+number, um, for the month,
+
+45
+00:02:09.755 --> 00:02:12.455
+and then this is the phase in which we are
+
+46
+00:02:12.455 --> 00:02:13.575
+testing the creative.
+
+47
+00:02:14.035 --> 00:02:15.655
+So we're actually testing the creative itself
+
+48
+00:02:15.675 --> 00:02:16.695
+and then the variable.
+
+49
+00:02:17.315 --> 00:02:19.615
+So in here I have like different variables.
+
+50
+00:02:19.655 --> 00:02:20.655
+I have a scroll stop
+
+51
+00:02:20.655 --> 00:02:23.575
+or text overlay thumbnail, headline ad style.
+
+52
+00:02:24.035 --> 00:02:25.015
+You know, there's, there's different
+
+53
+00:02:25.255 --> 00:02:26.255
+variables that you want to test.
+
+54
+00:02:27.195 --> 00:02:30.815
+Um, in order to like, just for your own sake,
+
+55
+00:02:31.355 --> 00:02:36.295
+get a track record of previous learnings and previous tests.
+
+56
+00:02:36.605 --> 00:02:38.775
+Because as a performance
+
+57
+00:02:39.375 --> 00:02:42.815
+creative strategist slash marketer slash producer, you know,
+
+58
+00:02:42.815 --> 00:02:44.895
+you always want to know what is moving the needle.
+
+59
+00:02:45.595 --> 00:02:46.815
+And I think this is the one thing
+
+60
+00:02:46.815 --> 00:02:49.175
+that right now is missing in the course,
+
+61
+00:02:49.235 --> 00:02:52.575
+and in the program is just overall like post, um,
+
+62
+00:02:52.925 --> 00:02:54.095
+post testing, right?
+
+63
+00:02:54.355 --> 00:02:57.335
+And this is, this can get really, like, really hairy,
+
+64
+00:02:57.815 --> 00:03:00.205
+especially if you're not not into the accounts.
+
+65
+00:03:00.545 --> 00:03:03.885
+And I'm speaking directly to video editors and,
+
+66
+00:03:03.945 --> 00:03:08.285
+and freelancers who aren't necessarily doing this right now,
+
+67
+00:03:08.705 --> 00:03:10.285
+um, because you don't have an agency
+
+68
+00:03:10.285 --> 00:03:11.645
+or you're not a creative strategist,
+
+69
+00:03:11.985 --> 00:03:16.525
+but I'm, I'm really urging those who are video editors
+
+70
+00:03:16.705 --> 00:03:19.885
+to be, to begin learning how to do this.
+
+71
+00:03:20.065 --> 00:03:22.085
+And you don't need this big, crazy thing.
+
+72
+00:03:23.025 --> 00:03:25.405
+Um, in Airtable, I would share it with you,
+
+73
+00:03:25.405 --> 00:03:27.845
+but I just don't know how right now, but I'll figure it out.
+
+74
+00:03:27.905 --> 00:03:30.445
+But, you know, u utilizing Google Sheets
+
+75
+00:03:31.065 --> 00:03:32.445
+is a great place to start.
+
+76
+00:03:33.265 --> 00:03:35.365
+And if you track your creatives here
+
+77
+00:03:36.025 --> 00:03:37.565
+and just kind of use the same
+
+78
+00:03:37.565 --> 00:03:39.485
+format, I'll go through it again.
+
+79
+00:03:39.585 --> 00:03:40.685
+I'm sorry, I'm jumping around.
+
+80
+00:03:41.165 --> 00:03:43.805
+I just want to really share the importance of doing this.
+
+81
+00:03:43.915 --> 00:03:46.485
+Then you'll, you can have a track record of what you've,
+
+82
+00:03:46.485 --> 00:03:48.565
+what you've done in the past and what moved the needle.
+
+83
+00:03:49.345 --> 00:03:52.885
+All right? So obviously we had the test variable.
+
+84
+00:03:52.885 --> 00:03:54.965
+And this is really important to, to remember
+
+85
+00:03:55.115 --> 00:03:57.085
+that when you're testing, like you're not just testing
+
+86
+00:03:57.085 --> 00:04:01.485
+random stuff and you're testing things based off
+
+87
+00:04:01.485 --> 00:04:02.685
+of a hypothesis and,
+
+88
+00:04:02.685 --> 00:04:05.045
+and based off of what's already working right?
+
+89
+00:04:05.265 --> 00:04:07.125
+In the beginning, yeah, it might be kind of random,
+
+90
+00:04:07.585 --> 00:04:09.445
+but as you get more data, then you can kind of,
+
+91
+00:04:09.445 --> 00:04:12.045
+you can build on what the data's telling you.
+
+92
+00:04:12.425 --> 00:04:13.685
+So for example, if it's a,
+
+93
+00:04:13.685 --> 00:04:15.565
+if it's a headline that works really well.
+
+94
+00:04:15.625 --> 00:04:18.725
+So going back to this, we have a couple variables here.
+
+95
+00:04:18.725 --> 00:04:21.525
+We have the headline, which is how to, how
+
+96
+00:04:21.525 --> 00:04:22.845
+to get tipsy without the booze.
+
+97
+00:04:22.845 --> 00:04:25.445
+Like, this has just worked really well for the brand.
+
+98
+00:04:25.865 --> 00:04:28.365
+And so there's no reason to kind of like, I mean, there is,
+
+99
+00:04:28.425 --> 00:04:30.405
+you can still innovate on it, but there's no reason to go
+
+100
+00:04:30.405 --> 00:04:31.885
+and test like, wild things
+
+101
+00:04:32.395 --> 00:04:34.245
+that wouldn't necessarily be aligned.
+
+102
+00:04:34.365 --> 00:04:36.445
+'cause we already got the data and know that this works.
+
+103
+00:04:37.225 --> 00:04:39.645
+Um, and then the next thing that I track actually,
+
+104
+00:04:39.875 --> 00:04:41.805
+that I don't know how many people are doing this,
+
+105
+00:04:41.865 --> 00:04:46.325
+but I actually track the video hooks themselves, okay?
+
+106
+00:04:46.385 --> 00:04:49.925
+So I will write down what the video hook was,
+
+107
+00:04:50.185 --> 00:04:52.445
+and then I'll include a thumbnail of it.
+
+108
+00:04:52.945 --> 00:04:56.205
+So this kind of gives me perspective on, okay, like
+
+109
+00:04:56.805 --> 00:04:59.285
+reaction hooks worked really, really well for this brand.
+
+110
+00:04:59.625 --> 00:05:03.005
+And so that kind of information, if I'm going
+
+111
+00:05:03.005 --> 00:05:04.845
+through the raw footage, like I know I'm looking
+
+112
+00:05:04.845 --> 00:05:09.405
+for reactions or when they work with UGC creators,
+
+113
+00:05:09.555 --> 00:05:11.045
+like they're telling them, Hey,
+
+114
+00:05:11.045 --> 00:05:12.805
+we need more reactions from you, right?
+
+115
+00:05:13.185 --> 00:05:14.645
+So it, it goes full circle.
+
+116
+00:05:15.305 --> 00:05:18.085
+And I believe as a, as a creative, like,
+
+117
+00:05:20.045 --> 00:05:23.045
+I think the next step to being a video editor is being a
+
+118
+00:05:23.045 --> 00:05:26.565
+video editor and creative strategist that can do all in one
+
+119
+00:05:26.715 --> 00:05:29.005
+because like I said, in, in the training
+
+120
+00:05:29.005 --> 00:05:30.925
+and course, like if you're just a video editor
+
+121
+00:05:30.945 --> 00:05:32.485
+and you're just putting together the parts
+
+122
+00:05:32.995 --> 00:05:34.965
+without really understanding the strategy
+
+123
+00:05:35.625 --> 00:05:37.605
+or the reason why something worked,
+
+124
+00:05:37.675 --> 00:05:39.285
+then I think you're gonna be left behind.
+
+125
+00:05:39.305 --> 00:05:41.765
+And somebody did mention that in the, the course,
+
+126
+00:05:41.945 --> 00:05:43.525
+or I'm sorry, in the community recently.
+
+127
+00:05:44.105 --> 00:05:48.085
+And so, like, everyone has their own system for this.
+
+128
+00:05:48.105 --> 00:05:50.245
+And I don't wanna say that mine's perfect by any means,
+
+129
+00:05:50.385 --> 00:05:52.525
+but this has allowed me like a,
+
+130
+00:05:52.645 --> 00:05:54.285
+a proper naming convention as well.
+
+131
+00:05:54.505 --> 00:05:57.125
+So these are all formulas that I've created.
+
+132
+00:05:57.785 --> 00:06:02.725
+Um, so I know like, okay, scroll stopper 89
+
+133
+00:06:03.025 --> 00:06:06.885
+and headline 56, were the, were the winning ones, right?
+
+134
+00:06:07.625 --> 00:06:09.965
+And I'm testing one variable at a time,
+
+135
+00:06:10.625 --> 00:06:13.325
+and this just allows me a lot more clarity and specificity.
+
+136
+00:06:13.345 --> 00:06:16.765
+So for me, let's say
+
+137
+00:06:17.445 --> 00:06:18.845
+I launched these ads and for example,
+
+138
+00:06:18.865 --> 00:06:21.165
+we just launched these ads and it's one style
+
+139
+00:06:21.505 --> 00:06:23.165
+and I just changed the hook, right?
+
+140
+00:06:23.185 --> 00:06:25.165
+But they're, they're a little bit different from each other
+
+141
+00:06:25.265 --> 00:06:27.925
+in terms of the actual scroll stoppers themselves.
+
+142
+00:06:28.585 --> 00:06:30.165
+Um, but next
+
+143
+00:06:30.165 --> 00:06:32.125
+what I'm gonna do is I'm gonna follow up in a couple days
+
+144
+00:06:32.475 --> 00:06:34.005
+with the, with the brand
+
+145
+00:06:34.005 --> 00:06:35.645
+and the agency that I'm working with,
+
+146
+00:06:35.705 --> 00:06:36.925
+and I'm just gonna ask for data.
+
+147
+00:06:37.545 --> 00:06:40.845
+Um, I don't need so much as a creative in terms of like,
+
+148
+00:06:41.155 --> 00:06:44.605
+what, like, I, like, it's nice to get like the hook rate
+
+149
+00:06:44.625 --> 00:06:46.605
+and the, the click the rate, all that stuff is nice.
+
+150
+00:06:46.665 --> 00:06:48.445
+But, um, what I'm really looking
+
+151
+00:06:48.445 --> 00:06:49.725
+for is like, is it converting or not?
+
+152
+00:06:49.785 --> 00:06:54.245
+Yes or no? And if it's not converting, um,
+
+153
+00:06:54.795 --> 00:06:56.165
+what can we do next, right?
+
+154
+00:06:56.165 --> 00:06:58.725
+And so out of these, these variations,
+
+155
+00:06:58.855 --> 00:07:00.485
+we're gonna look at some of the soft metrics
+
+156
+00:07:01.025 --> 00:07:02.045
+and compare them
+
+157
+00:07:02.385 --> 00:07:05.605
+and see which ones are either getting really good engagement
+
+158
+00:07:05.625 --> 00:07:07.565
+and not sales, or the ones
+
+159
+00:07:07.565 --> 00:07:10.205
+that are just completely not working at all,
+
+160
+00:07:11.105 --> 00:07:13.405
+or the ones that are, you know, working.
+
+161
+00:07:14.125 --> 00:07:16.245
+'cause surprisingly, like sometimes your,
+
+162
+00:07:16.245 --> 00:07:17.645
+your soft metrics could be crap,
+
+163
+00:07:17.785 --> 00:07:20.405
+but it could be a really profitable ad.
+
+164
+00:07:20.825 --> 00:07:22.245
+So it really just depends.
+
+165
+00:07:22.545 --> 00:07:24.685
+But at the end of the day, sales is what matters, right?
+
+166
+00:07:24.865 --> 00:07:25.925
+So I'll just go in here
+
+167
+00:07:26.065 --> 00:07:28.365
+and I'll just rank these like, okay,
+
+168
+00:07:28.365 --> 00:07:29.525
+this one was like a wand.
+
+169
+00:07:29.525 --> 00:07:31.085
+This one was like a a two,
+
+170
+00:07:31.625 --> 00:07:34.005
+and by the way, this is like not quantitative
+
+171
+00:07:34.005 --> 00:07:35.125
+or qualitative whatsoever.
+
+172
+00:07:35.305 --> 00:07:37.285
+I'm just like, these are just little markers for me.
+
+173
+00:07:37.785 --> 00:07:39.805
+And you know, I'm not a data guy, so I don't like
+
+174
+00:07:39.805 --> 00:07:41.405
+to like sit there and stare at it,
+
+175
+00:07:41.425 --> 00:07:43.965
+but I, I do need this information
+
+176
+00:07:44.585 --> 00:07:46.005
+to move forward to the next stage.
+
+177
+00:07:46.585 --> 00:07:51.005
+And so let's say like this one was, was the hook, right?
+
+178
+00:07:51.625 --> 00:07:54.325
+Um, and so what we'll do is just,
+
+179
+00:07:54.325 --> 00:07:55.445
+we'll expand on that, right?
+
+180
+00:07:55.705 --> 00:07:58.125
+So we, with this particular creative,
+
+181
+00:07:58.185 --> 00:08:01.605
+we were just really testing one message and just hooks.
+
+182
+00:08:02.225 --> 00:08:04.965
+Um, now for the second iteration, like they wanted
+
+183
+00:08:04.965 --> 00:08:08.925
+to test a different angle, which would be like a DHD angle.
+
+184
+00:08:09.185 --> 00:08:12.445
+So, you know, I would create a new ad name
+
+185
+00:08:12.585 --> 00:08:15.605
+and I would call it like, uh, SB
+
+186
+00:08:16.125 --> 00:08:18.205
+a DHD one.
+
+187
+00:08:19.065 --> 00:08:23.645
+And then from here, um, I would label the test,
+
+188
+00:08:24.075 --> 00:08:27.685
+test two, put this into creative testing,
+
+189
+00:08:28.305 --> 00:08:30.405
+and then I'm gonna be te testing the scroll
+
+190
+00:08:30.405 --> 00:08:31.845
+stopper plus the ad style.
+
+191
+00:08:32.545 --> 00:08:35.365
+Um, and then from here, you know, we'd come up with,
+
+192
+00:08:35.435 --> 00:08:40.165
+with hooks right here, like how this solved my A DHD.
+
+193
+00:08:40.535 --> 00:08:42.485
+We're gonna be very careful with the claims here.
+
+194
+00:08:42.985 --> 00:08:45.525
+And then for the video hook, I'm going
+
+195
+00:08:45.585 --> 00:08:48.045
+to create a new record.
+
+196
+00:08:48.465 --> 00:08:50.045
+And so if this is your first time seeing Airtable,
+
+197
+00:08:50.065 --> 00:08:51.605
+I'm sure it's gonna be like, really confusing.
+
+198
+00:08:51.705 --> 00:08:54.445
+But, um, I'm just gonna walk through it really quick.
+
+199
+00:08:54.705 --> 00:08:58.005
+Um, so like, person struggling
+
+200
+00:08:58.185 --> 00:09:01.445
+and I'm basically taking screenshots from my timeline
+
+201
+00:09:01.465 --> 00:09:03.605
+and then putting 'em in here struggling to focus.
+
+202
+00:09:04.305 --> 00:09:08.365
+All right? So, and then let's say for example, you know,
+
+203
+00:09:08.365 --> 00:09:09.485
+I took a screenshot there.
+
+204
+00:09:10.385 --> 00:09:14.845
+Um, let me just use this one as, 'cause I have a image,
+
+205
+00:09:15.545 --> 00:09:17.605
+but I'll put it into the thumbnail.
+
+206
+00:09:17.605 --> 00:09:19.525
+And I just like the visual aspect of things.
+
+207
+00:09:19.585 --> 00:09:21.805
+And again, I know there's other tools.
+
+208
+00:09:22.045 --> 00:09:25.125
+I think there's, um, motion, which is one of them
+
+209
+00:09:25.315 --> 00:09:28.285
+that like performance creators, strategists use.
+
+210
+00:09:28.815 --> 00:09:31.365
+Again, I'm not one of those, I don't wanna be on those.
+
+211
+00:09:31.705 --> 00:09:35.405
+Um, but this becomes one variation, right?
+
+212
+00:09:35.545 --> 00:09:38.445
+And then if I just want to create a new variation,
+
+213
+00:09:38.475 --> 00:09:39.485
+I'll just duplicate this
+
+214
+00:09:40.345 --> 00:09:42.765
+and I'll change these, um, these parameters.
+
+215
+00:09:42.765 --> 00:09:45.205
+So whether it's a headline or a hook, um,
+
+216
+00:09:45.305 --> 00:09:48.325
+and yeah, that's basically like my, my tracking process.
+
+217
+00:09:49.425 --> 00:09:52.085
+And it's not perfect, but it is what it is.
+
+218
+00:09:52.305 --> 00:09:54.325
+And if you guys want, like,
+
+219
+00:09:54.505 --> 00:09:57.805
+if you want like a more in depth like setup on how to, how
+
+220
+00:09:57.805 --> 00:10:00.245
+to set this up yourself, I might be able
+
+221
+00:10:00.245 --> 00:10:01.925
+to put something together in Google Sheets
+
+222
+00:10:02.425 --> 00:10:04.525
+or share this entire thing with you.
+
+223
+00:10:04.665 --> 00:10:08.485
+And then I, yeah, I don't wanna like share it
+
+224
+00:10:08.485 --> 00:10:11.245
+because I don't wanna like, uh,
+
+225
+00:10:11.245 --> 00:10:12.845
+it's like client information obviously,
+
+226
+00:10:12.945 --> 00:10:14.525
+but maybe I can make a fake one
+
+227
+00:10:14.545 --> 00:10:16.125
+or like a, I can duplicate it
+
+228
+00:10:16.145 --> 00:10:17.565
+and make it as like a stock one
+
+229
+00:10:17.565 --> 00:10:19.245
+and then you guys can, can pull from it.
+
+230
+00:10:19.585 --> 00:10:21.165
+So anyways, I hope that's helpful.
+
+231
+00:10:21.525 --> 00:10:22.885
+I know it's a little all over the place,
+
+232
+00:10:22.885 --> 00:10:24.845
+but I wanted to share something with you guys, um,
+
+233
+00:10:24.985 --> 00:10:26.565
+in the meantime since we weren't able
+
+234
+00:10:26.565 --> 00:10:27.685
+to jump on a call today.
+
+235
+00:10:27.955 --> 00:10:30.485
+Anyways, appreciate you all and hope you all are doing good.
+
+236
+00:10:30.535 --> 00:10:32.125
+We're gonna be, um, we're a little
+
+237
+00:10:32.125 --> 00:10:34.045
+behind on sharing some templates,
+
+238
+00:10:34.185 --> 00:10:36.685
+but we are getting those sent out today.
+
+239
+00:10:37.145 --> 00:10:39.245
+So look forward to that in your email.
+
+240
+00:10:39.705 --> 00:10:41.125
+And yeah, I'll see you guys soon.

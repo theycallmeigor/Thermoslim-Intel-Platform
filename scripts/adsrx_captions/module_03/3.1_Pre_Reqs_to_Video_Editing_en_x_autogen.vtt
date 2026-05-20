@@ -1,0 +1,529 @@
+WEBVTT
+
+1
+00:00:04.060 --> 00:00:06.510
+Welcome back guys, to another module,
+
+2
+00:00:07.130 --> 00:00:10.550
+to the advanced direct Response Editor training.
+
+3
+00:00:11.570 --> 00:00:15.950
+In this module, we're gonna go over part three, the pre WEX to video editing.
+
+4
+00:00:15.950 --> 00:00:17.550
+Okay, I'm not gonna do the whole thing in that voice.
+
+5
+00:00:17.590 --> 00:00:22.030
+I think that would be really exhausting. So let's get into it guys.
+
+6
+00:00:22.780 --> 00:00:25.670
+Alright. First off, what do you need to get started?
+
+7
+00:00:25.690 --> 00:00:29.710
+You're gonna need a PC and a Mac. That should be relatively high performance,
+
+8
+00:00:29.740 --> 00:00:33.590
+okay? If you're working off a potato, I don't recommend taking this course.
+
+9
+00:00:33.730 --> 00:00:38.350
+You should probably go to Best Buy and order something. Um, no, but in real,
+
+10
+00:00:38.580 --> 00:00:40.430
+real talk, if you're an editor,
+
+11
+00:00:40.620 --> 00:00:45.510
+your gear is incredibly important and you know that if you have crappy gear,
+
+12
+00:00:45.930 --> 00:00:47.670
+you're not gonna be able to perform as well.
+
+13
+00:00:47.730 --> 00:00:50.950
+You're gonna lag if your graphics card isn't up to speed.
+
+14
+00:00:50.950 --> 00:00:51.990
+If you don't have enough ram,
+
+15
+00:00:53.090 --> 00:00:57.390
+all of these things are gonna affect your productivity and you want to ensure
+
+16
+00:00:57.410 --> 00:01:00.470
+you have the best of the best if you can't afford it.
+
+17
+00:01:00.490 --> 00:01:01.510
+And if you can't afford it,
+
+18
+00:01:01.510 --> 00:01:05.630
+you'll work up to a point where you can't afford it and that's how you get nice
+
+19
+00:01:05.630 --> 00:01:09.430
+stuff. So I always recommend maxing out on ram,
+
+20
+00:01:09.710 --> 00:01:12.910
+whatever your motherboard can support, whether that's 32 gigs,
+
+21
+00:01:12.910 --> 00:01:17.630
+64 1 28, I, I think I have 32,
+
+22
+00:01:17.810 --> 00:01:22.470
+but I'm, you know, I'm very RAM focused. I love having a million tabs open,
+
+23
+00:01:22.810 --> 00:01:25.870
+uh, tons of programs open at one time. Uh,
+
+24
+00:01:26.020 --> 00:01:28.390
+next thing is getting an external s s d.
+
+25
+00:01:28.410 --> 00:01:31.750
+If you don't already have an SS s d built into your PC or Mac,
+
+26
+00:01:32.410 --> 00:01:36.350
+get an external one on Amazon. These things like get a,
+
+27
+00:01:36.370 --> 00:01:38.030
+get a terabyte or more,
+
+28
+00:01:38.500 --> 00:01:42.230
+they run so much faster than a typical hard drive. Uh,
+
+29
+00:01:42.410 --> 00:01:43.950
+so that's just one thing.
+
+30
+00:01:44.090 --> 00:01:48.470
+It is just like a must just get an Ss s d if you can, if you have the space,
+
+31
+00:01:48.470 --> 00:01:50.310
+if you have the resources, get dual monitors.
+
+32
+00:01:50.470 --> 00:01:54.990
+I always prefer that you can have two screens where you can toggle in between
+
+33
+00:01:55.060 --> 00:01:58.430
+your notes while editing. You don't have to keep minimizing.
+
+34
+00:01:59.070 --> 00:02:02.670
+I feel like having two screens has made me so much faster,
+
+35
+00:02:02.770 --> 00:02:05.230
+but it's also created a lot of distraction as well.
+
+36
+00:02:05.510 --> 00:02:06.670
+'cause you have more things to look at.
+
+37
+00:02:07.290 --> 00:02:10.430
+But I really like it because on one screen I can look at stock footage,
+
+38
+00:02:10.590 --> 00:02:12.390
+I can look at the script, I can, you know,
+
+39
+00:02:12.720 --> 00:02:17.390
+scrub footage or I can move my timeline into the other screen and
+
+40
+00:02:17.520 --> 00:02:19.230
+focus on this area. So, you know,
+
+41
+00:02:19.230 --> 00:02:22.390
+just having more real estate visually is always a good thing.
+
+42
+00:02:22.870 --> 00:02:26.230
+I used to have four monitors at one point and it just got too excessive where I
+
+43
+00:02:26.230 --> 00:02:29.550
+just had too much stuff going on and then it would slow me down and don't
+
+44
+00:02:29.750 --> 00:02:33.710
+recommend doing that. So I think two is optimal. Next,
+
+45
+00:02:33.940 --> 00:02:36.590
+high performance graphics card. This is obviously,
+
+46
+00:02:37.060 --> 00:02:41.350
+it's a no brainer if you're working with graphics in any capacity or if you're a
+
+47
+00:02:41.350 --> 00:02:45.190
+gamer, you're gonna need a fast performance, high performance graphics card.
+
+48
+00:02:45.290 --> 00:02:46.950
+So get what you can afford.
+
+49
+00:02:47.050 --> 00:02:50.750
+I'm not here to break down the exact specifics.
+
+50
+00:02:50.930 --> 00:02:54.430
+I'm so out of touch with what's out there in terms of what's really good.
+
+51
+00:02:54.550 --> 00:02:56.470
+I used to build my own PCs when I was a kid,
+
+52
+00:02:56.530 --> 00:03:01.360
+but now I've just switched to Mac and I just try to, I don't get the Max,
+
+53
+00:03:01.980 --> 00:03:05.400
+max Mac. That sounds weird. The Max Mac,
+
+54
+00:03:05.400 --> 00:03:07.640
+because that s**t comes out to like 15 grand.
+
+55
+00:03:07.740 --> 00:03:12.080
+I'm not gonna throw 15 grand on a computer when if you build a BC you can get
+
+56
+00:03:12.340 --> 00:03:16.840
+double the performance for like a fraction of the cost. Alright? Number two,
+
+57
+00:03:16.860 --> 00:03:19.960
+you're gonna need a legit version of Adobe Premier Pro.
+
+58
+00:03:20.340 --> 00:03:21.360
+If you use another program,
+
+59
+00:03:22.030 --> 00:03:25.280
+just absorb the principles and apply them to your software.
+
+60
+00:03:25.520 --> 00:03:28.720
+'cause really what we're learning here are the foundations, are the principles,
+
+61
+00:03:28.740 --> 00:03:32.800
+are the techniques. Uh, if you're using Final Cut, if you're using Da Vinci,
+
+62
+00:03:32.800 --> 00:03:37.200
+if you're using, what are the other ones? Uh, apple, you know,
+
+63
+00:03:37.860 --> 00:03:42.480
+iMovie, whatever the case may be. What you need to understand is, you know,
+
+64
+00:03:42.480 --> 00:03:44.880
+it's all the same. Doesn't matter what program you're using. It, it,
+
+65
+00:03:45.060 --> 00:03:47.600
+the concepts are really what's important.
+
+66
+00:03:47.800 --> 00:03:51.280
+'cause you can translate the concept in any editing program that you're using.
+
+67
+00:03:51.420 --> 00:03:54.120
+For example, your phone, like I use my phone,
+
+68
+00:03:54.280 --> 00:03:57.040
+I use cap cut to edit a lot of videos for social media.
+
+69
+00:03:57.390 --> 00:03:59.000
+There's pros and cons to everything.
+
+70
+00:03:59.180 --> 00:04:02.880
+No program is perfect and whatever you're used to using,
+
+71
+00:04:03.840 --> 00:04:05.880
+I highly suggest using that. But this program,
+
+72
+00:04:06.510 --> 00:04:10.760
+this training course will be predominantly Premier Pro. Okay,
+
+73
+00:04:12.750 --> 00:04:17.400
+next, you're gonna need time, focus, and patience. Okay? That's very important.
+
+74
+00:04:18.020 --> 00:04:22.400
+Things take time to learn. Okay? When you're learning something new,
+
+75
+00:04:22.700 --> 00:04:26.720
+you have to be very focused and present because you're taking in new
+
+76
+00:04:26.720 --> 00:04:29.120
+information. It's almost like riding a bike. Again,
+
+77
+00:04:29.250 --> 00:04:30.960
+maybe some of this stuff is brand new to you,
+
+78
+00:04:31.380 --> 00:04:34.680
+so your brain is gonna kind of be stretching itself,
+
+79
+00:04:34.680 --> 00:04:38.760
+which is always a good thing. And don't get frustrated and, you know,
+
+80
+00:04:38.760 --> 00:04:42.080
+just be patient with the process because learning takes time.
+
+81
+00:04:42.700 --> 00:04:47.040
+And you will over time with practice become very proficient.
+
+82
+00:04:47.040 --> 00:04:51.840
+You'll be able to talk about this stuff and you'll be able to identify patterns
+
+83
+00:04:51.860 --> 00:04:54.640
+and things that, you know, will be second nature to you.
+
+84
+00:04:54.640 --> 00:04:58.760
+It's just like learning an instrument over, over months, over years,
+
+85
+00:04:58.820 --> 00:05:00.960
+you become very fluid and you'll be able to freestyle.
+
+86
+00:05:00.960 --> 00:05:02.200
+You'll be able to do whatever you want.
+
+87
+00:05:02.660 --> 00:05:05.240
+And I've always wanted to be a really good piano player,
+
+88
+00:05:05.260 --> 00:05:09.200
+but I just never put in the time focus and patience. So that's my fault.
+
+89
+00:05:10.430 --> 00:05:13.000
+Okay. Number four, have a beginner's mindset.
+
+90
+00:05:13.320 --> 00:05:15.640
+I know everybody comes from different backgrounds and, and,
+
+91
+00:05:15.640 --> 00:05:17.760
+and different experiences and different skill sets.
+
+92
+00:05:17.900 --> 00:05:22.480
+So try to learn all this stuff with a blank slate or continue to,
+
+93
+00:05:22.740 --> 00:05:23.050
+you know,
+
+94
+00:05:23.050 --> 00:05:27.560
+adopt that open-mindedness because when you come in here with a lot of your,
+
+95
+00:05:27.630 --> 00:05:31.120
+your, your beliefs and whatnot, it can get in the way of your progress.
+
+96
+00:05:31.660 --> 00:05:34.600
+And I've worked with a lot of people in the past who've kind of come from a
+
+97
+00:05:34.600 --> 00:05:38.840
+different production world or they did a lot of TV and this person did a lot of
+
+98
+00:05:38.840 --> 00:05:43.680
+movies and so we clashed a lot in terms of principles and whatnot. But,
+
+99
+00:05:44.220 --> 00:05:45.640
+you know, at the end of the day,
+
+100
+00:05:45.840 --> 00:05:49.680
+what I'm just trying to teach you are additional tools to add to your belt.
+
+101
+00:05:50.060 --> 00:05:54.920
+So you can take what you know here and take what you know there and cross apply
+
+102
+00:05:54.920 --> 00:05:57.120
+them and then come up with something completely unique.
+
+103
+00:05:57.420 --> 00:06:01.680
+And I think that's the beauty of continually acquiring more information is then
+
+104
+00:06:01.680 --> 00:06:05.200
+you'll have a broader perspective of life. Alright,
+
+105
+00:06:05.260 --> 00:06:09.480
+so this is my setup right now. I've got the Max Studio 2022.
+
+106
+00:06:09.490 --> 00:06:13.080
+We've got 64 Giga gram. Oh yeah, yeah, that's pretty, pretty good. Um,
+
+107
+00:06:13.400 --> 00:06:17.880
+I got one terabyte SS s d two wide widescreen monitors. They're,
+
+108
+00:06:17.880 --> 00:06:22.480
+they're huge. Uh, I've had 'em for years and I'm rolling with the MX Master
+
+109
+00:06:23.580 --> 00:06:27.440
+Master three Logitech Mouse. I love this thing. Um,
+
+110
+00:06:27.790 --> 00:06:31.840
+primarily for the grip right here. If you do a lot of editing,
+
+111
+00:06:32.300 --> 00:06:36.600
+you're gonna run into a lot of like, wrists problems right here. I,
+
+112
+00:06:36.720 --> 00:06:41.520
+I think for one, at one point in my life I had basic minor carpal tunnel,
+
+113
+00:06:41.860 --> 00:06:43.960
+and it was because my mouse was too small.
+
+114
+00:06:44.400 --> 00:06:47.280
+I was using like this little gaming mouse, like it was tiny like this.
+
+115
+00:06:47.300 --> 00:06:48.880
+And I was making this movement.
+
+116
+00:06:48.940 --> 00:06:53.840
+And then all of my joints right here started to just be in pain all the time.
+
+117
+00:06:54.540 --> 00:06:57.200
+And, um, if I'm not working out, if I'm not lifting,
+
+118
+00:06:57.340 --> 00:07:00.520
+if I'm not doing any weights or anything like that, it starts to flare up again.
+
+119
+00:07:00.580 --> 00:07:03.000
+And this mouse is wide enough, uh,
+
+120
+00:07:03.000 --> 00:07:06.840
+where it kind of gives me enough support and my fingers are able to stretch wide
+
+121
+00:07:06.840 --> 00:07:11.240
+enough. 'cause it's not giving me that like, like crabby crab fingers,
+
+122
+00:07:11.930 --> 00:07:16.120
+which I feel like is, uh, is the reason why I, I was getting like carpal tunnel,
+
+123
+00:07:16.460 --> 00:07:21.000
+but it's a really common thing. So definitely invest in the right stuff. Uh,
+
+124
+00:07:21.000 --> 00:07:21.640
+you're gonna be,
+
+125
+00:07:21.640 --> 00:07:24.800
+you're sitting behind a computer a lot and you wanna be comfortable,
+
+126
+00:07:24.830 --> 00:07:28.000
+like get a nice chair, you know, invest in,
+
+127
+00:07:28.000 --> 00:07:30.240
+in your stuff because this is your job.
+
+128
+00:07:30.430 --> 00:07:33.720
+This is where you're putting a lot of your time and energy and you wanna make
+
+129
+00:07:33.720 --> 00:07:37.840
+sure you've got the best gear, you and, and the most comfort. And,
+
+130
+00:07:37.840 --> 00:07:42.530
+and primarily, primarily obviously protecting your health. 'cause um, you know,
+
+131
+00:07:42.530 --> 00:07:42.690
+we,
+
+132
+00:07:42.690 --> 00:07:47.470
+us editors can sit here for hours and just like be pieces of s**t for a while.

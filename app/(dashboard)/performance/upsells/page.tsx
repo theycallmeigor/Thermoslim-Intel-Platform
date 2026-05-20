@@ -12,47 +12,51 @@ export default async function UpsellsPage({ searchParams }: { searchParams: Prom
   const sp = await searchParams;
   const { startDate, endDate, prevStart, prevEnd } = parseRange(sp.from, sp.to);
 
-  const [upsellOrders, prevUpsellOrders, upsellPaths, allOrders, prevAllOrders, aovByType] = await Promise.all([
-    // Orders with upsells in period
-    prisma.order.count({
-      where: { hasUpsells: true, createdAt: { gte: startDate, lte: endDate }, status: 'COMPLETE', source: { in: ['SHOPIFY', 'MERGED'] } },
-    }),
-    prisma.order.count({
-      where: { hasUpsells: true, createdAt: { gte: prevStart, lte: prevEnd }, status: 'COMPLETE', source: { in: ['SHOPIFY', 'MERGED'] } },
-    }),
-    // UpsellPath records for revenue lifted
+  const baseOrderWhere = { createdAt: { gte: startDate, lte: endDate }, status: 'COMPLETE' as any, source: { in: ['SHOPIFY', 'MERGED'] } as any };
+
+  const [upsellPaths, prevUpsellPathCount, allOrders, aovWithUpsell, aovWithoutUpsell] = await Promise.all([
+    // All UpsellPath records in this period — source of truth for all upsell KPIs
     prisma.upsellPath.findMany({
       where: { order: { createdAt: { gte: startDate, lte: endDate }, status: 'COMPLETE' } },
       select: { upsellsAccepted: true, upsellsDeclined: true, revenueAdded: true },
     }),
-    // Total orders for take rate denominator
-    prisma.order.count({
-      where: { createdAt: { gte: startDate, lte: endDate }, status: 'COMPLETE', source: { in: ['SHOPIFY', 'MERGED'] } },
+    // Previous period UpsellPath count for take rate trend
+    prisma.upsellPath.count({
+      where: { order: { createdAt: { gte: prevStart, lte: prevEnd }, status: 'COMPLETE' } },
     }),
+    // Total qualifying orders for context
     prisma.order.count({
-      where: { createdAt: { gte: prevStart, lte: prevEnd }, status: 'COMPLETE', source: { in: ['SHOPIFY', 'MERGED'] } },
+      where: baseOrderWhere,
     }),
-    // AOV comparison: orders with upsell vs without
-    prisma.order.groupBy({
-      by: ['hasUpsells'],
-      where: { createdAt: { gte: startDate, lte: endDate }, status: 'COMPLETE', source: { in: ['SHOPIFY', 'MERGED'] } },
+    // AOV for orders that have a UpsellPath row
+    prisma.order.aggregate({
+      where: { ...baseOrderWhere, upsellPath: { isNot: null } },
       _avg: { totalPrice: true },
       _count: { id: true },
-      _sum: { totalPrice: true },
+    }),
+    // AOV for orders with no UpsellPath row
+    prisma.order.aggregate({
+      where: { ...baseOrderWhere, upsellPath: { is: null } },
+      _avg: { totalPrice: true },
+      _count: { id: true },
     }),
   ]);
 
   const totalRevenueAdded = upsellPaths.reduce((s, u) => s + u.revenueAdded, 0);
   const totalAccepted = upsellPaths.reduce((s, u) => s + u.upsellsAccepted, 0);
   const totalDeclined = upsellPaths.reduce((s, u) => s + u.upsellsDeclined, 0);
+  // totalOffered = accepted + declined; note: declined is currently 0 in all rows
   const totalOffered = totalAccepted + totalDeclined;
   const acceptRate = totalOffered > 0 ? ((totalAccepted / totalOffered) * 100).toFixed(1) + '%' : '—';
-  const takeRate = allOrders > 0 ? ((upsellOrders / allOrders) * 100).toFixed(1) + '%' : '—';
+  // Take rate: UpsellPath rows where at least one upsell was accepted / total UpsellPath rows
+  const totalUpsellPaths = upsellPaths.length;
+  const upsellsAcceptedCount = upsellPaths.filter(u => u.upsellsAccepted > 0).length;
+  const takeRate = totalUpsellPaths > 0 ? ((upsellsAcceptedCount / totalUpsellPaths) * 100).toFixed(1) + '%' : '—';
 
-  const withUpsell = aovByType.find(r => r.hasUpsells === true);
-  const withoutUpsell = aovByType.find(r => r.hasUpsells === false);
-  const aovWith = Math.round(withUpsell?._avg?.totalPrice ?? 0);
-  const aovWithout = Math.round(withoutUpsell?._avg?.totalPrice ?? 0);
+  const aovWith = Math.round(aovWithUpsell._avg?.totalPrice ?? 0);
+  const aovWithout = Math.round(aovWithoutUpsell._avg?.totalPrice ?? 0);
+  const aovWithCount = aovWithUpsell._count.id;
+  const aovWithoutCount = aovWithoutUpsell._count.id;
   const aovLift = aovWithout > 0 ? (((aovWith - aovWithout) / aovWithout) * 100).toFixed(1) + '%' : '—';
 
   return (
@@ -67,9 +71,9 @@ export default async function UpsellsPage({ searchParams }: { searchParams: Prom
         <KpiCard
           label="Upsell Take Rate"
           value={takeRate}
-          sub={`${upsellOrders} of ${allOrders} orders`}
-          change={pctChange(upsellOrders, prevUpsellOrders) ?? undefined}
-          positive={upsellOrders >= prevUpsellOrders}
+          sub={`${upsellsAcceptedCount} of ${totalUpsellPaths} upsell orders`}
+          change={pctChange(upsellsAcceptedCount, prevUpsellPathCount) ?? undefined}
+          positive={upsellsAcceptedCount >= prevUpsellPathCount}
         />
         <KpiCard
           label="Accept Rate"
@@ -92,12 +96,12 @@ export default async function UpsellsPage({ searchParams }: { searchParams: Prom
               <div>
                 <div className="text-xs text-gray-500 uppercase tracking-wider">With Upsell</div>
                 <div className="text-2xl font-bold text-white mt-1">{fmt$(aovWith)}</div>
-                <div className="text-xs text-gray-500 mt-0.5">{withUpsell?._count?.id ?? 0} orders</div>
+                <div className="text-xs text-gray-500 mt-0.5">{aovWithCount} orders</div>
               </div>
               <div className="text-right">
                 <div className="text-xs text-gray-500 uppercase tracking-wider">Without Upsell</div>
                 <div className="text-2xl font-bold text-gray-400 mt-1">{fmt$(aovWithout)}</div>
-                <div className="text-xs text-gray-500 mt-0.5">{withoutUpsell?._count?.id ?? 0} orders</div>
+                <div className="text-xs text-gray-500 mt-0.5">{aovWithoutCount} orders</div>
               </div>
             </div>
             <div className="h-px bg-gray-800" />

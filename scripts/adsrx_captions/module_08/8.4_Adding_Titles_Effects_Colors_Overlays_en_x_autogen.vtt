@@ -1,0 +1,3901 @@
+WEBVTT
+
+1
+00:00:03.700 --> 00:00:07.920
+Hi guys, and welcome back to part 8.3.
+
+2
+00:00:08.130 --> 00:00:11.480
+We're gonna be talking about adding titles, effects, and overlays.
+
+3
+00:00:11.900 --> 00:00:14.360
+So in the previous, uh, tutorial,
+
+4
+00:00:14.540 --> 00:00:18.680
+we basically did our assembly and our timeline and put together our story
+
+5
+00:00:18.680 --> 00:00:21.040
+according to our script. Um,
+
+6
+00:00:21.180 --> 00:00:24.160
+one thing that I forgot to mention in the previous one was, uh,
+
+7
+00:00:24.560 --> 00:00:29.200
+determining what was the style of the video. Um, but because, you know,
+
+8
+00:00:29.200 --> 00:00:34.040
+as as, as you can tell by the footage, it was U G C, but, um, in this,
+
+9
+00:00:34.460 --> 00:00:38.800
+uh, portion of the editing segment, we are gonna be, uh,
+
+10
+00:00:38.800 --> 00:00:43.400
+dialing in the titles, effects and overlays, and that will require us to be,
+
+11
+00:00:43.620 --> 00:00:48.560
+uh, specific about the actual ad styles. So, uh, just as a reminder, uh,
+
+12
+00:00:48.940 --> 00:00:52.600
+in this part of the editing stage, this is when we start to spice up our video.
+
+13
+00:00:52.620 --> 00:00:56.000
+You start to make it look and feel really cool. Um,
+
+14
+00:00:56.360 --> 00:01:01.240
+I think this makes a huge difference in the quality of your video and as well
+
+15
+00:01:01.240 --> 00:01:05.280
+as like the professionalism. You can tell when an editor is tight,
+
+16
+00:01:05.310 --> 00:01:08.720
+when they have very clean titles, clean overlays, and,
+
+17
+00:01:08.900 --> 00:01:10.960
+and very intentional effects.
+
+18
+00:01:11.310 --> 00:01:14.880
+Sometimes editors will just use random mass effects that don't actually add to
+
+19
+00:01:15.120 --> 00:01:18.400
+the video. So you wanna avoid that as much as possible.
+
+20
+00:01:18.940 --> 00:01:22.680
+And we'll also add some overlays here from Ads Orx, uh,
+
+21
+00:01:22.780 --> 00:01:27.480
+to show you how we can actually improve, uh, the speed at which we do things.
+
+22
+00:01:27.580 --> 00:01:28.880
+So that's gonna be really nice.
+
+23
+00:01:29.300 --> 00:01:34.200
+So next thing that we have to do is determine, okay, out of the, the,
+
+24
+00:01:34.260 --> 00:01:36.360
+the five different, actually this is five, this should be,
+
+25
+00:01:36.600 --> 00:01:40.200
+I don't know why this is four, uh, that guess must be a typo. Uh,
+
+26
+00:01:40.200 --> 00:01:42.920
+the five different ad styles, which one are we gonna be going for?
+
+27
+00:01:42.950 --> 00:01:47.400
+Obviously we shot that content with an iPhone and it was all in one shoot.
+
+28
+00:01:47.620 --> 00:01:52.400
+It wasn't necessarily, uh, a, uh, compilation of shoots from different, uh,
+
+29
+00:01:52.400 --> 00:01:55.680
+different U G C creators, and it wasn't done in the studio.
+
+30
+00:01:55.940 --> 00:02:00.080
+So I'm gonna go with the U G C, uh, style, right?
+
+31
+00:02:00.420 --> 00:02:05.200
+So when I'm gonna do U G C, I wanna make sure it looks U G C, all right?
+
+32
+00:02:05.620 --> 00:02:10.080
+And how I do that is I always start by getting inspiration
+
+33
+00:02:11.470 --> 00:02:15.880
+from other videos out there existing on the marketplace, okay? Um,
+
+34
+00:02:16.060 --> 00:02:19.560
+and one place I like to go is using foreplay.
+
+35
+00:02:19.700 --> 00:02:23.880
+And this is one of the most advanced ad research tools
+
+36
+00:02:24.500 --> 00:02:28.480
+ad saving tools ever to exist. And I, I, I,
+
+37
+00:02:28.520 --> 00:02:30.880
+I know the founder personally, he, Zach,
+
+38
+00:02:31.310 --> 00:02:35.600
+he's built an incredible platform where you can find inspiration and,
+
+39
+00:02:36.060 --> 00:02:38.200
+you know, research ads and save ads.
+
+40
+00:02:38.580 --> 00:02:41.480
+And I'll share with you guys a link to this where you guys can sign up.
+
+41
+00:02:41.940 --> 00:02:42.773
+And also,
+
+42
+00:02:42.830 --> 00:02:47.760
+I've created my own different boards for different styles of
+
+43
+00:02:47.760 --> 00:02:50.720
+videos and different niches. But it's incredible, man,
+
+44
+00:02:50.740 --> 00:02:55.480
+and you will never run out of inspiration with using foreplay, um,
+
+45
+00:02:55.590 --> 00:02:59.960
+because the traditional way of doing things is just so over, it's just so wonky,
+
+46
+00:02:59.980 --> 00:03:02.920
+it doesn't work, and it's so, you know, it's a mess.
+
+47
+00:03:03.420 --> 00:03:07.920
+But using foreplay is fantastic. So this is one place that I like to start,
+
+48
+00:03:08.340 --> 00:03:11.920
+but, um, I see a A U G C ad real, like right there and then,
+
+49
+00:03:11.920 --> 00:03:13.520
+so let's just watch it while
+
+50
+00:03:13.520 --> 00:03:16.160
+Your hair looks greasy too quickly. One,
+
+51
+00:03:17.020 --> 00:03:20.160
+you are not emulsifying your shampoo enough. All
+
+52
+00:03:20.160 --> 00:03:23.880
+Right? Uh, just bef, you know, before we watch the whole rest of the video,
+
+53
+00:03:24.160 --> 00:03:28.080
+I can already tell, uh, what these, you know, titles are gonna be, right.
+
+54
+00:03:28.080 --> 00:03:31.040
+These are, these look very, what's it called, um,
+
+55
+00:03:31.540 --> 00:03:35.480
+native to TikTok and Instagram. So they're using the background,
+
+56
+00:03:35.480 --> 00:03:39.320
+they're using the stroke over that. Um, and, and yeah,
+
+57
+00:03:39.430 --> 00:03:41.800
+it's pretty straightforward there. Now,
+
+58
+00:03:42.790 --> 00:03:46.200
+another example that I wanna share, because we actually,
+
+59
+00:03:47.520 --> 00:03:51.840
+I actually sorted out some examples from here is, let me just pull some up.
+
+60
+00:03:52.390 --> 00:03:54.720
+Okay? I'm just gonna use this as an example.
+
+61
+00:03:58.340 --> 00:03:58.840
+Yes,
+
+62
+00:03:58.840 --> 00:04:01.840
+I would say this is actually better of an example because it is weight loss.
+
+63
+00:04:01.900 --> 00:04:02.920
+So let's have a look at this.
+
+64
+00:04:04.650 --> 00:04:08.520
+Found makes, getting my prescription weight loss medication fast and easy.
+
+65
+00:04:09.120 --> 00:04:12.000
+I took the quiz and I got a personalized treatment plan,
+
+66
+00:04:12.660 --> 00:04:17.160
+and I get one-on-one access to a medical doctor to ensure my medication matches
+
+67
+00:04:17.300 --> 00:04:18.133
+my biology.
+
+68
+00:04:18.780 --> 00:04:22.960
+All right? So what I'm looking at from a design standpoint,
+
+69
+00:04:23.060 --> 00:04:27.000
+titles and captions and overlays. We've got a zoom in here. Uh,
+
+70
+00:04:27.050 --> 00:04:29.880
+we've got the titles up top,
+
+71
+00:04:30.300 --> 00:04:33.400
+and on the bottom it looks like branded colors.
+
+72
+00:04:33.940 --> 00:04:38.720
+So that's something that we can embed into this video when it gets into the
+
+73
+00:04:38.720 --> 00:04:43.560
+actual voiceover part, uh, or the testimonial. Um, it looks like we're,
+
+74
+00:04:43.560 --> 00:04:46.320
+we're trying to emulate the TikTok style format,
+
+75
+00:04:46.660 --> 00:04:51.560
+but I can always tell when it's not native to TikTok is when there's no curved
+
+76
+00:04:51.560 --> 00:04:56.040
+line here. And I think only a trained eye can un really understand that. But,
+
+77
+00:04:56.140 --> 00:05:00.520
+um, our ads orx templates already have the curved line embedded into them,
+
+78
+00:05:00.660 --> 00:05:02.360
+so that's one less step for you to do,
+
+79
+00:05:02.360 --> 00:05:04.680
+and you can make it look way more organic than that.
+
+80
+00:05:05.420 --> 00:05:09.520
+So it looks pretty straightforward. Um, you know,
+
+81
+00:05:09.540 --> 00:05:13.000
+it looks like she changed the, the, the editor changed the colors here,
+
+82
+00:05:13.060 --> 00:05:16.520
+but there's nothing too complex in the style. And then lastly,
+
+83
+00:05:16.520 --> 00:05:19.280
+you've got a nice little call to action, um,
+
+84
+00:05:19.620 --> 00:05:22.840
+end screen there with the brand and the color. So cool,
+
+85
+00:05:23.160 --> 00:05:25.520
+I will run with that example. Um,
+
+86
+00:05:27.020 --> 00:05:29.120
+so let's just jump right into it. All right, so we,
+
+87
+00:05:29.130 --> 00:05:31.920
+let's go back into our premier timeline. And
+
+88
+00:05:33.440 --> 00:05:37.600
+I know we have a script here. I know we have some titles already pre, um,
+
+89
+00:05:38.880 --> 00:05:43.440
+pre-made. So let's just go back here. I know I have some better ones. Um,
+
+90
+00:05:51.140 --> 00:05:53.920
+All right, I am just gonna make one up because, uh,
+
+91
+00:05:53.920 --> 00:05:58.160
+this is the clients and I feel like wait list is good for you,
+
+92
+00:05:58.260 --> 00:06:03.200
+bad for business, most wait very long for a, uh,
+
+93
+00:06:03.420 --> 00:06:08.000
+for a headline. So first and foremost, I'm gonna work with the hook.
+
+94
+00:06:08.260 --> 00:06:09.920
+Uh, it's the most important part,
+
+95
+00:06:09.920 --> 00:06:12.360
+and once I establish the foundation on the hook,
+
+96
+00:06:12.360 --> 00:06:14.680
+then I can just copy and paste everything over.
+
+97
+00:06:15.180 --> 00:06:19.440
+But one thing that I really love doing in hooks is
+
+98
+00:06:20.340 --> 00:06:23.840
+adding a zoom in. Okay? So you can do this two ways.
+
+99
+00:06:23.840 --> 00:06:26.960
+You can have an automated zoom in, which I have, if I type it,
+
+100
+00:06:27.020 --> 00:06:30.840
+if I go to my effects and I type in Zoom, or a scale, actually,
+
+101
+00:06:31.880 --> 00:06:35.080
+I have, um, these fake camera movements,
+
+102
+00:06:35.080 --> 00:06:38.960
+which I'll include the presets, uh, in this, in this video.
+
+103
+00:06:39.500 --> 00:06:42.280
+But if I type in scale, it's automated, right, right there,
+
+104
+00:06:42.300 --> 00:06:47.120
+and I can find a bezier one, which it will give it like kind of a, uh, uh,
+
+105
+00:06:47.450 --> 00:06:51.040
+it'll, it'll speed it up a little bit versus linear, uh, I, I,
+
+106
+00:06:51.080 --> 00:06:52.640
+I think linear will be fine.
+
+107
+00:06:52.860 --> 00:06:56.560
+And this basically goes from 100 to 110% in the scale.
+
+108
+00:06:56.940 --> 00:07:01.040
+So you don't have to go into the effects controls and actually do it manually.
+
+109
+00:07:01.150 --> 00:07:04.760
+Sometimes you can do that, or sometimes it's necessary to do that.
+
+110
+00:07:04.760 --> 00:07:08.480
+And I do that quite often. But for an, an easy clip like this, you know,
+
+111
+00:07:08.480 --> 00:07:12.880
+adding an automated preset, it just saves so much time. So click in that,
+
+112
+00:07:13.010 --> 00:07:17.040
+click that, drag it on, and let's preview that. Boom.
+
+113
+00:07:19.190 --> 00:07:23.640
+Okay, I'm gonna undo that just because I wanna see if, uh, if,
+
+114
+00:07:23.700 --> 00:07:27.360
+if 1, 1 50 is more intense. So let's try that.
+
+115
+00:07:31.830 --> 00:07:34.280
+Yeah, I kind of like that more because it's just, you know,
+
+116
+00:07:34.990 --> 00:07:37.920
+there's more going on and you're, you're seeing more of his eyeballs.
+
+117
+00:07:38.540 --> 00:07:41.780
+So yeah, let's roll with that.
+
+118
+00:07:43.690 --> 00:07:46.260
+Okay, next thing I want to add are titles.
+
+119
+00:07:46.800 --> 00:07:51.660
+So depending on your copywriter, if you wrote the titles,
+
+120
+00:07:51.720 --> 00:07:55.380
+if you know what headlines work really well for you, um,
+
+121
+00:07:55.680 --> 00:08:00.180
+you're gonna place that here. All right, so the, the title on a hook is,
+
+122
+00:08:00.280 --> 00:08:03.940
+is so, so important. It's going to change the performance of your ad.
+
+123
+00:08:04.200 --> 00:08:08.380
+We always like to test like 10 different titles, 10 different headlines, um,
+
+124
+00:08:08.760 --> 00:08:11.420
+you know, 10 different headlines with one scroll stopper,
+
+125
+00:08:11.480 --> 00:08:15.100
+and then find the winning headline and then test out different scroll stoppers.
+
+126
+00:08:15.100 --> 00:08:19.180
+So it's like you find the right messaging. So there you can do this two ways.
+
+127
+00:08:19.320 --> 00:08:20.900
+All right, so at,
+
+128
+00:08:20.900 --> 00:08:25.860
+because you're an ads or X customer or student, so to speak, um,
+
+129
+00:08:26.240 --> 00:08:31.220
+you're blessed with having templates. So let's just roll with a template here,
+
+130
+00:08:31.640 --> 00:08:33.540
+and I'm gonna type in TikTok. All right?
+
+131
+00:08:35.200 --> 00:08:39.660
+And so we have a lot of different styles. We have a few styles.
+
+132
+00:08:39.660 --> 00:08:44.660
+We just came out with a new one where you can actually drag the emoji into
+
+133
+00:08:44.800 --> 00:08:47.660
+the title. So, uh, I'm gonna use titles three,
+
+134
+00:08:47.760 --> 00:08:52.060
+and I'm just gonna drag that onto my timeline and boom,
+
+135
+00:08:52.640 --> 00:08:54.900
+I'm just gonna, for the sake of the video, just trim that here.
+
+136
+00:08:55.040 --> 00:08:56.400
+So I don't have any of that excess.
+
+137
+00:08:56.740 --> 00:09:00.400
+I'm gonna zoom in just so I can see a little bit more clearly. And, alright,
+
+138
+00:09:00.980 --> 00:09:05.560
+so using this title, um, right now it's pretty bare and that's fine.
+
+139
+00:09:05.630 --> 00:09:08.880
+What I wanna do is just shut everything off. Okay? So I wanna go in here,
+
+140
+00:09:09.230 --> 00:09:11.760
+take off, um, on and off feature.
+
+141
+00:09:12.500 --> 00:09:17.400
+And I just want to keep two lines. Let's see, two lines.
+
+142
+00:09:17.510 --> 00:09:19.200
+Cool. Alright,
+
+143
+00:09:20.020 --> 00:09:24.960
+so one thing that I want to do ahead of time is actually change the
+
+144
+00:09:24.960 --> 00:09:28.640
+text tracking to zero. 'cause right now on by default it's at 68.
+
+145
+00:09:28.780 --> 00:09:32.600
+So that's the spacing in between the text. And obviously you can,
+
+146
+00:09:32.620 --> 00:09:36.200
+you can change that here as much as you want, but I like to keep that at zero.
+
+147
+00:09:36.620 --> 00:09:41.000
+So it reduces the amount of space, um, the brand. Actually,
+
+148
+00:09:41.100 --> 00:09:44.640
+I'm not sure what font they use. But for this,
+
+149
+00:09:44.640 --> 00:09:48.160
+lemme just go to their site really quick and see if there's anything, uh,
+
+150
+00:09:50.030 --> 00:09:51.360
+yeah, let's see.
+
+151
+00:09:51.360 --> 00:09:56.320
+Right click Inspect and we might be able to pick it up here.
+
+152
+00:10:00.310 --> 00:10:04.320
+Tail went. Source, source Sands Pro. Okay. Source Sands Pro.
+
+153
+00:10:04.760 --> 00:10:07.440
+I might have that font. I might not. If not, it's not a big deal.
+
+154
+00:10:08.180 --> 00:10:12.680
+Source source, I have source code, but all right,
+
+155
+00:10:12.700 --> 00:10:16.240
+I'm just gonna go with my favorite font, proNova. Alright,
+
+156
+00:10:16.740 --> 00:10:21.040
+so let's go back to the example and have a quick look at it
+
+157
+00:10:21.580 --> 00:10:25.560
+so we can get a little bit of a, uh, little bit of inspo. All right,
+
+158
+00:10:25.600 --> 00:10:28.560
+I lost 60 pounds with found. Let's just copy that.
+
+159
+00:10:28.880 --> 00:10:30.640
+I lost 60 pounds with weightless.
+
+160
+00:10:31.340 --> 00:10:34.800
+And then add that little testimonial thing at the bottom.
+
+161
+00:10:35.580 --> 00:10:38.320
+So right off the bat, I know we have, um,
+
+162
+00:10:38.670 --> 00:10:43.080
+some brand colors that they like. So let's,
+
+163
+00:10:43.370 --> 00:10:46.720
+let's get those brand colors in first. Okay,
+
+164
+00:10:46.800 --> 00:10:48.520
+so this is the actual product itself.
+
+165
+00:10:49.150 --> 00:10:53.880
+Obviously we probably could have done this beforehand, but, um, you know,
+
+166
+00:10:53.880 --> 00:10:57.560
+that's part of the, the due diligence process is doing your, your research.
+
+167
+00:10:57.700 --> 00:11:02.280
+So we've got a lot of colors here. Um, one thing that I'll do is, um,
+
+168
+00:11:02.690 --> 00:11:05.920
+let's say there's two ways of doing this.
+
+169
+00:11:05.920 --> 00:11:09.560
+If you wanted to extract the brand colors. One is, uh, you know,
+
+170
+00:11:09.560 --> 00:11:13.200
+taking a screenshot of this entire thing, then dragging it into your timeline,
+
+171
+00:11:13.200 --> 00:11:14.680
+and then using the eyedropper tool.
+
+172
+00:11:15.020 --> 00:11:19.760
+If you don't already have an eyedropper tool as a, uh, shortcut in your browser,
+
+173
+00:11:19.930 --> 00:11:23.960
+definitely recommend doing that. Uh, it saves a ton of time.
+
+174
+00:11:24.380 --> 00:11:28.120
+So I'm actually gonna use that and pick a color here.
+
+175
+00:11:28.300 --> 00:11:31.440
+It looks like we got this dark blue, which is a nice one.
+
+176
+00:11:31.820 --> 00:11:33.280
+I'm gonna take this hex color,
+
+177
+00:11:33.460 --> 00:11:37.280
+go back to my premiere and I'm gonna go into my,
+
+178
+00:11:38.660 --> 00:11:42.680
+my graphics folder. And I'm gonna create a new item.
+
+179
+00:11:42.860 --> 00:11:47.000
+I'm gonna do a color mat, okay? And I'm going to click okay,
+
+180
+00:11:47.220 --> 00:11:51.200
+and I'm gonna paste this into there. I'm gonna call this dark blue.
+
+181
+00:11:52.150 --> 00:11:55.840
+Okay? Now that I have that, I'm gonna do the same for the other colors.
+
+182
+00:11:56.380 --> 00:12:00.760
+So we've got pick a color from the page, we've got this light blue,
+
+183
+00:12:01.790 --> 00:12:06.720
+it's like a C foam green, same thing here. Color mat
+
+184
+00:12:11.440 --> 00:12:15.800
+C green. And let's do one more of this.
+
+185
+00:12:15.810 --> 00:12:19.760
+Light blue. Looks like there's a light blue going on. Okay.
+
+186
+00:12:23.180 --> 00:12:24.013
+All right,
+
+187
+00:12:30.580 --> 00:12:32.680
+for some reason I can't touch this over here,
+
+188
+00:12:32.780 --> 00:12:34.120
+so I'm just gonna find something else.
+
+189
+00:12:40.500 --> 00:12:44.480
+So it looks like 6 4 9 cc, 4 6 4 9 cc four, okay,
+
+190
+00:12:45.400 --> 00:12:46.233
+I
+
+191
+00:12:47.140 --> 00:12:52.140
+6, 6, 4 9,
+
+192
+00:12:52.680 --> 00:12:55.240
+cc four. Okay, great. Light blue.
+
+193
+00:12:57.020 --> 00:12:59.440
+Now I've got all the brand colors. Fantastic.
+
+194
+00:12:59.740 --> 00:13:01.840
+Now I can pull on that anytime I need it.
+
+195
+00:13:02.580 --> 00:13:06.760
+So let's do the same as that video.
+
+196
+00:13:07.150 --> 00:13:11.440
+What was it? I lost 60 pounds with weightless. Okay,
+
+197
+00:13:11.500 --> 00:13:15.920
+so in this template, what's really great about this is I can just go in here.
+
+198
+00:13:17.280 --> 00:13:22.160
+I lost 60 pounds with weightless
+
+199
+00:13:23.180 --> 00:13:27.120
+and I think it's like that.
+
+200
+00:13:28.070 --> 00:13:29.360
+Alright, now it's up there.
+
+201
+00:13:30.610 --> 00:13:34.160
+Lemme just double check the product name.
+
+202
+00:13:34.600 --> 00:13:37.840
+I know I should know this stuff, but when you move so fast,
+
+203
+00:13:37.840 --> 00:13:41.080
+sometimes you don't have time. All right, so there is a, uh,
+
+204
+00:13:41.180 --> 00:13:44.040
+let just copy and paste this text if I can.
+
+205
+00:13:47.250 --> 00:13:50.760
+There it is, because I want that, I want the TM symbol in there.
+
+206
+00:13:51.680 --> 00:13:55.400
+I know that I, I'm pretty sure that if you do command
+
+207
+00:13:57.460 --> 00:14:02.240
+is that command R, there's a tmm symbol,
+
+208
+00:14:02.620 --> 00:14:05.880
+but yeah, I think it's, I think it's, um,
+
+209
+00:14:06.280 --> 00:14:09.240
+alt op or option two or alt alt two.
+
+210
+00:14:12.310 --> 00:14:16.080
+Cool. Okay, so you see these two little dots right here.
+
+211
+00:14:16.080 --> 00:14:19.680
+Those are actually placeholders for emojis and, um,
+
+212
+00:14:20.940 --> 00:14:24.480
+you can remove those, but you can also add them later on,
+
+213
+00:14:24.480 --> 00:14:28.280
+which is like super cool. And I'll show you how to do that in a second. Um,
+
+214
+00:14:29.460 --> 00:14:33.720
+but I'm actually gonna remove line two 'cause I don't think I need it. Uh,
+
+215
+00:14:33.850 --> 00:14:35.280
+let's see what we got going on here.
+
+216
+00:14:35.460 --> 00:14:38.920
+So let's see what this looks like with the font size a little bigger.
+
+217
+00:14:39.860 --> 00:14:44.040
+And now let's Change the color.
+
+218
+00:14:44.610 --> 00:14:46.600
+Let's do that dark blue background.
+
+219
+00:14:47.620 --> 00:14:52.080
+And let's go down here and go to the box color and boom,
+
+220
+00:14:52.300 --> 00:14:53.840
+get the dark blue. Hey,
+
+221
+00:14:57.410 --> 00:14:59.520
+weird. I don't know why that's doing that.
+
+222
+00:15:02.780 --> 00:15:07.040
+Let me just pull that hex color. Then I think it might be because I'm,
+
+223
+00:15:07.040 --> 00:15:11.400
+I'm recording on Loom and it's giving me that yellow bar.
+
+224
+00:15:12.180 --> 00:15:15.840
+So next I'm going to change the text color to white.
+
+225
+00:15:16.060 --> 00:15:20.640
+So it has that brand look cool. All right,
+
+226
+00:15:20.800 --> 00:15:23.480
+I lost 60 pounds with weightless, and then
+
+227
+00:15:25.430 --> 00:15:29.400
+he's got Jessica real found client.
+
+228
+00:15:29.580 --> 00:15:31.760
+So we'll do something like that as well.
+
+229
+00:15:32.380 --> 00:15:34.640
+So I'm just gonna hit option.
+
+230
+00:15:35.540 --> 00:15:40.080
+And I think that could be alt on pc, but option drag,
+
+231
+00:15:40.100 --> 00:15:42.360
+you're gonna duplicate that layer right above it. Okay?
+
+232
+00:15:43.220 --> 00:15:47.280
+And next I'm going to move this, I'm gonna move this, uh, down.
+
+233
+00:15:48.280 --> 00:15:51.800
+I can do that two ways. I can do the y position right here, um,
+
+234
+00:15:54.490 --> 00:15:57.280
+which, yeah, there it is. I can do y position here,
+
+235
+00:15:57.460 --> 00:16:00.920
+or I can go over into the position and the effects controls right here and move
+
+236
+00:16:00.920 --> 00:16:04.200
+it there. So it really is your preference. Um,
+
+237
+00:16:04.940 --> 00:16:06.320
+and let's now change,
+
+238
+00:16:09.930 --> 00:16:13.800
+we'll call him Matt, real wait
+
+239
+00:16:15.950 --> 00:16:16.783
+List
+
+240
+00:16:17.310 --> 00:16:19.280
+User. Cool.
+
+241
+00:16:22.540 --> 00:16:23.373
+All right.
+
+242
+00:16:29.790 --> 00:16:33.720
+Yeah. So That's, that's looking better.
+
+243
+00:16:34.100 --> 00:16:38.720
+I'm not like in love with it. I feel like because it's 16 by,
+
+244
+00:16:38.720 --> 00:16:43.280
+or it's nine by 16, it kind of looks, kind of, looks like,
+
+245
+00:16:43.680 --> 00:16:46.720
+I feel like these could be bigger in my, my opinion. Um,
+
+246
+00:16:49.060 --> 00:16:51.920
+so what I will do is actually break this into two lines.
+
+247
+00:16:52.740 --> 00:16:56.440
+So I'll cut this. All right, I lost 60 pounds,
+
+248
+00:16:56.620 --> 00:17:00.680
+and then I'm gonna add a second line, and I'm gonna do with weightless,
+
+249
+00:17:01.060 --> 00:17:04.400
+I'm gonna remove the, the emojis and
+
+250
+00:17:06.180 --> 00:17:09.320
+I'm gonna increase the font size. That way it's just like a little,
+
+251
+00:17:09.430 --> 00:17:12.120
+just like bigger. And I don't know, I don't know.
+
+252
+00:17:12.160 --> 00:17:16.280
+I feel like it blends in a little bit too much with his shirt. So,
+
+253
+00:17:17.340 --> 00:17:20.560
+you know, obviously because this is a hook, you know,
+
+254
+00:17:20.860 --> 00:17:24.880
+you don't wanna sacrifice brand for hook for attention.
+
+255
+00:17:25.620 --> 00:17:28.280
+You want, you want attention, always, always, always.
+
+256
+00:17:28.340 --> 00:17:31.240
+So let's just try to see if I can lighten this blue up a little bit.
+
+257
+00:17:32.120 --> 00:17:35.400
+I don't know why it's doing that. Premier premier's buggy.
+
+258
+00:17:37.540 --> 00:17:40.480
+Eh, I'm not a big fan of that. Let's try,
+
+259
+00:17:42.760 --> 00:17:45.160
+I mean, if I change this to red, it's gonna change the game.
+
+260
+00:17:46.580 --> 00:17:48.720
+It looks really out there,
+
+261
+00:17:49.260 --> 00:17:54.080
+but sometimes just going traditional black and white actually
+
+262
+00:17:54.080 --> 00:17:58.080
+feels a little, A little bit better. Um,
+
+263
+00:18:04.420 --> 00:18:05.840
+all right, I'm just gonna go back to it.
+
+264
+00:18:08.980 --> 00:18:11.120
+And this is part of that creative process, guys.
+
+265
+00:18:11.270 --> 00:18:16.160
+When you're editing you, you kind of want to just play around with stuff.
+
+266
+00:18:16.500 --> 00:18:20.720
+Uh, obviously you can work backwards with a video like this where it's like,
+
+267
+00:18:20.990 --> 00:18:22.760
+okay, this is clearly something that they're testing.
+
+268
+00:18:23.660 --> 00:18:27.600
+You can run with that or you can apply something completely different.
+
+269
+00:18:29.020 --> 00:18:32.640
+Um, what I wanna do here, 'cause I feel like there's so much blue on the screen,
+
+270
+00:18:33.840 --> 00:18:36.880
+I, I'm gonna just remove that background actually here,
+
+271
+00:18:37.020 --> 00:18:41.560
+so I can go into the box opacity and remove that background entirely.
+
+272
+00:18:41.660 --> 00:18:45.360
+And then now it just kind of feels like, you know, it's not,
+
+273
+00:18:46.840 --> 00:18:51.250
+it's not so in your face about it, right? It's just kind of like,
+
+274
+00:18:51.400 --> 00:18:55.930
+it's there. So it's almost like there's a curiosity aspect to here.
+
+275
+00:18:56.010 --> 00:18:57.610
+I lost 60 pounds with weightless.
+
+276
+00:18:58.350 --> 00:19:01.930
+Why is he eating french fries if he lost weight? There's something very like,
+
+277
+00:19:03.920 --> 00:19:06.690
+cognizant, like it's, it's, there's like incongruence here.
+
+278
+00:19:06.710 --> 00:19:10.050
+So that could potentially work as a hook. We, we don't know until we test it.
+
+279
+00:19:10.710 --> 00:19:13.490
+Um, so now that we've got that,
+
+280
+00:19:14.180 --> 00:19:18.170
+let's jump into the rest of the video, right? So let's go back to the shot list.
+
+281
+00:19:19.150 --> 00:19:22.810
+And I'm just gonna like summarize these clips, but, um,
+
+282
+00:19:25.790 --> 00:19:29.930
+New images helping transform the health of thousands of Americans. This is like,
+
+283
+00:19:30.280 --> 00:19:32.810
+this is obviously a voiceover, but for caption's sake,
+
+284
+00:19:32.870 --> 00:19:37.010
+I'm just gonna reduce it to this. Uh, and here I can actually,
+
+285
+00:19:37.050 --> 00:19:41.610
+I think would be good to just copy and paste or copy the,
+
+286
+00:19:41.630 --> 00:19:44.250
+the stylization of the, the captions of the titles.
+
+287
+00:19:44.670 --> 00:19:47.130
+So I'm hitting option or alt boom,
+
+288
+00:19:48.590 --> 00:19:49.770
+and I'm going to,
+
+289
+00:19:53.030 --> 00:19:56.530
+so this is gonna be super long, obviously. So we want to split that into two.
+
+290
+00:19:57.190 --> 00:19:59.370
+Uh, new image is helping transform
+
+291
+00:20:01.070 --> 00:20:03.930
+the health of da, da, da Americans.
+
+292
+00:20:06.430 --> 00:20:08.770
+So this would be potentially a good opportunity.
+
+293
+00:20:08.790 --> 00:20:13.290
+So I'm gonna reduce the font size, obviously. Okay, that looks good. Um,
+
+294
+00:20:14.430 --> 00:20:17.690
+and I'm gonna do, I'm gonna put the word the up there.
+
+295
+00:20:21.520 --> 00:20:26.050
+This is a good opportunity to add a, uh, an American flag emoji here.
+
+296
+00:20:27.270 --> 00:20:31.650
+So this is something that if you haven't done already,
+
+297
+00:20:31.880 --> 00:20:33.610
+make sure to do it. But, um,
+
+298
+00:20:33.910 --> 00:20:37.690
+create an emoji library and we have a separate tutorial on that.
+
+299
+00:20:37.950 --> 00:20:42.050
+But what this does is it takes our entire emoji library, uh,
+
+300
+00:20:42.050 --> 00:20:45.730
+and puts it into your premiere so you can easily search for emojis without
+
+301
+00:20:45.730 --> 00:20:47.560
+having to drag and drop them into your timeline.
+
+302
+00:20:47.860 --> 00:20:51.960
+So I'm just gonna type in American, I'm gonna do,
+
+303
+00:20:53.620 --> 00:20:58.480
+I'm gonna do flag, maybe u s a Now.
+
+304
+00:20:58.480 --> 00:21:02.120
+It's not a perfect system, obviously, but it's better than, uh,
+
+305
+00:21:02.120 --> 00:21:04.840
+better than nothing. So, uh,
+
+306
+00:21:04.870 --> 00:21:08.280
+from here I'm just gonna click on the flag and I'm gonna drag it into my graphic
+
+307
+00:21:08.390 --> 00:21:12.640
+spin. Boom. Now I have this emoji and I didn't have to leave,
+
+308
+00:21:13.000 --> 00:21:16.880
+I didn't have to go anywhere, so, nice. So the next step to this,
+
+309
+00:21:16.880 --> 00:21:21.060
+and this is what makes this, uh, this plugin, or I'm sorry,
+
+310
+00:21:21.060 --> 00:21:22.500
+this mo super cool,
+
+311
+00:21:23.160 --> 00:21:26.380
+is now I can add emojis into here,
+
+312
+00:21:26.440 --> 00:21:29.180
+any ones that I want on the left or the right side.
+
+313
+00:21:29.480 --> 00:21:34.020
+So I'm gonna click and drag this into here, and I'm gonna turn it on.
+
+314
+00:21:34.160 --> 00:21:38.980
+And boom, now I've got myself an American emoji, uh, American flag emoji.
+
+315
+00:21:39.110 --> 00:21:42.420
+Check that out. Isn't that cool? All right,
+
+316
+00:21:44.170 --> 00:21:45.003
+perfect.
+
+317
+00:21:45.480 --> 00:21:50.460
+So one thing that I want to do here is actually you can, you know,
+
+318
+00:21:50.590 --> 00:21:54.420
+spice it up a little bit. You can rotate this text.
+
+319
+00:21:55.300 --> 00:21:58.860
+I think there might be even a rotation feature or, yeah, here it is rotation,
+
+320
+00:21:59.310 --> 00:22:03.900
+which will keep it on the axis right there. So you can do something like that.
+
+321
+00:22:05.040 --> 00:22:09.220
+Um, so it's not just like, it looks like it's,
+
+322
+00:22:09.220 --> 00:22:13.300
+it's getting cut off up top. So I want to actually fix that.
+
+323
+00:22:14.760 --> 00:22:18.980
+So bring it back to center and we'll bring it down
+
+324
+00:22:20.560 --> 00:22:25.290
+and then rotate, like here. Cool.
+
+325
+00:22:30.810 --> 00:22:34.780
+Yeah, I like that. So again,
+
+326
+00:22:34.780 --> 00:22:38.500
+we haven't added any music to this. Um, and that's fine.
+
+327
+00:22:39.090 --> 00:22:41.540
+It's really your preference if you want to add music,
+
+328
+00:22:41.880 --> 00:22:46.580
+but sometimes it could be distracting and sometimes it can work. But,
+
+329
+00:22:47.200 --> 00:22:49.460
+uh, I have a track right here that I was gonna use.
+
+330
+00:22:52.550 --> 00:22:57.370
+Might as well. Let's just run with it. Um, so it's already in here.
+
+331
+00:22:57.590 --> 00:23:00.970
+I'm gonna open it up and now I'm gonna drag that into my music bin.
+
+332
+00:23:04.830 --> 00:23:08.270
+Okay. This is why these bins are very important.
+
+333
+00:23:08.550 --> 00:23:11.670
+'cause then you can just drag it where it needs to go. Okay?
+
+334
+00:23:13.540 --> 00:23:17.750
+Boom. All right. So if we want to add music,
+
+335
+00:23:18.120 --> 00:23:19.670
+let's just throw that underneath here.
+
+336
+00:23:21.900 --> 00:23:23.630
+It's gonna completely change the video now.
+
+337
+00:23:30.820 --> 00:23:33.270
+Yeah. 'cause you, you know, there's a beat going on. Um,
+
+338
+00:23:41.290 --> 00:23:45.520
+so I think with a voiceover, this video would be a lot more, uh, engaging.
+
+339
+00:23:46.380 --> 00:23:51.040
+So we'll add that later on, because this is not gonna be a voiceover tutorial.
+
+340
+00:23:51.310 --> 00:23:54.600
+This is more just showing a start to finish video ad.
+
+341
+00:23:56.590 --> 00:24:00.920
+Another thing we could do too is, um, start the, where the music picks up.
+
+342
+00:24:01.710 --> 00:24:02.543
+Like right here.
+
+343
+00:24:06.360 --> 00:24:08.480
+I feel like that's like a good time to,
+
+344
+00:24:09.950 --> 00:24:13.120
+it's a good opportunity to bring the energy back in, right?
+
+345
+00:24:16.770 --> 00:24:18.240
+There it is. Yeah. That's what we want.
+
+346
+00:24:23.470 --> 00:24:24.303
+Boom.
+
+347
+00:24:27.070 --> 00:24:31.680
+Okay, cool. So right here. And
+
+348
+00:24:33.200 --> 00:24:35.800
+I, I'm gonna mute the music for now just because it's gonna,
+
+349
+00:24:35.800 --> 00:24:38.120
+it's going to get in the way tutorial.
+
+350
+00:24:38.420 --> 00:24:42.560
+So I think there could be an opportunity here to add an extra clip.
+
+351
+00:24:43.180 --> 00:24:46.720
+Do do, because it's a little boring there. Um,
+
+352
+00:24:47.000 --> 00:24:51.360
+I could just speed it up to be honest. Um, let's play that.
+
+353
+00:24:56.300 --> 00:24:58.870
+Okay. So one thing I wanna do actually here is add a a zoom,
+
+354
+00:24:58.980 --> 00:25:02.350
+just because there's a lot of space, dead space, there's not much happening.
+
+355
+00:25:02.610 --> 00:25:07.230
+And obviously this is still the, uh, the interest phase.
+
+356
+00:25:07.650 --> 00:25:12.030
+So we want to keep things visually interesting. So I'm gonna hit, uh,
+
+357
+00:25:12.080 --> 00:25:16.390
+shift seven as my shortcut to effects. Yeah,
+
+358
+00:25:16.390 --> 00:25:21.030
+I'm gonna type in scale again, and let's do 1 25. Drag that in.
+
+359
+00:25:23.320 --> 00:25:25.430
+There we go. That looks a little bit better, right?
+
+360
+00:25:30.320 --> 00:25:32.950
+Great. I love it. Awesome. Okay.
+
+361
+00:25:33.410 --> 00:25:36.150
+If you ever get spacing like this,
+
+362
+00:25:37.470 --> 00:25:41.670
+a real quick shortcut, and you've gotta make sure that there's no,
+
+363
+00:25:41.670 --> 00:25:45.110
+there's no layers at all, uh, in this entire column right here.
+
+364
+00:25:45.490 --> 00:25:48.950
+But you just click on it and then click backspace or delete,
+
+365
+00:25:49.290 --> 00:25:53.310
+and it'll move everything to where you want it to go. All right,
+
+366
+00:25:54.570 --> 00:25:58.710
+so we've got new images helping transform the health of thousands,
+
+367
+00:25:59.390 --> 00:26:03.790
+thousands of Americans. Um, and now we want to introduce the product.
+
+368
+00:26:04.010 --> 00:26:08.230
+So let's go back there. Um, featuring wait lists.
+
+369
+00:26:09.190 --> 00:26:12.710
+I, I'm just gonna do like, wait list includes da, da, da, da da.
+
+370
+00:26:12.890 --> 00:26:17.750
+So let's take the same titles here from the
+
+371
+00:26:17.750 --> 00:26:22.700
+first one and just modify it,
+
+372
+00:26:22.700 --> 00:26:26.380
+right? And let's see.
+
+373
+00:26:37.860 --> 00:26:38.693
+I feel like
+
+374
+00:26:43.500 --> 00:26:48.320
+It is called wait list or featuring wait list, featuring wait list. Yeah,
+
+375
+00:26:48.340 --> 00:26:50.640
+we can do featuring wait list.
+
+376
+00:26:52.250 --> 00:26:54.200
+Let's reduce the font size a little bit there.
+
+377
+00:26:57.340 --> 00:27:01.040
+And I'm gonna move it down like this just so it's a little bit more centered.
+
+378
+00:27:02.140 --> 00:27:06.560
+Um, and what I actually wanna do, what, what you can do for like, the zoom in.
+
+379
+00:27:06.580 --> 00:27:10.200
+So if you zoom in here, zoom out from here,
+
+380
+00:27:10.540 --> 00:27:14.120
+and it kind of gives this cool, like back and forth effect.
+
+381
+00:27:15.100 --> 00:27:19.280
+So you'll do the opposite. So 1, 1 50 to a hundred, let's try that.
+
+382
+00:27:19.900 --> 00:27:21.960
+So if you start here, it'll come out.
+
+383
+00:27:22.580 --> 00:27:25.640
+And I feel like it's a good opportunity when you can zoom in,
+
+384
+00:27:25.640 --> 00:27:28.720
+you can zoom out just visually more stimulating.
+
+385
+00:27:30.620 --> 00:27:34.760
+All right, so the next thing I wanna do is actually add bullet points.
+
+386
+00:27:35.080 --> 00:27:39.600
+I want to add these three, uh, ingredients.
+
+387
+00:27:40.180 --> 00:27:43.720
+So how I'm gonna do that is very simple. There's actually a few ways,
+
+388
+00:27:43.820 --> 00:27:46.840
+two ways or so that you can do this. You can do, uh,
+
+389
+00:27:46.840 --> 00:27:50.440
+you can type in bullets and you can see that we have, uh,
+
+390
+00:27:50.710 --> 00:27:53.280
+presets already done in terms of like
+
+391
+00:27:54.860 --> 00:27:56.560
+bullet options. Okay?
+
+392
+00:27:57.460 --> 00:28:01.000
+Now we have to update these to include the, um,
+
+393
+00:28:02.980 --> 00:28:07.040
+the upload the emoji aspect.
+
+394
+00:28:07.620 --> 00:28:10.720
+So once those are updated, then you know, you,
+
+395
+00:28:10.720 --> 00:28:14.440
+you'll be able to just throw in your,
+
+396
+00:28:14.440 --> 00:28:17.200
+your benefits right here really quickly. Honestly,
+
+397
+00:28:17.640 --> 00:28:22.480
+I could probably just use this, he, uh, this whole thing for this ad. But,
+
+398
+00:28:22.820 --> 00:28:26.600
+um, I just want to show you if you have bullets. This is like,
+
+399
+00:28:26.670 --> 00:28:30.000
+this is key right here. Let me just,
+
+400
+00:28:30.800 --> 00:28:32.160
+I can turn this off 'cause I don't need that.
+
+401
+00:28:32.240 --> 00:28:34.240
+'cause I already have a head headline up there. But
+
+402
+00:28:36.470 --> 00:28:39.920
+what I like about this is it's all done for you. Uh,
+
+403
+00:28:39.970 --> 00:28:44.560
+let's move the letter spacing to zero. And it's actually,
+
+404
+00:28:46.710 --> 00:28:48.930
+oh, so this is actually, we're, we're affecting the headline,
+
+405
+00:28:48.930 --> 00:28:50.010
+so we don't really need that one.
+
+406
+00:28:52.340 --> 00:28:55.730
+Let's change the ladder spacing here. Okay.
+
+407
+00:28:56.390 --> 00:28:59.650
+And let's increase the font size there.
+
+408
+00:29:00.870 --> 00:29:05.010
+And obviously for any type of like check mark or like list
+
+409
+00:29:06.430 --> 00:29:09.810
+you want, you know, a plus or like a, a check or a,
+
+410
+00:29:10.600 --> 00:29:12.890
+some sort of emoji, uh, it, it,
+
+411
+00:29:12.910 --> 00:29:16.170
+it gives it that more user generated feel.
+
+412
+00:29:16.550 --> 00:29:18.170
+But let's just go with that first one right there.
+
+413
+00:29:18.230 --> 00:29:21.890
+I'm not sure if I have that d n a emoji here, so I might,
+
+414
+00:29:23.010 --> 00:29:27.930
+I might, I might not. Oh, I do. Fantastic. Great. So I did a dropdown.
+
+415
+00:29:28.060 --> 00:29:32.530
+Eventually this will turn into a upload spot. So that'll be,
+
+416
+00:29:34.750 --> 00:29:39.690
+and so it shows that, um, I can do either o either side, uh,
+
+417
+00:29:39.690 --> 00:29:40.230
+of the emoji.
+
+418
+00:29:40.230 --> 00:29:42.400
+So I'm actually just gonna turn that one off 'cause I don't need it.
+
+419
+00:29:44.140 --> 00:29:46.120
+And I'm gonna paste my
+
+420
+00:29:48.690 --> 00:29:52.000
+emoji in there. Or I'm sorry, my text in there. So you got your
+
+421
+00:29:54.380 --> 00:29:59.310
+font. So right here, I have some options, right? I can,
+
+422
+00:29:59.470 --> 00:30:03.830
+I can make it branded or I can remove the background entirely if I wanted to.
+
+423
+00:30:05.240 --> 00:30:08.030
+Let's try making it branded and see what that looks like.
+
+424
+00:30:11.710 --> 00:30:14.270
+I don't know why. Oh, it's just because the, uh, the yellow,
+
+425
+00:30:14.410 --> 00:30:17.590
+it is the yellow that's causing that. That's, that's a bummer.
+
+426
+00:30:19.000 --> 00:30:23.550
+Let's try a different color just because, you know, there's a little bit of,
+
+427
+00:30:23.550 --> 00:30:25.230
+there's like a lot of blue going on here,
+
+428
+00:30:27.540 --> 00:30:29.910
+Text color white and
+
+429
+00:30:32.250 --> 00:30:37.160
+looks okay. Um, it might look nice
+
+430
+00:30:38.910 --> 00:30:41.520
+because it's like so bright. Um,
+
+431
+00:30:44.990 --> 00:30:48.050
+we could add a drop shadow to it. Um,
+
+432
+00:30:48.470 --> 00:30:50.410
+or we can reduce the,
+
+433
+00:30:52.850 --> 00:30:56.010
+I would say the exposure on this scene a little bit so it pops out a little bit
+
+434
+00:30:56.010 --> 00:30:58.210
+more. Could do something like that.
+
+435
+00:31:01.540 --> 00:31:02.250
+Okay,
+
+436
+00:31:02.250 --> 00:31:05.870
+So let's just finish off the, the rest of those, those bullets.
+
+437
+00:31:07.890 --> 00:31:09.990
+So, um, these were the same. Let's,
+
+438
+00:31:10.050 --> 00:31:13.990
+we could basically just follow the same, um,
+
+439
+00:31:15.750 --> 00:31:18.590
+structure here. Let me just trim this.
+
+440
+00:31:23.540 --> 00:31:27.510
+Cool. And bullet number two, I don't need this.
+
+441
+00:31:28.010 --> 00:31:29.390
+I'm gonna do d n a.
+
+442
+00:31:33.160 --> 00:31:37.870
+Great. And lemme just double check what the settings were here.
+
+443
+00:31:38.290 --> 00:31:39.270
+So 56.
+
+444
+00:31:44.060 --> 00:31:48.230
+Yeah, if you're going to, um, adjust the, uh,
+
+445
+00:31:50.290 --> 00:31:52.350
+the font size, you just wanna make sure you remember it.
+
+446
+00:31:52.550 --> 00:31:53.950
+I remember this was that. So,
+
+447
+00:31:56.730 --> 00:31:58.350
+so this is one way of doing it, right?
+
+448
+00:31:58.810 --> 00:32:03.790
+The other way would be to do these individually and then just
+
+449
+00:32:03.880 --> 00:32:08.510
+paste them so you don't have to redo the, uh, the,
+
+450
+00:32:09.450 --> 00:32:12.790
+the stylization. And I can do that really quick too. 'cause I actually,
+
+451
+00:32:12.830 --> 00:32:16.470
+I sometimes prefer that, prefer that look.
+
+452
+00:32:18.980 --> 00:32:23.840
+And then I can, um, change the alignment of it as well. 'cause we're,
+
+453
+00:32:23.840 --> 00:32:24.673
+we're working with,
+
+454
+00:32:28.910 --> 00:32:33.260
+we're working with the same style throughout the whole video.
+
+455
+00:32:37.010 --> 00:32:37.780
+Okay.
+
+456
+00:32:37.780 --> 00:32:41.000
+I don't know what happened there. That was weird. Just these,
+
+457
+00:32:41.000 --> 00:32:42.280
+these weird medical terms.
+
+458
+00:32:50.060 --> 00:32:53.880
+Is it 36, man?
+
+459
+00:32:54.800 --> 00:32:56.160
+I have, uh, 56.
+
+460
+00:33:02.580 --> 00:33:05.580
+Hmm. Don't mind that color. But
+
+461
+00:33:10.870 --> 00:33:15.800
+yeah, I think doing it the first way, you know,
+
+462
+00:33:15.800 --> 00:33:17.440
+if you're gonna do a lot of different colors,
+
+463
+00:33:22.230 --> 00:33:25.850
+but the thing is that you're gonna get those animations pre-made already, so it,
+
+464
+00:33:25.870 --> 00:33:30.370
+it really is up to you. Boom. Oh,
+
+465
+00:33:30.570 --> 00:33:33.530
+I forgot the bit, the benefit and feature to the second one. My b
+
+466
+00:33:36.020 --> 00:33:36.970
+let's get that in there.
+
+467
+00:33:42.290 --> 00:33:46.750
+Oh, that's number one. Number two, great.
+
+468
+00:33:50.460 --> 00:33:53.830
+Cool. All right. Yeah, I'm, I'm, I'm pretty stoked on that.
+
+469
+00:33:53.830 --> 00:33:55.310
+Let's listen to that with music.
+
+470
+00:34:06.520 --> 00:34:11.390
+Let's see. All right,
+
+471
+00:34:11.390 --> 00:34:12.790
+so the music does stop right here.
+
+472
+00:34:12.890 --> 00:34:15.550
+So it feels like more of a natural cut to like,
+
+473
+00:34:16.030 --> 00:34:17.590
+I feel like it drags on a little long, right there.
+
+474
+00:34:21.540 --> 00:34:22.910
+Yeah, let's cut it here.
+
+475
+00:34:29.880 --> 00:34:33.660
+All right. Remember, you can do this. Backspace.
+
+476
+00:34:40.480 --> 00:34:42.380
+You know, it's interesting, you know, without the music,
+
+477
+00:34:43.380 --> 00:34:48.020
+I was still able to kind of keep the tempo, because when you're editing,
+
+478
+00:34:48.240 --> 00:34:49.380
+you kind of wanna just like,
+
+479
+00:34:49.380 --> 00:34:52.420
+pretend you have this metronome in the back of your mind. Like,
+
+480
+00:34:55.600 --> 00:34:58.540
+It just helps you stay on rhythm. So you understand like,
+
+481
+00:34:58.560 --> 00:35:02.340
+the pacing of something. Like, I'm always just like tapping my foot. It's like,
+
+482
+00:35:02.440 --> 00:35:06.060
+uh, uh, I don't know if you're musical or not, but, uh, if you are,
+
+483
+00:35:06.130 --> 00:35:10.620
+just kind of transition the musicality into your video.
+
+484
+00:35:11.240 --> 00:35:14.260
+Uh, if you're not, just think of yourself like hitting your hand.
+
+485
+00:35:14.560 --> 00:35:19.560
+1, 2, 3, 4, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1.
+
+486
+00:35:29.170 --> 00:35:30.860
+Like I would cut right there, right?
+
+487
+00:35:30.980 --> 00:35:34.980
+I feel like that makes a lot of sense and it actually works out pretty, um,
+
+488
+00:35:35.160 --> 00:35:36.700
+pretty smoothly with the video.
+
+489
+00:35:37.940 --> 00:35:42.920
+1, 2, 3, 4, 1, 2, 3, 4, 1, 2.
+
+490
+00:35:43.310 --> 00:35:47.760
+Boom. We're rocking, we're rocking. I'm digging it.
+
+491
+00:35:47.820 --> 00:35:51.240
+I'm digging it. All right, turn the music off. All right,
+
+492
+00:35:51.240 --> 00:35:53.440
+so here is when we're gonna do some,
+
+493
+00:35:55.590 --> 00:35:57.440
+some case studies.
+
+494
+00:36:00.410 --> 00:36:02.950
+So we have a couple options here. Um,
+
+495
+00:36:05.530 --> 00:36:10.190
+I'm not gonna include all that text, but let's do something like,
+
+496
+00:36:10.730 --> 00:36:13.590
+so, you know, going into ads, ORX,
+
+497
+00:36:13.750 --> 00:36:17.910
+I know we have a review counter right here, which
+
+498
+00:36:20.410 --> 00:36:24.830
+is really fun. I really enjoy this. Uh, enjoy it. I mean,
+
+499
+00:36:24.870 --> 00:36:28.670
+I really like using it in our videos, in my videos because it's like a,
+
+500
+00:36:28.670 --> 00:36:32.510
+it's a counter and, uh, it saves a lot of time.
+
+501
+00:36:36.480 --> 00:36:41.290
+We also have a ton of like, lots of different reviews,
+
+502
+00:36:41.790 --> 00:36:43.650
+review styles, or I'm sorry, review,
+
+503
+00:36:49.130 --> 00:36:52.860
+like review websites. So we have like Amazon,
+
+504
+00:36:57.620 --> 00:37:01.690
+Trustpilot, things like that. Uh,
+
+505
+00:37:02.070 --> 00:37:05.610
+for this example, I'm going to do, I'm gonna try this one.
+
+506
+00:37:08.920 --> 00:37:11.170
+Okay? So I'm gonna show you
+
+507
+00:37:14.330 --> 00:37:16.380
+what that looks like, right? Okay.
+
+508
+00:37:18.120 --> 00:37:21.700
+So I could overlay that over the video. Um,
+
+509
+00:37:22.240 --> 00:37:25.780
+and it'll show all the reviews and stuff, and I can remove the background.
+
+510
+00:37:25.880 --> 00:37:28.500
+So it just kind of adds like a little bit of an effect over it.
+
+511
+00:37:29.160 --> 00:37:32.740
+So I'm gonna take this and then paste this in here.
+
+512
+00:37:34.200 --> 00:37:35.033
+Um,
+
+513
+00:37:42.070 --> 00:37:44.140
+Lemme try something here. Um,
+
+514
+00:38:00.690 --> 00:38:05.470
+so I can move this up here if I wanted to. This counter is gonna go,
+
+515
+00:38:08.890 --> 00:38:11.190
+so one thing that I'll do if it, if it doesn't fit,
+
+516
+00:38:11.290 --> 00:38:13.550
+is you can speed this whole thing up. You know,
+
+517
+00:38:13.550 --> 00:38:17.310
+you can just do right click speed duration 200,
+
+518
+00:38:18.570 --> 00:38:23.030
+and now this thing's gonna speed up more. So,
+
+519
+00:38:25.320 --> 00:38:28.670
+great. Let me go down and I'm gonna change this.
+
+520
+00:38:29.210 --> 00:38:32.070
+I'm gonna just remove the background. All right? Bring it all the way down.
+
+521
+00:38:33.250 --> 00:38:37.560
+Now I can see the, the overlay a little bit more clearly.
+
+522
+00:38:40.170 --> 00:38:41.003
+Cool.
+
+523
+00:38:43.160 --> 00:38:47.020
+It might make sense to use this a little bit later on, to be honest. Um,
+
+524
+00:38:50.450 --> 00:38:55.200
+yeah, it's fine. We'll, we'll,
+
+525
+00:38:55.200 --> 00:38:58.680
+we'll do it there. It really is preference, right?
+
+526
+00:38:59.580 --> 00:39:04.440
+So now what we can do is make this look a little cooler so we can change the
+
+527
+00:39:04.440 --> 00:39:07.120
+star color. Let's try changing it to,
+
+528
+00:39:09.000 --> 00:39:13.160
+I don't know if they have any on their site reviews wise. Oh, they have greens.
+
+529
+00:39:13.430 --> 00:39:16.070
+Okay, cool, let's try that.
+
+530
+00:39:23.880 --> 00:39:28.020
+And this is the tru pilot color. Okay?
+
+531
+00:39:28.020 --> 00:39:32.900
+So this is the star color. And so honestly, we even have these. So
+
+532
+00:39:39.370 --> 00:39:43.490
+I just wanted to like show you how quickly it is to add these overlays
+
+533
+00:39:44.000 --> 00:39:47.090
+without having to do them from scratch, right? That's huge.
+
+534
+00:39:52.640 --> 00:39:56.060
+And you can get creative with how you want to position it. Um,
+
+535
+00:39:57.820 --> 00:40:01.420
+I think there's a recent study. Go back here.
+
+536
+00:40:05.020 --> 00:40:06.140
+Internal study results.
+
+537
+00:40:07.360 --> 00:40:08.440
+I, yeah,
+
+538
+00:40:16.590 --> 00:40:21.160
+Right. You know, if I were to take off the all caps,
+
+539
+00:40:21.160 --> 00:40:25.480
+then I can control this 30 day internal study.
+
+540
+00:40:29.790 --> 00:40:34.250
+You can change the font size there. Extra bold black,
+
+541
+00:40:40.730 --> 00:40:42.730
+I think all these are like off white. So
+
+542
+00:40:44.340 --> 00:40:47.040
+change these back to white, full white.
+
+543
+00:40:51.260 --> 00:40:56.200
+So another thing you can do here is let's say we
+
+544
+00:40:56.200 --> 00:41:01.120
+wanted to add maybe this like light blue as a tint
+
+545
+00:41:01.140 --> 00:41:03.720
+in the background, so it stands out a little bit more.
+
+546
+00:41:03.940 --> 00:41:07.640
+Change this background color to that. And
+
+547
+00:41:09.780 --> 00:41:13.840
+you've got that, but, uh, not a big fan of it. Let's try the dark blue.
+
+548
+00:41:16.860 --> 00:41:20.560
+And of course, you just gotta play with stuff. You gotta see, you know,
+
+549
+00:41:20.780 --> 00:41:23.600
+how you like it if it looks good. Um,
+
+550
+00:41:23.700 --> 00:41:25.880
+so you can see there's also a stroke width on here.
+
+551
+00:41:25.880 --> 00:41:30.160
+This is an opportunity to maybe add a little bit more branding in here.
+
+552
+00:41:32.630 --> 00:41:36.600
+Okay. You can increase the width or you can remove it entirely.
+
+553
+00:41:37.140 --> 00:41:39.880
+So sometimes it looks better without it to be honest.
+
+554
+00:41:44.870 --> 00:41:47.970
+Cool. Okay.
+
+555
+00:41:47.970 --> 00:41:52.130
+So you can see there's a little ending here where it transitions out. Okay?
+
+556
+00:41:52.550 --> 00:41:56.050
+So you can take that, cut it,
+
+557
+00:41:56.350 --> 00:42:01.250
+and then paste it down here where it actually, where the screen ends. So
+
+558
+00:42:03.800 --> 00:42:04.730
+Something like that.
+
+559
+00:42:09.470 --> 00:42:14.250
+So one thing I forgot to mention is you can actually change the, the number of,
+
+560
+00:42:15.950 --> 00:42:19.010
+number of reviews. Okay? So down here
+
+561
+00:42:33.220 --> 00:42:36.440
+number start right here. Okay, so
+
+562
+00:42:38.540 --> 00:42:42.920
+starts at one and then ends at 30. So this goes by thousands.
+
+563
+00:42:43.540 --> 00:42:45.120
+And so if you had more customers,
+
+564
+00:42:45.320 --> 00:42:47.480
+I mean you could fill this thing up to like a hundred thousand,
+
+565
+00:42:47.660 --> 00:42:52.520
+or I think it goes up to 999,000, um, anything above that,
+
+566
+00:42:52.520 --> 00:42:55.360
+then the comma won't, comma won't show.
+
+567
+00:42:55.980 --> 00:43:00.280
+But you can start it off at like 50000th of the counter does something like
+
+568
+00:43:00.280 --> 00:43:04.840
+this. Yeah. But it doesn't look as realistic.
+
+569
+00:43:06.500 --> 00:43:08.920
+So doing something like,
+
+570
+00:43:12.370 --> 00:43:16.480
+let's just do like 30 and then start at this one.
+
+571
+00:43:21.790 --> 00:43:25.120
+Cool. All right. So that's an option, guys. This, this doesn't,
+
+572
+00:43:25.350 --> 00:43:27.720
+this doesn't mean that you need to make it this way. Exactly.
+
+573
+00:43:29.180 --> 00:43:33.800
+Let me just show you another way of doing this. So let me just hide this. Um,
+
+574
+00:43:34.020 --> 00:43:34.920
+you know, you can,
+
+575
+00:43:35.380 --> 00:43:39.200
+you can just go back and then use some of these titles that you previously used.
+
+576
+00:43:45.800 --> 00:43:47.900
+You can just put that straight in the center there
+
+577
+00:43:50.170 --> 00:43:51.870
+and throw in that, uh,
+
+578
+00:43:54.770 --> 00:43:55.880
+throw in those results.
+
+579
+00:44:01.850 --> 00:44:05.180
+Yeah. So you can't, you can't, um,
+
+580
+00:44:06.230 --> 00:44:09.900
+stack 'em like that. You have to do two lines
+
+581
+00:44:11.650 --> 00:44:16.340
+like this. And let's add an emoji to the right side of that.
+
+582
+00:44:16.480 --> 00:44:20.780
+I'm gonna go here and go to my emojis. Yeah, flex Biceps. Perfect.
+
+583
+00:44:21.750 --> 00:44:25.860
+Throw that into my graphics panel. I'm gonna go back here.
+
+584
+00:44:26.320 --> 00:44:29.900
+I'm gonna drag it into the right side. Boom.
+
+585
+00:44:36.340 --> 00:44:40.640
+And continue that process with that. Cool.
+
+586
+00:44:41.770 --> 00:44:46.200
+Great. I dig it. I dig it. Alright,
+
+587
+00:44:46.210 --> 00:44:48.920
+let's save that. And let's finish up the rest of this video.
+
+588
+00:44:49.460 --> 00:44:53.600
+So we've got closeup of the product, um,
+
+589
+00:44:53.960 --> 00:44:55.560
+prescription only weight loss.
+
+590
+00:44:55.900 --> 00:44:59.000
+So I feel like these are options to do bullets.
+
+591
+00:44:59.180 --> 00:45:02.320
+So let me just push that in there. Prescription only. This is like,
+
+592
+00:45:02.540 --> 00:45:06.760
+as an editor, you should like look out for ways to just summarize things.
+
+593
+00:45:07.640 --> 00:45:11.480
+Prescription only weight loss treatment plan developed by
+
+594
+00:45:13.140 --> 00:45:16.800
+top physicians and pharmacists. Okay, so I'm gonna,
+
+595
+00:45:16.980 --> 00:45:19.120
+I'm gonna use these as little bullets that come up
+
+596
+00:45:21.180 --> 00:45:24.600
+and I'm gonna use the same kind of I'm format here. I,
+
+597
+00:45:24.600 --> 00:45:29.520
+and I'm gonna have them pop up like, so I'm just gonna copy that over.
+
+598
+00:45:30.460 --> 00:45:33.760
+All right, let's start with the first one, prescription only.
+
+599
+00:45:34.820 --> 00:45:39.240
+And I'm gonna do custom emojis for each one. Okay.
+
+600
+00:45:40.040 --> 00:45:41.960
+Prescription only. And I wanna make sure that,
+
+601
+00:45:49.290 --> 00:45:50.123
+Yeah,
+
+602
+00:45:53.250 --> 00:45:57.940
+What we can do is let's try taking the box off and
+
+603
+00:45:58.190 --> 00:45:59.380
+let's try lowering,
+
+604
+00:46:07.400 --> 00:46:11.220
+reduce the exposure a little bit there. Cool.
+
+605
+00:46:12.040 --> 00:46:13.980
+Now I want to add,
+
+606
+00:46:14.230 --> 00:46:18.340
+let's say bottle or like rx. Let's see,
+
+607
+00:46:19.080 --> 00:46:23.180
+doctor. So if you can't find something, that's fine.
+
+608
+00:46:23.640 --> 00:46:28.540
+You just gotta go into see if there's a doctor in here,
+
+609
+00:46:28.540 --> 00:46:30.100
+right? Let's try in doctor,
+
+610
+00:46:32.640 --> 00:46:33.473
+Doctor
+
+611
+00:46:42.060 --> 00:46:45.560
+Can also do just a check. I feel like these are really valuable.
+
+612
+00:46:45.600 --> 00:46:49.160
+I use these all the time and they just,
+
+613
+00:46:49.160 --> 00:46:53.520
+they just demonstrate the point really quickly. So prescription only
+
+614
+00:46:55.130 --> 00:46:58.100
+left this time, we're gonna do a left emoji. So boom.
+
+615
+00:46:59.000 --> 00:47:02.420
+And so if I want to go in here and actually, you know, modify it, I,
+
+616
+00:47:02.540 --> 00:47:03.373
+I totally can.
+
+617
+00:47:03.520 --> 00:47:07.700
+So I can make this a little bit smaller and I can move it to the left if I
+
+618
+00:47:07.700 --> 00:47:11.260
+wanted to, which is just so powerful. I love that so much.
+
+619
+00:47:12.280 --> 00:47:14.540
+So I'm gonna take this. So just hit shift F five.
+
+620
+00:47:14.840 --> 00:47:17.700
+I'm gonna move this guy up here
+
+621
+00:47:22.510 --> 00:47:25.850
+and gonna just basically have these, uh,
+
+622
+00:47:25.910 --> 00:47:28.730
+titles come out like one at a time, like staggered
+
+623
+00:47:30.520 --> 00:47:34.430
+prescription only weight loss treatment plan.
+
+624
+00:47:39.850 --> 00:47:41.470
+And so I'm gonna have it come down.
+
+625
+00:47:50.120 --> 00:47:54.040
+I am gonna add the second line here, treatment plan.
+
+626
+00:47:55.410 --> 00:47:56.590
+I'm gonna take off that emoji,
+
+627
+00:47:59.540 --> 00:48:04.260
+not a huge fan of that, how it, um, kind of overlays like that.
+
+628
+00:48:04.600 --> 00:48:07.620
+I'd want it like aligned left. So
+
+629
+00:48:11.410 --> 00:48:14.220
+what I'll do is try to keep everything on one line,
+
+630
+00:48:16.720 --> 00:48:20.570
+just call it weight loss plan. Okay? Makes it easier to see,
+
+631
+00:48:21.270 --> 00:48:23.810
+and I can just move it a little bit so it's aligned.
+
+632
+00:48:25.310 --> 00:48:29.680
+And then lastly, it's,
+
+633
+00:48:29.680 --> 00:48:34.070
+this is gonna be a really long line. So I would just say like, doctor approved,
+
+634
+00:48:35.140 --> 00:48:39.310
+physician approved. And
+
+635
+00:48:41.260 --> 00:48:44.630
+this is for the sake of example only, okay?
+
+636
+00:48:44.700 --> 00:48:49.190
+Because if you're working with a brand and they,
+
+637
+00:48:49.930 --> 00:48:53.110
+you can't say certain things, you know, that's gonna be an issue.
+
+638
+00:48:54.170 --> 00:48:56.710
+So you just wanna make sure you're compliant. You,
+
+639
+00:48:58.500 --> 00:49:03.400
+so I'm gonna reduce the font size two 80. Yeah, let's do that to all of them.
+
+640
+00:49:10.900 --> 00:49:11.700
+All right, cool.
+
+641
+00:49:11.700 --> 00:49:15.000
+So it looks like these guys are a little bit off and that's fine.
+
+642
+00:49:15.350 --> 00:49:16.183
+It's just like,
+
+643
+00:49:24.020 --> 00:49:27.680
+so what I wanna do is actually, because there's a lot of space here, um,
+
+644
+00:49:28.200 --> 00:49:32.760
+I wanted to move these guys around. So weight loss plan,
+
+645
+00:49:34.970 --> 00:49:37.060
+physician approved, let's see,
+
+646
+00:49:44.700 --> 00:49:46.470
+ideally I'd want them like,
+
+647
+00:49:59.400 --> 00:50:00.860
+and then physician approved.
+
+648
+00:50:04.280 --> 00:50:06.420
+So let's see. I, I, I might be, I,
+
+649
+00:50:09.560 --> 00:50:09.850
+Here
+
+650
+00:50:09.850 --> 00:50:12.130
+We go. Yeah, there it goes.
+
+651
+00:50:13.110 --> 00:50:16.410
+Now we might need to extend that depending on,
+
+652
+00:50:23.570 --> 00:50:27.640
+I think I can move a little bit, I can add a little bit back into it.
+
+653
+00:50:32.070 --> 00:50:34.480
+Yeah, I think that'll be fine. Cool.
+
+654
+00:50:36.460 --> 00:50:37.880
+So I'm gonna trim all that off.
+
+655
+00:50:46.730 --> 00:50:48.920
+Looks like there's a little gap here
+
+656
+00:50:51.860 --> 00:50:53.000
+and that's, that's fine.
+
+657
+00:51:04.420 --> 00:51:08.120
+All right, cool. What's the next step? Is um,
+
+658
+00:51:08.150 --> 00:51:10.400
+showing X at the pharmacy,
+
+659
+00:51:11.380 --> 00:51:14.800
+not available in any pharmacy. I'm just gonna add that at the title
+
+660
+00:51:21.780 --> 00:51:26.160
+and I'm gonna add a big X in there. So let's do that.
+
+661
+00:51:34.810 --> 00:51:37.510
+And I know that that's called crossmark.
+
+662
+00:51:39.300 --> 00:51:44.270
+Take that, drag that into my timeline there.
+
+663
+00:51:44.420 --> 00:51:46.710
+Alright, I'm gonna replace this
+
+664
+00:51:49.510 --> 00:51:53.950
+actually. Um, I can just use the emoji itself. Okay.
+
+665
+00:51:56.400 --> 00:51:59.460
+And I'm gonna show you a different way that you can stylize this so
+
+666
+00:52:01.360 --> 00:52:04.900
+you can add a stroke. All right, so now it looks very,
+
+667
+00:52:05.520 --> 00:52:07.300
+now it looks even more toy, right?
+
+668
+00:52:08.320 --> 00:52:13.020
+So let's do not available at any
+
+669
+00:52:13.400 --> 00:52:17.910
+on the second line, any pharmacy. Great.
+
+670
+00:52:18.170 --> 00:52:21.110
+Now lemme turn off this and let's increase the font size.
+
+671
+00:52:24.110 --> 00:52:24.943
+Okay,
+
+672
+00:52:29.920 --> 00:52:32.270
+lemme change the width, add a little bit more.
+
+673
+00:52:37.600 --> 00:52:40.170
+Okay, take my cross mark here.
+
+674
+00:52:42.550 --> 00:52:46.970
+So one thing we have, we have a really cool Mott. Um,
+
+675
+00:52:48.150 --> 00:52:52.970
+if you go into, if you type in check and crossmark symbols,
+
+676
+00:52:53.990 --> 00:52:58.330
+it has already animated ones, which I really love 'cause I use these so much.
+
+677
+00:52:58.910 --> 00:53:01.290
+Let me show you really quick. Um,
+
+678
+00:53:01.590 --> 00:53:06.050
+but basically it'll animate it for you like that, which is, which is great,
+
+679
+00:53:06.100 --> 00:53:10.490
+right? And you can toggle between a cross symbol or a check mark,
+
+680
+00:53:10.630 --> 00:53:15.010
+and then you can, there's different styles. So these are, these are rad,
+
+681
+00:53:15.470 --> 00:53:19.010
+go to cross symbol and then, you know, check,
+
+682
+00:53:19.750 --> 00:53:22.290
+choose a style that you want. I'm gonna go style one.
+
+683
+00:53:22.670 --> 00:53:26.920
+And then you can change the animation too. So, you know,
+
+684
+00:53:26.920 --> 00:53:31.720
+you can do a scale, you can do a rotation. Love it,
+
+685
+00:53:31.780 --> 00:53:36.120
+man. So fun. So useful. But for this one,
+
+686
+00:53:36.210 --> 00:53:37.280
+let's just do a draw.
+
+687
+00:53:37.860 --> 00:53:42.080
+And I'm gonna actually put these behind the title. So I'll,
+
+688
+00:53:42.080 --> 00:53:46.320
+I'll make that come out just like that. Boom.
+
+689
+00:53:48.780 --> 00:53:52.200
+And I'll just cut that. I don't need this anymore.
+
+690
+00:53:56.870 --> 00:54:01.680
+Cool. Um, what I like to do when like, something is, you know, it says no,
+
+691
+00:54:01.680 --> 00:54:05.840
+don't do that. I like to just go and change the saturation a little bit,
+
+692
+00:54:06.380 --> 00:54:11.360
+reduce that saturation. So it's like you're asking on TV style, um,
+
+693
+00:54:12.060 --> 00:54:14.720
+you know, indicates it's bad. We don't need a, we don't want to go there.
+
+694
+00:54:15.460 --> 00:54:18.880
+So I'll reduce the saturation. I'll even add a vne, um,
+
+695
+00:54:19.510 --> 00:54:22.880
+just a little bit just to give it like, some of that depth, like
+
+696
+00:54:26.310 --> 00:54:26.990
+Yeah,
+
+697
+00:54:26.990 --> 00:54:29.840
+Then it feels, and it feels like this is the enemy.
+
+698
+00:54:30.260 --> 00:54:33.680
+You don't want that in our life, right? Cool.
+
+699
+00:54:34.420 --> 00:54:37.760
+So we're almost done with the video. Lastly,
+
+700
+00:54:37.820 --> 00:54:41.920
+we just want to get these last steps. Visit website, get prescribed,
+
+701
+00:54:42.270 --> 00:54:45.760
+receive medication. So, you know, we've done a lot of these,
+
+702
+00:54:45.760 --> 00:54:50.600
+like individual bop bops, call 'em bop, bops. Um,
+
+703
+00:54:50.740 --> 00:54:53.560
+but we also have these bullets over here that we can reuse.
+
+704
+00:54:53.560 --> 00:54:54.680
+So let's just copy that over.
+
+705
+00:55:00.020 --> 00:55:03.280
+Uh, I can go through and probably check change all these.
+
+706
+00:55:05.120 --> 00:55:07.420
+Um, let's just do
+
+707
+00:55:09.890 --> 00:55:12.970
+backhand pointing. Let's change these all to backhand pointing.
+
+708
+00:55:16.680 --> 00:55:18.000
+'cause these are like steps, right?
+
+709
+00:55:22.300 --> 00:55:23.280
+Oh, the last one.
+
+710
+00:55:28.160 --> 00:55:32.220
+All right, cool. So what are the steps? You tell me? Visit website.
+
+711
+00:55:32.320 --> 00:55:34.300
+Get prescribed, receive medication.
+
+712
+00:55:39.630 --> 00:55:40.960
+Cool. So bullet one,
+
+713
+00:55:45.430 --> 00:55:49.180
+visit website. Cool, that one's done.
+
+714
+00:55:50.360 --> 00:55:54.060
+Get prescribed. Oops, I forgot. Number two,
+
+715
+00:55:55.400 --> 00:55:56.820
+get prescribed
+
+716
+00:56:04.310 --> 00:56:08.650
+number one, visit website. And then lastly is receive meds.
+
+717
+00:56:11.840 --> 00:56:14.810
+Receive those meds. Two, three,
+
+718
+00:56:19.090 --> 00:56:21.730
+I am gonna call it meds, eh, keeping medication.
+
+719
+00:56:24.420 --> 00:56:28.800
+So one thing you could do here, you can change the roundness of all of the, the,
+
+720
+00:56:28.800 --> 00:56:29.633
+uh,
+
+721
+00:56:31.950 --> 00:56:36.650
+around the actual titles. One thing that, um,
+
+722
+00:56:36.780 --> 00:56:38.970
+we'll probably work on is getting like a master one,
+
+723
+00:56:38.980 --> 00:56:43.330
+which will update each one automatically. So,
+
+724
+00:56:48.280 --> 00:56:51.010
+Cool. I'm actually gonna speed that up.
+
+725
+00:56:51.450 --> 00:56:54.210
+I feel like that could probably be done faster,
+
+726
+00:56:54.520 --> 00:56:56.090
+just so the steps come in sooner.
+
+727
+00:56:57.050 --> 00:56:57.883
+I,
+
+728
+00:57:01.750 --> 00:57:05.850
+All right, cool. So, you know,
+
+729
+00:57:05.850 --> 00:57:08.930
+there's a few things you can do here. If you wanted,
+
+730
+00:57:09.310 --> 00:57:11.810
+you can put the titles up there. You can bring 'em down here.
+
+731
+00:57:11.810 --> 00:57:15.850
+You can add a bar around here and show the step. But,
+
+732
+00:57:16.870 --> 00:57:19.090
+you know, let me see here.
+
+733
+00:57:19.660 --> 00:57:23.170
+Maybe zoom in a little bit because there's a lot of dead space. Uh,
+
+734
+00:57:27.470 --> 00:57:28.303
+yep.
+
+735
+00:57:28.360 --> 00:57:29.193
+Just like that.
+
+736
+00:57:30.280 --> 00:57:35.190
+Cool. And then lastly, see,
+
+737
+00:57:35.730 --> 00:57:39.070
+see if waitlist is right for you. You know,
+
+738
+00:57:39.070 --> 00:57:40.830
+this is like a last call to action right here.
+
+739
+00:57:45.660 --> 00:57:49.290
+Let's do what other styles we got. We got this one,
+
+740
+00:57:49.310 --> 00:57:50.330
+so let's bring that one back.
+
+741
+00:58:04.680 --> 00:58:08.720
+I will split those lines. Cool.
+
+742
+00:58:11.340 --> 00:58:15.250
+All right. I'm stoked. It kinda looks like he's naked.
+
+743
+00:58:16.030 --> 00:58:20.840
+So I'm gonna move the titles down here
+
+744
+00:58:24.700 --> 00:58:29.160
+and I'm gonna add a scale, just 'cause I feel like it's needed here.
+
+745
+00:58:37.620 --> 00:58:42.530
+Great. And lastly, you know, you just put the logo, I would do like a logo,
+
+746
+00:58:43.230 --> 00:58:47.290
+uh, c t a. So you can do something like this where there are templates.
+
+747
+00:58:47.310 --> 00:58:51.330
+You can find the one to the nine by 16. Find your aspect ratio
+
+748
+00:58:53.270 --> 00:58:57.250
+and boom, I've got this one right here. So let's pop that in there.
+
+749
+00:59:00.120 --> 00:59:00.953
+Boom.
+
+750
+00:59:04.070 --> 00:59:06.490
+And then I'd probably cut it there 'cause the music actually works out
+
+751
+00:59:06.490 --> 00:59:07.323
+perfectly.
+
+752
+00:59:11.310 --> 00:59:15.010
+All right, perfect. So lastly,
+
+753
+00:59:15.200 --> 00:59:20.170
+then we can just update this to include all those, those assets in there.
+
+754
+00:59:20.230 --> 00:59:24.280
+So let me just double check. I've got the, uh, the logo here.
+
+755
+00:59:27.140 --> 00:59:31.880
+Get that bad boy placed in here
+
+756
+00:59:34.230 --> 00:59:38.560
+into my graphics spin. Cool.
+
+757
+00:59:39.580 --> 00:59:43.920
+Now this is a C t A, it's really awesome. It has all the, you know,
+
+758
+00:59:43.990 --> 00:59:47.200
+presets you need. Let's pop in that logo,
+
+759
+00:59:47.350 --> 00:59:51.000
+replace ours with a new image. So if this ever happens,
+
+760
+00:59:51.070 --> 00:59:53.520
+just scale it down a little bit. Okay?
+
+761
+00:59:54.530 --> 00:59:58.560
+Scale it down scale to fit. You can do that. Um,
+
+762
+00:59:59.340 --> 01:00:04.200
+and then you can actually scale the logo like this.
+
+763
+01:00:04.710 --> 01:00:09.600
+Boom. Awesome. Okay, product settings.
+
+764
+01:00:10.850 --> 01:00:14.280
+We've got a product, let's go get it on their website.
+
+765
+01:00:17.030 --> 01:00:20.160
+Open image and new tab. All right, so this is gonna be,
+
+766
+01:00:20.670 --> 01:00:25.560
+this could be an issue unless we change the background. That's fine. Let's, uh,
+
+767
+01:00:26.550 --> 01:00:30.960
+product image. All right,
+
+768
+01:00:31.250 --> 01:00:34.440
+bring that into our timeline.
+
+769
+01:00:36.960 --> 01:00:41.640
+Graphics. Cool. Drag it in.
+
+770
+01:00:41.990 --> 01:00:45.040
+Boom. Oh, it's actually p and g. Perfect. So let's actually,
+
+771
+01:00:49.410 --> 01:00:52.640
+great. It's funny, it says prescriptions.
+
+772
+01:00:52.640 --> 01:00:56.920
+It's actually weight loss prescriptions. Um, all right,
+
+773
+01:00:56.980 --> 01:00:59.840
+so we've got the product. I'm happy with how that looks.
+
+774
+01:01:00.500 --> 01:01:04.320
+Now we've got the badge, which is this guy right here, the 25% off.
+
+775
+01:01:05.380 --> 01:01:08.600
+Now I don't know if they're offering any bundle deals, but you know,
+
+776
+01:01:08.600 --> 01:01:10.000
+if you wanted to change this, you can,
+
+777
+01:01:10.740 --> 01:01:14.960
+or you can omit it or you can remove it entirely. Uh, in this case,
+
+778
+01:01:15.020 --> 01:01:17.840
+I'm gonna remove it and I'm actually gonna move the product over to the right.
+
+779
+01:01:18.100 --> 01:01:20.280
+So let's just do that. So it's nice and centered.
+
+780
+01:01:24.470 --> 01:01:26.600
+Yeah, there we go.
+
+781
+01:01:27.540 --> 01:01:32.470
+And now I can actually scale this guy so I can move it
+
+782
+01:01:32.470 --> 01:01:36.950
+here as well. A little faster. Great,
+
+783
+01:01:37.530 --> 01:01:42.110
+I'm digging that. So next we've got the product settings,
+
+784
+01:01:42.110 --> 01:01:44.150
+batch things. We're good. Tech settings. All right,
+
+785
+01:01:44.150 --> 01:01:48.830
+so now we've just gotta include some website copy your three in one
+
+786
+01:01:49.530 --> 01:01:54.280
+weight loss medication. It's very generic here.
+
+787
+01:02:02.300 --> 01:02:04.040
+Um, it would probably be more like,
+
+788
+01:02:07.690 --> 01:02:08.523
+let's see,
+
+789
+01:02:13.090 --> 01:02:13.923
+try
+
+790
+01:02:23.790 --> 01:02:27.230
+prescribed wait list today.
+
+791
+01:02:28.770 --> 01:02:32.950
+And then I would probably move this guy. Oops, move this copy down below.
+
+792
+01:02:34.070 --> 01:02:34.903
+I
+
+793
+01:02:37.610 --> 01:02:40.670
+See if you qualify. Obviously there's, there's a lot of potentials here.
+
+794
+01:02:42.180 --> 01:02:45.790
+Text settings. Let's go down, change this to three one,
+
+795
+01:02:45.790 --> 01:02:49.110
+weight loss medication prescription only. You know,
+
+796
+01:02:49.110 --> 01:02:50.590
+there's a lot of potentials here.
+
+797
+01:02:54.780 --> 01:02:58.120
+Or you can do like click link below.
+
+798
+01:02:58.190 --> 01:02:59.880
+This could be a more direct call to action.
+
+799
+01:03:03.870 --> 01:03:08.460
+Click link to see if you qualify, right?
+
+800
+01:03:09.360 --> 01:03:13.940
+That's nice. Thank you. Cool.
+
+801
+01:03:14.040 --> 01:03:15.380
+I'm happy with how that looks. Now,
+
+802
+01:03:15.430 --> 01:03:17.100
+which just comes down to the background setting.
+
+803
+01:03:18.080 --> 01:03:22.940
+So we've got the stroke up here, which could be used.
+
+804
+01:03:23.080 --> 01:03:25.780
+We can probably maybe add some branding in there.
+
+805
+01:03:28.490 --> 01:03:33.020
+That looks cool. Now we've got the stroke number two, which is down,
+
+806
+01:03:33.090 --> 01:03:37.340
+down below. I think we might be able to keep that. But here's, uh,
+
+807
+01:03:37.340 --> 01:03:41.900
+here's the actual background. So we can do a gradient. Um,
+
+808
+01:03:41.990 --> 01:03:43.380
+let's see what they have on their site.
+
+809
+01:03:43.380 --> 01:03:48.380
+Looks like they have a gradient here from this color to that. So let's try,
+
+810
+01:03:49.750 --> 01:03:50.583
+let's try it.
+
+811
+01:03:55.880 --> 01:03:59.810
+This goes from light to dark. So light to
+
+812
+01:04:02.750 --> 01:04:05.970
+to dark. Okay,
+
+813
+01:04:06.350 --> 01:04:09.730
+now let's do dark here. Whoops,
+
+814
+01:04:14.800 --> 01:04:18.420
+not bad. Let's see. Okay, so if I move this
+
+815
+01:04:20.490 --> 01:04:24.290
+Gradient, it might, it can change the way it looks. That looks kind of cool.
+
+816
+01:04:24.910 --> 01:04:27.490
+Now, obviously the, um, the logo settings here,
+
+817
+01:04:28.000 --> 01:04:32.050
+what we can do is actually change it all to white, which is super,
+
+818
+01:04:32.420 --> 01:04:37.210
+super convenient. If you click on this button, boom, it'll change that for you.
+
+819
+01:04:37.270 --> 01:04:39.890
+You don't have to do anything. I love that so much.
+
+820
+01:04:40.910 --> 01:04:45.250
+And let's scale this down a little bit more. And there you go guys.
+
+821
+01:04:45.960 --> 01:04:47.570
+Okay, so this asset right here,
+
+822
+01:04:47.750 --> 01:04:52.650
+you can convert that into an MP four and reuse that over and over again.
+
+823
+01:04:52.670 --> 01:04:55.370
+You don't have to like, recreate that each time, especially if you're,
+
+824
+01:04:55.950 --> 01:05:00.690
+if you're working with the brand. Um, so boom. And look,
+
+825
+01:05:00.710 --> 01:05:03.530
+it looks like there's like a little bit of a, a delay here,
+
+826
+01:05:03.750 --> 01:05:06.010
+so I'm just gonna trim that off. So,
+
+827
+01:05:06.350 --> 01:05:10.970
+or what I could do is just move that under, under the shot.
+
+828
+01:05:11.230 --> 01:05:14.730
+But no, I'm just gonna trim it off. There's a little bit of a lag.
+
+829
+01:05:18.400 --> 01:05:20.970
+Boom. There it is, guys. There it is.
+
+830
+01:05:22.150 --> 01:05:25.330
+And it looks like there's a little bit of an off center on the product right
+
+831
+01:05:25.330 --> 01:05:30.330
+here. I'll move that. But other than that, I think that looks fantastic.
+
+832
+01:05:30.830 --> 01:05:35.450
+And so let's play it through one more time and I'll put my ED point here.
+
+833
+01:05:35.640 --> 01:05:40.170
+I'll do out for end start, start over.
+
+834
+01:05:48.070 --> 01:05:49.330
+Let see. It's lacking a little bit.
+
+835
+01:06:06.400 --> 01:06:07.233
+Boom,
+
+836
+01:06:08.630 --> 01:06:13.530
+22nd add, there we go. And that's one style, one variation, one hook,
+
+837
+01:06:13.820 --> 01:06:17.610
+right? All of these individual clips could be modified,
+
+838
+01:06:17.780 --> 01:06:21.770
+could be interchanged, because we modularized everything. Um,
+
+839
+01:06:22.950 --> 01:06:23.530
+and yeah,
+
+840
+01:06:23.530 --> 01:06:27.090
+I think that's a pretty solid video that doesn't even have a voiceover onto it.
+
+841
+01:06:27.510 --> 01:06:32.090
+Uh, that'll completely change the video if we add a voiceover. But this is, uh,
+
+842
+01:06:32.290 --> 01:06:34.050
+I would say, um,
+
+843
+01:06:35.050 --> 01:06:38.730
+I think the only thing I would do here would be probably split up these lines,
+
+844
+01:06:39.590 --> 01:06:40.280
+um,
+
+845
+01:06:40.280 --> 01:06:45.250
+just because I felt like there wasn't anything happening on the screen too much.
+
+846
+01:06:45.870 --> 01:06:46.810
+So I was gonna
+
+847
+01:06:48.480 --> 01:06:51.090
+take this line out and then add a second
+
+848
+01:06:55.310 --> 01:07:00.170
+in their first 30 days and then kind of separate these two lines like
+
+849
+01:07:00.170 --> 01:07:01.010
+that, just so,
+
+850
+01:07:04.430 --> 01:07:06.730
+and it actually works out with the music. I even expect that
+
+851
+01:07:11.840 --> 01:07:16.290
+like, it, the music actually goes. So if you wanted,
+
+852
+01:07:16.390 --> 01:07:21.170
+you could do like a third caption. You can do something like,
+
+853
+01:07:25.450 --> 01:07:28.600
+lemme move this. I don't need this adjustment layer. That's not necessary.
+
+854
+01:07:31.900 --> 01:07:32.733
+So
+
+855
+01:07:42.430 --> 01:07:43.263
+right here,
+
+856
+01:07:45.240 --> 01:07:49.300
+and then I'm gonna change this to like in a recent study,
+
+857
+01:07:55.900 --> 01:07:58.780
+internal, uh, wait lists
+
+858
+01:08:05.120 --> 01:08:05.953
+on average
+
+859
+01:08:09.440 --> 01:08:09.730
+Do
+
+860
+01:08:09.730 --> 01:08:10.563
+Patient patience.
+
+861
+01:08:19.620 --> 01:08:22.080
+So let's change the font size there.
+
+862
+01:08:25.630 --> 01:08:26.880
+Okay, so I'm gonna take,
+
+863
+01:08:39.750 --> 01:08:43.320
+yeah, see that looks pretty cool. Um,
+
+864
+01:08:44.760 --> 01:08:46.360
+I can even try something like this.
+
+865
+01:08:46.460 --> 01:08:49.920
+So there's a little bit more of a variety in the colors.
+
+866
+01:08:53.300 --> 01:08:56.840
+Change the color font black here. Yep.
+
+867
+01:09:02.390 --> 01:09:02.730
+Okay,
+
+868
+01:09:02.730 --> 01:09:03.563
+Click.
+
+869
+01:09:06.590 --> 01:09:10.280
+Okay. So that's actually where the drop hits. So I want to move that title here.
+
+870
+01:09:18.230 --> 01:09:20.560
+Cool. Loving it, dig it.
+
+871
+01:09:43.020 --> 01:09:45.440
+All right, fantastic. Honestly, that's probably, uh,
+
+872
+01:09:46.080 --> 01:09:48.560
+a worthy video to the client. Um,
+
+873
+01:09:49.740 --> 01:09:51.720
+so let's see where we're at.
+
+874
+01:09:53.340 --> 01:09:57.520
+So we've got the ad styles, we added the titles, the overlay, the music,
+
+875
+01:09:57.980 --> 01:10:00.760
+the effects. You know, obviously if I wanted,
+
+876
+01:10:00.880 --> 01:10:02.920
+I could probably go in there a little bit more, um,
+
+877
+01:10:04.060 --> 01:10:08.880
+and fix or like added any more effects. But, uh, for a U G C like this,
+
+878
+01:10:09.120 --> 01:10:11.880
+I really don't think it's necessary. Zoom ins and zoom outs are,
+
+879
+01:10:11.900 --> 01:10:15.600
+are usually most effective. You know, we, we could do a small,
+
+880
+01:10:15.670 --> 01:10:20.640
+like a very slight, um, linear one here, like a small zoom in.
+
+881
+01:10:23.160 --> 01:10:27.370
+It's very, very not that noticeable. All we can do maybe one here.
+
+882
+01:10:30.180 --> 01:10:34.350
+Yeah, what happens is we kinda lose him flexing, right?
+
+883
+01:10:39.500 --> 01:10:44.050
+Which isn't bad. No. Looks great.
+
+884
+01:10:44.480 --> 01:10:49.210
+Cool. Now, color correction, um,
+
+885
+01:10:49.670 --> 01:10:54.410
+for this video honestly doesn't really need too much of it because it's U G C.
+
+886
+01:10:54.790 --> 01:10:57.530
+Um, the shots are already kind of like already there,
+
+887
+01:10:58.070 --> 01:11:01.730
+but the color correction that I typically go with, you know,
+
+888
+01:11:02.120 --> 01:11:06.570
+I'll do an adjustment layer across the whole video and then just maybe add a
+
+889
+01:11:06.570 --> 01:11:09.850
+little bit. Let's go into that real quick.
+
+890
+01:11:10.030 --> 01:11:12.370
+So have an adjustment layer,
+
+891
+01:11:17.100 --> 01:11:19.000
+And I'll go into here
+
+892
+01:11:21.300 --> 01:11:25.560
+and then go into the basic correction here. And I'm just playing with the, um,
+
+893
+01:11:26.660 --> 01:11:30.600
+you know, depending on what the video needs especially. Okay, so this is a hook,
+
+894
+01:11:30.610 --> 01:11:34.320
+right? So we want this to, to really stand out.
+
+895
+01:11:34.500 --> 01:11:37.080
+We can maybe even jack up the saturation there.
+
+896
+01:11:37.220 --> 01:11:40.040
+You see what a difference that made it look.
+
+897
+01:11:42.060 --> 01:11:45.720
+So you can do something like that, or you can desaturate it, right? Like
+
+898
+01:11:48.100 --> 01:11:51.480
+now it, now it looks very like pale. Um,
+
+899
+01:11:51.550 --> 01:11:55.370
+very similar to that pain point we had. You know,
+
+900
+01:11:55.370 --> 01:11:57.370
+if you add a little bit of a vignette to it,
+
+901
+01:11:58.150 --> 01:12:02.610
+it just turns into a completely different look and feel.
+
+902
+01:12:04.750 --> 01:12:08.730
+So that's one,
+
+903
+01:12:08.970 --> 01:12:13.450
+I would say one adjustment layer that you can do for the, for the hook.
+
+904
+01:12:15.030 --> 01:12:19.210
+Now it looks more cinematic and a more epic. But here, you know,
+
+905
+01:12:19.210 --> 01:12:23.290
+if I wanted to brighten up this video a little bit more, um,
+
+906
+01:12:23.800 --> 01:12:27.240
+make it stand out, I,
+
+907
+01:12:27.440 --> 01:12:29.480
+I typically just go by eye. Um,
+
+908
+01:12:29.670 --> 01:12:32.280
+I'll go here and I'll add a little bit of vibrance to it,
+
+909
+01:12:32.870 --> 01:12:37.400
+just to give it a little bit more life, uh, because let's see,
+
+910
+01:12:37.400 --> 01:12:39.400
+without it, so yeah, there's just a little bit,
+
+911
+01:12:39.560 --> 01:12:40.760
+a little bit of a difference there.
+
+912
+01:12:45.850 --> 01:12:46.683
+Yeah,
+
+913
+01:12:48.400 --> 01:12:52.500
+The blacks are a little bit more, um, more pronounced.
+
+914
+01:12:54.830 --> 01:12:55.180
+Bring
+
+915
+01:12:55.180 --> 01:13:00.100
+The blacks down. Cool.
+
+916
+01:13:01.330 --> 01:13:04.660
+Yeah. So let's see the before and after.
+
+917
+01:13:05.700 --> 01:13:06.533
+I
+
+918
+01:13:09.180 --> 01:13:10.780
+Probably tone it down a little bit here.
+
+919
+01:13:19.460 --> 01:13:20.970
+Let's see. Let's bring this guy down.
+
+920
+01:13:25.170 --> 01:13:29.260
+Yeah, I'm happy with that. You know, it's, it's, it's minor, but it's not,
+
+921
+01:13:29.290 --> 01:13:30.500
+doesn't need to be too much.
+
+922
+01:13:32.130 --> 01:13:36.460
+This one already did add a color correction to that. Um,
+
+923
+01:13:36.870 --> 01:13:39.540
+maybe drag this over, see if it makes a difference.
+
+924
+01:13:43.380 --> 01:13:44.620
+I think it looks better without it,
+
+925
+01:13:46.520 --> 01:13:50.180
+but we can add it to this shot at the end if we wanted to.
+
+926
+01:13:53.920 --> 01:13:58.520
+All right, sweet. Perfect. And there you go.
+
+927
+01:13:58.700 --> 01:14:00.960
+Now we've got ourselves a a little bit of color correction. Like I said,
+
+928
+01:14:01.340 --> 01:14:05.040
+we don't want to go too heavy on it. We just wanna bring out some of the,
+
+929
+01:14:06.340 --> 01:14:10.560
+the contrast and the vibrance, because it's kind of a dull, uh,
+
+930
+01:14:10.560 --> 01:14:13.400
+iPhone footage can sometimes be dull. Um,
+
+931
+01:14:13.620 --> 01:14:17.880
+and then for the hooks and pain points, like we just want to either desaturate,
+
+932
+01:14:17.940 --> 01:14:21.360
+add vignettes, make them a little bit more dramatic. Um,
+
+933
+01:14:21.820 --> 01:14:25.920
+and then what we'll do next is go over. Um,
+
+934
+01:14:26.260 --> 01:14:26.880
+so in this video,
+
+935
+01:14:26.880 --> 01:14:31.120
+we're not gonna go over subtitles or audio levels because it's already kind of
+
+936
+01:14:31.120 --> 01:14:32.760
+pre-done, but, um,
+
+937
+01:14:33.910 --> 01:14:38.840
+next we're gonna go over hook variations. So actually before we finish off,
+
+938
+01:14:39.580 --> 01:14:43.240
+let me just show you, um, how I like to do my audio.
+
+939
+01:14:44.020 --> 01:14:45.320
+So for a song like this,
+
+940
+01:14:49.060 --> 01:14:52.320
+you know, it's already peaking at like, at like zero. Um,
+
+941
+01:14:53.310 --> 01:14:57.880
+this isn't bad or anything, but if you go into your audio track mix right here,
+
+942
+01:14:58.390 --> 01:15:03.280
+okay? Um, and especially if you have a lot of different audio clips happening,
+
+943
+01:15:03.280 --> 01:15:06.760
+like a voiceover and stuff like that, you wanna set limiters.
+
+944
+01:15:07.140 --> 01:15:12.080
+So if you click on this dropdown, this is like hidden. So this is under the,
+
+945
+01:15:13.620 --> 01:15:18.240
+the audio track mixer. All right, so boom,
+
+946
+01:15:18.530 --> 01:15:23.520
+we've got that guy going on. So click on that dropdown, and then these are your,
+
+947
+01:15:23.720 --> 01:15:25.720
+I believe these are your bus, these are called buses,
+
+948
+01:15:26.340 --> 01:15:30.400
+but you can set one on the master. But if you click on this,
+
+949
+01:15:30.400 --> 01:15:33.280
+you can see that there's all these different effects that you can do to your
+
+950
+01:15:33.280 --> 01:15:37.440
+sound. It's almost like if you're doing any type of like, audio, audio work.
+
+951
+01:15:38.180 --> 01:15:40.600
+But, um, like I said, I like to use this.
+
+952
+01:15:40.600 --> 01:15:44.320
+If I have a lot like voiceovers happening or sound effects,
+
+953
+01:15:44.950 --> 01:15:49.120
+then I can control more of the audio. But in this case, it's just music,
+
+954
+01:15:49.180 --> 01:15:54.160
+so it doesn't really matter too much. But, um, you can add a limiter here,
+
+955
+01:15:54.160 --> 01:15:57.400
+which is if you go to a amplitude and compression,
+
+956
+01:15:57.460 --> 01:16:02.400
+go to hard limiter and then double click on that, uh,
+
+957
+01:16:02.630 --> 01:16:07.280
+move my face, it'll come up with this option. And then maximum amplitude, um,
+
+958
+01:16:07.950 --> 01:16:09.680
+keep this at like negative six.
+
+959
+01:16:10.110 --> 01:16:13.760
+This will kind of keep everything from turning red. Um,
+
+960
+01:16:13.860 --> 01:16:15.400
+and it's gonna be like right down here.
+
+961
+01:16:15.780 --> 01:16:20.560
+And if you wanted to input everything on the tracks by like five decibels or
+
+962
+01:16:20.560 --> 01:16:23.200
+like 10, if everything's really low, you can do that all at one time.
+
+963
+01:16:24.100 --> 01:16:26.640
+So that's really helpful. Um,
+
+964
+01:16:26.700 --> 01:16:29.800
+so you don't have to go in there and individually control everything.
+
+965
+01:16:30.190 --> 01:16:34.320
+This will do all of your audio tracks, but if you do want to, uh,
+
+966
+01:16:34.340 --> 01:16:35.840
+add this to an individual track,
+
+967
+01:16:36.460 --> 01:16:41.000
+all you gotta do is hit all option or all drag this over, and, uh,
+
+968
+01:16:41.090 --> 01:16:44.440
+it'll basically apply the same settings over there and you can remove this if
+
+969
+01:16:44.440 --> 01:16:48.960
+you wanted to. Um, but I, you know, uh,
+
+970
+01:16:48.980 --> 01:16:51.920
+for this example, it doesn't make sense to have, you know,
+
+971
+01:16:51.920 --> 01:16:55.920
+limiter because you only have one audio, uh, one audio piece.
+
+972
+01:16:56.740 --> 01:17:01.040
+But yeah, anyways, I would say this video is almost done.
+
+973
+01:17:01.440 --> 01:17:06.240
+I think the next step is just finishing off the hook variations and then it's
+
+974
+01:17:06.240 --> 01:17:08.840
+off to the races. All right, guys, thanks for joining me on this,
+
+975
+01:17:08.900 --> 01:17:10.800
+and I hope you learned a lot. I'll see you in the next one.

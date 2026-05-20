@@ -112,9 +112,65 @@ See `.env.example` for all required variables. Critical ones:
 
 ---
 
+## STRUCTURAL DEBT GUARD — Pre-Flight Checks
+
+**Read this before writing ANY code in this codebase.** These are known structural weaknesses. Every change must avoid deepening them. If your change violates a guard, stop and refactor first.
+
+### Guard 1: No New Inline Prisma Queries in Pages
+**Problem:** 51 dashboard pages query Prisma directly. Revenue dedup filter copy-pasted 20+ times.
+**Rule:** New pages MUST use service functions from `src/services/` (create the file if it doesn't exist yet). If a service doesn't exist for the data you need, extract the existing inline query into a service FIRST, then use it.
+**Check before commit:** Grep your changed `.tsx` page files for `prisma.` — if found in a page component, you're violating this guard.
+
+### Guard 2: Don't Feed the God Files
+**Problem:** `pipeline.ts` (894 lines), `checkoutchamp/index.ts` (763 lines), `cc-qa/researcher.ts` (926 lines).
+**Rule:** Never add logic to a file over 400 lines. If you need to add ingestion logic, add it as a new focused file (`upsert-product.ts`, `upsert-subscription.ts`, etc.) and import it. Same for the CC adapter — split by concern (sync, field-mapping, subscriptions).
+**Check before commit:** `wc -l` on any file you modified. If it grew and was already >400 lines, extract.
+
+### Guard 3: Scripts Must Use Adapters
+**Problem:** `scripts/cc-qa/` (14 files, ~5000 lines) reimplements CC API calls outside the adapter pattern.
+**Rule:** New scripts MUST import from `src/adapters/` and `src/core/`. If the adapter doesn't expose what you need, extend the adapter — don't duplicate.
+**Check before commit:** Grep new script files for direct `fetch()` calls to CC/Shopify APIs. If found, route through the adapter.
+
+### Guard 4: Error Boundaries on Dashboard Routes
+**Problem:** Any failed Prisma query crashes the entire page with Next.js default error screen.
+**Rule:** Every new route segment under `app/(dashboard)/` MUST have an `error.tsx` file. Wrap risky queries to show "data unavailable" for that section rather than killing the page.
+**Check before commit:** New dashboard route? Check for `error.tsx` in the same directory.
+
+### Guard 5: Batch Database Operations
+**Problem:** Ingestion loops do sequential upserts — 500 orders = 1500+ DB round-trips.
+**Rule:** Any new ingestion code MUST batch writes. Use `prisma.createMany()`, `prisma.$transaction()`, or at minimum `Promise.all` with `p-limit(10)`.
+**Check before commit:** Look for `for/while` loops containing `await prisma.` — batch them.
+
+### Guard 6: Use the Revenue Constant
+**Problem:** `source IN ('SHOPIFY', 'MERGED') AND status = 'COMPLETE'` scattered across 10+ files.
+**Rule:** Import `REVENUE_WHERE` from `src/lib/constants.ts` (create if missing). One place to update, all consumers benefit.
+**Check before commit:** Grep for `source.*SHOPIFY.*MERGED` or `status.*COMPLETE` in new code. Use the constant.
+
+### Guard 7: Adapters Don't Call Pipeline
+**Problem:** CC adapter imports `runIngestion()` directly — breaks the layered architecture.
+**Rule:** Adapters return `NormalizedRecord[]`. The caller (API route, sync script, worker) passes them to `runIngestion()`. Adapters never import from `src/core/ingestion/`.
+**Check before commit:** Grep adapter files for imports from `../../core/ingestion`.
+
+### Guard 8: Auth on API Routes
+**Problem:** No `middleware.ts` at project root. API sync routes appear unprotected.
+**Rule:** Any new API route that modifies data MUST check authentication. Webhook routes validate their shared secret. Cron routes check `CRON_SECRET`.
+**Check before commit:** New API route? Verify auth check exists in the first 5 lines. (battle-tested 2026-04-04 — aligned with global quality gate R-SEC-001)
+
+### Guard Evolution
+- Guard catches a real issue → add "battle-tested {date}" note
+- Guard never triggers in 10+ sessions → flag for removal
+- New structural debt discovered → add a new guard immediately
+- Updated: 2026-04-04 (initial set from knowledge graph analysis)
+
+---
+
 ## KNOWLEDGE SYSTEM
-- **Global rules** (profile, guardrails, quality gate, session rhythm): `~/.claude/CLAUDE.md` (auto-loaded)
+- **Global rules** (profile, guardrails, model routing): `~/.claude/CLAUDE.md` (auto-loaded). Detailed procedures (session rhythm, quality gate, export format): `~/.claude/docs/`
 - **Cross-project gotchas:** `~/Vaults/CROMaxLabs/shared-gotchas.md` — read before bug fixes
 - **Decision journal:** `~/Vaults/CROMaxLabs/decision-journal.md` — read before architectural choices
 - **Vault domain docs:** `~/Vaults/CROMaxLabs/thermoslim-platform/_INDEX.md`
 - **Any agent** (Claude Code, Gemini CLI, OpenClaw) reads the same shared knowledge files
+
+## COST TRACKING
+
+Token costs tracked via `python3 ~/.claude/tools/claude-usage/cli.py today`. Session hubs capture `cost_baseline` at start. At session close, update hub `## Cost` section with delta. Include `session_cost` and `model_split` in session exports. Full protocol in global `~/.claude/CLAUDE.md`.

@@ -1,0 +1,1349 @@
+WEBVTT
+
+1
+00:00:03.490 --> 00:00:06.030
+Hey, what's going on guys? In this tutorial,
+
+2
+00:00:06.250 --> 00:00:10.950
+we are gonna go through and begin assembling our clips into
+
+3
+00:00:11.050 --> 00:00:13.310
+our timeline. Uh, at this point,
+
+4
+00:00:13.410 --> 00:00:17.950
+you have already modularized your clips so you know what shots are
+
+5
+00:00:18.310 --> 00:00:22.510
+valuable, which ones you want to take, which ones you want to use, actually. Um,
+
+6
+00:00:22.730 --> 00:00:27.590
+so let's just jump into Premier and begin this process. So over here in Premier,
+
+7
+00:00:27.830 --> 00:00:32.390
+I actually just open up a brand new, uh, sequence, I'm sorry, uh,
+
+8
+00:00:32.510 --> 00:00:36.710
+a brand new project. And over here you can see my bins over here. Um,
+
+9
+00:00:37.330 --> 00:00:42.310
+and I still haven't yet put in my modular clips yet,
+
+10
+00:00:42.330 --> 00:00:46.430
+and I'm about to do that now. But, uh, for the sake of this tutorial,
+
+11
+00:00:46.790 --> 00:00:51.190
+I actually recorded a voiceover, and so I'm going to, uh,
+
+12
+00:00:51.900 --> 00:00:54.310
+include that in there as well. But, um,
+
+13
+00:00:55.090 --> 00:00:57.310
+let me just go back really quick because I,
+
+14
+00:00:57.420 --> 00:01:01.590
+this is actually a client project and I have a script written for it,
+
+15
+00:01:02.560 --> 00:01:04.350
+which is over here.
+
+16
+00:01:04.890 --> 00:01:07.950
+And so I wanted to just kind of quickly go over this with you.
+
+17
+00:01:08.300 --> 00:01:12.870
+It's not gonna be exact, but what I'm trying to relate to you is,
+
+18
+00:01:13.490 --> 00:01:18.310
+um, the structure. Okay? So how we script everything, uh,
+
+19
+00:01:18.570 --> 00:01:21.550
+is very much that similar format, the ADA format.
+
+20
+00:01:21.690 --> 00:01:26.310
+So you have the scroll stopper, the hook, the introduction, um, in this case,
+
+21
+00:01:26.450 --> 00:01:30.750
+uh, case study and proof authority. And then we have, um,
+
+22
+00:01:30.810 --> 00:01:33.910
+how it works and, and then the C t A. All right?
+
+23
+00:01:34.290 --> 00:01:38.950
+So we are gonna go through this process. Um, with the clips.
+
+24
+00:01:39.420 --> 00:01:41.470
+This ad can turn out, I, I don't even know,
+
+25
+00:01:41.490 --> 00:01:45.790
+I'm just gonna edit this and see how it goes. But along the way, we will, um,
+
+26
+00:01:46.130 --> 00:01:48.550
+you know, we'll, we'll figure it out. But, uh,
+
+27
+00:01:48.560 --> 00:01:53.110
+let's go back into our premier and let's start working with some of this
+
+28
+00:01:53.110 --> 00:01:56.550
+footage. All right, so, uh, going into the modular raws,
+
+29
+00:01:56.930 --> 00:02:01.190
+you can see that everything here is already pre-labeled.
+
+30
+00:02:01.850 --> 00:02:06.750
+Um, and the sound is actually removed as well,
+
+31
+00:02:06.750 --> 00:02:10.510
+because I don't need the sound. So that's actually one less, one less layer.
+
+32
+00:02:10.890 --> 00:02:15.790
+So you can see here we've got browsing mobile phone craving
+
+33
+00:02:16.210 --> 00:02:18.230
+for junk foods. Okay, so real quick,
+
+34
+00:02:18.250 --> 00:02:22.190
+the product is actually a weight loss product. So when we shot this,
+
+35
+00:02:22.530 --> 00:02:26.190
+we wanted to get a ton of different hooks and scroll stoppers, um,
+
+36
+00:02:26.380 --> 00:02:29.870
+that could potentially grab attention. And so, you know,
+
+37
+00:02:29.950 --> 00:02:33.870
+we got a bunch of junk food and did all this crazy stuff. And, um, you know,
+
+38
+00:02:33.870 --> 00:02:36.830
+this is definitely gonna grab attention, uh, later on. So,
+
+39
+00:02:37.810 --> 00:02:39.470
+but we also shot, you know,
+
+40
+00:02:39.720 --> 00:02:43.750
+shots like this where the product's being put out into the hand. Uh,
+
+41
+00:02:43.860 --> 00:02:45.630
+lots of lots of cool dynamic things,
+
+42
+00:02:45.650 --> 00:02:50.270
+but I'm pretty sure we can make a really effective video ad with the examples at
+
+43
+00:02:50.270 --> 00:02:53.670
+hand. So let's, let's do it. Alright,
+
+44
+00:02:53.890 --> 00:02:56.910
+so I'm gonna take all my raws here, highlight all of them,
+
+45
+00:02:56.970 --> 00:03:01.960
+and I'm just gonna drag them into my, my raw bin. Fantastic.
+
+46
+00:03:02.660 --> 00:03:06.320
+Uh, I have a few other assets here, like my voiceover,
+
+47
+00:03:06.490 --> 00:03:10.160
+which I'll put there into music, or I'll actually put in sound effects.
+
+48
+00:03:10.940 --> 00:03:14.200
+And I have a couple other clips in here that I didn't modularize yet,
+
+49
+00:03:14.220 --> 00:03:19.220
+but pharmacy and receiving package. So I'll put that into my raws. Great.
+
+50
+00:03:19.610 --> 00:03:24.220
+Okay, so first step, uh, is creating a sequence, right?
+
+51
+00:03:24.320 --> 00:03:28.900
+So I'll go into my sequence bin, right click new item sequence.
+
+52
+00:03:29.280 --> 00:03:30.660
+And if you guys haven't done this already,
+
+53
+00:03:30.800 --> 00:03:33.700
+we have some free training on how to create presets. Um,
+
+54
+00:03:33.880 --> 00:03:36.740
+so I definitely recommend doing that. So for this example,
+
+55
+00:03:37.120 --> 00:03:40.780
+I'm gonna go with nine by 16. It's a very hot, um,
+
+56
+00:03:41.900 --> 00:03:46.580
+I would say vertical placement nowadays. TikTok, you know, reels, all of that.
+
+57
+00:03:46.680 --> 00:03:50.940
+So we'll, we'll do nine by 16. I'm just gonna call this nine by 16, um,
+
+58
+00:03:51.400 --> 00:03:54.980
+top of funnel. Alright, boom. We're good to go.
+
+59
+00:03:55.840 --> 00:03:58.100
+So first, first things first, right?
+
+60
+00:03:58.200 --> 00:04:02.460
+We want to kind of work in a logical order. So, um,
+
+61
+00:04:03.030 --> 00:04:04.860
+we're talking about the scroll stopper here,
+
+62
+00:04:05.480 --> 00:04:09.860
+and we want to just start to lay down what that scroll stopper potential could
+
+63
+00:04:09.860 --> 00:04:14.180
+be. And in this case, uh, it's just kind of vague. So, um,
+
+64
+00:04:14.200 --> 00:04:17.620
+strong visual audio and headline. Uh, you know,
+
+65
+00:04:17.690 --> 00:04:21.260
+just by going through the clips, I think we saw some great potential here.
+
+66
+00:04:21.760 --> 00:04:26.380
+So I'm actually gonna change the view so that I can actually see these shots a
+
+67
+00:04:26.380 --> 00:04:27.213
+little bit more clearly.
+
+68
+00:04:27.660 --> 00:04:30.940
+'cause I like to do the thumbnail view because that way I know what I'm looking
+
+69
+00:04:31.100 --> 00:04:33.740
+at. Um, but let's just call,
+
+70
+00:04:33.870 --> 00:04:38.810
+let's just do like this example's kind of fun. Yeah,
+
+71
+00:04:38.830 --> 00:04:43.130
+that's a nice, that's a cool, cool shot. So, um, what I like to do,
+
+72
+00:04:43.280 --> 00:04:46.090
+instead of dragging, you know, this over like that,
+
+73
+00:04:46.810 --> 00:04:49.850
+I actually double click the shot and then click on this little, um,
+
+74
+00:04:50.560 --> 00:04:54.690
+icon right here. And what it does is it just drags the video over like that,
+
+75
+00:04:55.230 --> 00:04:56.490
+all right? I, I,
+
+76
+00:04:56.570 --> 00:05:00.490
+I really like that 'cause it's one less layer that I have to worry about, um,
+
+77
+00:05:00.560 --> 00:05:05.250
+when it comes to like, setting things up. So boom, I have this shot,
+
+78
+00:05:05.590 --> 00:05:10.290
+but remember we only wanna do three seconds or so, right?
+
+79
+00:05:10.350 --> 00:05:15.010
+So that's three second mark right there. One thing that I like to do,
+
+80
+00:05:15.430 --> 00:05:18.250
+um, in terms of, you know,
+
+81
+00:05:18.250 --> 00:05:23.130
+keeping things within a a a time segment, you can obviously, you can add,
+
+82
+00:05:23.500 --> 00:05:26.650
+let's say like a chapter queue right here at the three second mark.
+
+83
+00:05:27.310 --> 00:05:28.650
+Or you could do a marker,
+
+84
+00:05:28.880 --> 00:05:33.170
+something like that where it shows you three seconds is right there. Um,
+
+85
+00:05:33.200 --> 00:05:37.970
+another thing that I could do, you know, if you don't have it, it it,
+
+86
+00:05:37.970 --> 00:05:41.770
+because one, one thing is that this thing stays still. Um, so for example,
+
+87
+00:05:41.770 --> 00:05:45.050
+if I were to go over here and I wanted three seconds here,
+
+88
+00:05:45.080 --> 00:05:46.490
+it'd be more difficult to count.
+
+89
+00:05:46.630 --> 00:05:51.050
+So I will go in here and then create a,
+
+90
+00:05:51.710 --> 00:05:54.290
+what's it called? A, uh, an adjustment layer, just,
+
+91
+00:05:54.640 --> 00:05:56.090
+just regular adjustment layer.
+
+92
+00:05:56.630 --> 00:06:00.040
+And I'll drag it onto my timeline like that,
+
+93
+00:06:00.780 --> 00:06:03.080
+and then I will actually shorten it.
+
+94
+00:06:03.500 --> 00:06:08.240
+So I know that this is a three second segment right here. So wherever I go,
+
+95
+00:06:08.390 --> 00:06:10.720
+this is kind of my placeholder, so I know, okay,
+
+96
+00:06:10.720 --> 00:06:15.720
+this is three seconds right there. Cool. So with that being said,
+
+97
+00:06:16.120 --> 00:06:19.720
+I like to sometimes add a little bit of space in between here. Um,
+
+98
+00:06:19.790 --> 00:06:24.400
+just a little bit of room before doing any hooks, just so to be honest, I like,
+
+99
+00:06:24.420 --> 00:06:27.720
+uh, 'cause it can vary and I'll show you later on why,
+
+100
+00:06:27.860 --> 00:06:29.280
+why we do something like that. But,
+
+101
+00:06:30.180 --> 00:06:35.080
+so in this shot we have him putting it in his eyes
+
+102
+00:06:35.460 --> 00:06:38.960
+and we're, we're just trying to find like, what's the best shot right here.
+
+103
+00:06:39.100 --> 00:06:42.560
+Oh yeah, I think, you know, he's not really doing much here, but when he,
+
+104
+00:06:42.560 --> 00:06:46.560
+when he picks it up, I feel like is really compelling. So I'm just gonna,
+
+105
+00:06:46.980 --> 00:06:48.600
+I'm just gonna delete that. I, I hit,
+
+106
+00:06:48.680 --> 00:06:52.240
+I hit see and now I'm just gonna delete that and I'm gonna drag it over here.
+
+107
+00:06:53.020 --> 00:06:56.160
+Um, and I'm gonna review this, so I'm hitting plus to zoom in.
+
+108
+00:06:58.130 --> 00:07:02.120
+Let's review it one more time. Okay, fantastic.
+
+109
+00:07:02.300 --> 00:07:04.800
+So we have this three seconds and the clip is longer.
+
+110
+00:07:05.150 --> 00:07:07.120
+What I like to do is actually speed up the clip.
+
+111
+00:07:07.700 --> 00:07:12.440
+So if I have all this extra space, obviously we don't need all of it,
+
+112
+00:07:12.440 --> 00:07:15.800
+right? So I just want to get that and then get his eyeballs, like,
+
+113
+00:07:18.600 --> 00:07:22.850
+yeah, like right there. So I'm gonna cut that. All right,
+
+114
+00:07:23.710 --> 00:07:27.050
+delete. And what I'm gonna do is hit the, the rate tool,
+
+115
+00:07:27.380 --> 00:07:29.970
+which is this shortcut right here, the rate stretch tool.
+
+116
+00:07:30.350 --> 00:07:34.970
+And I'm just gonna bring it down like that so I can match exactly that three
+
+117
+00:07:34.970 --> 00:07:39.050
+second window. Cool.
+
+118
+00:07:39.630 --> 00:07:43.290
+So boom, now I have my first hook. All right?
+
+119
+00:07:43.910 --> 00:07:47.490
+So if I wanted to go back and actually add a second hook,
+
+120
+00:07:48.120 --> 00:07:51.970
+this is what I would normally do. So because I have these all modularized,
+
+121
+00:07:51.990 --> 00:07:53.810
+it makes my life so much easier, right?
+
+122
+00:07:54.550 --> 00:07:58.210
+So I have this shot and then from here, um,
+
+123
+00:07:58.550 --> 00:08:01.570
+and I'm not actually gonna like cut the whole thing in there 'cause I don't,
+
+124
+00:08:01.570 --> 00:08:02.970
+I don't think I need to, it's kind of repetitive.
+
+125
+00:08:03.630 --> 00:08:06.490
+So I'll just bring it in and then end it there.
+
+126
+00:08:06.670 --> 00:08:09.450
+And I'll hit the out the o for out,
+
+127
+00:08:10.180 --> 00:08:11.730
+click the drag video in.
+
+128
+00:08:12.430 --> 00:08:15.290
+And what I'm actually gonna do is I'm gonna move this adjustment layer up top
+
+129
+00:08:15.290 --> 00:08:18.330
+just so I have a little bit of space here.
+
+130
+00:08:18.990 --> 00:08:20.650
+But when you're doing hooks,
+
+131
+00:08:21.070 --> 00:08:23.610
+you actually wanna just stack 'em on top of each other, okay?
+
+132
+00:08:23.610 --> 00:08:28.330
+Because this is going to, this is gonna allow you to, um,
+
+133
+00:08:28.630 --> 00:08:32.690
+select the hook variation that you want to eventually export. Um,
+
+134
+00:08:33.270 --> 00:08:38.250
+so what you can do by toggling in between them is hit command shift e
+
+135
+00:08:38.520 --> 00:08:39.353
+like this.
+
+136
+00:08:39.950 --> 00:08:44.890
+And you'll be able to not delete it and not hide it. So this,
+
+137
+00:08:45.080 --> 00:08:47.370
+this little feature will hide the entire track,
+
+138
+00:08:47.390 --> 00:08:52.290
+but when you do com command or control shift e it actually just hides it
+
+139
+00:08:52.290 --> 00:08:55.010
+for a temporary bit of time or however long you know,
+
+140
+00:08:55.180 --> 00:08:57.520
+you decide to keep it hidden. So
+
+141
+00:08:59.020 --> 00:09:01.560
+for the example's sake, let's just keep it like that.
+
+142
+00:09:02.060 --> 00:09:05.800
+And I'm happy with this shot right here. I think it looks really cool and weird.
+
+143
+00:09:06.660 --> 00:09:10.760
+So now let's start working through our actual,
+
+144
+00:09:11.580 --> 00:09:13.480
+uh, story like our, our script, right?
+
+145
+00:09:13.870 --> 00:09:17.600
+This medically customized metabolic weight loss program by new images helping
+
+146
+00:09:17.960 --> 00:09:22.880
+thousands. Okay, cool. So the shot is saying show closeup of packaging,
+
+147
+00:09:22.940 --> 00:09:26.080
+or any before and afters available. So we definitely have, uh,
+
+148
+00:09:26.080 --> 00:09:31.000
+closeups of the packaging. So let's throw that in there. All right,
+
+149
+00:09:35.420 --> 00:09:39.480
+so what do we got over here? We've got this shot. Let's get a clear one.
+
+150
+00:09:39.740 --> 00:09:43.400
+And it's not bad. Yeah, this one's cool.
+
+151
+00:09:47.450 --> 00:09:48.360
+Let's check this one.
+
+152
+00:09:49.440 --> 00:09:50.273
+I,
+
+153
+00:09:53.020 --> 00:09:56.480
+By the way, there's no sound on this, so it's, uh,
+
+154
+00:10:06.940 --> 00:10:10.720
+so let's go with something just like more straightforward like this.
+
+155
+00:10:11.200 --> 00:10:15.240
+I kinda like that. And yeah, we'll, we'll take that whole clip.
+
+156
+00:10:15.750 --> 00:10:20.640
+Plug it in. All right. So boom,
+
+157
+00:10:23.270 --> 00:10:27.160
+This medical da, da, da has been da, da da, da da. All right.
+
+158
+00:10:28.620 --> 00:10:33.320
+And so what I'll do is try to just keep this like, so as we know,
+
+159
+00:10:33.320 --> 00:10:34.480
+this is three seconds, right?
+
+160
+00:10:34.580 --> 00:10:39.240
+So let's try to keep this thing three seconds as well. I'll do the rate tool,
+
+161
+00:10:39.370 --> 00:10:43.800
+bring that down, speed it up so we have room for captions.
+
+162
+00:10:44.190 --> 00:10:49.000
+Okay, good. Next we've got, um, okay,
+
+163
+00:10:49.060 --> 00:10:53.440
+so closeup of packaging, it's called wait list, show, product package.
+
+164
+00:10:54.300 --> 00:10:58.840
+And I know we have some product package shots here,
+
+165
+00:10:59.300 --> 00:11:03.320
+but we wanna make it a little bit more different than that last shot, right? So
+
+166
+00:11:09.070 --> 00:11:10.560
+yeah, we can do something like this.
+
+167
+00:11:13.820 --> 00:11:15.400
+See if I got any other photo.
+
+168
+00:11:19.750 --> 00:11:22.640
+Yeah, I think this will be a good shot because there's a lot of, um,
+
+169
+00:11:24.120 --> 00:11:26.800
+a lot of space around it and we can, um,
+
+170
+00:11:28.220 --> 00:11:30.280
+use that space for captions. So
+
+171
+00:11:32.340 --> 00:11:36.200
+1, 2, 3. Cool, happy with that.
+
+172
+00:11:36.880 --> 00:11:41.680
+'cause we're gonna be using these as captions in, in a recent study. Da,
+
+173
+00:11:41.680 --> 00:11:45.560
+da da da da da. Patient's lost. Okay? So, um,
+
+174
+00:11:45.740 --> 00:11:48.680
+I'm not gonna put all this information in there. Instead I'm just gonna have a,
+
+175
+00:11:48.760 --> 00:11:52.040
+a shot of an actress like posing.
+
+176
+00:11:53.860 --> 00:11:55.920
+So it looks like they lost weight.
+
+177
+00:11:58.740 --> 00:12:02.320
+So this one, this is obviously a pain point, but we can have,
+
+178
+00:12:05.590 --> 00:12:08.000
+yeah, we can do something like this where he's like flexing, right?
+
+179
+00:12:08.390 --> 00:12:12.040
+It's not bad of a shot, but I feel like women sell better. So,
+
+180
+00:12:15.990 --> 00:12:20.720
+okay, a little cheesy there, but let's do something like this, okay? In
+
+181
+00:12:25.100 --> 00:12:28.080
+out cool. Boom.
+
+182
+00:12:29.260 --> 00:12:32.280
+And then this is gonna be a little bit of a longer shot because I know there's a
+
+183
+00:12:32.280 --> 00:12:37.080
+lot of description in the text, so, great. Okay.
+
+184
+00:12:37.110 --> 00:12:41.120
+Wait list is a description only, da, da, da treatment plan developed by,
+
+185
+00:12:41.120 --> 00:12:45.600
+so closeup of the product. Let's do another closeup of the product.
+
+186
+00:12:51.150 --> 00:12:53.000
+Okay? Just plug that in. Okay.
+
+187
+00:12:53.000 --> 00:12:57.200
+Clearly this is a really long shot and you gotta remember, we want quick cuts.
+
+188
+00:12:57.200 --> 00:13:02.040
+We don't want a ton of information here at a time. So, uh, as you can see,
+
+189
+00:13:02.040 --> 00:13:05.400
+this one's okay, depending on the captions. Three seconds.
+
+190
+00:13:08.070 --> 00:13:09.630
+Probably trim this down too.
+
+191
+00:13:12.820 --> 00:13:14.950
+Yeah, I think I, I just like her, like
+
+192
+00:13:17.410 --> 00:13:21.910
+we might even do, it might even be worth to add, uh,
+
+193
+00:13:21.990 --> 00:13:25.070
+a second one in here so that it looks a little bit more
+
+194
+00:13:32.370 --> 00:13:34.750
+So we can add more people in the shot.
+
+195
+00:13:41.060 --> 00:13:44.830
+Okay, Good.
+
+196
+00:13:45.210 --> 00:13:49.950
+And I'm just gonna cut that right now. I'm just kind of, kind of playing,
+
+197
+00:13:49.950 --> 00:13:54.590
+playing it by ear because once we get the, uh, the titles in,
+
+198
+00:13:54.590 --> 00:13:58.110
+we'll kind of get a feel for it. So we're already at 14 seconds. All right,
+
+199
+00:13:58.130 --> 00:14:00.030
+so that's, that's kind of long. Well actually,
+
+200
+00:14:00.250 --> 00:14:01.750
+that's trim this all the way down.
+
+201
+00:14:02.410 --> 00:14:06.190
+So if you wanted to trim all this space right here,
+
+202
+00:14:06.310 --> 00:14:09.470
+a quick shortcut is w it'll just push everything down.
+
+203
+00:14:10.650 --> 00:14:13.670
+So boom title, good.
+
+204
+00:14:14.750 --> 00:14:16.350
+I honestly feel like it's a little long.
+
+205
+00:14:17.770 --> 00:14:20.290
+I think that's probably where I would cut right there. 'cause it's like,
+
+206
+00:14:22.630 --> 00:14:27.440
+so what I mean by adding little space right here is now I know
+
+207
+00:14:27.440 --> 00:14:29.800
+like this one would start here instead. So
+
+208
+00:14:32.690 --> 00:14:33.523
+boom,
+
+209
+00:14:35.330 --> 00:14:37.820
+good ingredients come up.
+
+210
+00:14:39.770 --> 00:14:44.740
+Case studies. I feel like he should already be flexing
+
+211
+00:14:47.190 --> 00:14:50.660
+right here. Cool.
+
+212
+00:14:53.200 --> 00:14:54.560
+I mean, there's, there's options here.
+
+213
+00:14:54.580 --> 00:14:57.840
+You could do a split screen or you could do both of them one after another
+
+214
+00:15:01.180 --> 00:15:04.440
+and it isn't available at your local pharmacy. All right,
+
+215
+00:15:04.440 --> 00:15:05.960
+so I know that we have pharmacy shots.
+
+216
+00:15:06.760 --> 00:15:07.593
+I
+
+217
+00:15:10.300 --> 00:15:12.320
+In here, so pharmacy,
+
+218
+00:15:15.620 --> 00:15:19.160
+all right, this is actually me going into the pharmacy. So,
+
+219
+00:15:21.220 --> 00:15:25.480
+all right, so these aren't modularized. So,
+
+220
+00:15:26.460 --> 00:15:26.860
+um,
+
+221
+00:15:26.860 --> 00:15:31.120
+one thing that you need to do with U G C shots is you're gonna right click or
+
+222
+00:15:31.120 --> 00:15:35.320
+you're gonna select them all right click, go to modify, interpret footage,
+
+223
+00:15:35.580 --> 00:15:38.960
+and then you want to change the color space override, um,
+
+224
+00:15:39.070 --> 00:15:42.200
+because it comes out a little like dull like this, I don't know,
+
+225
+00:15:42.200 --> 00:15:46.080
+it's with the new iPhones, but change it to 2020 scene.
+
+226
+00:15:46.980 --> 00:15:51.040
+And your, your videos are gonna look like tremendously different.
+
+227
+00:15:51.140 --> 00:15:52.480
+So let's,
+
+228
+00:15:55.940 --> 00:15:59.000
+so I know I did a little like whipp pen there,
+
+229
+00:15:59.140 --> 00:16:02.240
+so it's a little bit of a visuals.
+
+230
+00:16:07.070 --> 00:16:11.040
+Boom. Okay, so clearly this one's way bigger, right?
+
+231
+00:16:11.040 --> 00:16:13.320
+Because they didn't modularize it. So, uh,
+
+232
+00:16:14.040 --> 00:16:17.800
+shortcut to getting to your effects control panel is shift f uh,
+
+233
+00:16:17.930 --> 00:16:22.400
+shift five here. I'm just gonna scale this bad boy down like this.
+
+234
+00:16:23.060 --> 00:16:27.520
+Uh, another shortcut you can do to scale down. If you click on motion, you can,
+
+235
+00:16:28.300 --> 00:16:33.240
+uh, get the little bounding box and then adjust it that way. That's,
+
+236
+00:16:33.240 --> 00:16:36.040
+that's really nice and helpful. So, boom,
+
+237
+00:16:36.820 --> 00:16:41.080
+not available to any store pharmacy. So I'm just gonna cut this,
+
+238
+00:16:41.200 --> 00:16:45.560
+I don't need that. All right,
+
+239
+00:16:45.610 --> 00:16:49.800
+let's go back to the script, See if waitlist is for you.
+
+240
+00:16:49.800 --> 00:16:53.440
+Visit NewAge medical screen Recording. Alright, so, uh,
+
+241
+00:16:53.600 --> 00:16:57.360
+I don't have a screen recording, but I do have him over the shoulder, uh,
+
+242
+00:16:58.390 --> 00:17:01.680
+basically doing the same thing. So I'm gonna get that shot.
+
+243
+00:17:02.080 --> 00:17:06.160
+I remember that was earlier on right here. Cool.
+
+244
+00:17:06.580 --> 00:17:10.480
+So let's go here. Yeah, we don't need that whole process,
+
+245
+00:17:10.820 --> 00:17:14.880
+so let's just get that up to when he selects a package.
+
+246
+00:17:15.980 --> 00:17:20.840
+So o drag it in. And that's a really long clip,
+
+247
+00:17:21.220 --> 00:17:25.680
+so we're gonna speed that up. And I feel like this drags a little bit,
+
+248
+00:17:25.900 --> 00:17:28.000
+so let's speed that up as well.
+
+249
+00:17:31.500 --> 00:17:34.800
+We will see when the captains come in. Boom.
+
+250
+00:17:37.020 --> 00:17:40.670
+Okay, so there's a little bit of dead space here. I'm gonna trim that.
+
+251
+00:17:41.930 --> 00:17:46.470
+I'm gonna get it right when he starts actually moving his finger.
+
+252
+00:17:48.380 --> 00:17:53.360
+Cool. All right, so I'm gonna, I'm gonna speed this thing up,
+
+253
+00:17:53.530 --> 00:17:58.280
+maybe 150. Um, so if you don't wanna use the rate tool,
+
+254
+00:17:58.940 --> 00:18:03.320
+uh, I would suggest just right clicking and then going to speed duration,
+
+255
+00:18:03.900 --> 00:18:08.440
+and then hitting one 50. And then just go in increments of like one 50 or, uh,
+
+256
+00:18:08.440 --> 00:18:12.600
+increments of 50 or a hundred. So it's like 1.5 or two x speed.
+
+257
+00:18:13.870 --> 00:18:16.000
+This goes for like reducing the speed as well.
+
+258
+00:18:19.890 --> 00:18:24.740
+Yeah, so I would probably test out just to see if it,
+
+259
+00:18:24.920 --> 00:18:29.780
+if it moves a little faster. Yeah, that's better.
+
+260
+00:18:30.570 --> 00:18:35.460
+Boom. Cool. I would prob I would just cut there. Cut, delete.
+
+261
+00:18:37.360 --> 00:18:41.420
+And so next we've got screen recording. Begin your transformation today.
+
+262
+00:18:42.200 --> 00:18:42.920
+All right,
+
+263
+00:18:42.920 --> 00:18:47.300
+so we've got maybe like one additional
+
+264
+00:18:51.950 --> 00:18:54.410
+we can do, like a product shot if they, if we have one.
+
+265
+00:19:09.580 --> 00:19:13.750
+Okay, let's see what we got here. Begin your transformation today. So, you know,
+
+266
+00:19:13.750 --> 00:19:18.190
+with, with begin your transformation today, um, we definitely like,
+
+267
+00:19:18.580 --> 00:19:21.670
+it'd be nice to have some sort of person.
+
+268
+00:19:23.700 --> 00:19:28.110
+Yeah, here we go. It's a nice little ending. Beginner your transformation today.
+
+269
+00:19:28.780 --> 00:19:33.030
+He's flexing. All right, that could be a nice little ending there.
+
+270
+00:19:37.330 --> 00:19:39.430
+And I'll cut there 'cause he's not really doing anything
+
+271
+00:19:42.820 --> 00:19:47.630
+cool. And I think the rest of the video could just have the, uh, like an outro,
+
+272
+00:19:49.450 --> 00:19:52.150
+uh, with the logo and c t a. So
+
+273
+00:19:57.050 --> 00:20:00.270
+Pretty much from here, let's just go back to our steps, right? So we,
+
+274
+00:20:00.290 --> 00:20:05.230
+we pretty much put all of the, uh, the shots together, okay?
+
+275
+00:20:05.290 --> 00:20:08.390
+So this is if you're following a script and you already know what,
+
+276
+00:20:08.460 --> 00:20:11.070
+what clips you have. So real quick,
+
+277
+00:20:11.080 --> 00:20:15.150
+going back to the steps here, modularizing clips,
+
+278
+00:20:15.150 --> 00:20:18.830
+now we assemble timeline and adds some music. Um,
+
+279
+00:20:19.610 --> 00:20:22.950
+it really comes down now if we want to add music, we can add music later,
+
+280
+00:20:23.010 --> 00:20:27.470
+to be honest, because the timing is gonna be, it's gonna affect everything.
+
+281
+00:20:28.090 --> 00:20:33.030
+So I would say this is pretty, pretty solid for, uh, initial cut.
+
+282
+00:20:33.050 --> 00:20:35.270
+And next we're gonna add titles, overlays and effects.
+
+283
+00:20:35.330 --> 00:20:39.830
+So let's play this through one, one time no sound.
+
+284
+00:20:40.910 --> 00:20:45.710
+Honestly, it's sometimes better to play to edit videos, excuse me,
+
+285
+00:20:46.090 --> 00:20:50.360
+to edit videos without sound because you actually can feel the pacing more,
+
+286
+00:20:51.100 --> 00:20:55.000
+um, unless the, the music, you know, unless you are cutting to music,
+
+287
+00:20:55.070 --> 00:20:57.640
+like cutting to the beat. And in this scenario,
+
+288
+00:20:57.710 --> 00:20:59.600
+like this case like weight loss stuff, like,
+
+289
+00:20:59.600 --> 00:21:01.000
+you're not gonna be really cutting to the beat.
+
+290
+00:21:01.110 --> 00:21:04.040
+Like people aren't really interested in that. You know,
+
+291
+00:21:04.190 --> 00:21:09.000
+when you cut to the beat, it's something that's hip, that's cool, you know,
+
+292
+00:21:09.000 --> 00:21:13.880
+there's a excitement to it. In this case, we're just, it's very informational,
+
+293
+00:21:14.100 --> 00:21:18.560
+cut and dry. But what we wanna do is just kind of feel where the video is,
+
+294
+00:21:19.110 --> 00:21:20.920
+where's it, where's it lagging? Where, where,
+
+295
+00:21:20.920 --> 00:21:25.320
+where do we need to spice the spice something up. So boom.
+
+296
+00:21:26.030 --> 00:21:26.863
+Okay,
+
+297
+00:21:29.930 --> 00:21:34.670
+So that will have like the, the product little things there. Good.
+
+298
+00:21:41.590 --> 00:21:45.760
+Okay, I feel like that one is a little long. So let's actually, um,
+
+299
+00:21:47.060 --> 00:21:48.200
+and you can tell obviously the,
+
+300
+00:21:48.200 --> 00:21:50.720
+the clip itself is long and I don't think it needs to be that long.
+
+301
+00:21:50.900 --> 00:21:55.160
+So let's speed this up to let's try 300 and see, we,
+
+302
+00:21:55.160 --> 00:21:58.960
+we've we've shaved almost an entire second. That's big.
+
+303
+00:21:59.350 --> 00:22:01.160
+It's big when it comes to ads.
+
+304
+00:22:05.510 --> 00:22:09.920
+Cool. Yeah, I think that, I think that's a solid, solid story.
+
+305
+00:22:10.100 --> 00:22:14.960
+So again, we've got hook, we've got, um,
+
+306
+00:22:15.720 --> 00:22:20.280
+interest, all right, we're, we've got desire. This is probably where we,
+
+307
+00:22:20.380 --> 00:22:23.480
+we might be able to improve on the video. Um,
+
+308
+00:22:24.620 --> 00:22:29.160
+so we got interest right here. This could be interesting.
+
+309
+00:22:29.400 --> 00:22:31.680
+I feel like it could be missing something, um,
+
+310
+00:22:32.260 --> 00:22:36.160
+in terms of like keeping them engaged because it's going straight into the
+
+311
+00:22:36.160 --> 00:22:37.120
+product. I feel like there's,
+
+312
+00:22:37.120 --> 00:22:41.680
+there could be something here that can spice it up. Okay,
+
+313
+00:22:41.680 --> 00:22:45.610
+here we go. This might be a better shot. Yeah,
+
+314
+00:22:46.160 --> 00:22:49.810
+there's just a little bit more entertainment value here, you know, shaking it.
+
+315
+00:22:49.810 --> 00:22:53.050
+There's more visuals going on. So I'm gonna use that clip.
+
+316
+00:22:53.710 --> 00:22:57.890
+I'm actually gonna insert it here. And if you hold commander control, um,
+
+317
+00:22:59.030 --> 00:23:02.930
+you can actually insert it just like that in between your shots.
+
+318
+00:23:07.140 --> 00:23:09.240
+So what I'm gonna do is,
+
+319
+00:23:17.140 --> 00:23:19.670
+Yeah, see there's a little bit more of like a,
+
+320
+00:23:20.620 --> 00:23:24.590
+just like a visual stimulation going on here that you're like, what was that?
+
+321
+00:23:24.760 --> 00:23:27.230
+Right? So you go from this, you're, you've,
+
+322
+00:23:27.230 --> 00:23:31.230
+you've got your attention now I want to keep your interest. Okay, what is that?
+
+323
+00:23:31.490 --> 00:23:34.150
+So I'll add some effects to this later on, and I think it'll,
+
+324
+00:23:34.320 --> 00:23:38.550
+it'll maintain your attention. But for now,
+
+325
+00:23:39.190 --> 00:23:43.510
+I think this is pretty solid. Um, lemme just review this clip really quick,
+
+326
+00:23:43.730 --> 00:23:45.780
+see what we've got going on. Okay, she's just working.
+
+327
+00:23:50.150 --> 00:23:53.680
+There's another shot of, of shaking the green bottle. Okay? So
+
+328
+00:23:55.490 --> 00:23:59.920
+we've got a lot of crazy, crazy hooks here. Ice cream on pizza.
+
+329
+00:24:01.660 --> 00:24:05.160
+All right, let's watch this one more time. That looks fun. All right,
+
+330
+00:24:05.510 --> 00:24:09.480
+this new product, da da da. I would add a zoom in here and, uh,
+
+331
+00:24:09.500 --> 00:24:14.400
+the titles pop up. Add the little boom, boom, boom.
+
+332
+00:24:15.200 --> 00:24:18.400
+I like that. Da da da da, da. Solid, solid,
+
+333
+00:24:18.450 --> 00:24:23.040
+solid and cool. All right, I'm actually really happy with that.
+
+334
+00:24:23.140 --> 00:24:23.973
+I'm gonna save it.
+
+335
+00:24:24.580 --> 00:24:28.920
+And next we're gonna go over the titles and effects and all that fun stuff.
+
+336
+00:24:29.220 --> 00:24:32.920
+All right, thanks for watching me and I hope you are following along.
+
+337
+00:24:33.300 --> 00:24:34.680
+So see you in the next one.

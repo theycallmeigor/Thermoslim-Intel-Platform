@@ -1,0 +1,1780 @@
+WEBVTT
+
+1
+00:00:02.480 --> 00:00:04.600
+Ei, o que é que se passa, pessoal?
+
+2
+00:00:04.680 --> 00:00:06.120
+Neste tutorial,
+
+3
+00:00:06.240 --> 00:00:12.240
+vamos começar a montar os nossos
+clips na nossa linha de tempo.
+
+4
+00:00:12.360 --> 00:00:13.400
+Nesta altura,
+
+5
+00:00:13.520 --> 00:00:18.440
+já modularizou os seus clips, pelo que
+sabe quais os planos que são valiosos,
+
+6
+00:00:18.520 --> 00:00:22.680
+quais os que quer levar, quais
+os que quer utilizar, na verdade.
+
+7
+00:00:22.760 --> 00:00:25.480
+Vamos saltar para o Premiere
+e começar este processo.
+
+8
+00:00:25.560 --> 00:00:27.440
+Aqui na estreia,
+
+9
+00:00:27.560 --> 00:00:30.240
+Na verdade, acabei de abrir uma sequência
+
+10
+00:00:30.240 --> 00:00:34.160
+completamente nova, desculpe,
+um projeto completamente novo.
+
+11
+00:00:34.240 --> 00:00:37.240
+Aqui, podem ver os meus caixotes de lixo.
+
+12
+00:00:37.320 --> 00:00:40.200
+Ainda não coloquei os meus clips
+
+13
+00:00:40.200 --> 00:00:44.080
+modulares, e estou
+prestes a fazê-lo agora.
+
+14
+00:00:44.200 --> 00:00:48.920
+Mas, para este tutorial,
+gravei uma voz-off,
+
+15
+00:00:49.040 --> 00:00:54.200
+e por isso vou incluí-la também.
+
+16
+00:00:54.400 --> 00:00:59.720
+Deixe-me voltar atrás rapidamente, porque
+este é um projeto de um cliente e eu
+
+17
+00:00:59.760 --> 00:01:04.720
+tenho um guião escrito
+para ele, que está aqui.
+
+18
+00:01:04.840 --> 00:01:08.200
+Gostaria de vos falar
+rapidamente sobre isto.
+
+19
+00:01:08.280 --> 00:01:15.720
+Não vai ser exato, mas o que estou a
+tentar transmitir-lhe é a estrutura.
+
+20
+00:01:15.840 --> 00:01:21.640
+A forma como criamos os guiões é
+muito semelhante, o formato AIDA.
+
+21
+00:01:21.760 --> 00:01:23.800
+Tem o batente de rolagem, o gancho,
+
+22
+00:01:23.880 --> 00:01:29.400
+a introdução, neste caso, estudo
+de caso e autoridade de prova.
+
+23
+00:01:29.520 --> 00:01:34.120
+Depois temos como funciona e,
+em seguida, a CTA, está bem?
+
+24
+00:01:34.240 --> 00:01:39.200
+Vamos passar por este
+processo com os clips.
+
+25
+00:01:39.320 --> 00:01:41.320
+Este anúncio pode resultar.
+Eu nem sequer sei.
+
+26
+00:01:41.360 --> 00:01:43.160
+Vou apenas editar isto e ver como fica
+
+27
+00:01:43.200 --> 00:01:47.640
+mas, pelo caminho, havemos de descobrir.
+
+28
+00:01:47.760 --> 00:01:51.160
+Mas voltemos à nossa estreia
+
+29
+00:01:51.160 --> 00:01:54.400
+e vamos começar a trabalhar com
+algumas destas filmagens, está bem?
+
+30
+00:01:54.480 --> 00:01:56.760
+Entrar no ROS modular,
+
+31
+00:01:56.880 --> 00:02:03.040
+pode ver que tudo aqui
+já está pré-rotulado.
+
+32
+00:02:03.920 --> 00:02:08.400
+Na verdade, o som também foi
+removido porque não preciso dele.
+
+33
+00:02:08.480 --> 00:02:11.040
+De facto, é menos uma camada.
+
+34
+00:02:11.160 --> 00:02:13.760
+Podem ver aqui que temos o telemóvel a
+
+35
+00:02:13.760 --> 00:02:17.080
+navegar, com vontade de
+comer comida de plástico.
+
+36
+00:02:17.200 --> 00:02:20.600
+Muito rapidamente, o produto é de
+facto um produto para perder peso.
+
+37
+00:02:20.680 --> 00:02:23.880
+Quando filmámos isto,
+queríamos obter uma tonelada
+
+38
+00:02:23.920 --> 00:02:25.760
+de diferentes ganchos e rolhas de
+
+39
+00:02:25.760 --> 00:02:28.720
+pergaminho que podem
+potencialmente chamar a atenção.
+
+40
+00:02:28.800 --> 00:02:32.880
+Comemos um monte de comida de plástico
+e fizemos todas estas coisas malucas.
+
+41
+00:02:32.960 --> 00:02:37.560
+Isto vai certamente chamar
+a atenção mais tarde.
+
+42
+00:02:37.680 --> 00:02:40.440
+Mas também tirámos fotografias como esta,
+
+43
+00:02:40.520 --> 00:02:43.520
+em que o produto está
+a ser colocado na mão.
+
+44
+00:02:43.640 --> 00:02:47.120
+Há muitas coisas dinâmicas fixes, mas
+tenho a certeza de que podemos fazer uma
+
+45
+00:02:47.160 --> 00:02:50.560
+anúncio em vídeo eficaz com
+os exemplos disponíveis.
+
+46
+00:02:50.640 --> 00:02:53.200
+Então vamos a isso.
+
+47
+00:02:53.360 --> 00:02:56.000
+Muito bem, vou levar todos
+os meus raws para aqui,
+
+48
+00:02:56.080 --> 00:02:59.840
+Destaco todos eles e vou arrastá-los
+para o meu caixote do lixo.
+
+49
+00:02:59.920 --> 00:03:00.960
+Fantástico.
+
+50
+00:03:02.680 --> 00:03:07.920
+Tenho alguns outros recursos aqui, como
+a minha locução, que vou colocar aqui
+
+51
+00:03:07.960 --> 00:03:10.800
+ou coloco efeitos sonoros.
+
+52
+00:03:10.920 --> 00:03:14.440
+Tenho aqui mais alguns clips
+que ainda não modularizei,
+
+53
+00:03:14.520 --> 00:03:16.520
+mas a farmácia e a receção de encomendas,
+
+54
+00:03:16.560 --> 00:03:18.680
+por isso, vou incluir
+isso nas minhas raws.
+
+55
+00:03:18.960 --> 00:03:19.520
+Ótimo.
+
+56
+00:03:19.640 --> 00:03:24.280
+Então, o primeiro passo é
+criar uma sequência, certo?
+
+57
+00:03:24.400 --> 00:03:26.520
+Vou para a minha sequência, caixa, clicar
+
+58
+00:03:26.520 --> 00:03:29.120
+com o botão direito do
+rato, Novo item, Sequência.
+
+59
+00:03:29.200 --> 00:03:32.120
+E se ainda não o fizeram, temos
+uma formação gratuita sobre como
+
+60
+00:03:32.160 --> 00:03:35.600
+para criar predefinições, pelo que
+recomendo vivamente que o faça.
+
+61
+00:03:35.680 --> 00:03:39.000
+Por isso, para este exemplo,
+vou escolher 9 por 16.
+
+62
+00:03:39.080 --> 00:03:40.400
+Está muito calor.
+
+63
+00:03:40.480 --> 00:03:46.600
+Atualmente, diria que a colocação
+vertical, TikToks, Reels, tudo isso.
+
+64
+00:03:46.720 --> 00:03:48.720
+Portanto, vamos fazer 9 por 16.
+
+65
+00:03:48.800 --> 00:03:53.000
+Vou chamar-lhe nove por 16, topo do funil.
+
+66
+00:03:53.120 --> 00:03:55.760
+Muito bem, boom, estamos prontos para ir.
+
+67
+00:03:55.840 --> 00:04:02.120
+Portanto, em primeiro lugar,
+queremos trabalhar numa ordem lógica.
+
+68
+00:04:02.240 --> 00:04:05.320
+Estamos a falar do batente do pergaminho,
+
+69
+00:04:05.400 --> 00:04:10.680
+e queremos começar a definir o que
+pode ser esse potencial de rolha.
+
+70
+00:04:10.760 --> 00:04:13.760
+Neste caso, é apenas vago, por isso, é
+
+71
+00:04:13.760 --> 00:04:17.200
+preciso ter um forte
+visual, áudio e título.
+
+72
+00:04:17.280 --> 00:04:21.720
+Só de ver os clips, acho que
+vimos aqui um grande potencial.
+
+73
+00:04:21.800 --> 00:04:26.240
+Na verdade, vou mudar a vista
+para poder ver estas fotografias
+
+74
+00:04:26.280 --> 00:04:29.800
+um pouco mais claramente, porque gosto
+de fazer a visualização em miniatura.
+
+75
+00:04:29.880 --> 00:04:31.800
+Assim, sei para o que estou a olhar.
+
+76
+00:04:31.880 --> 00:04:38.400
+Mas vamos lá fazer Este
+exemplo é divertido.
+
+77
+00:04:38.560 --> 00:04:41.000
+Sim, é uma boa foto, é uma foto fixe.
+
+78
+00:04:41.120 --> 00:04:46.760
+O que eu gosto de fazer, em vez de
+arrastar isto para aqui e para ali,
+
+79
+00:04:46.880 --> 00:04:49.160
+Na verdade, clico duas vezes na imagem e,
+
+80
+00:04:49.200 --> 00:04:51.640
+em seguida, clico neste
+pequeno ícone aqui.
+
+81
+00:04:51.720 --> 00:04:55.040
+E o que faz é arrastar o vídeo assim.
+
+82
+00:04:55.160 --> 00:04:57.880
+Gosto muito disso porque é menos um
+
+83
+00:04:57.880 --> 00:05:03.320
+camada com que me tenho de preocupar
+quando se trata de preparar as coisas.
+
+84
+00:05:03.400 --> 00:05:05.680
+Então, boom, tenho esta foto.
+
+85
+00:05:05.760 --> 00:05:10.320
+Mas lembrem-se, só queremos fazer
+três segundos ou mais, certo?
+
+86
+00:05:10.440 --> 00:05:13.720
+Portanto, são três segundos de intervalo.
+
+87
+00:05:13.800 --> 00:05:17.440
+Uma coisa que gosto de fazer em termos de
+
+88
+00:05:17.440 --> 00:05:21.720
+manter as coisas dentro
+de um segmento de tempo,
+
+89
+00:05:21.840 --> 00:05:25.640
+pode adicionar, digamos, uma
+fila de capítulos aqui mesmo
+
+90
+00:05:25.680 --> 00:05:28.400
+na marca dos três segundos,
+ou pode fazer um marcador,
+
+91
+00:05:28.480 --> 00:05:32.880
+algo do género, onde mostra que
+os três segundos estão mesmo ali.
+
+92
+00:05:32.960 --> 00:05:37.440
+Outra coisa que eu poderia
+fazer se não tiveres
+
+93
+00:05:37.440 --> 00:05:40.600
+Porque uma coisa é o facto
+de esta coisa ficar parada.
+
+94
+00:05:40.680 --> 00:05:43.880
+Assim, por exemplo, se eu fosse até aqui
+
+95
+00:05:43.880 --> 00:05:46.520
+e eu quisesse três segundos aqui,
+seria mais difícil de contar.
+
+96
+00:05:46.600 --> 00:05:52.520
+Por isso, vou entrar aqui e
+criar como é que se chama?
+
+97
+00:05:52.680 --> 00:05:54.880
+Uma camada de ajustamento, apenas
+
+98
+00:05:54.880 --> 00:06:00.720
+camada de ajustamento normal e arrasto-a
+para a minha linha de tempo desta forma.
+
+99
+00:06:00.800 --> 00:06:03.560
+E depois vou mesmo encurtá-la
+
+100
+00:06:03.560 --> 00:06:06.880
+por isso sei que este é um
+segmento de três segundos aqui.
+
+101
+00:06:06.960 --> 00:06:09.720
+Por isso, para onde quer que eu
+vá, este é o meu espaço reservado,
+
+102
+00:06:09.800 --> 00:06:12.640
+para que eu saiba, ok, são
+três segundos aqui mesmo.
+
+103
+00:06:12.720 --> 00:06:15.840
+Fixe. Dito isto,
+
+104
+00:06:16.080 --> 00:06:19.440
+Por vezes, gosto de acrescentar
+um pouco de espaço no meio,
+
+105
+00:06:19.520 --> 00:06:25.120
+um pouco de espaço antes de fazer qualquer
+gancho, para ser honesto, gosto de
+
+106
+00:06:25.120 --> 00:06:29.600
+Porque pode variar, e mostrar-vos-ei mais
+tarde porque é que fazemos algo assim.
+
+107
+00:06:29.680 --> 00:06:33.640
+Mas Então, nesta fotografia,
+temo-lo a colocá-lo
+
+108
+00:06:33.680 --> 00:06:38.960
+nos seus olhos, e estamos apenas a tentar
+descobrir qual é a melhor jogada aqui.
+
+109
+00:06:39.080 --> 00:06:42.000
+Oh, sim, acho que ele não
+está a fazer muito aqui,
+
+110
+00:06:42.080 --> 00:06:45.840
+mas quando ele a pega, sinto
+que é realmente convincente.
+
+111
+00:06:45.920 --> 00:06:48.040
+Por isso, vou apagar isso.
+
+112
+00:06:48.120 --> 00:06:51.120
+Carreguei no C e agora vou apagar isso.
+
+113
+00:06:51.240 --> 00:06:54.560
+Vou arrastá-lo para aqui e vou rever isto.
+
+114
+00:06:54.680 --> 00:06:57.600
+Por isso, carrego na tecla
++ para aumentar o zoom.
+
+115
+00:06:57.680 --> 00:06:59.720
+Vamos ver mais uma vez.
+
+116
+00:06:59.840 --> 00:07:02.200
+Muito bem, fantástico.
+
+117
+00:07:02.320 --> 00:07:05.280
+Temos estes três segundos
+e o clip é mais longo.
+
+118
+00:07:05.360 --> 00:07:07.720
+O que eu gosto de fazer é acelerar o clip.
+
+119
+00:07:07.800 --> 00:07:12.720
+Se tenho todo este espaço extra, é óbvio
+que não precisamos dele todo, certo?
+
+120
+00:07:12.800 --> 00:07:17.440
+Só quero apanhar isso e
+depois apanhar os olhos dele.
+
+121
+00:07:18.600 --> 00:07:21.240
+Sim, é isso mesmo.
+
+122
+00:07:21.400 --> 00:07:23.080
+Vou cortar isso,
+
+123
+00:07:23.680 --> 00:07:26.040
+apagar, e o que vou fazer é carregar em
+
+124
+00:07:26.040 --> 00:07:29.000
+a ferramenta de taxa,
+que é este atalho aqui,
+
+125
+00:07:29.120 --> 00:07:32.280
+a ferramenta de esticar a
+taxa, e vou baixá-la como
+
+126
+00:07:32.320 --> 00:07:37.280
+para que eu possa corresponder exatamente
+a essa janela de três segundos.
+
+127
+00:07:38.760 --> 00:07:40.760
+Fixe. Então, boom.
+
+128
+00:07:40.920 --> 00:07:43.840
+Agora tenho o meu
+primeiro gancho, está bem?
+
+129
+00:07:43.920 --> 00:07:46.920
+Portanto, se eu quisesse
+voltar atrás e acrescentar
+
+130
+00:07:46.960 --> 00:07:49.760
+um segundo gancho, isto é
+o que eu normalmente faria.
+
+131
+00:07:49.840 --> 00:07:54.480
+Como tenho tudo isto modularizado, a minha
+vida torna-se muito mais fácil, certo?
+
+132
+00:07:54.560 --> 00:07:59.960
+Então, tenho esta fotografia e,
+a partir daqui, não vou cortar
+
+133
+00:07:59.960 --> 00:08:02.320
+tudo lá dentro porque acho
+que não preciso de o fazer.
+
+134
+00:08:02.400 --> 00:08:03.680
+É repetitivo.
+
+135
+00:08:03.800 --> 00:08:10.120
+Vou só introduzir e acabar aí,
+e vou carregar no "O" de "out".
+
+136
+00:08:10.240 --> 00:08:12.280
+Clique no botão arrastar vídeo.
+
+137
+00:08:12.360 --> 00:08:13.920
+O que eu vou fazer é
+
+138
+00:08:13.960 --> 00:08:18.920
+para mover esta camada de ajuste para
+cima, para ter um pouco de espaço aqui.
+
+139
+00:08:19.000 --> 00:08:21.040
+Mas quando se está a fazer ganchos,
+
+140
+00:08:21.120 --> 00:08:23.920
+na verdade, é melhor empilhá-los
+uns em cima dos outros, está bem?
+
+141
+00:08:24.000 --> 00:08:26.680
+Porque isto vai
+
+142
+00:08:26.680 --> 00:08:33.160
+permitem selecionar a variação do
+gancho que se pretende exportar.
+
+143
+00:08:33.280 --> 00:08:39.760
+O que pode fazer para alternar entre eles
+é premir Command, Shift, E, desta forma,
+
+144
+00:08:39.880 --> 00:08:44.400
+e poderá não o apagar e não o esconder.
+
+145
+00:08:44.560 --> 00:08:47.080
+Esta pequena funcionalidade
+irá ocultar todo o
+
+146
+00:08:47.120 --> 00:08:52.280
+mas quando se faz Command ou Control,
+Shift, E, na realidade, apenas a esconde
+
+147
+00:08:52.320 --> 00:08:57.240
+por um período de tempo temporário ou
+pelo tempo que decidir manter oculto.
+
+148
+00:08:57.320 --> 00:09:01.920
+Por isso, para efeitos de exemplo,
+vamos manter as coisas assim.
+
+149
+00:09:02.000 --> 00:09:04.000
+Estou satisfeito com esta fotografia aqui.
+
+150
+00:09:04.040 --> 00:09:06.560
+Acho que tem um aspeto
+muito fixe e estranho.
+
+151
+00:09:06.640 --> 00:09:13.840
+Vamos agora começar a trabalhar na
+nossa história, no nosso guião, certo?
+
+152
+00:09:13.960 --> 00:09:15.920
+Este tratamento metabólico de
+peso medicamente personalizado
+
+153
+00:09:15.960 --> 00:09:18.480
+programa de perda de peso por novas
+imagens ajudando milhares de pessoas.
+
+154
+00:09:18.520 --> 00:09:19.440
+Ok, fixe.
+
+155
+00:09:19.560 --> 00:09:21.480
+O tiro está a dizer,
+
+156
+00:09:21.600 --> 00:09:24.800
+mostrar o close-up da embalagem ou
+qualquer antes e depois está disponível.
+
+157
+00:09:24.880 --> 00:09:28.080
+Temos, sem dúvida, grandes
+planos da embalagem.
+
+158
+00:09:28.160 --> 00:09:29.880
+Vamos lá pôr isso no sítio.
+
+159
+00:09:29.960 --> 00:09:32.360
+Muito bem.
+
+160
+00:09:35.520 --> 00:09:38.240
+O que é que temos aqui? Temos esta foto.
+
+161
+00:09:38.320 --> 00:09:39.760
+Vamos lá ver o que se passa.
+
+162
+00:09:39.840 --> 00:09:41.440
+Isso não é mau.
+
+163
+00:09:42.600 --> 00:09:44.400
+Sim, este é fixe.
+
+164
+00:09:46.760 --> 00:09:49.680
+Vamos verificar este.
+
+165
+00:09:52.960 --> 00:10:00.880
+Já agora, isto não tem
+som, por isso é diferente.
+
+166
+00:10:06.880 --> 00:10:10.680
+Vamos optar por algo
+mais simples, como isto.
+
+167
+00:10:10.800 --> 00:10:13.520
+Gosto disso.
+
+168
+00:10:13.760 --> 00:10:17.280
+Pegamos no clip inteiro e ligamo-lo.
+
+169
+00:10:17.640 --> 00:10:18.840
+Muito bem.
+
+170
+00:10:19.000 --> 00:10:22.600
+Então, boom.
+
+171
+00:10:23.400 --> 00:10:26.560
+Este médico da da da da tem sido
+da da da da da da da da da da da.
+
+172
+00:10:26.640 --> 00:10:28.000
+Muito bem.
+
+173
+00:10:28.640 --> 00:10:30.880
+E por isso o que vou fazer é tentar manter
+
+174
+00:10:30.920 --> 00:10:34.480
+isto como Como sabemos, isto
+são três segundos, certo?
+
+175
+00:10:34.560 --> 00:10:38.200
+Vamos tentar manter esta
+coisa em três segundos também.
+
+176
+00:10:38.280 --> 00:10:41.760
+Vou usar a ferramenta de
+taxa, baixá-la e acelerá-la.
+
+177
+00:10:42.520 --> 00:10:44.840
+Temos espaço para
+legendas. Muito bem, ótimo.
+
+178
+00:10:44.880 --> 00:10:45.840
+Ótimo.
+
+179
+00:10:46.160 --> 00:10:48.240
+A seguir, temos
+
+180
+00:10:48.640 --> 00:10:52.280
+Muito bem, a embalagem de proximidade
+chama-se Weightless (sem peso).
+
+181
+00:10:52.360 --> 00:10:54.080
+Mostrar a embalagem do produto.
+
+182
+00:10:54.160 --> 00:10:58.520
+Sei que temos algumas fotografias
+de pacotes de produtos
+
+183
+00:10:58.520 --> 00:11:00.920
+aqui, mas queremos torná-la um pouco mais
+
+184
+00:11:00.920 --> 00:11:03.440
+diferente do que a
+última fotografia, certo?
+
+185
+00:11:03.520 --> 00:11:11.760
+Podemos fazer algo deste género.
+
+186
+00:11:12.920 --> 00:11:16.600
+Ver se tenho mais alguma fotografia.
+
+187
+00:11:19.880 --> 00:11:22.000
+Penso que esta será uma
+boa oportunidade porque
+
+188
+00:11:22.000 --> 00:11:29.880
+há muito espaço à volta, e podemos
+utilizar esse espaço para as legendas.
+
+189
+00:11:30.000 --> 00:11:35.280
+Então, um, dois, três. Fixe.
+
+190
+00:11:35.480 --> 00:11:39.240
+Fico contente com isso, porque
+vamos utilizá-los como legendas.
+
+191
+00:11:39.320 --> 00:11:44.120
+Num estudo recente, os doentes perderam.
+
+192
+00:11:44.240 --> 00:11:47.240
+Ok, não vou colocar toda
+esta informação aqui.
+
+193
+00:11:47.360 --> 00:11:53.000
+Em vez disso, vou apenas tirar uma
+fotografia de uma atriz a posar.
+
+194
+00:11:53.880 --> 00:11:56.880
+Assim, parece que perderam peso.
+
+195
+00:11:58.800 --> 00:12:03.440
+Portanto, este é obviamente um
+ponto de dor, mas podemos ter
+
+196
+00:12:05.720 --> 00:12:08.400
+Sim, podemos fazer algo deste género,
+em que ele está a fazer flexões, certo?
+
+197
+00:12:08.440 --> 00:12:13.120
+Não é mau, mas acho que as
+mulheres vendem melhor, por isso.
+
+198
+00:12:16.120 --> 00:12:19.720
+Está bem, é um pouco piroso,
+mas vamos fazer algo do género.
+
+199
+00:12:19.800 --> 00:12:21.760
+Está bem, entra.
+
+200
+00:12:24.960 --> 00:12:26.080
+Fora.
+
+201
+00:12:26.600 --> 00:12:27.680
+Fixe.
+
+202
+00:12:27.960 --> 00:12:29.080
+Bum.
+
+203
+00:12:29.440 --> 00:12:30.840
+E depois isto vai ser um pouco
+
+204
+00:12:30.880 --> 00:12:34.920
+de um tiro mais longo, porque sei que
+há muita descrição no texto, portanto.
+
+205
+00:12:35.000 --> 00:12:36.160
+Ótimo.
+
+206
+00:12:36.840 --> 00:12:38.880
+Ok, a lista de espera
+é apenas uma descrição.
+
+207
+00:12:38.960 --> 00:12:43.240
+O plano de tratamento é seguido
+de um grande plano do produto.
+
+208
+00:12:43.600 --> 00:12:47.080
+Vamos fazer outro grande plano do produto.
+
+209
+00:12:51.280 --> 00:12:52.800
+Ok, basta ligar isso.
+
+210
+00:12:52.880 --> 00:12:54.440
+Ok, é óbvio que isto é
+uma hipótese muito remota,
+
+211
+00:12:54.520 --> 00:12:57.120
+e não se esqueçam,
+queremos cortes rápidos.
+
+212
+00:12:57.200 --> 00:13:00.040
+Não queremos uma tonelada
+de informação de cada vez.
+
+213
+00:13:00.120 --> 00:13:03.400
+Como podem ver, este é bom.
+
+214
+00:13:03.520 --> 00:13:07.360
+Dependendo das legendas, três segundos.
+
+215
+00:13:07.720 --> 00:13:11.320
+Provavelmente, também o vou reduzir.
+
+216
+00:13:12.920 --> 00:13:14.840
+Sim, acho que gosto dela.
+
+217
+00:13:14.920 --> 00:13:18.920
+Podemos até fazer
+
+218
+00:13:18.920 --> 00:13:21.840
+Pode até valer a pena acrescentar
+
+219
+00:13:21.840 --> 00:13:27.440
+um segundo aqui para
+que pareça um pouco mais
+
+220
+00:13:28.920 --> 00:13:36.560
+Assim, podemos acrescentar
+mais pessoas na fotografia.
+
+221
+00:13:41.280 --> 00:13:42.440
+Está bem.
+
+222
+00:13:44.640 --> 00:13:47.520
+Ótimo, e eu vou cortar isso.
+
+223
+00:13:48.560 --> 00:13:51.320
+Neste momento, estou
+apenas a tocar de ouvido,
+
+224
+00:13:51.400 --> 00:13:56.000
+porque assim que tivermos os títulos,
+vamos ter uma ideia do que se passa.
+
+225
+00:13:56.080 --> 00:13:58.120
+Então já estamos nos 14 segundos, certo?
+
+226
+00:13:58.200 --> 00:13:59.440
+Então é uma longa
+
+227
+00:13:59.480 --> 00:14:02.600
+Bem, na verdade, vamos reduzir isto tudo.
+
+228
+00:14:02.680 --> 00:14:08.080
+Se quiser cortar todo este espaço
+aqui, um atalho rápido é o W.
+
+229
+00:14:08.200 --> 00:14:10.600
+Vai empurrar tudo para baixo.
+
+230
+00:14:10.680 --> 00:14:13.160
+Então, bum, maré.
+
+231
+00:14:13.320 --> 00:14:14.480
+Ótimo.
+
+232
+00:14:14.720 --> 00:14:17.720
+Sinceramente, acho que é um pouco longo.
+
+233
+00:14:17.800 --> 00:14:19.560
+Acho que é provavelmente
+aí que eu cortaria
+
+234
+00:14:19.600 --> 00:14:24.880
+ali mesmo, porque é como O que quero dizer
+com adicionar um pequeno espaço à direita
+
+235
+00:14:24.920 --> 00:14:34.800
+Aqui está agora Eu sei que este
+começaria aqui, por isso... Boom.
+
+236
+00:14:35.240 --> 00:14:36.480
+Ótimo.
+
+237
+00:14:36.880 --> 00:14:39.120
+Os ingredientes aparecem.
+
+238
+00:14:39.960 --> 00:14:41.560
+Estudos de caso.
+
+239
+00:14:41.960 --> 00:14:45.800
+Sinto que ele já devia
+estar a fazer flexões.
+
+240
+00:14:47.320 --> 00:14:48.840
+Aqui mesmo.
+
+241
+00:14:50.360 --> 00:14:51.440
+Fixe.
+
+242
+00:14:53.200 --> 00:14:54.400
+Quero dizer, há opções aqui.
+
+243
+00:14:54.480 --> 00:14:59.600
+Pode fazer um ecrã dividido ou pode
+fazer os dois um a seguir ao outro.
+
+244
+00:14:59.720 --> 00:15:04.040
+E não está disponível
+na sua farmácia local.
+
+245
+00:15:04.160 --> 00:15:07.400
+Muito bem, eu sei que
+temos vacinas de farmácia.
+
+246
+00:15:10.240 --> 00:15:12.520
+Aqui dentro, tão farmácia.
+
+247
+00:15:12.640 --> 00:15:20.160
+Muito bem, isto sou eu a
+entrar na farmácia, portanto.
+
+248
+00:15:21.080 --> 00:15:23.880
+Muito bem.
+
+249
+00:15:24.200 --> 00:15:26.680
+Estes não são modularizados, portanto.
+
+250
+00:15:26.760 --> 00:15:28.640
+Uma coisa que é necessário fazer com as
+
+251
+00:15:28.640 --> 00:15:30.880
+fotos UGC é clicar com
+o botão direito do rato,
+
+252
+00:15:30.960 --> 00:15:32.680
+ou vai seleccioná-los a todos, clicar com
+
+253
+00:15:32.680 --> 00:15:34.480
+o botão direito do rato
+e ir para modificar,
+
+254
+00:15:34.520 --> 00:15:37.280
+interpretar a filmagem e, em
+seguida, pretende alterar a cor
+
+255
+00:15:37.320 --> 00:15:41.920
+espaço de substituição porque sai
+um pouco aborrecido como este.
+
+256
+00:15:42.040 --> 00:15:46.800
+Não sei se é por causa dos novos iPhones,
+mas mudem-no para a cena de 2020,
+
+257
+00:15:46.880 --> 00:15:51.880
+e os seus vídeos vão ter um
+aspeto tremendamente diferente.
+
+258
+00:15:52.000 --> 00:16:02.880
+Sei que fiz ali um pequeno pino de
+chicote, por isso é um pouco visual.
+
+259
+00:16:07.000 --> 00:16:07.920
+Bum.
+
+260
+00:16:08.240 --> 00:16:11.120
+Ok, então é óbvio que
+este é muito maior, certo?
+
+261
+00:16:11.200 --> 00:16:12.320
+Porque não o modularizei.
+
+262
+00:16:12.400 --> 00:16:19.920
+Por isso, o atalho para aceder ao
+painel de controlo de efeitos é Shift 5.
+
+263
+00:16:20.320 --> 00:16:23.320
+Aqui, vou só reduzir a escala
+deste menino mau, assim.
+
+264
+00:16:23.400 --> 00:16:28.320
+Outro atalho que pode fazer para reduzir
+a escala, se clicar em movimento, pode
+
+265
+00:16:28.320 --> 00:16:32.720
+obter a pequena caixa delimitadora
+e ajustá-la dessa forma.
+
+266
+00:16:32.840 --> 00:16:35.360
+Isso é muito simpático e útil.
+
+267
+00:16:35.480 --> 00:16:40.320
+Portanto, não está disponível
+em nenhuma loja ou farmácia.
+
+268
+00:16:40.440 --> 00:16:42.840
+Vou só cortar isto. Não preciso disso.
+
+269
+00:16:45.160 --> 00:16:48.360
+Muito bem, vamos voltar ao guião.
+
+270
+00:16:48.480 --> 00:16:49.880
+Veja se a lista de espera é para si.
+
+271
+00:16:49.960 --> 00:16:52.120
+Visitar New Age Medical, gravação de ecrã.
+
+272
+00:16:52.200 --> 00:16:54.760
+Não tenho uma gravação do ecrã,
+
+273
+00:16:54.880 --> 00:17:00.360
+mas tenho-o por cima do ombro,
+basicamente a fazer a mesma coisa.
+
+274
+00:17:00.480 --> 00:17:02.000
+Vou tirar a fotografia.
+
+275
+00:17:02.080 --> 00:17:05.720
+Lembra-te, isso foi há pouco. Aqui mesmo.
+
+276
+00:17:05.840 --> 00:17:09.000
+Fixe. Vamos lá.
+
+277
+00:17:09.240 --> 00:17:11.080
+Não precisamos de todo esse processo.
+
+278
+00:17:11.160 --> 00:17:17.080
+Vamos apenas adiantar isso para
+quando ele selecionar um pacote.
+
+279
+00:17:17.280 --> 00:17:21.040
+O, arraste-o para dentro,
+e é um clip muito longo.
+
+280
+00:17:21.160 --> 00:17:24.080
+Vamos acelerar esse processo.
+
+281
+00:17:24.200 --> 00:17:26.680
+Sinto que isto se está a arrastar um
+
+282
+00:17:26.680 --> 00:17:29.600
+pouco, por isso vamos
+acelerar isso também.
+
+283
+00:17:29.800 --> 00:17:30.920
+Está bem.
+
+284
+00:17:31.560 --> 00:17:34.520
+Veremos quando chegarem as legendas.
+
+285
+00:17:34.640 --> 00:17:35.880
+Bum.
+
+286
+00:17:37.080 --> 00:17:39.760
+Muito bem, há aqui um
+pouco de espaço morto.
+
+287
+00:17:39.840 --> 00:17:41.520
+Vou cortar isso.
+
+288
+00:17:41.920 --> 00:17:47.520
+Vou acertar quando ele
+começar a mexer o dedo.
+
+289
+00:17:48.400 --> 00:17:49.600
+Fixe.
+
+290
+00:17:51.160 --> 00:17:56.280
+Muito bem, vou acelerar isto, talvez 150.
+
+291
+00:17:56.440 --> 00:17:58.880
+Se não pretender utilizar
+a ferramenta de taxa,
+
+292
+00:17:58.960 --> 00:18:04.080
+Sugiro que clique com o botão direito do
+rato e vá para a duração da velocidade
+
+293
+00:18:04.120 --> 00:18:10.600
+e depois atingir 150, e depois
+ir em incrementos de 50 ou 100.
+
+294
+00:18:10.720 --> 00:18:13.280
+A velocidade é de 1,5 ou 2x.
+
+295
+00:18:13.400 --> 00:18:18.080
+O mesmo se aplica à redução da velocidade.
+
+296
+00:18:19.920 --> 00:18:28.680
+Eu provavelmente testaria só para ver
+se se move um pouco mais depressa.
+
+297
+00:18:28.840 --> 00:18:30.440
+Sim, assim está melhor.
+
+298
+00:18:30.520 --> 00:18:32.000
+Bum, fixe.
+
+299
+00:18:32.160 --> 00:18:34.320
+Eu cortava aí.
+
+300
+00:18:34.520 --> 00:18:36.320
+Cortar, apagar.
+
+301
+00:18:37.680 --> 00:18:42.200
+A seguir, temos a gravação de ecrã,
+comece hoje a sua transformação.
+
+302
+00:18:42.280 --> 00:18:48.280
+Temos talvez mais um.
+
+303
+00:18:52.000 --> 00:18:55.440
+Podemos tirar uma fotografia
+do produto, se tivermos uma.
+
+304
+00:18:59.760 --> 00:19:11.040
+Muito bem, vamos ver o que temos aqui.
+
+305
+00:19:11.320 --> 00:19:12.840
+Comece hoje mesmo a sua transformação.
+
+306
+00:19:12.920 --> 00:19:17.240
+Com comece hoje mesmo a sua transformação,
+
+307
+00:19:17.360 --> 00:19:24.960
+seria bom ter uma pessoa
+Sim, aqui vamos nós.
+
+308
+00:19:25.160 --> 00:19:26.640
+É um final simpático.
+
+309
+00:19:26.720 --> 00:19:29.560
+Comece hoje a sua transformação.
+Ele está a fazer flexões.
+
+310
+00:19:29.640 --> 00:19:34.000
+Muito bem, isto pode ser um bom final.
+
+311
+00:19:37.480 --> 00:19:40.800
+E vou parar por aí, porque
+ele não está a fazer nada.
+
+312
+00:19:42.840 --> 00:19:43.520
+Fixe.
+
+313
+00:19:43.680 --> 00:19:51.800
+E penso que o resto do vídeo poderia ter
+apenas um final com o logótipo e a CTA.
+
+314
+00:19:51.920 --> 00:19:59.920
+Portanto, a partir daqui,
+vamos voltar aos nossos passos.
+
+315
+00:20:00.080 --> 00:20:04.680
+Praticamente juntámos todas as fotos.
+
+316
+00:20:04.840 --> 00:20:10.160
+Isto se estiver a seguir o guião e
+já souber quais os clips que tem.
+
+317
+00:20:10.280 --> 00:20:15.160
+Muito rapidamente, voltando aos
+passos aqui, modular os nossos clips.
+
+318
+00:20:15.280 --> 00:20:18.480
+Agora, montamos a cronologia
+e adicionamos alguma música.
+
+319
+00:20:18.600 --> 00:20:20.480
+É mesmo assim.
+
+320
+00:20:20.640 --> 00:20:21.840
+Agora, se quisermos adicionar música,
+
+321
+00:20:21.920 --> 00:20:26.240
+podemos acrescentar música mais tarde,
+para ser sincero, porque o momento vai ser
+
+322
+00:20:26.280 --> 00:20:27.920
+Vai afetar tudo.
+
+323
+00:20:28.040 --> 00:20:33.040
+Diria que isto é bastante
+sólido para um corte inicial.
+
+324
+00:20:33.160 --> 00:20:36.560
+De seguida, vamos adicionar
+títulos, sobreposições e efeitos.
+
+325
+00:20:36.640 --> 00:20:39.080
+Vamos fazer isto uma vez.
+
+326
+00:20:39.200 --> 00:20:40.440
+Sem som.
+
+327
+00:20:40.640 --> 00:20:45.120
+Honestamente, por vezes
+é melhor editar os vídeos
+
+328
+00:20:45.160 --> 00:20:47.800
+Desculpe, para editar vídeos sem som
+
+329
+00:20:47.840 --> 00:20:50.920
+porque se sente mais o ritmo.
+
+330
+00:20:51.040 --> 00:20:54.800
+A menos que se esteja a cortar música,
+
+331
+00:20:54.960 --> 00:20:58.440
+seguindo o ritmo, e neste
+cenário, neste caso,
+
+332
+00:20:58.560 --> 00:21:02.000
+para emagrecer, não vai
+estar a cortar o ritmo.
+
+333
+00:21:02.120 --> 00:21:03.960
+As pessoas não estão
+realmente interessadas nisso.
+
+334
+00:21:04.000 --> 00:21:08.680
+Quando se corta para a batida, é
+algo que está na moda, que é fixe.
+
+335
+00:21:08.760 --> 00:21:11.400
+Há emoção nisso.
+
+336
+00:21:11.600 --> 00:21:14.960
+Neste caso, é muito
+informativo, simples e direto.
+
+337
+00:21:15.040 --> 00:21:17.600
+Mas o que queremos fazer é sentir onde é
+
+338
+00:21:17.600 --> 00:21:20.560
+que o vídeo está Onde é
+que está a atrasar-se?
+
+339
+00:21:20.640 --> 00:21:24.680
+Onde é que precisamos de
+apimentar alguma coisa?
+
+340
+00:21:24.800 --> 00:21:26.000
+Então, boom.
+
+341
+00:21:26.120 --> 00:21:27.160
+Está bem.
+
+342
+00:21:28.920 --> 00:21:33.680
+Isso terá o produto pequenas coisas lá.
+
+343
+00:21:34.320 --> 00:21:35.560
+Ótimo.
+
+344
+00:21:41.880 --> 00:21:44.320
+Ok, senti que esta é um pouco longa.
+
+345
+00:21:44.400 --> 00:21:48.000
+Vamos lá a ver Dá para
+perceber, obviamente,
+
+346
+00:21:48.080 --> 00:21:50.840
+o clip em si é longo, e penso que
+não precisa de ser assim tão longo.
+
+347
+00:21:50.880 --> 00:21:53.280
+Vamos acelerar isto para,
+
+348
+00:21:53.400 --> 00:21:58.480
+Vamos tentar 300 e ver, já
+perdemos quase um segundo inteiro.
+
+349
+00:21:58.560 --> 00:22:02.720
+Isso é importante. É grande
+quando se trata de anúncios.
+
+350
+00:22:05.480 --> 00:22:10.960
+Fixe. Sim, acho que é uma história sólida.
+
+351
+00:22:11.360 --> 00:22:16.280
+Mais uma vez, temos o
+gancho, temos o interesse.
+
+352
+00:22:18.040 --> 00:22:18.960
+Temos vontade.
+
+353
+00:22:19.080 --> 00:22:23.680
+É provavelmente aqui que
+podemos melhorar o vídeo.
+
+354
+00:22:24.720 --> 00:22:28.000
+Temos interesse aqui mesmo.
+
+355
+00:22:28.160 --> 00:22:29.320
+Isto pode ser interessante.
+
+356
+00:22:29.360 --> 00:22:31.400
+Sinto que pode estar a faltar alguma coisa
+
+357
+00:22:31.400 --> 00:22:36.600
+em termos de os manter envolvidos,
+porque vai diretamente para o produto.
+
+358
+00:22:36.720 --> 00:22:41.320
+Sinto que pode haver aqui alguma
+coisa que o possa apimentar.
+
+359
+00:22:41.400 --> 00:22:42.400
+Muito bem, cá vamos nós.
+
+360
+00:22:42.440 --> 00:22:44.840
+Esta pode ser uma fotografia melhor.
+
+361
+00:22:45.320 --> 00:22:48.840
+Sim, há aqui um pouco mais
+de valor de entretenimento.
+
+362
+00:22:48.920 --> 00:22:51.400
+Abanando-a, há mais imagens a aparecer.
+
+363
+00:22:51.480 --> 00:22:53.800
+Vou usar esse clip.
+
+364
+00:22:53.960 --> 00:22:55.240
+Na verdade, vou inseri-lo aqui.
+
+365
+00:22:55.320 --> 00:22:59.160
+E se detém o comando ou o controlo, tem
+
+366
+00:22:59.160 --> 00:23:05.280
+pode, de facto, inseri-lo assim,
+entre as suas fotografias.
+
+367
+00:23:07.120 --> 00:23:10.720
+Portanto, o que vou fazer é
+
+368
+00:23:17.240 --> 00:23:19.320
+Sim, há um pouco mais de
+
+369
+00:23:19.360 --> 00:23:21.960
+de apenas um estímulo visual que se passa
+
+370
+00:23:21.960 --> 00:23:24.800
+aqui e que nos faz
+pensar: "O que foi aquilo?
+
+371
+00:23:24.880 --> 00:23:28.680
+A partir daqui, já têm a vossa atenção.
+
+372
+00:23:28.800 --> 00:23:30.080
+Agora, quero manter o vosso interesse.
+
+373
+00:23:30.160 --> 00:23:31.480
+Ok, o que é isso?
+
+374
+00:23:31.600 --> 00:23:34.400
+Por isso, mais tarde, acrescentarei alguns
+
+375
+00:23:34.400 --> 00:23:37.320
+efeitos e penso que
+manterá a vossa atenção.
+
+376
+00:23:37.400 --> 00:23:41.720
+Mas, para já, acho que
+isto é bastante sólido.
+
+377
+00:23:41.840 --> 00:23:44.760
+Deixem-me só rever este clip muito
+rapidamente, para ver o que se passa.
+
+378
+00:23:44.800 --> 00:23:47.120
+Está bem, ela está a trabalhar.
+
+379
+00:23:50.400 --> 00:23:55.160
+Há outra imagem de agitar
+a garrafa verde, ok, então.
+
+380
+00:23:55.560 --> 00:23:58.480
+Temos aqui muitos ganchos loucos, loucos.
+
+381
+00:23:58.600 --> 00:24:01.400
+Gelado em pizza.
+
+382
+00:24:01.720 --> 00:24:03.560
+Muito bem, vamos ver isto mais uma vez.
+
+383
+00:24:03.640 --> 00:24:04.600
+Parece divertido.
+
+384
+00:24:04.680 --> 00:24:06.960
+Muito bem, este novo produto, da da da da.
+
+385
+00:24:07.040 --> 00:24:11.320
+Adicionava um zoom aqui
+e os títulos apareciam.
+
+386
+00:24:11.440 --> 00:24:14.360
+Acrescenta o pequeno, bum, bum, bum.
+
+387
+00:24:14.480 --> 00:24:15.840
+Gosto disso.
+
+388
+00:24:16.000 --> 00:24:17.680
+Da da da da da da da da da da da.
+
+389
+00:24:17.760 --> 00:24:19.480
+Sólido, sólido, sólido.
+
+390
+00:24:19.600 --> 00:24:21.040
+E fixe.
+
+391
+00:24:21.320 --> 00:24:22.920
+Muito bem, estou realmente
+muito contente com isso.
+
+392
+00:24:23.000 --> 00:24:24.320
+Vou guardá-lo.
+
+393
+00:24:24.440 --> 00:24:29.000
+A seguir, vamos rever os títulos e os
+efeitos e todas essas coisas divertidas.
+
+394
+00:24:29.080 --> 00:24:33.240
+Muito bem, obrigado por me verem
+e espero que estejam a acompanhar.
+
+395
+00:24:33.320 --> 00:24:34.600
+Vemo-nos na próxima.
+

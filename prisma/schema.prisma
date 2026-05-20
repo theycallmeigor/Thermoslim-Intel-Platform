@@ -12,6 +12,7 @@ enum Source {
   SHOPIFY
   CHECKOUTCHAMP
   MERGED
+  LOOP
 }
 
 enum OrderStatus {
@@ -67,6 +68,8 @@ enum SubscriptionEventType {
   PAUSED
   RESUMED
   REACTIVATED
+  EXPIRED
+  SKIPPED
 }
 
 enum RevenueEventType {
@@ -227,9 +230,13 @@ model Subscription {
   customer             Customer             @relation(fields: [customerId], references: [id])
   ccPurchaseId         String?              @unique
   ccClientPurchaseId   String?              @unique
+  shopifyContractId    String?              @unique  // Shopify SubscriptionContract GID — Loop dedup key
+  loopSubscriptionId   String?              @unique  // Reserved for future Loop API
+  sellingPlanName      String?                       // Shopify selling plan name
   originalOrderId      String?
   productMapId         String?
   productMap           ProductMap?          @relation(fields: [productMapId], references: [id])
+  source               Source?
   status               SubscriptionStatus
   currentBillingCycle  Int                  @default(1)
   recurringPrice       Int
@@ -244,6 +251,7 @@ model Subscription {
 
   @@index([customerId])
   @@index([status])
+  @@index([source])
   @@index([campaignId])
 }
 
@@ -259,9 +267,12 @@ model SubscriptionEvent {
   declineReason      String?
   metadata           Json?
   occurredAt         DateTime
+  klaviyoEventId     String?              @unique
+  source             Source?
 
   @@index([subscriptionId])
   @@index([occurredAt])
+  @@index([source])
 }
 
 model RevenueEvent {
@@ -524,4 +535,11 @@ model FunnelPage {
   @@unique([funnelId, ccPageId])
   @@index([slug])
   @@index([externalUrl])
+}
+
+model SyncCursor {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  cursor    String
+  updatedAt DateTime @updatedAt
 }

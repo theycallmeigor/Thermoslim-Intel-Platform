@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 export const metadata: Metadata = { title: 'Dashboard — ThermoSlim' };
 
+import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { unstable_cache } from 'next/cache';
 import { RevenueChart, type DailyRevenue } from './RevenueChart';
@@ -9,7 +10,9 @@ import { SubscriberDonut, type DonutSlice } from './SubscriberDonut';
 import { SubscriberActivityChart, type SubActivityDay } from './SubscriberActivityChart';
 import { subDays, format } from 'date-fns';
 import { fmt$, fmtK, pctChange, parseRange, toMonthlyMrr } from '@/lib/dashboard/formatting';
+import { getTrialExpectedPrices } from '@/lib/dashboard/trial-prices';
 import { statusColors, getSourceLabel, getOrderType } from '@/lib/dashboard/colors';
+import { calculateMrr } from '@/lib/dashboard/mrr';
 import { KpiCard } from '@/components/ui/KpiCard';
 
 // ─── Data fetching ────────────────────────────────────────────────────────────
@@ -27,7 +30,6 @@ const getStableKpis = unstable_cache(
       shopifyRevenue,
       ccRevenue,
       activeSubsWithProduct,
-      mrrByProduct,
       totalOrders,
     ] = await Promise.all([
       prisma.subscription.count({ where: { status: { in: ['ACTIVE', 'TRIAL'] } } }),
@@ -43,15 +45,12 @@ const getStableKpis = unstable_cache(
       }),
       prisma.subscription.findMany({
         where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-        include: { productMap: { select: { productLine: true, frequency: true } } },
-      }),
-      prisma.subscription.findMany({
-        where: { status: { in: ['ACTIVE', 'TRIAL'] } },
-        include: { productMap: { select: { name: true, productLine: true, frequency: true } } },
+        select: { recurringPrice: true, frequency: true, productMapId: true, startedAt: true,
+          productMap: { select: { productLine: true, frequency: true } } },
       }),
       prisma.order.count({ where: { source: { in: ['SHOPIFY', 'MERGED'] } } }),
     ]);
-    return { activeSubscriptions, shopifyOrders, ccOrders, shopifyRevenue, ccRevenue, activeSubsWithProduct, mrrByProduct, totalOrders };
+    return { activeSubscriptions, shopifyOrders, ccOrders, shopifyRevenue, ccRevenue, activeSubsWithProduct, totalOrders };
   },
   ['dashboard-stable-kpis'],
   { revalidate: 15 * 60 }, // 15-minute cache — refreshed by background sync
@@ -92,7 +91,7 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
         take: ORDERS_PER_PAGE,
         skip: (ordersPage - 1) * ORDERS_PER_PAGE,
         orderBy: { createdAt: 'desc' },
-        include: { customer: { select: { email: true, firstName: true, lastName: true } } },
+        include: { customer: { select: { id: true, email: true, firstName: true, lastName: true } } },
       }),
 
       prisma.subscription.findMany({
@@ -120,7 +119,7 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
       }),
     ]);
 
-  const { activeSubscriptions, shopifyOrders, ccOrders, shopifyRevenue, ccRevenue, activeSubsWithProduct, mrrByProduct, totalOrders } = stable;
+  const { activeSubscriptions, shopifyOrders, ccOrders, shopifyRevenue, ccRevenue, activeSubsWithProduct, totalOrders } = stable;
   const prevActiveSubscriptions = activeSubscriptions; // stable — period comparison uses live revenue delta instead
 
   // ─── Revenue chart (4 series via Shopify tags) ───────────────────────────
@@ -202,35 +201,24 @@ async function getDashboardData(startDate: Date, endDate: Date, prevStart: Date,
     .sort((a, b) => b[1] - a[1])
     .map(([name, value]) => ({ name, value }));
 
-  // ─── MRR breakdown by product (normalized by frequency) ───────────────────
-  const mrrProductMap = new Map<string, { name: string; mrr: number; count: number }>();
-  for (const sub of mrrByProduct) {
-    const key = sub.productMap?.name ?? sub.ccPurchaseId ?? 'Unknown';
-    const monthlyMrr = toMonthlyMrr(sub.recurringPrice, sub.frequency);
-    const existing = mrrProductMap.get(key);
-    if (existing) {
-      existing.mrr += monthlyMrr;
-      existing.count += 1;
-    } else {
-      mrrProductMap.set(key, {
-        name: sub.productMap?.name ?? 'Unknown Product',
-        mrr: monthlyMrr,
-        count: 1,
-      });
-    }
-  }
-  const mrrBreakdown = Array.from(mrrProductMap.values())
+  // ─── MRR breakdown by product (centralized calculation) ──────────────────
+  const { totalMrr: currMrr, byProductLine } = await calculateMrr();
+  const mrrBreakdown = Array.from(byProductLine.entries())
+    .map(([name, v]) => ({ name, mrr: v.mrr, count: v.count }))
     .sort((a, b) => b.mrr - a.mrr)
     .slice(0, 6);
 
   // ─── Pct changes ──────────────────────────────────────────────────────────
   const currRevenue = revenueResult._sum.totalPrice ?? 0;
   const prevRevenue = prevRevenueResult._sum.totalPrice ?? 0;
-  // MRR normalized by frequency
-  const currMrr = activeSubsWithProduct.reduce((sum, s) => sum + toMonthlyMrr(s.recurringPrice, s.frequency), 0);
+  // prevMrr: subs active before the period start (for period-over-period comparison)
+  const trialPrices = await getTrialExpectedPrices();
   const prevMrr = activeSubsWithProduct
     .filter(s => s.startedAt < startDate)
-    .reduce((sum, s) => sum + toMonthlyMrr(s.recurringPrice, s.frequency), 0);
+    .reduce((sum, s) => {
+      const expected = s.productMapId ? trialPrices.get(s.productMapId) : undefined;
+      return sum + toMonthlyMrr(s.recurringPrice, s.frequency, expected);
+    }, 0);
 
   // ─── Subscriber activity chart ───────────────────────────────────────────
   const additionTypes = new Set(['CREATED', 'REACTIVATED', 'RESUMED']);
@@ -310,6 +298,18 @@ export default async function DashboardPage({
   const ordersPage = Math.max(1, parseInt(sp.page ?? '1', 10) || 1);
 
   const data = await getDashboardData(startDate, endDate, prevStart, prevEnd, ordersPage);
+
+  // Check which customers have Loop subscriptions (for order type badges)
+  const recentOrderCustomerIds = [...new Set(data.recentOrders.map(o => o.customerId))];
+  const loopSubCustomerIds = new Set(
+    recentOrderCustomerIds.length > 0
+      ? (await prisma.subscription.findMany({
+          where: { customerId: { in: recentOrderCustomerIds }, source: 'SHOPIFY' },
+          select: { customerId: true },
+          distinct: ['customerId'],
+        })).map(s => s.customerId)
+      : []
+  );
 
   const maxCampaignRev = data.topCampaigns.reduce(
     (max, c) => Math.max(max, c._sum.totalPrice ?? 0), 0,
@@ -486,8 +486,10 @@ export default async function DashboardPage({
                   <tbody className="divide-y divide-gray-800/60">
                     {data.recentOrders.map(order => (
                       <tr key={order.id} className="hover:bg-gray-800/40 transition-colors">
-                        <td className="px-6 py-3.5 font-mono text-xs text-gray-400">
-                          #{order.sourceOrderId.slice(-8)}
+                        <td className="px-6 py-3.5 font-mono text-xs">
+                          <Link href={`/orders/${order.id}`} className="text-blue-400 hover:text-blue-300 transition-colors">
+                            #{order.sourceOrderId.slice(-8)}
+                          </Link>
                         </td>
                         <td className="px-6 py-3.5">
                           {(() => {
@@ -502,7 +504,8 @@ export default async function DashboardPage({
                         </td>
                         <td className="px-6 py-3.5">
                           {(() => {
-                            const subType = getOrderType(order);
+                            const isLoopSub = order.source === 'SHOPIFY' && loopSubCustomerIds.has(order.customerId);
+                            const subType = isLoopSub ? 'subscription' : getOrderType(order);
                             if (subType === 'rebill') return (
                               <span className="inline-flex px-2 py-0.5 rounded text-xs font-medium bg-amber-500/10 text-amber-400">Rebill</span>
                             );
