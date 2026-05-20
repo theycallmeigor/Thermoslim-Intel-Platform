@@ -31,7 +31,7 @@
         "genericAuthType": "httpHeaderAuth",
         "sendBody": true,
         "contentType": "json",
-        "jsonBody": "={{ JSON.stringify({ model: 'voyage-multimodal-3', input: [[ $json.text_payload, { image: $json.media_url } ]], input_type: 'document', output_dimension: 1024 }) }}",
+        "jsonBody": "={{ JSON.stringify({ model: 'voyage-multimodal-3', inputs: [{ content: [ ...(($json.text_payload && String($json.text_payload).trim()) ? [{ type: 'text', text: String($json.text_payload).slice(0, 8000) }] : []), { type: 'image_url', image_url: $json.media_url } ] }], input_type: 'document' }) }}",
         "options": {}
       },
       "id": "voyage-embed",
@@ -40,7 +40,7 @@
       "typeVersion": 4.2,
       "position": [440, 80],
       "credentials": { "httpHeaderAuth": { "id": "VOYAGE_API_KEY_CREDENTIAL_ID", "name": "Voyage API Key" } },
-      "notes": "TODO: create 'Voyage API Key' Header Auth credential (Authorization: Bearer <key>). Endpoint confirmed: https://api.voyageai.com/v1/multimodalembeddings"
+      "notes": "Voyage Multimodal 3: POST https://api.voyageai.com/v1/multimodalembeddings. Header Auth credential 'Voyage API Key' must set Authorization: Bearer <key>. Body uses `inputs` (plural) with content blocks {type:text|image_url}. Returns native 1024-dim (no output_dimension param). Text capped at 8000 chars; falls back to image-only if text_payload empty."
     },
     {
       "parameters": {

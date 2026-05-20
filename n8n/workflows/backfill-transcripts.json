@@ -1,0 +1,197 @@
+{
+  "name": "Backfill Transcripts (Pegasus)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger-manual",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            { "name": "supabase_base", "value": "https://fliqklclucdhjemdjatr.supabase.co" }
+          ],
+          "number": [{ "name": "batch_size", "value": 1 }]
+        },
+        "options": {}
+      },
+      "id": "set-config",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [380, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.supabase_base + '/rest/v1/ads' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "select", "value": "id,media_url,media_type" },
+            { "name": "media_url", "value": "not.is.null" },
+            { "name": "media_type", "value": "eq.video" },
+            { "name": "transcript", "value": "is.null" },
+            { "name": "limit", "value": "={{ $json.batch_size }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fetch-pending",
+      "name": "Fetch Pending Ads",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [560, 300],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    },
+    {
+      "parameters": { "batchSize": 1, "options": {} },
+      "id": "per-ad-loop",
+      "name": "Per-Ad Loop",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [740, 300]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_TRANSCRIBE_ROUTER_ID",
+          "mode": "id",
+          "cachedResultName": "Transcribe Ad (Pegasus Sub-Workflow)"
+        },
+        "options": { "waitForSubWorkflow": true }
+      },
+      "id": "call-router",
+      "name": "Call Transcribe Router",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [920, 300],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build INSERT body for tl_transcript_attempts and PATCH body for ads.transcript.\nconst r = $input.first().json;\nconst hasTranscript = r.transcript && (Array.isArray(r.transcript) ? r.transcript.length>=0 : true) && !r.parse_error;\nconst attemptBody = {\n  ad_id: r.ad_id,\n  media_url: r.media_url,\n  index_id: '69f3ae5732c37ea72b973f25',\n  task_id: r.index_task_id ?? null,\n  pegasus_video_id: r.pegasus_video_id ?? null,\n  status: hasTranscript ? 'ready' : 'failed',\n  transcript: r.transcript ?? null,\n  raw_index_response:    r.raw_index_response ?? null,\n  raw_generate_response: r.raw_generate_response ?? null,\n  error_text: r.parse_error ?? (hasTranscript ? null : 'no transcript returned')\n};\nconst patchBody = hasTranscript\n  ? { transcript: r.transcript, tl_pegasus_video_id: r.pegasus_video_id }\n  : null;\nreturn [{ json: { ad_id: r.ad_id, hasTranscript, attemptBody, patchBody } }];"
+      },
+      "id": "build-bodies",
+      "name": "Build Bodies",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 240]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').first().json.supabase_base + '/rest/v1/tl_transcript_attempts' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=minimal" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.attemptBody) }}",
+        "options": { "response": { "response": { "neverError": true } } }
+      },
+      "id": "log-attempt",
+      "name": "Log Attempt (raw)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1280, 240],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose" },
+          "conditions": [
+            { "leftValue": "={{ $('Build Bodies').item.json.hasTranscript }}", "rightValue": true, "operator": { "type": "boolean", "operation": "true", "singleValue": true } }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-has-tx",
+      "name": "Transcript OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1460, 240]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $('Config').first().json.supabase_base + '/rest/v1/ads?id=eq.' + $('Build Bodies').item.json.ad_id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=minimal" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($('Build Bodies').item.json.patchBody) }}",
+        "options": { "response": { "response": { "neverError": true } } }
+      },
+      "id": "patch-ads",
+      "name": "Write transcript to ads",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1640, 180],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').first().json.supabase_base + '/rest/v1/tl_transcript_attempts' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=minimal" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ ad_id: $('Per-Ad Loop').item.json.id, media_url: $('Per-Ad Loop').item.json.media_url, status: 'failed', error_text: ($json.error?.message || $json.message || 'router error'), raw_index_response: $json }) }}",
+        "options": { "response": { "response": { "neverError": true } } }
+      },
+      "id": "log-failed",
+      "name": "Log Failed Attempt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1100, 460],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    }
+  ],
+  "connections": {
+    "Manual Trigger":         { "main": [[{ "node": "Config", "type": "main", "index": 0 }]] },
+    "Config":                 { "main": [[{ "node": "Fetch Pending Ads", "type": "main", "index": 0 }]] },
+    "Fetch Pending Ads":      { "main": [[{ "node": "Per-Ad Loop", "type": "main", "index": 0 }]] },
+    "Per-Ad Loop":            { "main": [[],[{ "node": "Call Transcribe Router", "type": "main", "index": 0 }]] },
+    "Call Transcribe Router": { "main": [[{ "node": "Build Bodies", "type": "main", "index": 0 }],[{ "node": "Log Failed Attempt", "type": "main", "index": 0 }]] },
+    "Build Bodies":           { "main": [[{ "node": "Log Attempt (raw)", "type": "main", "index": 0 }]] },
+    "Log Attempt (raw)":      { "main": [[{ "node": "Transcript OK?", "type": "main", "index": 0 }]] },
+    "Transcript OK?":         { "main": [[{ "node": "Write transcript to ads", "type": "main", "index": 0 }],[{ "node": "Per-Ad Loop", "type": "main", "index": 0 }]] },
+    "Write transcript to ads":{ "main": [[{ "node": "Per-Ad Loop", "type": "main", "index": 0 }]] },
+    "Log Failed Attempt":     { "main": [[{ "node": "Per-Ad Loop", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}

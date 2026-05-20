@@ -1,0 +1,1496 @@
+{
+  "created": "2026-04-28T12:56:24.242888",
+  "rows": [
+    {
+      "id": "fc3b302d-970a-4bf5-9c46-30e249357888",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d7s93auebh3vli9hja0u6p3s",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "20c10ad9-f479-48fb-81f1-785c9e8a4f52",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dd1le2jd0j349mah379dug5g",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "e303cc17-bb3b-4876-908a-0d330a5c390d",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dpdbr8460d61upah36l943ek",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "fa5031b3-f7ea-415e-86be-636e04a676df",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dp6hdbam327vj1bhjk8fl1bo",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "d266fa5a-8b3b-43b7-96da-fbe02ad8d0aa",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d295u4bmn5rhpebhjts6299m",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "104454b7-247b-48c7-ac62-3e5453a0371f",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=da5v8mv35hg76hbhj1s8bq2i",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "19e92eb2-981c-4fcf-886d-1ce721a69fee",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d6ct7bda513jnmbh3h36ed7s",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "6ebec92d-767b-43f7-8332-130c5d3dbd6b",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d1qbl2oposcoqqbhj9edh3am",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "0c73eb8f-a619-4cd5-a900-787d5e252c04",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=diiafgkhukvjm1dh3tp0qf0i",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "e4d85613-12c9-4dc8-9688-9cab44683a05",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=daak21qctcsvs3dhjluoct9s",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "349399d3-895f-4ce0-9e61-345964a86a71",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=daak21qctcsvs3dhjluoct9s",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "aba703d4-18ad-49f3-a56a-7714387f3971",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d8ddhpaj52viridh365vm30q",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "35cecf09-4fb4-4ec9-bd0b-2b227024d2ad",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dt8q4ak0t8h23ldhjol1pm12",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "5ae95aa3-c854-469a-8266-cdd72dfbe25f",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dbjfgpofvhn5emdhjta85m8k&fbclid=IwVERFWAQ7VuBleHRuA2FlbQIxMABzcnRjBmFwcF9pZA8xNzM4NDc2NDI2NzAzNzAAAR4HqUT_VcMPeTLrlYCmWdLfjNHjBcqtWxOSqlD7GzcN-QBXNzsMD3LPhIDChg_aem_VBl1xZNOwplzJ6jGg8wX5Q",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "3e9eca36-1890-44b0-997e-fd93c4280f43",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dvmdsmmii1tdd2ehjj2ijr2g",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "76a1ede9-e17a-41e9-82af-1f2c2f290def",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d6chd6rgfjnbi5ehjq4svvf0",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "964c5f94-b01b-42c8-bdb1-5db4e5e4eac6",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d8sr4podk4cl3cehjrirfgd0",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "4a4918a7-ae4a-4da9-9a8f-6847154941d9",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d2kcqc8kpglf3fehjnbivf30",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "105017ce-8e1d-4d12-baf5-fec86c5e7955",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dm9t004dgta3jkeh3pnuhpfe",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "ff50e611-8b98-4544-9be5-4f3519aec361",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=da3i1v91b6l3bmeh3jf5k2am",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "70702f68-33a8-4bf7-9413-78bf2ad3cc3e",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d4j7ie2b1rrid8fhjqqud02q",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "efca5a87-f3a5-4255-9da4-819ffe884984",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dfgfbpqcqb3tnbfhjrogtmcu",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "bb5eb168-23a3-41e4-90ac-12237d93b081",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d0b5eu2n2i6te9fhjt84p99g",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "a2b7bbde-e285-4915-afb1-ec0e15f21b7e",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d1st0vqvam7e31hhjg7bh588",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "579ff801-891d-421d-bb11-f44218579ea6",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dnhhf55pqir47jihje9043bq",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "6dadc112-d043-4602-ab85-0d716e205e5e",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=diujm4su96t662jh3i48601e",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "d139fe25-5419-4618-a1e6-b56f883defdd",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d13j96605uqeibjhjgerq80q",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "225f220b-c686-46b4-bf0f-54e5c3bc1072",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dmnksa6gqkg3mjjhjh2dah4s",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "cd90c137-d200-4040-b305-45758c2f6dbb",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=ds2abi0emtiek0kh3h0vsf7g",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "213b0d09-993a-4fb7-be57-c4aed3178025",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d4ngq8ltil3581kh3is01ecu",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "df19e9dc-0fa1-47d8-b0be-73661063eb62",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d9r8biviv3jcr2kh3hgruh0e",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "837d5285-23e0-41a5-94db-f282e90f57f7",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dpnpc7vpu2k294kh30gmsvfc",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "1a643c07-001b-4e45-b1a8-db613575e6fe",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dtqigg6011jaickhjff6vnfi",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "78dcb2c8-d0bf-4f63-9081-7e70e87fa162",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273:1&cid=dctk480d8g01btkhjsq2s1fs&fbclid=IwZXh0bgNhZW0BMABhZGlkAas0mcRrqUNzcnRjBmFwcF9pZAo2NjI4NTY4Mzc5AAEeS4Ms9XIF-FpziRNbQ2fEl8F0ZFN4Ty_RcdBKAcXXg1soO_lTmEqh6EathQg_aem_zE8XmAbz1wzbPb9bxrtN5w",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "d5bdda41-3580-4b76-b8c0-2921b9609738",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d7cvn59u435e94lh3csug4a2",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "47c0d689-f2a7-4834-a888-651d03e4ec44",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d6fumh4tf3f6ghlhja8rhmeq",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "3c4a6434-e00b-41ea-a802-a57cbbc15a84",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=du91pajarsf2thlh3dq0bu7k",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "7c645649-18d3-469a-98aa-5f7b34a13bb8",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dcatu6t920lq7slhjtn56i0a",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "ce708892-fa60-4545-afbc-3d6a13ca64cc",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d5ldbg5mlj0rc2mh3jssb518",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "9ab860d4-abe3-4cfe-bf47-6de29d1e7b34",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=do8bhv3ttljr78mh39qdmk8e",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "1af58264-864a-4711-9491-27db9f97a6a5",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dmk4kprcq0ftdlnh3aijmvcc",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "ba94dd14-1308-45f9-918d-6c3fac02a75e",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dsnup1hu2mi2p4oh3ffkb81g",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "eba8e5bb-eeea-48e7-844d-db54dbce184b",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dqal72na5cikusohj40ltr4c",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "a8b46b3b-82af-4229-a59a-20bbccb58964",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dp7mn9ih6ngi2sohjtalsg44",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "5ef73b7c-c160-47cb-a2d5-e37db5c0e5b3",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dbrlngkkrffu9hphjbgcug5i",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "566288e0-3238-46d3-a732-2c81215b979a",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d7ro43dak99pjeqh34ltoe5q",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "4a9e212a-99ce-4a72-bdba-9f3c1da9ae48",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dpb7ho8apav5tjqhjdacf9de",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "a66b3009-24a4-40b6-8eba-4827f70da060",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d555g3bga9j8ekqhjvj6o76a",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "9057cc72-1656-4768-a1ba-62232e9f224d",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d64u0cbassl9q5rh337pggc4",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "43dda1c2-b156-4761-ab21-e6fda1bbdf7d",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dmfjnjpg57tn9crh3vo9t90s",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "4904ca05-b70b-4b10-a8cb-0e3b39a51caa",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dlovjqhmvosohcshj02g7m8g",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "ae89a4c6-06a2-4975-a4aa-c9096bb456ec",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dmfpolpq1ojpofshj6svcc4o",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "8ebc03d1-58ce-4abc-9557-91731455ba88",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dllgpm65imguu9th3kmj9odc",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "14b776c7-1bde-4da4-affa-c4c9b7c88a3a",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d1bsnk1lisk3acth3mljmj1k",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "78cef706-4222-4c46-81bf-30e5be424334",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dledoudlb6imvjthjv0hpg6s",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "ccd3c018-4199-465e-8edd-914fa949056f",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d3h9u1n4d0cqsqth3nncf24s",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "2db0569b-5bb4-4d14-bd63-612a9222f768",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=der39rvseq6de2uhj66cbm5m",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "4dec8379-6bb2-40f4-b989-872748d44342",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dl2hahbj0ackq4uhjccogddi",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "8ec40c59-37e7-4837-a70c-48c6eceb5d99",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dai73q33c7stcguhjjj6d90g",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "e853ac64-28fc-46bb-86a8-ad47ba0aabdc",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=df6u9tqk4kn2nluhjf33upa4",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "97dcb141-9e76-4984-9764-c35c276e66d7",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dvnpe031eslgrquhj8l31fd8",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "066ab380-30bc-4171-a5f4-a20a45398465",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d12pqm6kddc88suh3mrukq1m",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "507cbdef-6d16-4c07-b10a-6204b38f9d8f",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d2gpd0q8elbkvtuhjaojo1du",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "13b2b2bc-f0b4-4ac5-9306-45018dbbadc8",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d7n2fjkkvk08gvuhjte6vk4i",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "efa0216c-f697-40b2-9a9c-4a724721d7ef",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dc2n4uaquuvp0svh3jtege7g",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "6358472b-deb7-4711-80d7-05145c905793",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dul7i1skokq39vvhj3oqc182",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "d3d1f3c0-fd52-4cb8-aec4-e0d1efa46829",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dqp96bkk2asc7f0ijpvv0350",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "b554de3c-4918-4fe1-99fc-a60a95fe1783",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=deuq83brto12df0i3luvm430",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "b508b74c-e82f-47d9-8022-dc0ca79f403e",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=duf9cdb8m2erbn0i3g47ncfo",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "447b8056-f10e-4768-a502-736e23397f33",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dfjban13e3b1jr0i3qm3vbd6",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "03366e5f-cfb4-4c9f-8447-768deac865e3",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=dha13kljo9nq641i33812efm",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "413ef421-e918-42a9-99e2-d6a73c563f08",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=d3aksl7c05g8lrihj5b3uh84",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "dac1d600-8215-4d74-8aac-d74a7ac7e405",
+      "ccref": "F684F3F4CAF9401D8415700C21F593C1",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-top5?products=273%3A1&cid=df94jev0thfn90khjea99kbk",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout-bsd-top5"
+    },
+    {
+      "id": "ad7877d5-7072-492b-936c-813151bbe215",
+      "ccref": "5D0E497B070541498BE92C9CA2C49F6E",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-quiz?products=273%3A1&_gl=1*1baqr6t*_gcl_au*MTcxMDU5MzU2Mi4xNzc0Njk5NjU4*FPAU*MjEzMzQ1MzIyOS4xNzc0Njk5NTAx&cid=dvo20lsbuk5rbs9hjlkvh3ba",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-quiz"
+    },
+    {
+      "id": "6470ea7a-6357-4cf4-a810-6472ec90fd09",
+      "ccref": "5D0E497B070541498BE92C9CA2C49F6E",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-quiz?products=273%3A1&cid=d90hf4c86t9mq3ah3fn0m4bk",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-quiz"
+    },
+    {
+      "id": "2f0a5bec-518d-43fe-a8d7-1bceec9a6653",
+      "ccref": "5D0E497B070541498BE92C9CA2C49F6E",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-quiz?products=273%3A1&_gl=1*ago57f*_gcl_au*MTI4NTQwMzYzMS4xNzc0NzM5MjU1*FPAU*MTI4NTQwMzYzMS4xNzc0NzM5MjU1&cid=d8j8789a0dg1m7ahjnbgkv8q",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-quiz"
+    },
+    {
+      "id": "69734ffa-7da8-45da-9e93-1914591e162d",
+      "ccref": "5D0E497B070541498BE92C9CA2C49F6E",
+      "salesUrl": "https://try.thermoslim.co/checkout-bsd-quiz?products=273%3A1&_gl=1*r6ojg3*_gcl_au*MTUzMDUzMjM4OC4xNzc0NzM4MTAw*FPAU*MTUzMDUzMjM4OC4xNzc0NzM4MTAw&cid=ddbl872c9gaub9ah3gh4me9a",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout-bsd-quiz"
+    },
+    {
+      "id": "c80d1efa-9423-4409-835e-15730bd23f30",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "aff7ff70-4585-4bba-842b-622ed656c8c8",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*6urev3*_gcl_au*OTI0MDkxODYzLjE3NzQwNTA0OTQ.*FPAU*OTI0MDkxODYzLjE3NzQwNTA0OTQ.&cid=dc2hcmfrcdt0n69hjovr4o52",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "beba57d0-12cd-4573-93b6-0efd73f0a24f",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*16kjsvf*_gcl_au*OTUxMjA5NTY2LjE3NzQ2NDE5NzI.*FPAU*OTUxMjA5NTY2LjE3NzQ2NDE5NzI.&cid=dsvetv0ii5q5oc9hjfd1pm6k",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "3a2d1695-a8a4-45ba-aae0-4618d3d36a1b",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "2110aa19-9c72-4dae-ab48-1a5d4ead30ad",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "fdf96890-88a5-45d9-896f-7cf416c7d1d1",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "dad0c80e-292e-4afb-be7b-d07246288f2e",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "5b1c67d0-5089-42ef-8d0e-95f898b7a048",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "247d02f8-9fd6-495a-9425-0bbf92f7a637",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "b86e5b39-e9eb-4046-ab4e-c07533200f6c",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1ny9yen*_gcl_au*NDkxMjQxNDk4LjE3NzQ4MDMxNzM.*FPAU*NDkxMjQxNDk4LjE3NzQ4MDMxNzM.&cid=dbd0t10t317edoah3hkhg12s",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "a751d9dc-650d-4f19-b73a-3986b59bda0f",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*bia3jj*_gcl_au*ODI2NjcwOTQ0LjE3NzQ4MTkxMTg.*FPAU*ODI2NjcwOTQ0LjE3NzQ4MTkxMTg.&cid=d4ch1qor7kqsatahj2c8op7q",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "f77a9145-12c9-4b26-ab28-b6b917a0a19c",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "25da9267-d0f7-4ff0-b387-2b968ec590da",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "e9674eb4-e344-4d18-a97f-862b97b31c3f",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*mjo8f9*_gcl_au*MjA0NTgyMTkyLjE3NzQ4MzM1ODI.*FPAU*MjA0NTgyMTkyLjE3NzQ4MzM1ODI.&cid=dsn5hbumbip441bhjm0lk22g",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "3793a83a-4ef2-46fb-96af-00dfe2126b47",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1lom6d9*_gcl_au*MTAyMTAwMTY5NC4xNzc0ODQwNTg0*FPAU*MTAyMTAwMTY5NC4xNzc0ODQwNTg0&cid=de6tok1rh2p443bhj94ec7b0",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "fd9f3428-c073-4479-9cf2-a72f8342470f",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*a5mxx9*_gcl_au*MTQ2NDE4MDYwMi4xNzc0ODcxODI2*FPAU*MTQ2NDE4MDYwMi4xNzc0ODcxODI2&cid=dknp77kunt3c3bbhj760pf36",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "04b4e0c7-0bdf-41fa-ba91-8d6f73cc45aa",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1x13l43*_gcl_au*OTUwOTg4NTI5LjE3NzQ4ODE3NjM.*FPAU*OTUwOTg4NTI5LjE3NzQ4ODE3NjM.&cid=dvi681h2l9q70ebh3g08mq4k",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "98c6f972-be70-4d4b-8063-bf1ff6cf1522",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*k5qo6l*_gcl_au*NzE5MDI1ODQ4LjE3NzQ3MjU2Mjg.*FPAU*NzE5MDI1ODQ4LjE3NzQ3MjU2Mjg.&cid=d25sm8hks27drebh3gm4c4a6",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "3e5f8c0e-a7d4-4e36-b7aa-d21224cc253a",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1x13l43*_gcl_au*OTUwOTg4NTI5LjE3NzQ4ODE3NjM.*FPAU*OTUwOTg4NTI5LjE3NzQ4ODE3NjM.&cid=dvi681h2l9q70ebh3g08mq4k",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "0c12070a-3916-48fb-8083-bcdbfeea4d99",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1qz1sai*_gcl_au*MTg1MTgyMzgwMy4xNzc0Mjc2MTMw*FPAU*MTg1MTgyMzgwMy4xNzc0Mjc2MTMw&cid=daho0l9vg33glebhj0s14a1q",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "52059073-2534-4543-91e7-e59e3ca3b5d0",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*84b658*_gcl_au*MTY4ODM3NzA1NS4xNzc0ODgyMjI2*FPAU*MTY4ODM3NzA1NS4xNzc0ODgyMjI2&cid=dh27jjt4rldkvfbhj43v0348",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "0f00a6bc-fc24-43a3-b010-1123299f79ba",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1xecv9n*_gcl_au*MTI1NDczMDEwMC4xNzczMzcyNzQ2*FPAU*MTI1NDczMDEwMC4xNzczMzcyNzQ2&cid=d9vgeo516vkfhgbhj7u7mgc6",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "ed865b79-7607-4183-8266-4e390030c35c",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1qeglti*_gcl_au*MTgwMTAyMjY2OS4xNzc0OTAwOTkx*FPAU*MTgwMTAyMjY2OS4xNzc0OTAwOTkx&cid=d1m3kpo5s6lqakbh3f4hd21q",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "65b9b9b6-ba9b-4531-8196-95ab796d50f6",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1qeglti*_gcl_au*MTgwMTAyMjY2OS4xNzc0OTAwOTkx*FPAU*MTgwMTAyMjY2OS4xNzc0OTAwOTkx&cid=d1m3kpo5s6lqakbh3f4hd21q",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "63f296d4-1429-4307-8234-e9a6fc2be56a",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "aed87ab9-d026-4c49-8688-b7cf7ff349f2",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1j84frh*_gcl_au*MjA3NDAxMDQ2Ni4xNzc0OTEwNzcx*FPAU*MjA3NDAxMDQ2Ni4xNzc0OTEwNzcx&cid=degk6s005kufmmbhjn5b517c",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "453dc99e-25d0-46bd-a092-a3474a1f6ca4",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "113e800c-71f0-4a0e-9ca4-de95fd2a5283",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "6cd2bfb8-9d71-444d-8690-4e1b072b38f6",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1fuu63q*_gcl_au*NzQxMjc0OTQwLjE3NzQ5OTMwNDM.*FPAU*NzQxMjc0OTQwLjE3NzQ5OTMwNDM.&cid=dj7nn9dqi8k8ndch322ahk5i",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "49f713e3-b6f6-407d-aa8e-24dab40afb52",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "1308d34a-19bd-4ba1-bece-adf2781eebae",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "b1cd2166-b716-44db-832d-3d11e54d6b23",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&cid=d6gvv6tmhv1booah3s7lnk1m",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "1d9604e3-098d-4bd3-9676-6be7a9c3aca8",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*14ti7n5*_gcl_au*MTg1MTgyMzgwMy4xNzc0Mjc2MTMw*FPAU*MTg1MTgyMzgwMy4xNzc0Mjc2MTMw&cid=dd27u1s87q7eu7dh3qk7ak7g",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "aa0e3a05-61d8-491a-b41f-f3487db0fb40",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "23ebb76c-9bd4-4cd7-97f6-aa764cd8c7b8",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "6a5f447e-9f7e-4d8d-b80e-9741571ac4e9",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "c41f3ff8-4ebd-44fd-9a9f-ac7938ff189b",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?token=8RR82701EJ332205W",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "00293c99-9edb-41f3-a5c1-ed94193cb8e7",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*4oknf4*_gcl_au*MTA3OTM2MjExNi4xNzc1MjM1NDI3*FPAU*MTA3OTM2MjExNi4xNzc1MjM1NDI3&cid=d1029pj6gglqagehj12qg536",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "2f4f21dc-0fba-4c20-a8a7-4d9e961e28dd",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*15hvulm*_gcl_au*OTcyMjMzODQ2LjE3NzUxODg5NTc.*FPAU*OTcyMjMzODQ2LjE3NzUxODg5NTc.&cid=dhv8em5fnua25keh3790r0aq",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "516478f9-5050-427a-9400-0fd3c5d5c9d8",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*jw11yh*_gcl_au*NDU5MTk2NTI4LjE3NzUyNTk4MTY.*FPAU*NDU5MTk2NTI4LjE3NzUyNTk4MTY.&cid=dadnnl46g6oigneh3fjcq5co",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "be456e2b-c8c6-428f-86b6-71793a8bc4fe",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "38830e00-af6c-47f4-87c5-81f77d06bfff",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "16a4bebf-8a17-4244-8cd8-4258a08054f8",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1wffllo*_gcl_au*Nzk1ODE2ODYyLjE3NzUzMjIxNDE.*FPAU*Nzk1ODE2ODYyLjE3NzUzMjIxNDE.&cid=d5jhhgkfv2ud39fh3hod0a2e",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "c6555ca5-0b33-40a8-aa19-57c73a737a91",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*9vlxw6*_gcl_au*NDgwMjQ0ODA2LjE3NzUxODM3MDc.*FPAU*NDgwMjQ0ODA2LjE3NzUxODM3MDc.&cid=d40cuit4r31jthfh3c15mf4c",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "93e9cb59-6b4a-4569-98e8-62e13bd5f9e3",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "e052323e-4e9d-4631-9d73-b50c617f27f3",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "42d77dc8-37c9-4933-9ec4-cb07ad66278b",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1vpry81*_gcl_au*MTUzMjYwNTYwNC4xNzc1NDkwODIw*FPAU*NzQ1NzM3Njg3LjE3NzUwMTYzMjQ.&cid=dafsamfa46r8cehhj1p17tbq",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "b34f06c5-4f2e-4128-aa5a-75ae783eef4a",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "7557d9fb-4e14-4a88-bb82-1b8a7b52d4bf",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "964a542f-ec14-490e-9704-476d776996da",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*kpmfcc*_gcl_au*MTE4MTczNTYxNS4xNzc1NTkyOTA5*FPAU*MTE4MTczNTYxNS4xNzc1NTkyOTA5&cid=d9vsfnilju0sukhh3269t16k",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "727becaa-84f4-4938-8058-1f518a780221",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "2d1f8c0b-8d2f-4800-bab7-e8d4786f6f17",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*l857z1*_gcl_au*MTU3Njg5NzExLjE3NzU2NzAyNzQ.*FPAU*MTU3Njg5NzExLjE3NzU2NzAyNzQ.&cid=d6riabm6h9vm49ihji42dl8k",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "2b218146-1b25-4057-99e3-2f6df86c7bcc",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1efbsme*_gcl_au*MTQwODI0MDQ1NS4xNzc1Njg0MTIx*FPAU*MTQwODI0MDQ1NS4xNzc1Njg0MTIx&cid=dqubra1jejkmvdihjbir8j2m",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "7102a332-996c-4912-a790-8a5141002c38",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "0cfc6b50-0765-4da1-b7e2-554cca8466ff",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "84c0cb9e-b1e8-433a-910d-cec8a61eaac2",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*36fx7n*_gcl_au*MTQ1MTE0MzQwMS4xNzc1NzczNjU0*FPAU*MTQ1MTE0MzQwMS4xNzc1NzczNjU0&cid=deceosqpimo146jh3di89p02",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "2895db91-abd9-48b1-9190-b09812becbfa",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1m2pykf*_gcl_au*MTk0ODk5NjQyNC4xNzc1ODA0MjU4*FPAU*MTk0ODk5NjQyNC4xNzc1ODA0MjU4&cid=doftspeuml6c3fjhj54gfke0",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "0f4d1b0c-1138-4147-9081-67841e061556",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*a8mn7n*_gcl_au*MTU1OTYzODM3NC4xNzc1MTg3ODAy*FPAU*MTU1OTYzODM3NC4xNzc1MTg3ODAy&cid=d4p3dsdti8msfqjhjj5tbva8",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "89f2bd74-986e-4db1-8594-e4434e946983",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*zw4p7n*_gcl_au*OTM1NjMwMjQ2LjE3NzU2MjA5NTY.*FPAU*OTM1NjMwMjQ2LjE3NzU2MjA5NTY.&cid=da88s5m1l9rcosjh3pu9hb70",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "0d469683-d5a7-4c30-aa0a-3df9c664c025",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1osnhpv*_gcl_au*NTk1MTYzMjk4LjE3NzU4NjAxODQ.*FPAU*NTk1MTYzMjk4LjE3NzU4NjAxODQ.&cid=do0cb7kp01sm5ujhjtneemaa",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "d01d487f-1c1f-4c8c-81e8-e59d0dad092f",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "803388a0-9ebe-49e0-a58d-8f37f0ac7e70",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "ca0d6f33-0e7c-4f13-a612-58bd2b5dbcb9",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "84ff0ca2-aa80-4d50-8bc3-d1fe3140a7c8",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1e2hvmw*_gcl_au*MTMxOTk2MjkzMi4xNzc1ODYyNTQz*FPAU*MTMxOTk2MjkzMi4xNzc1ODYyNTQz&cid=d08eep0jaqarl0lh3g37ll8g",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "aac6a369-1d27-4822-aeb0-f14c1581fcd4",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1s7mm8n*_gcl_au*MTc3Njc1NTAwMS4xNzc2MDI4MjU5*FPAU*MTc3Njc1NTAwMS4xNzc2MDI4MjU5&cid=dcdvk83nb6p2adlhjpihf55k",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "29cb5217-5c4b-4d2e-b92f-1ae1ee9af5a6",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1e2hvmw*_gcl_au*MTMxOTk2MjkzMi4xNzc1ODYyNTQz*FPAU*MTMxOTk2MjkzMi4xNzc1ODYyNTQz&cid=d08eep0jaqarl0lh3g37ll8g",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "ac618e13-004e-47b5-a3bb-f244ff5f2e3a",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "6159f15d-00d1-42f4-96b0-0488aff6c9fb",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "72a18ca1-d4bb-4e1d-9887-e1642146b72b",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*10x9t1l*_gcl_au*MTU1OTYzODM3NC4xNzc1MTg3ODAy*FPAU*MTU1OTYzODM3NC4xNzc1MTg3ODAy&cid=dak5p1fq89pi04mhj9o4lo0c",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "f19db179-9a6f-44e0-9ddd-c943766553f8",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1bg6ks5*_gcl_au*MTAxODQ2NjQ3MS4xNzc2MTQzMjQ1*FPAU*MTAxODQ2NjQ3MS4xNzc2MTQzMjQ1&cid=dgo22udnkskll7nhjlal4tci",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "fcedaf09-6606-4222-b621-391e1f5516bc",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "c3bff69a-3efd-475d-843c-222bf25e2b07",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*cigg9u*_gcl_au*MTcwMjk2MzUyNS4xNzc2MjUyNDkx*FPAU*MTcwMjk2MzUyNS4xNzc2MjUyNDkx&cid=d7vgnadmdh1otbnhj29ok3bq",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "5dfb22ae-eb7c-4f9e-a95b-6a1ac0ad4fb9",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*r0cwez*_gcl_au*MTYzMTE4NzYyNy4xNzc2MjU2MDgz*FPAU*MTYzMTE4NzYyNy4xNzc2MjU2MDgz&cid=dqjfd5oo2ftqocnh3bh6ao42",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "cdcf2343-2a09-4241-ab34-09e96f8673cc",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "f748a665-6cae-4841-b10c-01c5b5a959e9",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1p7qqhq*_gcl_au*NzY3NjgxNzM1LjE3NzYzNDI4NTU.*FPAU*NzY3NjgxNzM1LjE3NzYzNDI4NTU.&cid=dmnkn4bv9j67o4ohj5e0p190",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "ff47b05e-6ecb-450f-bc35-2ba1c07a11fa",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1whh3oo*_gcl_au*ODY0NDY4MDgzLjE3NzYzODkwNzU.*FPAU*MTY3MTc3NTg3OC4xNzc0MDQ3MDA1&cid=d9avoi3ec8vu5hohjb4fve52",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "d9649533-ccc0-40b6-8a5a-2ddf0587356a",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*kygo0k*_gcl_au*MTY3NDI3MDIyOS4xNzc2NDE3MTYx*FPAU*MTY3NDI3MDIyOS4xNzc2NDE3MTYx&cid=dg0c4i33k1542soh39ouor42",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "75ef2e98-f394-4032-9a42-34cb8e3521a0",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*196ek2l*_gcl_au*MTE3OTI4MDc3Mi4xNzc1NTI4OTcw*FPAU*MTE3OTI4MDc3Mi4xNzc1NTI4OTcw&cid=dnj4nnbqq9mugsoh3u2qdo5k",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "c55cfd35-4fb6-4572-a92e-b3093f86951d",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*dslta6*_gcl_au*MTQ0OTgxMTE3LjE3NzY0MzU5Njc.*FPAU*MTQ0OTgxMTE3LjE3NzY0MzU5Njc.&cid=dq4jnpmr530mtuoh3ulm0e46",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "6c746b76-2804-4c0c-b24a-3f31791c96cc",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "8bb7b28c-5358-4abb-9334-1140d528358e",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1pykwxk*_gcl_au*MTk4NTQ2OTE2Ny4xNzc2NDM0NTM5*FPAU*MTk4NTQ2OTE2Ny4xNzc2NDM0NTM5&cid=dfltv5mge537s8phj6jhof3m",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "6374b48c-5e76-4515-a795-e043ad7bd894",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*joht2u*_gcl_au*MTQ4OTY0NzIxNi4xNzc2NDc0MTk1*FPAU*MTQ4OTY0NzIxNi4xNzc2NDc0MTk1&cid=demjoqj16ou199phjmrec65i",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "5ac288a9-a7aa-43ef-8d32-54ac73681645",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1156ui6*_gcl_au*NTE5Nzg5Njk3LjE3NzY1MjE1MzY.*FPAU*NTE5Nzg5Njk3LjE3NzY1MjE1MzY.&cid=dojvb8l10ln5gmph39mqt12c",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "02e0ff9f-ea66-4f44-8766-9f085ba1b7dd",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*ak1p9p*_gcl_au*NTM0ODE5NDM5LjE3NzY1MzA5ODY.*FPAU*NTM0ODE5NDM5LjE3NzY1MzA5ODY.&cid=dcqogmqhjq4s7ophjcok7iam",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "cd2cfc4d-9839-4ac1-b7d4-72af78e3b816",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*qpljks*_gcl_au*MjM4MDAwODkyLjE3NzY1OTM1MDc.*FPAU*MjM4MDAwODkyLjE3NzY1OTM1MDc.&cid=dujq45lfrice9aqhjjit086a",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "e2840729-1b21-4f2a-9d41-f175b4fc1279",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "65b6d8c3-6177-41e9-ac63-dd24958dd2cd",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "27f588a8-2448-4f83-a9c3-d4e7643e1e66",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "22571cc1-4c61-4c6d-ac18-a4ff2d297029",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "a06071f1-a123-4b07-a629-8a245a5f175c",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1pi58hx*_gcl_au*MTI4MDIzMjA2Ni4xNzc2Njg4NjI1*FPAU*MTI4MDIzMjA2Ni4xNzc2Njg4NjI1&cid=deelg37sjjj5g4rhj24dnf3i",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "2ec5977e-d54b-4278-a2c9-c6e6f1b3aa6e",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "ba2de7f0-9658-4a80-b2a8-fca698729a5a",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*zh0sxx*_gcl_au*MTk4MTIxNTA0NC4xNzc2NzUxNTQ0*FPAU*MTk4MTIxNTA0NC4xNzc2NzUxNTQ0&cid=dk1jduenbd4krmrhj75dj562",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "3a1feec9-1975-4036-bfd6-e13dbc248e5b",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1jh093h*_gcl_au*MzcyOTY0MDk5LjE3NzY1NjQ3NDQ.*FPAU*MzcyOTY0MDk5LjE3NzY1NjQ3NDQ.&cid=dtk63gh34pu21mrh3nh8qp72",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "22668c0b-222f-436a-ade1-f6d280e7fab4",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1nyq4hr*_gcl_au*NDg0Mzg0MDA3LjE3NzY3OTkzMTI.*FPAU*NDg0Mzg0MDA3LjE3NzY3OTkzMTI.&cid=d6p7cqrn43n383sh3eqpq41s",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "9716b462-a865-43dd-a29d-e8d25aa085b0",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1hmcu86*_gcl_au*MTQ0ODk1MDMxNS4xNzc2ODMyMzYz*FPAU*MTQ0ODk1MDMxNS4xNzc2ODMyMzYz&cid=dmk4r0scl9ao4csh35eqjg74",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "9885f24d-93ab-457d-8649-7aa5898e5a2b",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*r1t75p*_gcl_au*MTgzNTQ1NjI2MC4xNzc2ODg0NTcx*FPAU*MTgzNTQ1NjI2MC4xNzc2ODg0NTcx&cid=d4arsfua315s8ssh3um6qe86",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "2886002b-17b6-44ee-a173-6ba07af47974",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1us9i8x*_gcl_au*MTg4ODIxMzEzNS4xNzc2OTA2NzAy*FPAU*MTg4ODIxMzEzNS4xNzc2OTA2NzAy&cid=dn291s6hfouv11th3k8ruq6q",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "8a576ebf-d90f-479f-ac2a-031e4475eb42",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "ab1e630b-40d9-4562-badf-88b76fd28b25",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "02354ed8-31a5-417a-88e6-2cab7486a8cb",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1d8s1gj*_gcl_au*MTYxMTY2MzI4MS4xNzc2OTUwMTkw*FPAU*MTYxMTY2MzI4MS4xNzc2OTUwMTkw&cid=d2slromacpo2ndth3p65lhae",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "79195ffa-e4f4-4eff-9140-a4273d994ac2",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "e3cb6e53-17fd-48e0-8525-61be72f23dca",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "3df14391-5991-418a-b6c7-291a8b167d2b",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1pwbaea*_gcl_au*MjIxMjgzNDI4LjE3NzcwNDYzNTY.*FPAU*MjIxMjgzNDI4LjE3NzcwNDYzNTY.&cid=dukkj1bjlpfs47uhjlvl079i",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "c0ebfb3a-38d4-46ec-9809-055c1503362c",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "14505fe3-ca06-427c-b76a-c497be8a5d7b",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*qdab76*_gcl_au*ODA3OTc3MzguMTc3NzEzNjUzOQ..*FPAU*ODA3OTc3MzguMTc3NzEzNjUzOQ..&cid=df2dg2cf0d6kr1vh3ocqns6i",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "ea672617-7fec-4391-9764-5b58436a7f5f",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*zs7vux*_gcl_au*ODY2OTA0ODgyLjE3NzcxNjc5NDE.*FPAU*ODY2OTA0ODgyLjE3NzcxNjc5NDE.&cid=df3sbe9oc1ghe9vhjkqjbq4c",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "838d0c54-4726-434e-ad17-b04ba58762a6",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "8da4e0d2-7648-4b1e-931a-dee676a2fcf3",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1mh72xi*_gcl_au*MjUyOTMzOTU5LjE3NzcyMDczNTQ.*FPAU*MjUyOTMzOTU5LjE3NzcyMDczNTQ.&cid=d90n4n1ootof5kvh3n4b11fa",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "c7e9c7ba-e22d-44a9-87e7-e00bd9a0af87",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1voi9xt*_gcl_au*MjA3NzIzMDEwNy4xNzc3MjE2NDYw*FPAU*MjA3NzIzMDEwNy4xNzc3MjE2NDYw&cid=du374gu68g56bnvh3gv72jbk",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "e18e61f2-67ad-4c7c-b7f8-b122f6341738",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "365374d6-9d70-49f8-864a-765ba30ec976",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1a0cpex*_gcl_au*NzI0NzQ4NTkwLjE3NzU2Njk3NDk.*FPAU*NzI0NzQ4NTkwLjE3NzU2Njk3NDk.&cid=dof1c5t8j5ej5svhj1s90t1m",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "4faed60a-c110-4131-b253-4d7d637e818a",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*13gx59z*_gcl_au*MTEyOTk2OTAxMy4xNzc2ODc4MTY5*FPAU*MTEyOTk2OTAxMy4xNzc2ODc4MTY5&cid=dae6uht7odkutuvhjmkd3j1g",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "aefa06ce-9082-462f-ab8c-cb1b64bf01c3",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "27358bf3-4fa7-4a04-b52f-7b8f9e8dfa69",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "DECLINED",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "aafdff79-b622-4222-99e3-a7df09087769",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1bbcsdq*_gcl_au*MjE0MDcwNDYwNS4xNzc0ODkzMDYx*FPAU*MTQwMDYyMzk3MS4xNzc0MzEwNDUw&cid=dhtg4m0qr0k61hbhjoupdi2g",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "f4317bd3-6729-4d1f-a42f-6adf308f8b83",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*1qji63j*_gcl_au*MTM2NTg0NDk4LjE3NzU1ODUzMDI.*FPAU*MTM2NTg0NDk4LjE3NzU1ODUzMDI.&cid=dsf6flel981vlihhjn18sr88",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "62fd025c-40d1-475b-8944-26c1c0a2db54",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "f29ec221-4c8b-4af4-b24a-5f3fd34db430",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273%3A1&_gl=1*nsb3vr*_gcl_au*MjAwNzI4NDc3MC4xNzc1NzQzNzU0*FPAU*MjAwNzI4NDc3MC4xNzc1NzQzNzU0&cid=d86frfn3ehafiuihj99duba2",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "de2b1858-1ee7-4cb8-acd2-79c7ab6a8ca2",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "dff01153-0a10-4354-941b-04f2bc079d24",
+      "ccref": "A84CCA4826EB4736910C4C1BBEE293B7",
+      "salesUrl": "https://try.thermoslim.co/checkout2?products=273:1",
+      "status": "COMPLETE",
+      "matched_pattern": "checkout2"
+    },
+    {
+      "id": "9178d103-b82c-416e-be2d-91fef924e7af",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/checkout8625?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "5a5a0c07-24a4-4c74-a803-5b67c96da2ab",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/48cafeca-fc27-47e1-bfc2-1ab9ce6f07b5.html",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "cd17217f-cfd8-4f36-8ff0-9ff5f68aa618",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/checkout8625?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "c7968ad0-1e05-49d3-b441-ff9bfb570b4c",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/48cafeca-fc27-47e1-bfc2-1ab9ce6f07b5.html?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "37ab2e42-3192-418f-85bd-431949169bd7",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/checkout8625?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "a3813ca3-fb00-4571-9061-65f99007c117",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/checkout8625?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "5584f0b2-5d0a-4abd-8161-a2d66546d281",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/checkout",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "8b88880b-67f0-42e9-a489-236361ed7f05",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/checkout8625?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "7442d71d-5a2a-411f-b87d-cd3c19821be3",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/48cafeca-fc27-47e1-bfc2-1ab9ce6f07b5.html?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "310edae3-f6e4-4a47-bf4a-a373f72af876",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/checkout",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "0ff84498-625f-4b16-8d00-ccd81cccebd6",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/checkout8625?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "b6cda965-1714-4455-a043-0f9ce6148a59",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/checkout8625?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "2238dffa-0a01-43f6-a004-7b11de285b1c",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/checkout8625?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "66b835cb-53e2-411a-9f9b-3f4dc67f1165",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/48cafeca-fc27-47e1-bfc2-1ab9ce6f07b5.html?products=273:1",
+      "status": "PARTIAL",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "7c0f5b05-bd82-4867-a943-98f9e104065c",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/89d84769-ba90-4584-8ef6-844f2c373539.html?products=257:1",
+      "status": "COMPLETE",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    },
+    {
+      "id": "96175674-5905-43a6-9a90-92e0bb09ff5e",
+      "ccref": "8B0924CCB5C644E580792695AC560643",
+      "salesUrl": "https://funnels-build.thisisatestsiteonly.com/8b0924cc-b5c6-44e5-8079-2695ac560643/89d84769-ba90-4584-8ef6-844f2c373539.html?products=257:1",
+      "status": "COMPLETE",
+      "matched_pattern": "8b0924cc-b5c6-44e5-8079-2695ac560643"
+    }
+  ]
+}

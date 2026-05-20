@@ -21,7 +21,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT id, name, gethookd_brand_id, tier FROM public.brands WHERE status = 'active' AND gethookd_brand_id IS NOT NULL;"
+        "query": "SELECT id, name, gethookd_brand_id FROM public.brands WHERE status = 'active' AND gethookd_brand_id IS NOT NULL;"
       },
       "id": "supabase-query",
       "name": "Get Active Brands",

@@ -1,0 +1,297 @@
+{
+  "name": "Active Ads Refresh (5-day cadence)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 8 * * *" }] }
+      },
+      "id": "trigger-r-0001",
+      "name": "Daily 8am",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [-224, 96]
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            { "name": "brand_id", "type": "number" }
+          ]
+        }
+      },
+      "id": "trigger-r-call-0001b",
+      "name": "When Called (brand_id)",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [-224, 288]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Decide which mode we're in: cron (no brand_id input) vs callable (specific brand_id).\nconst calledItems = $('When Called (brand_id)').all();\nconst calledBrandId = calledItems.length > 0 && calledItems[0].json && calledItems[0].json.brand_id\n  ? Number(calledItems[0].json.brand_id) : null;\nreturn [{ json: { _called_brand_id: calledBrandId } }];"
+      },
+      "id": "mode-r-001",
+      "name": "Determine Mode",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-32, 192]
+    },
+    {
+      "parameters": {
+        "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/brands",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "select", "value": "id,name,gethookd_brand_id" },
+            { "name": "status", "value": "eq.active" },
+            { "name": "gethookd_brand_id", "value": "not.is.null" },
+            { "name": "or", "value": "={{ $json._called_brand_id ? `(id.eq.${$json._called_brand_id})` : `(last_delta_check_at.is.null,last_delta_check_at.lt.` + new Date(Date.now() - 5*24*60*60*1000).toISOString() + `)` }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fetch-stale-r-0002",
+      "name": "Fetch Brands To Refresh",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [192, 192]
+    },
+    {
+      "parameters": { "options": {} },
+      "id": "per-brand-r-0003",
+      "name": "Per Brand",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [224, 192]
+    },
+    {
+      "parameters": {
+        "jsCode": "const brand = $('Per Brand').item.json;\nreturn [{\n  json: {\n    brand_id: brand.id,\n    brand_name: brand.name,\n    gethookd_brand_id: brand.gethookd_brand_id,\n    status_filter: 'active',\n    page: 1,\n    total_pages: 500,\n    pull_start_iso: new Date().toISOString(),\n    _stop: false\n  }\n}];"
+      },
+      "id": "init-page-r-0004",
+      "name": "Init Page",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [448, 192]
+    },
+    {
+      "parameters": {
+        "url": "https://app.gethookd.ai/api/v1/explore",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "query", "value": "={{ $json.brand_name }}" },
+            { "name": "status", "value": "={{ $json.status_filter }}" },
+            { "name": "per_page", "value": "50" },
+            { "name": "page", "value": "={{ $json.page }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "gh-fetch-r-0005",
+      "name": "GetHookd — Fetch Page",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [672, 192]
+    },
+    {
+      "parameters": {
+        "jsCode": "const pageResp = $input.first().json;\nconst state = $('Init Page').first().json;\nconst meta = pageResp.meta || {};\nconst currentPage = meta.current_page || meta.page || state.page;\nconst totalPages = meta.last_page || meta.total_pages || meta.total || state.total_pages;\nconst data = Array.isArray(pageResp.data) ? pageResp.data : [];\nconst adsToUpsert = [];\nfor (const ad of data) {\n  adsToUpsert.push({\n    json: {\n      id: ad.id, external_id: ad.external_id ?? null,\n      brand_id: state.brand_id, brand_name: state.brand_name,\n      brand_external_id: ad.brand ? ad.brand.external_id : null,\n      platform: ad.platform ?? null, display_format: ad.display_format ?? null,\n      title: ad.title ?? null, body: ad.body ?? null,\n      cta_type: ad.cta_type ?? null, cta_text: ad.cta_text ?? null,\n      landing_page: ad.landing_page ?? null, link_description: ad.link_description ?? null,\n      start_date: ad.start_date ?? null, end_date: ad.end_date ?? null,\n      days_active: ad.days_active ?? null, active_in_library: ad.active_in_library ?? null,\n      performance_score: ad.performance_score ?? null,\n      performance_score_title: ad.performance_score_title ?? null,\n      ad_spend_range_score: ad.ad_spend_range_score ?? null,\n      ad_spend_range_score_title: ad.ad_spend_range_score_title ?? null,\n      gender_audience: ad.gender_audience ?? null,\n      age_audience_min: ad.age_audience_min ?? null, age_audience_max: ad.age_audience_max ?? null,\n      media_type: ad.media && ad.media[0] ? ad.media[0].type : null,\n      media_url: ad.media && ad.media[0] ? ad.media[0].url : null,\n      thumbnail_url: ad.media && ad.media[0] ? ad.media[0].thumbnail_url : null,\n      share_url: ad.share_url ?? null,\n      updated_at: new Date().toISOString(),\n      _page: currentPage, _total_pages: totalPages,\n      _brand_id: state.brand_id, _gethookd_brand_id: state.gethookd_brand_id,\n      _brand_name: state.brand_name, _status_filter: state.status_filter,\n      _pull_start_iso: state.pull_start_iso\n    }\n  });\n}\nconst stop = data.length === 0 || currentPage >= totalPages;\nif (adsToUpsert.length === 0) {\n  return [{ json: { _empty: true, _stop: stop, _page: currentPage, _total_pages: totalPages, _brand_id: state.brand_id, _gethookd_brand_id: state.gethookd_brand_id, _brand_name: state.brand_name, _status_filter: state.status_filter, _pull_start_iso: state.pull_start_iso }}];\n}\nadsToUpsert[adsToUpsert.length - 1].json._stop = stop;\nadsToUpsert[adsToUpsert.length - 1].json._empty = false;\nreturn adsToUpsert;"
+      },
+      "id": "extract-r-0006",
+      "name": "Extract Ads (Refresh All)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [896, 192]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/ads",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Prefer", "value": "resolution=merge-duplicates,return=minimal" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json._empty ? \"[]\" : JSON.stringify((({ _page, _total_pages, _brand_id, _gethookd_brand_id, _brand_name, _status_filter, _stop, _empty, _pull_start_iso, ...rest }) => rest)($json)) }}",
+        "options": {}
+      },
+      "id": "upsert-r-0007",
+      "name": "Upsert to Supabase",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, 192]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "1", "name": "page", "value": "={{ $('Extract Ads (Refresh All)').first().json._page }}", "type": "number" },
+            { "id": "2", "name": "total_pages", "value": "={{ $('Extract Ads (Refresh All)').first().json._total_pages }}", "type": "number" },
+            { "id": "3", "name": "brand_id", "value": "={{ $('Extract Ads (Refresh All)').first().json._brand_id }}", "type": "number" },
+            { "id": "4", "name": "gethookd_brand_id", "value": "={{ $('Extract Ads (Refresh All)').first().json._gethookd_brand_id }}", "type": "number" },
+            { "id": "5", "name": "brand_name", "value": "={{ $('Extract Ads (Refresh All)').first().json._brand_name }}", "type": "string" },
+            { "id": "6", "name": "status_filter", "value": "={{ $('Extract Ads (Refresh All)').first().json._status_filter }}", "type": "string" },
+            { "id": "7", "name": "pull_start_iso", "value": "={{ $('Extract Ads (Refresh All)').first().json._pull_start_iso }}", "type": "string" },
+            { "id": "8", "name": "_stop", "value": "={{ $('Extract Ads (Refresh All)').first().json._stop === true }}", "type": "boolean" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "collapse-r-0008",
+      "name": "Collapse to Counter",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1344, 192],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose" },
+          "conditions": [
+            {
+              "id": "stop-cond",
+              "leftValue": "={{ $json._stop }}",
+              "rightValue": "",
+              "operator": { "type": "boolean", "operation": "false", "singleValue": true }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-more-r-0009",
+      "name": "More Pages?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [1568, 192]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "1", "name": "page", "value": "={{ $json.page + 1 }}", "type": "number" },
+            { "id": "2", "name": "total_pages", "value": "={{ $json.total_pages }}", "type": "number" },
+            { "id": "3", "name": "brand_id", "value": "={{ $json.brand_id }}", "type": "number" },
+            { "id": "4", "name": "gethookd_brand_id", "value": "={{ $json.gethookd_brand_id }}", "type": "number" },
+            { "id": "5", "name": "brand_name", "value": "={{ $json.brand_name }}", "type": "string" },
+            { "id": "6", "name": "status_filter", "value": "={{ $json.status_filter }}", "type": "string" },
+            { "id": "7", "name": "pull_start_iso", "value": "={{ $json.pull_start_iso }}", "type": "string" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "increment-r-0010",
+      "name": "Increment Page",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1792, 96]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ 'https://fliqklclucdhjemdjatr.supabase.co/rest/v1/ads?brand_id=eq.' + $json.brand_id + '&active_in_library=eq.1&updated_at=lt.' + encodeURIComponent($json.pull_start_iso) }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Prefer", "value": "return=minimal" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ active_in_library: 0, updated_at: new Date().toISOString() }) }}",
+        "options": {}
+      },
+      "id": "mark-inactive-r-0011",
+      "name": "Mark Departed Inactive",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1792, 288]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ 'https://fliqklclucdhjemdjatr.supabase.co/rest/v1/brands?id=eq.' + $json.brand_id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [{ "name": "Content-Type", "value": "application/json" }]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ last_delta_check_at: new Date().toISOString() }) }}",
+        "options": {}
+      },
+      "id": "stamp-brand-r-0012",
+      "name": "Stamp last_delta_check_at",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2016, 288]
+    }
+  ],
+  "connections": {
+    "Daily 8am": {
+      "main": [[{ "node": "Determine Mode", "type": "main", "index": 0 }]]
+    },
+    "When Called (brand_id)": {
+      "main": [[{ "node": "Determine Mode", "type": "main", "index": 0 }]]
+    },
+    "Determine Mode": {
+      "main": [[{ "node": "Fetch Brands To Refresh", "type": "main", "index": 0 }]]
+    },
+    "Fetch Brands To Refresh": {
+      "main": [[{ "node": "Per Brand", "type": "main", "index": 0 }]]
+    },
+    "Per Brand": {
+      "main": [
+        [],
+        [{ "node": "Init Page", "type": "main", "index": 0 }]
+      ]
+    },
+    "Init Page": {
+      "main": [[{ "node": "GetHookd — Fetch Page", "type": "main", "index": 0 }]]
+    },
+    "GetHookd — Fetch Page": {
+      "main": [[{ "node": "Extract Ads (Refresh All)", "type": "main", "index": 0 }]]
+    },
+    "Extract Ads (Refresh All)": {
+      "main": [[{ "node": "Upsert to Supabase", "type": "main", "index": 0 }]]
+    },
+    "Upsert to Supabase": {
+      "main": [[{ "node": "Collapse to Counter", "type": "main", "index": 0 }]]
+    },
+    "Collapse to Counter": {
+      "main": [[{ "node": "More Pages?", "type": "main", "index": 0 }]]
+    },
+    "More Pages?": {
+      "main": [
+        [{ "node": "Increment Page", "type": "main", "index": 0 }],
+        [{ "node": "Mark Departed Inactive", "type": "main", "index": 0 }]
+      ]
+    },
+    "Increment Page": {
+      "main": [[{ "node": "GetHookd — Fetch Page", "type": "main", "index": 0 }]]
+    },
+    "Mark Departed Inactive": {
+      "main": [[{ "node": "Stamp last_delta_check_at", "type": "main", "index": 0 }]]
+    },
+    "Stamp last_delta_check_at": {
+      "main": [[{ "node": "Per Brand", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}

@@ -1,79 +1,21 @@
 {
   "name": "GetHookd — Weekly Digest",
-  "nodes": [
-    {
-      "parameters": {
-        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 8 * * 1" }] }
-      },
-      "id": "schedule-trigger",
-      "name": "Weekly Monday 08:00 UTC",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.2,
-      "position": [0, 0]
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT brand_name, hook, core_angle, ad_type, start_date FROM public.ads WHERE start_date >= now() - interval '7 days' AND analyzed_at IS NOT NULL AND enrichment_error IS NULL ORDER BY brand_name, start_date DESC;"
-      },
-      "id": "get-new-ads",
-      "name": "Get New Ads This Week",
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [220, 0],
-      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
-    },
-    {
-      "parameters": {
-        "jsCode": "// Group ads by brand and collect new hooks/angles vs prior corpus\nconst rows = items.map(i => i.json);\nconst byBrand = {};\nfor (const row of rows) {\n  if (!byBrand[row.brand_name]) byBrand[row.brand_name] = { hooks: new Set(), angles: new Set(), types: new Set(), count: 0 };\n  byBrand[row.brand_name].count++;\n  if (row.hook)       byBrand[row.brand_name].hooks.add(row.hook);\n  if (row.core_angle) byBrand[row.brand_name].angles.add(row.core_angle);\n  if (row.ad_type)    byBrand[row.brand_name].types.add(row.ad_type);\n}\nconst weekStart = new Date();\nweekStart.setDate(weekStart.getDate() - 7);\nreturn Object.entries(byBrand).map(([brand, data]) => ({\n  json: {\n    brand_name: brand,\n    week_start: weekStart.toISOString().split('T')[0],\n    new_ad_count: data.count,\n    new_hooks: [...data.hooks],\n    new_angles: [...data.angles],\n    summary_prompt: `Summarize in 2 sentences what ${brand} is doing in their ads this week: ${data.count} new ads. Hooks: ${[...data.hooks].join(', ')}. Angles: ${[...data.angles].join(', ')}. Formats: ${[...data.types].join(', ')}.`\n  }\n}));"
-      },
-      "id": "group-by-brand",
-      "name": "Group by Brand",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [440, 0]
-    },
-    {
-      "parameters": {
-        "modelId": { "__rl": true, "value": "gemini-1.5-flash", "mode": "list" },
-        "messages": { "values": [{ "content": "={{ $json.summary_prompt }}" }] },
-        "options": {}
-      },
-      "id": "gemini-summarize",
-      "name": "Gemini Flash Summary",
-      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
-      "typeVersion": 1,
-      "position": [660, 0]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/weekly_digests",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "supabaseApi",
-        "sendHeaders": true,
-        "headerParameters": { "parameters": [{ "name": "Prefer", "value": "resolution=merge-duplicates" }] },
-        "sendBody": true,
-        "contentType": "json",
-        "jsonBody": "={{ JSON.stringify({ brand_name: $('Group by Brand').item.json.brand_name, week_start: $('Group by Brand').item.json.week_start, new_ad_count: $('Group by Brand').item.json.new_ad_count, new_hooks: $('Group by Brand').item.json.new_hooks, new_angles: $('Group by Brand').item.json.new_angles, summary_text: $json.content }) }}",
-        "options": {}
-      },
-      "id": "upsert-digest",
-      "name": "Upsert Weekly Digest",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [880, 0],
-      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
-    }
-  ],
-  "pinData": {},
+  "active": false,
+  "settings": { "executionOrder": "v1", "availableInMCP": true, "binaryMode": "separate" },
+  "meta": { "aiBuilderAssisted": true, "builderVariant": "mcp" },
+  "description": "Weekly digest — groups new ads by brand, generates Gemini Flash strategic summary per brand, upserts to weekly_digests table.",
+  "tags": [],
   "connections": {
     "Weekly Monday 08:00 UTC": { "main": [[{ "node": "Get New Ads This Week", "type": "main", "index": 0 }]] },
-    "Get New Ads This Week":   { "main": [[{ "node": "Group by Brand",        "type": "main", "index": 0 }]] },
-    "Group by Brand":          { "main": [[{ "node": "Gemini Flash Summary",  "type": "main", "index": 0 }]] },
-    "Gemini Flash Summary":    { "main": [[{ "node": "Upsert Weekly Digest",  "type": "main", "index": 0 }]] }
+    "Get New Ads This Week": { "main": [[{ "node": "Group by Brand", "type": "main", "index": 0 }]] },
+    "Group by Brand": { "main": [[{ "node": "Gemini Flash Summary", "type": "main", "index": 0 }]] },
+    "Gemini Flash Summary": { "main": [[{ "node": "Upsert Weekly Digest", "type": "main", "index": 0 }]] }
   },
-  "active": false,
-  "settings": { "executionOrder": "v1" },
-  "tags": [{ "name": "ad-intelligence" }]
+  "nodes": [
+    { "id": "656c190f-5b47-4e1b-9155-3c5bcc386f40", "name": "Weekly Monday 08:00 UTC", "type": "n8n-nodes-base.scheduleTrigger", "typeVersion": 1.3, "position": [0, 0], "parameters": { "rule": { "interval": [{ "field": "cronExpression", "expression": "0 8 * * 1" }] } } },
+    { "id": "b0efdb1e-4b69-46c4-b3f6-d2fbd43fd1f5", "name": "Get New Ads This Week", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [224, 0], "parameters": { "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/ads", "authentication": "predefinedCredentialType", "nodeCredentialType": "supabaseApi", "sendQuery": true, "queryParameters": { "parameters": [{ "name": "select", "value": "brand_name,hook,core_angle,ad_type,funnel_stage,start_date" }, { "name": "analyzed_at", "value": "not.is.null" }, { "name": "start_date", "value": "=gte.{{ new Date(Date.now()-7*24*60*60*1000).toISOString().split(\"T\")[0] }}" }, { "name": "order", "value": "brand_name,start_date.desc" }, { "name": "limit", "value": "500" }] }, "options": {} } },
+    { "id": "11223ada-7341-4f27-8c2a-ed42b2cb7873", "name": "Group by Brand", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [448, 0], "parameters": { "jsCode": "const rows = items.map(i => i.json);\nconst byBrand = {};\nfor (const row of rows) {\n  if (!byBrand[row.brand_name]) byBrand[row.brand_name] = { hooks: new Set(), angles: new Set(), types: new Set(), stages: new Set(), count: 0 };\n  byBrand[row.brand_name].count++;\n  if (row.hook) byBrand[row.brand_name].hooks.add(row.hook);\n  if (row.core_angle) byBrand[row.brand_name].angles.add(row.core_angle);\n  if (row.ad_type) byBrand[row.brand_name].types.add(row.ad_type);\n  if (row.funnel_stage) byBrand[row.brand_name].stages.add(row.funnel_stage);\n}\nconst weekStart = new Date(Date.now()-7*24*60*60*1000).toISOString().split('T')[0];\nreturn Object.entries(byBrand).map(([brand, data]) => ({\n  json: {\n    brand_name: brand,\n    week_start: weekStart,\n    new_ad_count: data.count,\n    new_hooks: [...data.hooks].slice(0,5),\n    new_angles: [...data.angles].slice(0,5),\n    summary_prompt: brand + ' ran ' + data.count + ' new ads this week. Types: ' + [...data.types].join(', ') + '. Stages: ' + [...data.stages].join(', ') + '. Top hooks: ' + [...data.hooks].slice(0,3).join(' | ') + '. Write a 2-sentence strategic summary of what they are testing.'\n  }\n}));" } },
+    { "id": "9c951c85-fd43-4303-8c63-9794f708c94f", "name": "Gemini Flash Summary", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [672, 0], "parameters": { "method": "POST", "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent", "authentication": "genericCredentialType", "genericAuthType": "httpHeaderAuth", "sendBody": true, "specifyBody": "json", "jsonBody": "={{ JSON.stringify({ contents: [{ parts: [{ text: $json.summary_prompt }] }], generationConfig: { temperature: 0.3, maxOutputTokens: 200 } }) }}", "options": { "response": { "response": { "neverError": true } } } } },
+    { "id": "5b646c1c-ab85-4fef-b287-b739a69a7580", "name": "Upsert Weekly Digest", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [896, 0], "parameters": { "method": "POST", "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/weekly_digests", "authentication": "predefinedCredentialType", "nodeCredentialType": "supabaseApi", "sendHeaders": true, "headerParameters": { "parameters": [{ "name": "Prefer", "value": "resolution=merge-duplicates,return=minimal" }, { "name": "Content-Type", "value": "application/json" }] }, "sendBody": true, "specifyBody": "json", "jsonBody": "={{ JSON.stringify({ brand_name: $(\"Group by Brand\").item.json.brand_name, week_start: $(\"Group by Brand\").item.json.week_start, new_ad_count: $(\"Group by Brand\").item.json.new_ad_count, new_hooks: $(\"Group by Brand\").item.json.new_hooks, new_angles: $(\"Group by Brand\").item.json.new_angles, summary_text: $json.candidates && $json.candidates[0] ? $json.candidates[0].content.parts[0].text : null }) }}", "options": {} } }
+  ]
 }

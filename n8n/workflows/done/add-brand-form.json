@@ -1,0 +1,97 @@
+{
+  "name": "Add Brand Form",
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": true
+  },
+  "meta": {
+    "aiBuilderAssisted": true,
+    "builderVariant": "mcp"
+  },
+  "description": "Public form to add new brands to the GetHookd watchlist. Inserts into Supabase brands table; if 'Run Full Pull Now' is checked, triggers the Complete Pull workflow.",
+  "tags": [],
+  "connections": {
+    "Add Brand Form": { "main": [[{ "node": "Insert into brands", "type": "main", "index": 0 }]] },
+    "Insert into brands": { "main": [[{ "node": "Pull Now?", "type": "main", "index": 0 }]] },
+    "Pull Now?": { "main": [[{ "node": "Trigger Complete Pull", "type": "main", "index": 0 }]] }
+  },
+  "nodes": [
+    {
+      "id": "29af3951-08f7-4bb3-a891-5f3fe2275078",
+      "name": "Add Brand Form",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [0, 0],
+      "parameters": {
+        "formTitle": "Add Brand to GetHookd Watchlist",
+        "formDescription": "New brands appear in tracking workflows automatically based on tier.",
+        "formFields": {
+          "values": [
+            { "fieldLabel": "Brand Name", "fieldName": "brand_name", "fieldType": "text", "placeholder": "Smooche", "requiredField": true },
+            { "fieldLabel": "Tier", "fieldName": "tier", "fieldType": "dropdown", "fieldOptions": { "values": [{"option":"full_pull"},{"option":"daily_delta"},{"option":"weekly_sweep"},{"option":"paused"}] }, "requiredField": true, "defaultValue": "daily_delta" },
+            { "fieldLabel": "Notes", "fieldName": "notes", "fieldType": "textarea", "placeholder": "Why we are tracking this brand (optional)" },
+            { "fieldLabel": "Run Full Pull Now?", "fieldName": "run_pull_now", "fieldType": "checkbox", "fieldOptions": { "values": [{"option":"Yes, trigger Complete Pull immediately after adding"}] } }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {
+          "path": "add-brand",
+          "buttonLabel": "Add Brand",
+          "respondWithOptions": { "values": { "respondWith": "text", "formSubmittedText": "Brand added. Pull triggered if checkbox was checked." } }
+        }
+      },
+      "webhookId": "0492444e-686d-4939-89fc-5d088cd25362"
+    },
+    {
+      "id": "244db5b9-fbfe-4cfa-99e4-8ac9c6b6c288",
+      "name": "Insert into brands",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [224, 0],
+      "parameters": {
+        "method": "POST",
+        "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/brands",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [{ "name": "Prefer", "value": "resolution=merge-duplicates, return=representation" }, { "name": "Content-Type", "value": "application/json" }] },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ name: $json.brand_name, tier: $json.tier, notes: $json.notes || null }) }}",
+        "options": {}
+      }
+    },
+    {
+      "id": "c86bc397-4f54-4df6-9c61-35dd32d05f00",
+      "name": "Pull Now?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [448, 0],
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "typeValidation": "loose" },
+          "conditions": [{ "id": "1", "leftValue": "={{ $('Add Brand Form').first().json.run_pull_now }}", "rightValue": "", "operator": { "type": "string", "operation": "notEmpty", "singleValue": true } }],
+          "combinator": "and"
+        }
+      }
+    },
+    {
+      "id": "ea91bf81-3c87-4156-8267-61fb0c96e1f3",
+      "name": "Trigger Complete Pull",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [672, 0],
+      "parameters": {
+        "source": "database",
+        "workflowId": { "__rl": true, "value": "8KdACTgMQpgNttey", "mode": "id" },
+        "mode": "once",
+        "workflowInputs": { "mappingMode": "defineBelow", "value": { "brand_name": "={{ $('Add Brand Form').first().json.brand_name }}" } },
+        "options": { "waitForSubWorkflow": false }
+      }
+    }
+  ]
+}

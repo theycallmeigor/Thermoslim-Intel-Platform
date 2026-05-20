@@ -1,0 +1,574 @@
+{
+  "name": "Ads — Multimodal Enrich v2 (binaryMode default)",
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true,
+    "binaryMode": "memory",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "meta": { "aiBuilderAssisted": false, "builderVariant": "manual" },
+  "description": "Branch-by-format enrichment: dco/image, dpa, image, video lanes converge at Verify Nothing Missing gate. Triggers: daily 09:00 UTC, executeWorkflow from Add Brand Form, manual. binaryMode=memory so Download Thumb returns real base64. Failures route to ads_pending_review.",
+  "tags": [],
+  "connections": {
+    "Manual Run": { "main": [[{ "node": "Fetch Pending Ads", "type": "main", "index": 0 }]] },
+    "Schedule Daily": { "main": [[{ "node": "Fetch Pending Ads", "type": "main", "index": 0 }]] },
+    "When Called": { "main": [[{ "node": "Fetch Pending Ads", "type": "main", "index": 0 }]] },
+    "Fetch Pending Ads": { "main": [[{ "node": "Prepare Paths", "type": "main", "index": 0 }]] },
+    "Prepare Paths": { "main": [[{ "node": "Loop Ads", "type": "main", "index": 0 }]] },
+    "Loop Ads": { "main": [
+      [{ "node": "Merge Lanes", "type": "main", "index": 0 }],
+      [{ "node": "Switch Format", "type": "main", "index": 0 }]
+    ]},
+    "Switch Format": { "main": [
+      [{ "node": "Switch DCO Media", "type": "main", "index": 0 }],
+      [{ "node": "B1 Download Thumb", "type": "main", "index": 0 }],
+      [{ "node": "C1 Download Thumb", "type": "main", "index": 0 }],
+      [{ "node": "D1 Download Thumb", "type": "main", "index": 0 }]
+    ]},
+    "Switch DCO Media": { "main": [
+      [{ "node": "A1 Download Thumb", "type": "main", "index": 0 }],
+      [{ "node": "D1 Download Thumb", "type": "main", "index": 0 }]
+    ]},
+
+    "A1 Download Thumb": { "main": [[{ "node": "A2 Classify DCO Image", "type": "main", "index": 0 }]] },
+    "A2 Classify DCO Image": { "main": [[{ "node": "A3 Build Embed Text", "type": "main", "index": 0 }]] },
+    "A3 Build Embed Text": { "main": [[{ "node": "A4 Gemini Embed 3072d", "type": "main", "index": 0 }]] },
+    "A4 Gemini Embed 3072d": { "main": [[{ "node": "A5 Download Main Asset", "type": "main", "index": 0 }]] },
+    "A5 Download Main Asset": { "main": [[{ "node": "A6 Voyage Embed 1024d", "type": "main", "index": 0 }]] },
+    "A6 Voyage Embed 1024d": { "main": [[{ "node": "A7 Upload Asset", "type": "main", "index": 0 }]] },
+    "A7 Upload Asset": { "main": [[{ "node": "A8 Drive Backup Asset", "type": "main", "index": 0 }]] },
+    "A8 Drive Backup Asset": { "main": [[{ "node": "A9 Body Summary", "type": "main", "index": 0 }]] },
+    "A9 Body Summary": { "main": [[{ "node": "A10 Assemble Patch", "type": "main", "index": 0 }]] },
+    "A10 Assemble Patch": { "main": [[{ "node": "Merge Lanes", "type": "main", "index": 0 }]] },
+
+    "B1 Download Thumb": { "main": [[{ "node": "B2 Extract Slug", "type": "main", "index": 0 }]] },
+    "B2 Extract Slug": { "main": [[{ "node": "B3 Resolve product_id", "type": "main", "index": 0 }]] },
+    "B3 Resolve product_id": { "main": [[{ "node": "B4 Classify DPA", "type": "main", "index": 0 }]] },
+    "B4 Classify DPA": { "main": [[{ "node": "B5 Build Embed Text", "type": "main", "index": 0 }]] },
+    "B5 Build Embed Text": { "main": [[{ "node": "B6 Gemini Embed 3072d", "type": "main", "index": 0 }]] },
+    "B6 Gemini Embed 3072d": { "main": [[{ "node": "B7 Voyage Embed 1024d", "type": "main", "index": 0 }]] },
+    "B7 Voyage Embed 1024d": { "main": [[{ "node": "B8 Upload Asset", "type": "main", "index": 0 }]] },
+    "B8 Upload Asset": { "main": [[{ "node": "B9 Drive Backup Asset", "type": "main", "index": 0 }]] },
+    "B9 Drive Backup Asset": { "main": [[{ "node": "B10 Assemble Patch", "type": "main", "index": 0 }]] },
+    "B10 Assemble Patch": { "main": [[{ "node": "Merge Lanes", "type": "main", "index": 0 }]] },
+
+    "C1 Download Thumb": { "main": [[{ "node": "C2 Classify Image", "type": "main", "index": 0 }]] },
+    "C2 Classify Image": { "main": [[{ "node": "C3 Build Embed Text", "type": "main", "index": 0 }]] },
+    "C3 Build Embed Text": { "main": [[{ "node": "C4 Gemini Embed 3072d", "type": "main", "index": 0 }]] },
+    "C4 Gemini Embed 3072d": { "main": [[{ "node": "C5 Download Main Asset", "type": "main", "index": 0 }]] },
+    "C5 Download Main Asset": { "main": [[{ "node": "C6 Voyage Embed 1024d", "type": "main", "index": 0 }]] },
+    "C6 Voyage Embed 1024d": { "main": [[{ "node": "C7 Upload Asset", "type": "main", "index": 0 }]] },
+    "C7 Upload Asset": { "main": [[{ "node": "C8 Drive Backup Asset", "type": "main", "index": 0 }]] },
+    "C8 Drive Backup Asset": { "main": [[{ "node": "C9 Body Summary", "type": "main", "index": 0 }]] },
+    "C9 Body Summary": { "main": [[{ "node": "C10 Assemble Patch", "type": "main", "index": 0 }]] },
+    "C10 Assemble Patch": { "main": [[{ "node": "Merge Lanes", "type": "main", "index": 0 }]] },
+
+    "D1 Download Thumb": { "main": [[{ "node": "D2 Classify Video", "type": "main", "index": 0 }]] },
+    "D2 Classify Video": { "main": [[{ "node": "D3 Build Embed Text", "type": "main", "index": 0 }]] },
+    "D3 Build Embed Text": { "main": [[{ "node": "D4 Gemini Embed 3072d", "type": "main", "index": 0 }]] },
+    "D4 Gemini Embed 3072d": { "main": [[{ "node": "D5 Voyage Embed 1024d (thumb)", "type": "main", "index": 0 }]] },
+    "D5 Voyage Embed 1024d (thumb)": { "main": [[{ "node": "D6 Download mp4", "type": "main", "index": 0 }]] },
+    "D6 Download mp4": { "main": [[{ "node": "D7 Upload mp4", "type": "main", "index": 0 }]] },
+    "D7 Upload mp4": { "main": [[{ "node": "D8 Drive Backup mp4", "type": "main", "index": 0 }]] },
+    "D8 Drive Backup mp4": { "main": [[{ "node": "D9 Marengo Task Create", "type": "main", "index": 0 }]] },
+    "D9 Marengo Task Create": { "main": [[{ "node": "D10 Wait Then Poll", "type": "main", "index": 0 }]] },
+    "D10 Wait Then Poll": { "main": [[{ "node": "D11 Poll Marengo", "type": "main", "index": 0 }]] },
+    "D11 Poll Marengo": { "main": [[{ "node": "D12 Check Ready", "type": "main", "index": 0 }]] },
+    "D12 Check Ready": { "main": [
+      [{ "node": "D13 Insert Clip Rows", "type": "main", "index": 0 }],
+      [{ "node": "D10 Wait Then Poll", "type": "main", "index": 0 }]
+    ]},
+    "D13 Insert Clip Rows": { "main": [[{ "node": "D14 Mean-pool 512", "type": "main", "index": 0 }]] },
+    "D14 Mean-pool 512": { "main": [[{ "node": "D15 Pegasus Transcribe", "type": "main", "index": 0 }]] },
+    "D15 Pegasus Transcribe": { "main": [[{ "node": "D16 Transcript Summary", "type": "main", "index": 0 }]] },
+    "D16 Transcript Summary": { "main": [[{ "node": "D17 Drive Backup Transcript", "type": "main", "index": 0 }]] },
+    "D17 Drive Backup Transcript": { "main": [[{ "node": "D18 Refine Hook Timing", "type": "main", "index": 0 }]] },
+    "D18 Refine Hook Timing": { "main": [[{ "node": "D19 Assemble Patch", "type": "main", "index": 0 }]] },
+    "D19 Assemble Patch": { "main": [[{ "node": "Merge Lanes", "type": "main", "index": 0 }]] },
+
+    "Merge Lanes": { "main": [[{ "node": "Verify Nothing Missing", "type": "main", "index": 0 }]] },
+    "Verify Nothing Missing": { "main": [[{ "node": "Route on Missing", "type": "main", "index": 0 }]] },
+    "Route on Missing": { "main": [
+      [{ "node": "PATCH Ad Complete", "type": "main", "index": 0 }],
+      [{ "node": "INSERT Pending Review", "type": "main", "index": 0 }]
+    ]},
+    "PATCH Ad Complete": { "main": [[{ "node": "Loop Ads", "type": "main", "index": 0 }]] },
+    "INSERT Pending Review": { "main": [[{ "node": "Loop Ads", "type": "main", "index": 0 }]] }
+  },
+  "nodes": [
+    { "id": "trig-manual", "name": "Manual Run", "type": "n8n-nodes-base.manualTrigger", "typeVersion": 1, "position": [0, 0], "parameters": {} },
+    { "id": "trig-schedule", "name": "Schedule Daily", "type": "n8n-nodes-base.scheduleTrigger", "typeVersion": 1.3, "position": [0, 200], "parameters": { "rule": { "interval": [{ "field": "cronExpression", "expression": "0 9 * * *" }] } } },
+    { "id": "trig-called", "name": "When Called", "type": "n8n-nodes-base.executeWorkflowTrigger", "typeVersion": 1.1, "position": [0, 400], "parameters": { "workflowInputs": { "values": [{ "name": "brand_id" }] } } },
+
+    { "id": "fetch-pending", "name": "Fetch Pending Ads", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [224, 200], "parameters": {
+      "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/ads",
+      "authentication": "predefinedCredentialType",
+      "nodeCredentialType": "supabaseApi",
+      "sendQuery": true,
+      "queryParameters": { "parameters": [
+        { "name": "select", "value": "id,external_id,brand_id,brand_name,title,body,cta_type,cta_text,display_format,media_type,media_url,thumbnail_url,landing_page,performance_score,days_active,analyzed_at,enrichment_error,product_id,visual_description,embedding_1024,embedding_512,transcript" },
+        { "name": "or", "value": "=(analyzed_at.is.null,enrichment_error.not.is.null)" },
+        { "name": "brand_id", "value": "={{ $json.brand_id ? 'eq.' + $json.brand_id : 'gt.0' }}" },
+        { "name": "limit", "value": "400" },
+        { "name": "order", "value": "performance_score.desc.nullslast,days_active.desc" }
+      ]},
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 60000 }
+    }},
+
+    { "id": "prepare-paths", "name": "Prepare Paths", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [448, 200], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const it = $input.item.json;\nconst fmt = (it.display_format || '').toLowerCase();\nconst mt = (it.media_type || '').toLowerCase();\nconst lane = fmt === 'dco' ? ('dco/' + mt) : (fmt + '/' + mt);\nconst isVideo = mt === 'video';\nconst ext = isVideo ? 'mp4' : 'jpg';\nconst contentType = isVideo ? 'video/mp4' : 'image/jpeg';\nconst slug = (it.brand_name || 'unknown').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');\nconst assetPath = slug + '/' + it.id + '.' + ext;\nconst thumbForClassify = it.thumbnail_url || it.media_url || 'https://placehold.co/1x1/png';\nconst mainUrl = it.media_url || it.thumbnail_url || 'https://placehold.co/1x1/png';\nreturn { json: { ...it, _lane: lane, _ext: ext, _contentType: contentType, _assetPath: assetPath, _slug: slug, _thumbForClassify: thumbForClassify, _mainUrl: mainUrl } };"
+    }},
+
+    { "id": "loop-ads", "name": "Loop Ads", "type": "n8n-nodes-base.splitInBatches", "typeVersion": 3, "position": [672, 200], "parameters": { "batchSize": 10, "options": {} } },
+
+    { "id": "switch-format", "name": "Switch Format", "type": "n8n-nodes-base.switch", "typeVersion": 3, "position": [896, 200], "parameters": {
+      "rules": { "values": [
+        { "conditions": { "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "loose" }, "conditions": [{ "leftValue": "={{ $json.display_format }}", "rightValue": "dco", "operator": { "type": "string", "operation": "equals" } }], "combinator": "and" }, "renameOutput": true, "outputKey": "dco" },
+        { "conditions": { "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "loose" }, "conditions": [{ "leftValue": "={{ $json.display_format }}", "rightValue": "dpa", "operator": { "type": "string", "operation": "equals" } }], "combinator": "and" }, "renameOutput": true, "outputKey": "dpa" },
+        { "conditions": { "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "loose" }, "conditions": [{ "leftValue": "={{ $json.display_format }}", "rightValue": "image", "operator": { "type": "string", "operation": "equals" } }], "combinator": "and" }, "renameOutput": true, "outputKey": "image" },
+        { "conditions": { "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "loose" }, "conditions": [{ "leftValue": "={{ $json.display_format }}", "rightValue": "video", "operator": { "type": "string", "operation": "equals" } }], "combinator": "and" }, "renameOutput": true, "outputKey": "video" }
+      ]},
+      "options": { "fallbackOutput": "extra" }
+    }},
+
+    { "id": "switch-dco-media", "name": "Switch DCO Media", "type": "n8n-nodes-base.switch", "typeVersion": 3, "position": [1120, 0], "parameters": {
+      "rules": { "values": [
+        { "conditions": { "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "loose" }, "conditions": [{ "leftValue": "={{ $json.media_type }}", "rightValue": "image", "operator": { "type": "string", "operation": "equals" } }], "combinator": "and" }, "renameOutput": true, "outputKey": "image" },
+        { "conditions": { "options": { "caseSensitive": false, "leftValue": "", "typeValidation": "loose" }, "conditions": [{ "leftValue": "={{ $json.media_type }}", "rightValue": "video", "operator": { "type": "string", "operation": "equals" } }], "combinator": "and" }, "renameOutput": true, "outputKey": "video" }
+      ]},
+      "options": {}
+    }},
+
+    { "id": "a1-thumb", "name": "A1 Download Thumb", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [1344, -200], "parameters": {
+      "url": "={{ $json._thumbForClassify }}",
+      "options": { "response": { "response": { "neverError": true, "responseFormat": "file", "outputPropertyName": "thumb" } }, "timeout": 30000 }
+    }},
+    { "id": "a2-classify", "name": "A2 Classify DCO Image", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [1568, -200], "parameters": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ (() => { const ad = $('Prepare Paths').item.json; const bin = $('A1 Download Thumb').item.binary && $('A1 Download Thumb').item.binary.thumb; const real = bin && bin.data && bin.data.length > 500 && !bin.data.startsWith('filesystem'); const parts = [{ text: 'You are a senior creative strategist analyzing a Meta DCO (Dynamic Creative Optimization) IMAGE ad. Use BOTH the image and the ad text. Be specific.\\nBRAND: ' + (ad.brand_name||'') + '\\nFORMAT: dco/image\\nTITLE: ' + (ad.title||'') + '\\nBODY: ' + (ad.body||'') + '\\nCTA: ' + (ad.cta_type||'') + ' ' + (ad.cta_text||'') + '\\n\\nFIELDS:\\nad_type: UGC_TESTIMONIAL|FOUNDER_STORY|US_VS_THEM|PRODUCT_DEMO|BEFORE_AFTER|FAQ|PROMO_DISCOUNT|OTHER\\nfunnel_stage: TOF|MOF|BOF\\nhook: opening line verbatim, max 200ch\\ncore_angle: central claim, max 300ch\\ntarget_persona, pain_point, emotional_tone, visual_description, talent_description, color_palette, on_screen_text, creative_brief, confidence (0-1)\\nlightbulb_status_quo, lightbulb_alternatives, lightbulb_mechanism, lightbulb_offer, lightbulb_new_life\\nnative_ui_hijacking (boolean)\\ndco_variant_hint: short note on whether this looks like a multi-product carousel or single image cycled' }]; if (real) parts.push({ inline_data: { mime_type: bin.mimeType || 'image/jpeg', data: bin.data } }); return JSON.stringify({ contents: [{ parts }], generationConfig: { responseMimeType: 'application/json', temperature: 0.2, responseSchema: { type: 'OBJECT', properties: { ad_type: { type: 'STRING' }, funnel_stage: { type: 'STRING' }, hook: { type: 'STRING' }, core_angle: { type: 'STRING' }, target_persona: { type: 'STRING' }, pain_point: { type: 'STRING' }, emotional_tone: { type: 'STRING' }, visual_description: { type: 'STRING' }, talent_description: { type: 'STRING' }, color_palette: { type: 'STRING' }, on_screen_text: { type: 'STRING' }, creative_brief: { type: 'STRING' }, confidence: { type: 'NUMBER' }, lightbulb_status_quo: { type: 'STRING' }, lightbulb_alternatives: { type: 'STRING' }, lightbulb_mechanism: { type: 'STRING' }, lightbulb_offer: { type: 'STRING' }, lightbulb_new_life: { type: 'STRING' }, native_ui_hijacking: { type: 'BOOLEAN' }, dco_variant_hint: { type: 'STRING' } }, required: ['ad_type','hook','core_angle','visual_description','confidence'] } } }); })() }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 60000 }
+    }},
+    { "id": "a3-embed-text", "name": "A3 Build Embed Text", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [1792, -200], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const ad = $('Prepare Paths').item.json; const resp = $input.item.json; let e = {}; try { e = JSON.parse(resp.candidates[0].content.parts[0].text); } catch(err){} const text = ['Brand:'+(ad.brand_name||''),'Format:dco/image','Type:'+(e.ad_type||''),'Hook:'+(e.hook||''),'Angle:'+(e.core_angle||''),'Persona:'+(e.target_persona||''),'Pain:'+(e.pain_point||''),'Visual:'+(e.visual_description||''),'Colors:'+(e.color_palette||''),'OnScreen:'+(e.on_screen_text||''),'Variant:'+(e.dco_variant_hint||''),'Title:'+(ad.title||''),'Body:'+(ad.body||'')].join(' | '); return { json: { ...ad, _enrichment: e, _embedText: text } };"
+    }},
+    { "id": "a4-embed", "name": "A4 Gemini Embed 3072d", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2016, -200], "parameters": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:batchEmbedContents",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ JSON.stringify({ requests: [{ model: 'models/gemini-embedding-2', content: { parts: [{ text: $json._embedText }] }, taskType: 'RETRIEVAL_DOCUMENT' }] }) }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 30000 }
+    }},
+    { "id": "a5-main", "name": "A5 Download Main Asset", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2240, -200], "parameters": {
+      "url": "={{ $('A3 Build Embed Text').item.json._mainUrl }}",
+      "options": { "response": { "response": { "neverError": true, "responseFormat": "file", "outputPropertyName": "data" } }, "timeout": 120000 }
+    }},
+    { "id": "a6-voyage", "name": "A6 Voyage Embed 1024d", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2464, -200], "parameters": {
+      "method": "POST",
+      "url": "https://api.voyageai.com/v1/multimodalembeddings",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ JSON.stringify({ model: 'voyage-multimodal-3', inputs: [{ content: [{ type: 'image_base64', image_base64: 'data:' + ($input.item.binary && $input.item.binary.data && $input.item.binary.data.mimeType || 'image/jpeg') + ';base64,' + ($input.item.binary && $input.item.binary.data && $input.item.binary.data.data || '') }] }], output_dtype: 'float' }) }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 60000 }
+    }},
+    { "id": "a7-upload", "name": "A7 Upload Asset", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2688, -200], "parameters": {
+      "method": "POST",
+      "url": "={{ 'https://fliqklclucdhjemdjatr.supabase.co/storage/v1/object/ad-assets/' + $('A3 Build Embed Text').item.json._assetPath }}",
+      "authentication": "predefinedCredentialType",
+      "nodeCredentialType": "supabaseApi",
+      "sendHeaders": true,
+      "headerParameters": { "parameters": [
+        { "name": "x-upsert", "value": "true" },
+        { "name": "Content-Type", "value": "={{ $('A3 Build Embed Text').item.json._contentType }}" }
+      ]},
+      "sendBody": true,
+      "contentType": "binaryData",
+      "inputDataFieldName": "data",
+      "options": { "response": { "response": { "neverError": true } } }
+    }},
+    { "id": "a8-drive", "name": "A8 Drive Backup Asset", "type": "n8n-nodes-base.googleDrive", "typeVersion": 3, "position": [2912, -200], "parameters": {
+      "operation": "upload",
+      "name": "={{ $('A3 Build Embed Text').item.json.id + '.' + $('A3 Build Embed Text').item.json._ext }}",
+      "driveId": { "__rl": true, "mode": "list", "value": "My Drive" },
+      "folderId": { "__rl": true, "mode": "id", "value": "={{ $('A3 Build Embed Text').item.json._slug }}" },
+      "options": {}
+    }},
+    { "id": "a9-summary", "name": "A9 Body Summary", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [3136, -200], "parameters": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ JSON.stringify({ contents: [{ parts: [{ text: 'Compress this ad body to <=250 words preserving hook, mechanism, offer, CTA. No commentary, just the compressed version:\\n\\n' + ($('A3 Build Embed Text').item.json.body || '(no body)') }] }], generationConfig: { temperature: 0.2, maxOutputTokens: 600 } }) }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 30000 }
+    }},
+    { "id": "a10-assemble", "name": "A10 Assemble Patch", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [3360, -200], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const ad = $('A3 Build Embed Text').item.json; const e = ad._enrichment || {}; const embResp = $('A4 Gemini Embed 3072d').item.json; const voyResp = $('A6 Voyage Embed 1024d').item.json; const sumResp = $input.item.json; let emb=null; try { emb = embResp.embeddings[0].values; } catch(x){} let voy=null; try { voy = voyResp.data[0].embedding; } catch(x){} let summary=''; try { summary = sumResp.candidates[0].content.parts[0].text; } catch(x){} const pgvec = arr => arr ? '['+arr.map(v=>Number(v).toFixed(6)).join(',')+']' : null; return { json: { _lane: 'dco/image', _adId: ad.id, _patch: { ad_type: e.ad_type||null, funnel_stage: e.funnel_stage||null, hook: e.hook||null, core_angle: e.core_angle||null, target_persona: e.target_persona||null, pain_point: e.pain_point||null, emotional_tone: e.emotional_tone||null, visual_description: e.visual_description||null, talent_description: e.talent_description||null, color_palette: e.color_palette||null, shot_style: 'static_image', on_screen_text: e.on_screen_text||null, creative_brief: e.creative_brief||null, confidence: e.confidence||null, lightbulb_status_quo: e.lightbulb_status_quo||null, lightbulb_alternatives: e.lightbulb_alternatives||null, lightbulb_mechanism: e.lightbulb_mechanism||null, lightbulb_offer: e.lightbulb_offer||null, lightbulb_new_life: e.lightbulb_new_life||null, native_ui_hijacking: e.native_ui_hijacking ?? false, dco_variant_hint: e.dco_variant_hint||null, embedding: pgvec(emb), embedding_1024: pgvec(voy), embedding_text: ad._embedText, body_summary: summary || null, asset_path: ad._assetPath, asset_public_url: 'https://fliqklclucdhjemdjatr.supabase.co/storage/v1/object/public/ad-assets/' + ad._assetPath, media_downloaded: true } } };"
+    }},
+
+    { "id": "b1-thumb", "name": "B1 Download Thumb", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [1344, 300], "parameters": {
+      "url": "={{ $json._thumbForClassify }}",
+      "options": { "response": { "response": { "neverError": true, "responseFormat": "file", "outputPropertyName": "thumb" } }, "timeout": 30000 }
+    }},
+    { "id": "b2-slug", "name": "B2 Extract Slug", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [1568, 300], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const ad = $('Prepare Paths').item.json; const lp = ad.landing_page || ''; const m = lp.match(/\\/products\\/([a-z0-9-]+)/i); const slug = m ? m[1].toLowerCase() : null; return { json: { ...ad, _productSlug: slug } };"
+    }},
+    { "id": "b3-resolve", "name": "B3 Resolve product_id", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [1792, 300], "parameters": {
+      "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/products",
+      "authentication": "predefinedCredentialType",
+      "nodeCredentialType": "supabaseApi",
+      "sendQuery": true,
+      "queryParameters": { "parameters": [
+        { "name": "select", "value": "id" },
+        { "name": "slug", "value": "={{ $json._productSlug ? 'eq.' + $json._productSlug : 'is.null' }}" },
+        { "name": "limit", "value": "1" }
+      ]},
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 15000 }
+    }},
+    { "id": "b4-classify", "name": "B4 Classify DPA", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2016, 300], "parameters": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ (() => { const ad = $('B2 Extract Slug').item.json; const bin = $('B1 Download Thumb').item.binary && $('B1 Download Thumb').item.binary.thumb; const real = bin && bin.data && bin.data.length > 500 && !bin.data.startsWith('filesystem'); const parts = [{ text: 'You are analyzing a Meta DPA (Dynamic Product Ad) — catalog-driven product card. Focus on product, price overlay, badges. Skip persona/pain/tone (catalog ads are audience-agnostic).\\nBRAND: ' + (ad.brand_name||'') + '\\nTITLE: ' + (ad.title||'') + '\\nBODY: ' + (ad.body||'') + '\\n\\nFIELDS:\\nvisual_description: scene/product description\\non_screen_text: price, badge text, overlays\\ncolor_palette: 3-5 dominant\\ncreative_brief: how to recreate this card\\nconfidence: 0-1\\nlightbulb_offer: specific offer/CTA presented\\nlightbulb_new_life: outcome promised' }]; if (real) parts.push({ inline_data: { mime_type: bin.mimeType || 'image/jpeg', data: bin.data } }); return JSON.stringify({ contents: [{ parts }], generationConfig: { responseMimeType: 'application/json', temperature: 0.2, responseSchema: { type: 'OBJECT', properties: { visual_description: { type: 'STRING' }, on_screen_text: { type: 'STRING' }, color_palette: { type: 'STRING' }, creative_brief: { type: 'STRING' }, confidence: { type: 'NUMBER' }, lightbulb_offer: { type: 'STRING' }, lightbulb_new_life: { type: 'STRING' } }, required: ['visual_description','confidence'] } } }); })() }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 60000 }
+    }},
+    { "id": "b5-embed-text", "name": "B5 Build Embed Text", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [2240, 300], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const ad = $('B2 Extract Slug').item.json; const resp = $input.item.json; let e = {}; try { e = JSON.parse(resp.candidates[0].content.parts[0].text); } catch(err){} const text = ['Brand:'+(ad.brand_name||''),'Format:dpa','Product:'+(ad._productSlug||''),'Visual:'+(e.visual_description||''),'OnScreen:'+(e.on_screen_text||''),'Colors:'+(e.color_palette||''),'Offer:'+(e.lightbulb_offer||''),'NewLife:'+(e.lightbulb_new_life||''),'Title:'+(ad.title||''),'Body:'+(ad.body||'')].join(' | '); return { json: { ...ad, _enrichment: e, _embedText: text } };"
+    }},
+    { "id": "b6-embed", "name": "B6 Gemini Embed 3072d", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2464, 300], "parameters": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:batchEmbedContents",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ JSON.stringify({ requests: [{ model: 'models/gemini-embedding-2', content: { parts: [{ text: $json._embedText }] }, taskType: 'RETRIEVAL_DOCUMENT' }] }) }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 30000 }
+    }},
+    { "id": "b7-voyage", "name": "B7 Voyage Embed 1024d", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2688, 300], "parameters": {
+      "method": "POST",
+      "url": "https://api.voyageai.com/v1/multimodalembeddings",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ (() => { const bin = $('B1 Download Thumb').item.binary && $('B1 Download Thumb').item.binary.thumb; if (!bin || !bin.data || bin.data.length < 500 || bin.data.startsWith('filesystem')) return JSON.stringify({ model: 'voyage-multimodal-3', inputs: [{ content: [{ type: 'text', text: $json._embedText || ($('B2 Extract Slug').item.json.title || '') }] }] }); return JSON.stringify({ model: 'voyage-multimodal-3', inputs: [{ content: [{ type: 'image_base64', image_base64: 'data:' + (bin.mimeType||'image/jpeg') + ';base64,' + bin.data }] }] }); })() }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 60000 }
+    }},
+    { "id": "b8-upload", "name": "B8 Upload Asset", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2912, 300], "parameters": {
+      "method": "POST",
+      "url": "={{ 'https://fliqklclucdhjemdjatr.supabase.co/storage/v1/object/ad-assets/' + $('B2 Extract Slug').item.json._assetPath }}",
+      "authentication": "predefinedCredentialType",
+      "nodeCredentialType": "supabaseApi",
+      "sendHeaders": true,
+      "headerParameters": { "parameters": [
+        { "name": "x-upsert", "value": "true" },
+        { "name": "Content-Type", "value": "image/jpeg" }
+      ]},
+      "sendBody": true,
+      "contentType": "binaryData",
+      "inputDataFieldName": "thumb",
+      "options": { "response": { "response": { "neverError": true } } }
+    }},
+    { "id": "b9-drive", "name": "B9 Drive Backup Asset", "type": "n8n-nodes-base.googleDrive", "typeVersion": 3, "position": [3136, 300], "parameters": {
+      "operation": "upload",
+      "name": "={{ $('B2 Extract Slug').item.json.id + '.jpg' }}",
+      "driveId": { "__rl": true, "mode": "list", "value": "My Drive" },
+      "folderId": { "__rl": true, "mode": "id", "value": "={{ $('B2 Extract Slug').item.json._slug }}" },
+      "options": {}
+    }},
+    { "id": "b10-assemble", "name": "B10 Assemble Patch", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [3360, 300], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const ad = $('B2 Extract Slug').item.json; const e = ad._enrichment || {}; const resolved = $('B3 Resolve product_id').item.json; const productId = Array.isArray(resolved) && resolved[0] ? resolved[0].id : null; const embResp = $('B6 Gemini Embed 3072d').item.json; const voyResp = $('B7 Voyage Embed 1024d').item.json; let emb=null; try { emb = embResp.embeddings[0].values; } catch(x){} let voy=null; try { voy = voyResp.data[0].embedding; } catch(x){} const pgvec = arr => arr ? '['+arr.map(v=>Number(v).toFixed(6)).join(',')+']' : null; return { json: { _lane: 'dpa/image', _adId: ad.id, _patch: { visual_description: e.visual_description||null, on_screen_text: e.on_screen_text||null, color_palette: e.color_palette||null, creative_brief: e.creative_brief||null, confidence: e.confidence||null, lightbulb_offer: e.lightbulb_offer||null, lightbulb_new_life: e.lightbulb_new_life||null, product_id: productId, embedding: pgvec(emb), embedding_1024: pgvec(voy), embedding_text: ad._embedText, asset_path: ad._assetPath, asset_public_url: 'https://fliqklclucdhjemdjatr.supabase.co/storage/v1/object/public/ad-assets/' + ad._assetPath, media_downloaded: true } } };"
+    }},
+
+    { "id": "c1-thumb", "name": "C1 Download Thumb", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [1344, 550], "parameters": {
+      "url": "={{ $json._thumbForClassify }}",
+      "options": { "response": { "response": { "neverError": true, "responseFormat": "file", "outputPropertyName": "thumb" } }, "timeout": 30000 }
+    }},
+    { "id": "c2-classify", "name": "C2 Classify Image", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [1568, 550], "parameters": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ (() => { const ad = $('Prepare Paths').item.json; const bin = $('C1 Download Thumb').item.binary && $('C1 Download Thumb').item.binary.thumb; const real = bin && bin.data && bin.data.length > 500 && !bin.data.startsWith('filesystem'); const parts = [{ text: 'You are a senior creative strategist analyzing a Meta IMAGE ad. Use BOTH image and text.\\nBRAND: ' + (ad.brand_name||'') + '\\nTITLE: ' + (ad.title||'') + '\\nBODY: ' + (ad.body||'') + '\\nCTA: ' + (ad.cta_type||'') + ' ' + (ad.cta_text||'') + '\\n\\nFields: ad_type, funnel_stage (TOF/MOF/BOF), hook, core_angle, target_persona, pain_point, emotional_tone, visual_description, talent_description, color_palette, shot_style, on_screen_text, creative_brief, confidence (0-1), all 5 lightbulbs (status_quo/alternatives/mechanism/offer/new_life), native_ui_hijacking' }]; if (real) parts.push({ inline_data: { mime_type: bin.mimeType || 'image/jpeg', data: bin.data } }); return JSON.stringify({ contents: [{ parts }], generationConfig: { responseMimeType: 'application/json', temperature: 0.2, responseSchema: { type: 'OBJECT', properties: { ad_type: { type: 'STRING' }, funnel_stage: { type: 'STRING' }, hook: { type: 'STRING' }, core_angle: { type: 'STRING' }, target_persona: { type: 'STRING' }, pain_point: { type: 'STRING' }, emotional_tone: { type: 'STRING' }, visual_description: { type: 'STRING' }, talent_description: { type: 'STRING' }, color_palette: { type: 'STRING' }, shot_style: { type: 'STRING' }, on_screen_text: { type: 'STRING' }, creative_brief: { type: 'STRING' }, confidence: { type: 'NUMBER' }, lightbulb_status_quo: { type: 'STRING' }, lightbulb_alternatives: { type: 'STRING' }, lightbulb_mechanism: { type: 'STRING' }, lightbulb_offer: { type: 'STRING' }, lightbulb_new_life: { type: 'STRING' }, native_ui_hijacking: { type: 'BOOLEAN' } }, required: ['ad_type','hook','core_angle','visual_description','confidence'] } } }); })() }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 60000 }
+    }},
+    { "id": "c3-embed-text", "name": "C3 Build Embed Text", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [1792, 550], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const ad = $('Prepare Paths').item.json; const resp = $input.item.json; let e = {}; try { e = JSON.parse(resp.candidates[0].content.parts[0].text); } catch(err){} const text = ['Brand:'+(ad.brand_name||''),'Format:image','Type:'+(e.ad_type||''),'Hook:'+(e.hook||''),'Angle:'+(e.core_angle||''),'Persona:'+(e.target_persona||''),'Visual:'+(e.visual_description||''),'Shot:'+(e.shot_style||''),'Colors:'+(e.color_palette||''),'OnScreen:'+(e.on_screen_text||''),'Title:'+(ad.title||''),'Body:'+(ad.body||'')].join(' | '); return { json: { ...ad, _enrichment: e, _embedText: text } };"
+    }},
+    { "id": "c4-embed", "name": "C4 Gemini Embed 3072d", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2016, 550], "parameters": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:batchEmbedContents",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ JSON.stringify({ requests: [{ model: 'models/gemini-embedding-2', content: { parts: [{ text: $json._embedText }] }, taskType: 'RETRIEVAL_DOCUMENT' }] }) }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 30000 }
+    }},
+    { "id": "c5-main", "name": "C5 Download Main Asset", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2240, 550], "parameters": {
+      "url": "={{ $('C3 Build Embed Text').item.json._mainUrl }}",
+      "options": { "response": { "response": { "neverError": true, "responseFormat": "file", "outputPropertyName": "data" } }, "timeout": 120000 }
+    }},
+    { "id": "c6-voyage", "name": "C6 Voyage Embed 1024d", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2464, 550], "parameters": {
+      "method": "POST",
+      "url": "https://api.voyageai.com/v1/multimodalembeddings",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ JSON.stringify({ model: 'voyage-multimodal-3', inputs: [{ content: [{ type: 'image_base64', image_base64: 'data:' + ($input.item.binary && $input.item.binary.data && $input.item.binary.data.mimeType || 'image/jpeg') + ';base64,' + ($input.item.binary && $input.item.binary.data && $input.item.binary.data.data || '') }] }] }) }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 60000 }
+    }},
+    { "id": "c7-upload", "name": "C7 Upload Asset", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2688, 550], "parameters": {
+      "method": "POST",
+      "url": "={{ 'https://fliqklclucdhjemdjatr.supabase.co/storage/v1/object/ad-assets/' + $('C3 Build Embed Text').item.json._assetPath }}",
+      "authentication": "predefinedCredentialType",
+      "nodeCredentialType": "supabaseApi",
+      "sendHeaders": true,
+      "headerParameters": { "parameters": [
+        { "name": "x-upsert", "value": "true" },
+        { "name": "Content-Type", "value": "={{ $('C3 Build Embed Text').item.json._contentType }}" }
+      ]},
+      "sendBody": true,
+      "contentType": "binaryData",
+      "inputDataFieldName": "data",
+      "options": { "response": { "response": { "neverError": true } } }
+    }},
+    { "id": "c8-drive", "name": "C8 Drive Backup Asset", "type": "n8n-nodes-base.googleDrive", "typeVersion": 3, "position": [2912, 550], "parameters": {
+      "operation": "upload",
+      "name": "={{ $('C3 Build Embed Text').item.json.id + '.' + $('C3 Build Embed Text').item.json._ext }}",
+      "driveId": { "__rl": true, "mode": "list", "value": "My Drive" },
+      "folderId": { "__rl": true, "mode": "id", "value": "={{ $('C3 Build Embed Text').item.json._slug }}" },
+      "options": {}
+    }},
+    { "id": "c9-summary", "name": "C9 Body Summary", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [3136, 550], "parameters": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ JSON.stringify({ contents: [{ parts: [{ text: 'Compress this ad body to <=250 words preserving hook, mechanism, offer, CTA. No commentary:\\n\\n' + ($('C3 Build Embed Text').item.json.body || '(no body)') }] }], generationConfig: { temperature: 0.2, maxOutputTokens: 600 } }) }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 30000 }
+    }},
+    { "id": "c10-assemble", "name": "C10 Assemble Patch", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [3360, 550], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const ad = $('C3 Build Embed Text').item.json; const e = ad._enrichment || {}; const embResp = $('C4 Gemini Embed 3072d').item.json; const voyResp = $('C6 Voyage Embed 1024d').item.json; const sumResp = $input.item.json; let emb=null; try { emb = embResp.embeddings[0].values; } catch(x){} let voy=null; try { voy = voyResp.data[0].embedding; } catch(x){} let summary=''; try { summary = sumResp.candidates[0].content.parts[0].text; } catch(x){} const pgvec = arr => arr ? '['+arr.map(v=>Number(v).toFixed(6)).join(',')+']' : null; return { json: { _lane: 'image/image', _adId: ad.id, _patch: { ad_type: e.ad_type||null, funnel_stage: e.funnel_stage||null, hook: e.hook||null, core_angle: e.core_angle||null, target_persona: e.target_persona||null, pain_point: e.pain_point||null, emotional_tone: e.emotional_tone||null, visual_description: e.visual_description||null, talent_description: e.talent_description||null, color_palette: e.color_palette||null, shot_style: e.shot_style||null, on_screen_text: e.on_screen_text||null, creative_brief: e.creative_brief||null, confidence: e.confidence||null, lightbulb_status_quo: e.lightbulb_status_quo||null, lightbulb_alternatives: e.lightbulb_alternatives||null, lightbulb_mechanism: e.lightbulb_mechanism||null, lightbulb_offer: e.lightbulb_offer||null, lightbulb_new_life: e.lightbulb_new_life||null, native_ui_hijacking: e.native_ui_hijacking ?? false, embedding: pgvec(emb), embedding_1024: pgvec(voy), embedding_text: ad._embedText, body_summary: summary || null, asset_path: ad._assetPath, asset_public_url: 'https://fliqklclucdhjemdjatr.supabase.co/storage/v1/object/public/ad-assets/' + ad._assetPath, media_downloaded: true } } };"
+    }},
+
+    { "id": "d1-thumb", "name": "D1 Download Thumb", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [1344, 900], "parameters": {
+      "url": "={{ $json._thumbForClassify }}",
+      "options": { "response": { "response": { "neverError": true, "responseFormat": "file", "outputPropertyName": "thumb" } }, "timeout": 30000 }
+    }},
+    { "id": "d2-classify", "name": "D2 Classify Video", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [1568, 900], "parameters": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ (() => { const ad = $('Prepare Paths').item.json; const bin = $('D1 Download Thumb').item.binary && $('D1 Download Thumb').item.binary.thumb; const real = bin && bin.data && bin.data.length > 500 && !bin.data.startsWith('filesystem'); const parts = [{ text: 'You are a senior creative strategist analyzing a Meta VIDEO ad. The image is the key frame. Use it AND the ad text.\\nBRAND: ' + (ad.brand_name||'') + '\\nFORMAT: ' + (ad.display_format||'video') + '/video\\nTITLE: ' + (ad.title||'') + '\\nBODY: ' + (ad.body||'') + '\\nCTA: ' + (ad.cta_type||'') + ' ' + (ad.cta_text||'') + '\\n\\nFields: ad_type, funnel_stage (TOF/MOF/BOF), hook, core_angle, target_persona, pain_point, emotional_tone, visual_description, talent_description, color_palette, shot_style (camera/composition), on_screen_text, creative_brief, confidence, all 5 lightbulbs, native_ui_hijacking (boolean), hook_timing_seconds (estimate at what second the core value prop lands)' }]; if (real) parts.push({ inline_data: { mime_type: bin.mimeType || 'image/jpeg', data: bin.data } }); return JSON.stringify({ contents: [{ parts }], generationConfig: { responseMimeType: 'application/json', temperature: 0.2, responseSchema: { type: 'OBJECT', properties: { ad_type: { type: 'STRING' }, funnel_stage: { type: 'STRING' }, hook: { type: 'STRING' }, core_angle: { type: 'STRING' }, target_persona: { type: 'STRING' }, pain_point: { type: 'STRING' }, emotional_tone: { type: 'STRING' }, visual_description: { type: 'STRING' }, talent_description: { type: 'STRING' }, color_palette: { type: 'STRING' }, shot_style: { type: 'STRING' }, on_screen_text: { type: 'STRING' }, creative_brief: { type: 'STRING' }, confidence: { type: 'NUMBER' }, lightbulb_status_quo: { type: 'STRING' }, lightbulb_alternatives: { type: 'STRING' }, lightbulb_mechanism: { type: 'STRING' }, lightbulb_offer: { type: 'STRING' }, lightbulb_new_life: { type: 'STRING' }, native_ui_hijacking: { type: 'BOOLEAN' }, hook_timing_seconds: { type: 'NUMBER' } }, required: ['ad_type','hook','core_angle','visual_description','confidence'] } } }); })() }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 60000 }
+    }},
+    { "id": "d3-embed-text", "name": "D3 Build Embed Text", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [1792, 900], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const ad = $('Prepare Paths').item.json; const resp = $input.item.json; let e = {}; try { e = JSON.parse(resp.candidates[0].content.parts[0].text); } catch(err){} const text = ['Brand:'+(ad.brand_name||''),'Format:'+(ad.display_format||'')+'/video','Type:'+(e.ad_type||''),'Hook:'+(e.hook||''),'Angle:'+(e.core_angle||''),'Persona:'+(e.target_persona||''),'Pain:'+(e.pain_point||''),'Visual:'+(e.visual_description||''),'Shot:'+(e.shot_style||''),'Colors:'+(e.color_palette||''),'OnScreen:'+(e.on_screen_text||''),'Transcript:'+(ad.transcript||''),'Title:'+(ad.title||''),'Body:'+(ad.body||'')].join(' | '); return { json: { ...ad, _enrichment: e, _embedText: text } };"
+    }},
+    { "id": "d4-embed", "name": "D4 Gemini Embed 3072d", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2016, 900], "parameters": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2:batchEmbedContents",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ JSON.stringify({ requests: [{ model: 'models/gemini-embedding-2', content: { parts: [{ text: $json._embedText }] }, taskType: 'RETRIEVAL_DOCUMENT' }] }) }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 30000 }
+    }},
+    { "id": "d5-voyage", "name": "D5 Voyage Embed 1024d (thumb)", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2240, 900], "parameters": {
+      "method": "POST",
+      "url": "https://api.voyageai.com/v1/multimodalembeddings",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ (() => { const bin = $('D1 Download Thumb').item.binary && $('D1 Download Thumb').item.binary.thumb; if (!bin || !bin.data || bin.data.length < 500 || bin.data.startsWith('filesystem')) return JSON.stringify({ model: 'voyage-multimodal-3', inputs: [{ content: [{ type: 'text', text: $json._embedText }] }] }); return JSON.stringify({ model: 'voyage-multimodal-3', inputs: [{ content: [{ type: 'image_base64', image_base64: 'data:' + (bin.mimeType||'image/jpeg') + ';base64,' + bin.data }] }] }); })() }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 60000 }
+    }},
+    { "id": "d6-mp4", "name": "D6 Download mp4", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2464, 900], "parameters": {
+      "url": "={{ $('D3 Build Embed Text').item.json._mainUrl }}",
+      "options": { "response": { "response": { "neverError": true, "responseFormat": "file", "outputPropertyName": "data" } }, "timeout": 180000 }
+    }},
+    { "id": "d7-upload", "name": "D7 Upload mp4", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [2688, 900], "parameters": {
+      "method": "POST",
+      "url": "={{ 'https://fliqklclucdhjemdjatr.supabase.co/storage/v1/object/ad-assets/' + $('D3 Build Embed Text').item.json._assetPath }}",
+      "authentication": "predefinedCredentialType",
+      "nodeCredentialType": "supabaseApi",
+      "sendHeaders": true,
+      "headerParameters": { "parameters": [
+        { "name": "x-upsert", "value": "true" },
+        { "name": "Content-Type", "value": "video/mp4" }
+      ]},
+      "sendBody": true,
+      "contentType": "binaryData",
+      "inputDataFieldName": "data",
+      "options": { "response": { "response": { "neverError": true } } }
+    }},
+    { "id": "d8-drive-mp4", "name": "D8 Drive Backup mp4", "type": "n8n-nodes-base.googleDrive", "typeVersion": 3, "position": [2912, 900], "parameters": {
+      "operation": "upload",
+      "name": "={{ $('D3 Build Embed Text').item.json.id + '.mp4' }}",
+      "driveId": { "__rl": true, "mode": "list", "value": "My Drive" },
+      "folderId": { "__rl": true, "mode": "id", "value": "={{ $('D3 Build Embed Text').item.json._slug }}" },
+      "options": {}
+    }},
+    { "id": "d9-marengo", "name": "D9 Marengo Task Create", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [3136, 900], "parameters": {
+      "method": "POST",
+      "url": "https://api.twelvelabs.io/v1.3/embed/tasks",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "contentType": "multipart-form-data",
+      "bodyParameters": { "parameters": [
+        { "name": "model_name", "value": "marengo3.0" },
+        { "name": "video_url", "value": "={{ $('D3 Build Embed Text').item.json._mainUrl }}" },
+        { "name": "embedding_option", "value": "visual" }
+      ]},
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 60000 }
+    }},
+    { "id": "d10-wait", "name": "D10 Wait Then Poll", "type": "n8n-nodes-base.wait", "typeVersion": 1.1, "position": [3360, 900], "parameters": { "amount": 10, "unit": "seconds" } },
+    { "id": "d11-poll", "name": "D11 Poll Marengo", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [3584, 900], "parameters": {
+      "url": "={{ 'https://api.twelvelabs.io/v1.3/embed/tasks/' + $('D9 Marengo Task Create').item.json._id }}",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 30000 }
+    }},
+    { "id": "d12-ready", "name": "D12 Check Ready", "type": "n8n-nodes-base.if", "typeVersion": 2.2, "position": [3808, 900], "parameters": {
+      "conditions": { "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" }, "conditions": [{ "leftValue": "={{ $json.status }}", "rightValue": "ready", "operator": { "type": "string", "operation": "equals" } }], "combinator": "and" },
+      "options": {}
+    }},
+    { "id": "d13-clips", "name": "D13 Insert Clip Rows", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [4032, 850], "parameters": {
+      "method": "POST",
+      "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/ad_clip_embeddings",
+      "authentication": "predefinedCredentialType",
+      "nodeCredentialType": "supabaseApi",
+      "sendHeaders": true,
+      "headerParameters": { "parameters": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Prefer", "value": "resolution=merge-duplicates,return=minimal" }
+      ]},
+      "sendQuery": true,
+      "queryParameters": { "parameters": [{ "name": "on_conflict", "value": "ad_id,clip_index,embedding_scope" }]},
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ (() => { const ad = $('D3 Build Embed Text').item.json; const task = $('D9 Marengo Task Create').item.json; const segs = ($('D11 Poll Marengo').item.json.video_embedding && $('D11 Poll Marengo').item.json.video_embedding.segments) || []; const clip = segs.filter(s => s.embedding_scope === 'clip' && s.embedding_option === 'visual'); const pgvec = arr => '['+arr.map(v=>Number(v).toFixed(7)).join(',')+']'; return JSON.stringify(clip.map((s,i) => ({ ad_id: ad.id, clip_index: i, embedding_scope: 'clip', start_offset_sec: s.start_offset_sec||0, end_offset_sec: s.end_offset_sec||0, embedding: pgvec(s.float), model_id: 'marengo3.0', task_id: task._id }))); })() }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 60000 }
+    }},
+    { "id": "d14-pool", "name": "D14 Mean-pool 512", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [4256, 850], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const segs = ($('D11 Poll Marengo').item.json.video_embedding && $('D11 Poll Marengo').item.json.video_embedding.segments) || []; const clip = segs.filter(s => s.embedding_scope === 'clip' && s.embedding_option === 'visual'); const vecs = clip.map(s => s.float).filter(v => Array.isArray(v)); if (!vecs.length) return { json: { ...$json, _embedding_512: null } }; const dim = vecs[0].length; const mean = []; for (let i=0;i<dim;i++) { let s=0; for (const v of vecs) s += v[i]; mean.push(s / vecs.length); } return { json: { ...$json, _embedding_512: '[' + mean.map(v=>Number(v).toFixed(7)).join(',') + ']' } };"
+    }},
+    { "id": "d15-pegasus", "name": "D15 Pegasus Transcribe", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [4480, 850], "parameters": {
+      "method": "POST",
+      "url": "https://api.twelvelabs.io/v1.3/gist",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ JSON.stringify({ video_id: $('D9 Marengo Task Create').item.json._id, types: ['transcript'] }) }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 120000 }
+    }},
+    { "id": "d16-summary", "name": "D16 Transcript Summary", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [4704, 850], "parameters": {
+      "method": "POST",
+      "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "authentication": "genericCredentialType",
+      "genericAuthType": "httpHeaderAuth",
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ JSON.stringify({ contents: [{ parts: [{ text: 'Compress this video transcript to <=250 words preserving hook, mechanism, offer, CTA. No commentary:\\n\\n' + (($input.item.json.transcript) || $input.item.json.gist || '(no transcript)') }] }], generationConfig: { temperature: 0.2, maxOutputTokens: 600 } }) }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 30000 }
+    }},
+    { "id": "d17-drive-txt", "name": "D17 Drive Backup Transcript", "type": "n8n-nodes-base.googleDrive", "typeVersion": 3, "position": [4928, 850], "parameters": {
+      "operation": "upload",
+      "name": "={{ $('D3 Build Embed Text').item.json.id + '_transcript.txt' }}",
+      "driveId": { "__rl": true, "mode": "list", "value": "My Drive" },
+      "folderId": { "__rl": true, "mode": "id", "value": "={{ $('D3 Build Embed Text').item.json._slug }}" },
+      "options": {}
+    }},
+    { "id": "d18-hook", "name": "D18 Refine Hook Timing", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [5152, 850], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const ad = $('D3 Build Embed Text').item.json; const e = ad._enrichment || {}; const peg = $('D15 Pegasus Transcribe').item.json; const transcript = (peg && (peg.transcript || peg.gist)) || ''; let hookSec = e.hook_timing_seconds || 0; const hookText = (e.hook || '').toLowerCase().slice(0,30); if (hookText && peg && Array.isArray(peg.segments)) { const match = peg.segments.find(s => (s.text || '').toLowerCase().includes(hookText)); if (match && typeof match.start === 'number') hookSec = match.start; } return { json: { ...ad, _transcript: transcript, _hookTimingSec: hookSec } };"
+    }},
+    { "id": "d19-assemble", "name": "D19 Assemble Patch", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [5376, 850], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const ad = $json; const e = ad._enrichment || {}; const embResp = $('D4 Gemini Embed 3072d').item.json; const voyResp = $('D5 Voyage Embed 1024d (thumb)').item.json; const pool = $('D14 Mean-pool 512').item.json; const sumResp = $('D16 Transcript Summary').item.json; let emb=null; try { emb = embResp.embeddings[0].values; } catch(x){} let voy=null; try { voy = voyResp.data[0].embedding; } catch(x){} let summary=''; try { summary = sumResp.candidates[0].content.parts[0].text; } catch(x){} const pgvec = arr => arr ? '['+arr.map(v=>Number(v).toFixed(6)).join(',')+']' : null; const now = new Date().toISOString(); return { json: { _lane: (ad.display_format === 'dco' ? 'dco/video' : 'video/video'), _adId: ad.id, _patch: { ad_type: e.ad_type||null, funnel_stage: e.funnel_stage||null, hook: e.hook||null, core_angle: e.core_angle||null, target_persona: e.target_persona||null, pain_point: e.pain_point||null, emotional_tone: e.emotional_tone||null, visual_description: e.visual_description||null, talent_description: e.talent_description||null, color_palette: e.color_palette||null, shot_style: e.shot_style||null, on_screen_text: e.on_screen_text||null, creative_brief: e.creative_brief||null, confidence: e.confidence||null, lightbulb_status_quo: e.lightbulb_status_quo||null, lightbulb_alternatives: e.lightbulb_alternatives||null, lightbulb_mechanism: e.lightbulb_mechanism||null, lightbulb_offer: e.lightbulb_offer||null, lightbulb_new_life: e.lightbulb_new_life||null, native_ui_hijacking: e.native_ui_hijacking ?? false, hook_timing_seconds: ad._hookTimingSec, transcript: ad._transcript || null, transcript_summary: summary || null, transcript_written_at: ad._transcript ? now : null, embedding: pgvec(emb), embedding_1024: pgvec(voy), embedding_512: pool._embedding_512 || null, embedding_512_written_at: pool._embedding_512 ? now : null, embedding_1024_written_at: voy ? now : null, embedding_text: ad._embedText, asset_path: ad._assetPath, asset_public_url: 'https://fliqklclucdhjemdjatr.supabase.co/storage/v1/object/public/ad-assets/' + ad._assetPath, media_downloaded: true } } };"
+    }},
+
+    { "id": "merge-lanes", "name": "Merge Lanes", "type": "n8n-nodes-base.merge", "typeVersion": 3, "position": [5600, 400], "parameters": { "mode": "append" } },
+
+    { "id": "verify", "name": "Verify Nothing Missing", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [5824, 400], "parameters": {
+      "mode": "runOnceForEachItem",
+      "jsCode": "const required = { 'dco/image': ['visual_description','embedding','embedding_1024','asset_public_url','body_summary'], 'dco/video': ['visual_description','transcript','transcript_summary','embedding','embedding_1024','embedding_512','asset_public_url'], 'dpa/image': ['visual_description','product_id','embedding','embedding_1024','asset_public_url'], 'image/image': ['visual_description','embedding','embedding_1024','asset_public_url','body_summary'], 'video/video': ['visual_description','transcript','transcript_summary','embedding','embedding_1024','embedding_512','asset_public_url'] }; const lane = $json._lane; const patch = $json._patch || {}; const need = required[lane] || []; const missing = need.filter(f => patch[f] == null || patch[f] === ''); return { json: { _adId: $json._adId, _lane: lane, _patch: patch, _missing: missing, _missingCount: missing.length } };"
+    }},
+
+    { "id": "route", "name": "Route on Missing", "type": "n8n-nodes-base.if", "typeVersion": 2.2, "position": [6048, 400], "parameters": {
+      "conditions": { "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" }, "conditions": [{ "leftValue": "={{ $json._missingCount }}", "rightValue": 0, "operator": { "type": "number", "operation": "equals" } }], "combinator": "and" },
+      "options": {}
+    }},
+
+    { "id": "patch-complete", "name": "PATCH Ad Complete", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [6272, 300], "parameters": {
+      "method": "PATCH",
+      "url": "={{ 'https://fliqklclucdhjemdjatr.supabase.co/rest/v1/ads?id=eq.' + $json._adId }}",
+      "authentication": "predefinedCredentialType",
+      "nodeCredentialType": "supabaseApi",
+      "sendHeaders": true,
+      "headerParameters": { "parameters": [
+        { "name": "Prefer", "value": "return=minimal" },
+        { "name": "Content-Type", "value": "application/json" }
+      ]},
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ JSON.stringify(Object.assign({}, $json._patch, { analyzed_at: new Date().toISOString(), embedded_at: new Date().toISOString(), updated_at: new Date().toISOString(), enrichment_error: null })) }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 30000 }
+    }},
+
+    { "id": "insert-pending", "name": "INSERT Pending Review", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.4, "position": [6272, 500], "parameters": {
+      "method": "POST",
+      "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/ads_pending_review",
+      "authentication": "predefinedCredentialType",
+      "nodeCredentialType": "supabaseApi",
+      "sendHeaders": true,
+      "headerParameters": { "parameters": [
+        { "name": "Prefer", "value": "return=minimal" },
+        { "name": "Content-Type", "value": "application/json" }
+      ]},
+      "sendBody": true,
+      "specifyBody": "json",
+      "jsonBody": "={{ JSON.stringify({ ad_id: $json._adId, lane: $json._lane, reason: 'incomplete_enrichment:' + $json._missing.join(',') }) }}",
+      "options": { "response": { "response": { "neverError": true } }, "timeout": 15000 }
+    }}
+  ]
+}

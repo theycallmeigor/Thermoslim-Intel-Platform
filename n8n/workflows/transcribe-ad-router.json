@@ -1,0 +1,153 @@
+{
+  "name": "Transcribe Ad (Pegasus Sub-Workflow)",
+  "nodes": [
+    {
+      "parameters": {
+        "inputSource": "jsonExample",
+        "jsonExample": "{\n  \"id\": 94790209,\n  \"media_url\": \"https://static-gp.gethookd.ai/media/ads_media/94425745/media-652188e82c46.mp4\"\n}"
+      },
+      "id": "trigger",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.twelvelabs.io/v1.3/tasks",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            { "name": "index_id", "value": "69f3ae5732c37ea72b973f25" },
+            { "name": "video_url", "value": "={{ $json.media_url }}" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "create-index-task",
+      "name": "Pegasus — Index Video",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [420, 300],
+      "credentials": { "httpHeaderAuth": { "id": "MARENGO_API_KEY_CREDENTIAL_ID", "name": "Twelve Labs API Key" } }
+    },
+    {
+      "parameters": { "amount": 10, "unit": "seconds" },
+      "id": "wait",
+      "name": "Wait 10s Before Poll",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [620, 300],
+      "webhookId": "tx-wait-1"
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://api.twelvelabs.io/v1.3/tasks/' + $('Pegasus — Index Video').first().json._id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "poll-task",
+      "name": "Pegasus — Poll Task",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [820, 300],
+      "credentials": { "httpHeaderAuth": { "id": "MARENGO_API_KEY_CREDENTIAL_ID", "name": "Twelve Labs API Key" } }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 2 },
+                "conditions": [
+                  { "leftValue": "={{ $json.status }}", "rightValue": "ready", "operator": { "type": "string", "operation": "equals" }, "id": "is-ready" }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "ready"
+            },
+            {
+              "conditions": {
+                "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose", "version": 2 },
+                "conditions": [
+                  { "leftValue": "={{ $json.status }}", "rightValue": "failed", "operator": { "type": "string", "operation": "equals" }, "id": "is-failed" }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "failed"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra",
+          "renameFallbackOutput": "still_processing"
+        }
+      },
+      "id": "task-status",
+      "name": "Task Status?",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [1020, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.twelvelabs.io/v1.3/generate",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ video_id: $('Pegasus — Poll Task').first().json.video_id, prompt: 'Transcribe ALL spoken audio in this video word for word. Return ONLY a valid JSON array with NO surrounding text. Format strictly: [{\"start\":<seconds_number>,\"end\":<seconds_number>,\"text\":\"<exact spoken words>\"}]. If there is no spoken audio, return []. Do not include music descriptions or visual descriptions.', temperature: 0 }) }}",
+        "options": {}
+      },
+      "id": "generate-transcript",
+      "name": "Pegasus — Generate Transcript",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1240, 200],
+      "credentials": { "httpHeaderAuth": { "id": "MARENGO_API_KEY_CREDENTIAL_ID", "name": "Twelve Labs API Key" } }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Parse the transcript response. Pegasus may wrap JSON in markdown fences or return\n// plain JSON depending on the model — handle both. Echo ad fields for parent workflow.\nconst gen = $input.first().json;\nlet trig = {};\ntry { trig = $('Execute Workflow Trigger').item.json || {}; }\ncatch(e) { try { trig = $('Execute Workflow Trigger').first().json || {}; } catch(_e) {} }\nconst pollOut = $('Pegasus — Poll Task').first().json || {};\n\nconst rawText = gen?.data ?? gen?.text ?? gen?.output ?? gen?.result ?? '';\nlet transcript = null;\nlet parseError = null;\nif (typeof rawText === 'string') {\n  // strip ```json fences if present\n  const cleaned = rawText.replace(/^```(?:json)?\\s*/i,'').replace(/\\s*```$/,'').trim();\n  try { transcript = JSON.parse(cleaned); }\n  catch(e) { parseError = String(e.message); transcript = { raw_text: cleaned }; }\n} else if (Array.isArray(rawText) || typeof rawText === 'object') {\n  transcript = rawText;\n}\nreturn [{ json: {\n  ad_id:       trig.id        ?? null,\n  media_url:   trig.media_url ?? null,\n  pegasus_video_id: pollOut.video_id ?? null,\n  index_task_id:    $('Pegasus — Index Video').first().json._id ?? null,\n  transcript,\n  parse_error: parseError,\n  raw_index_response:    pollOut,\n  raw_generate_response: gen\n} }];"
+      },
+      "id": "normalize",
+      "name": "Normalize Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1460, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Task said 'failed' — emit a failure marker so caller can log it.\nlet trig = {};\ntry { trig = $('Execute Workflow Trigger').item.json || {}; }\ncatch(e) { try { trig = $('Execute Workflow Trigger').first().json || {}; } catch(_e) {} }\nconst pollOut = $('Pegasus — Poll Task').first().json || {};\nreturn [{ json: {\n  ad_id: trig.id ?? null,\n  media_url: trig.media_url ?? null,\n  pegasus_video_id: null,\n  index_task_id: $('Pegasus — Index Video').first().json._id ?? null,\n  transcript: null,\n  parse_error: 'pegasus indexing failed',\n  raw_index_response: pollOut,\n  raw_generate_response: null\n} }];"
+      },
+      "id": "fail-pass",
+      "name": "Failed Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1240, 460]
+    }
+  ],
+  "connections": {
+    "Execute Workflow Trigger":      { "main": [[{ "node": "Pegasus — Index Video", "type": "main", "index": 0 }]] },
+    "Pegasus — Index Video":         { "main": [[{ "node": "Wait 10s Before Poll", "type": "main", "index": 0 }]] },
+    "Wait 10s Before Poll":          { "main": [[{ "node": "Pegasus — Poll Task", "type": "main", "index": 0 }]] },
+    "Pegasus — Poll Task":           { "main": [[{ "node": "Task Status?", "type": "main", "index": 0 }]] },
+    "Task Status?":                  { "main": [
+        [{ "node": "Pegasus — Generate Transcript", "type": "main", "index": 0 }],
+        [{ "node": "Failed Output", "type": "main", "index": 0 }],
+        [{ "node": "Wait 10s Before Poll", "type": "main", "index": 0 }]
+    ] },
+    "Pegasus — Generate Transcript": { "main": [[{ "node": "Normalize Output", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}

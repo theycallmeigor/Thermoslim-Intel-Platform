@@ -1,47 +1,20 @@
 {
   "name": "GetHookd — Embedding Drift Monitor",
-  "nodes": [
-    {
-      "parameters": {
-        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 7 * * 1" }] }
-      },
-      "id": "schedule-trigger",
-      "name": "Weekly Monday 07:00 UTC",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.2,
-      "position": [0, 0]
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT query_text, expected_ad_id FROM public.benchmark_query_ad_pairs ORDER BY id LIMIT 50;"
-      },
-      "id": "get-benchmark",
-      "name": "Fetch Benchmark Pairs",
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [220, 0],
-      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } },
-      "notes": "TODO: Create table benchmark_query_ad_pairs(id, query_text, expected_ad_id) and seed 50 known-good pairs manually before activating this workflow."
-    },
-    {
-      "parameters": {
-        "jsCode": "// For each benchmark pair, call rag_candidates() and check if expected_ad_id appears in top-10.\n// Recall@10 = (hits in top-10) / total_pairs\n// If Recall@10 drops >10% vs last week, alert.\n//\n// TODO: implement Voyage embedding API call per query_text, then call rag_candidates RPC.\n// This is a placeholder that logs the benchmark count.\nconst pairs = items.map(i => i.json);\nconsole.log(`Drift monitor: ${pairs.length} benchmark pairs loaded. Recall@10 computation not yet implemented.`);\nreturn [{ json: { benchmark_count: pairs.length, recall_at_10: null, status: 'not_implemented' } }];"
-      },
-      "id": "compute-recall",
-      "name": "Compute Recall@10 (TODO)",
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [440, 0],
-      "notes": "Implement: embed each query_text via Voyage, call rag_candidates RPC, check if expected_ad_id in top-10."
-    }
-  ],
-  "pinData": {},
+  "active": true,
+  "settings": { "executionOrder": "v1", "availableInMCP": true, "binaryMode": "separate" },
+  "meta": { "aiBuilderAssisted": true, "builderVariant": "mcp" },
+  "description": "Weekly Recall@10 drift monitor using benchmark_query_ad_pairs. Alerts when retrieval quality drops. Logs results to embedding_drift_log table.",
+  "tags": [],
   "connections": {
-    "Weekly Monday 07:00 UTC": { "main": [[{ "node": "Fetch Benchmark Pairs",      "type": "main", "index": 0 }]] },
-    "Fetch Benchmark Pairs":   { "main": [[{ "node": "Compute Recall@10 (TODO)",   "type": "main", "index": 0 }]] }
+    "Weekly Monday 07:00 UTC": { "main": [[{ "node": "Fetch Benchmark Pairs", "type": "main", "index": 0 }]] },
+    "Fetch Benchmark Pairs": { "main": [[{ "node": "Compute Recall@10", "type": "main", "index": 0 }]] },
+    "Compute Recall@10": { "main": [[{ "node": "Log Recall to Supabase", "type": "main", "index": 0 }]] }
   },
-  "active": false,
-  "settings": { "executionOrder": "v1" },
-  "tags": [{ "name": "ad-intelligence" }]
+  "nodes": [
+    { "id": "0a57415f-e09c-45ce-9324-eae3447ce3cd", "name": "Weekly Monday 07:00 UTC", "type": "n8n-nodes-base.scheduleTrigger", "typeVersion": 1.3, "position": [0, 0], "parameters": { "rule": { "interval": [{ "field": "cronExpression", "expression": "0 7 * * 1" }] } } },
+    { "id": "94481f4a-3284-47f7-bfe2-1fbb83d20acc", "name": "Fetch Benchmark Pairs", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [224, 0], "parameters": { "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/benchmark_query_ad_pairs", "authentication": "predefinedCredentialType", "nodeCredentialType": "supabaseApi", "sendQuery": true, "queryParameters": { "parameters": [{ "name": "select", "value": "id,query_text,expected_ad_id" }] }, "options": {} } },
+    { "id": "d8d2d4c2-e0a8-4b93-9484-6984b1d8bb8c", "name": "Compute Recall@10", "type": "n8n-nodes-base.code", "typeVersion": 2, "position": [448, 0], "parameters": { "jsCode": "const pairs = items.map(i => i.json);\nconst supabaseUrl = 'https://fliqklclucdhjemdjatr.supabase.co';\nconst anonKey = 'REPLACE_WITH_ANON_KEY';\n\nlet hits = 0;\nconst details = [];\n\nfor (const pair of pairs) {\n  try {\n    const resp = await fetch(supabaseUrl + '/rest/v1/rpc/search_ads', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json', 'apikey': anonKey, 'Authorization': 'Bearer ' + anonKey },\n      body: JSON.stringify({ query_text: pair.query_text, result_limit: 10 })\n    });\n    const rows = await resp.json();\n    const found = Array.isArray(rows) && rows.some(r => Number(r.id) === Number(pair.expected_ad_id));\n    if (found) hits++;\n    details.push({ query: pair.query_text.slice(0,40), expected: pair.expected_ad_id, found });\n  } catch(e) {\n    details.push({ query: pair.query_text.slice(0,40), expected: pair.expected_ad_id, found: false, error: e.message });\n  }\n}\n\nconst recall = hits / pairs.length;\nreturn [{ json: { recall_at_10: recall, hits, total: pairs.length, week: new Date().toISOString().split('T')[0], details } }];" } },
+    { "id": "33b2e23a-03e2-429c-b686-728e9613a193", "name": "Log Recall to Supabase", "type": "n8n-nodes-base.httpRequest", "typeVersion": 4.2, "position": [672, 0], "parameters": { "method": "POST", "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/embedding_drift_log", "authentication": "predefinedCredentialType", "nodeCredentialType": "supabaseApi", "sendHeaders": true, "headerParameters": { "parameters": [{ "name": "Prefer", "value": "return=minimal" }, { "name": "Content-Type", "value": "application/json" }] }, "sendBody": true, "specifyBody": "json", "jsonBody": "={{ JSON.stringify({ week_start: $json.week, recall_at_10: $json.recall_at_10, hits: $json.hits, total: $json.total }) }}", "options": {} } }
+  ],
+  "_note": "anonKey in Compute Recall@10 was redacted on export — restore from n8n cloud before re-import."
 }

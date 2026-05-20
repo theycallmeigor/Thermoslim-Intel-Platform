@@ -1,0 +1,227 @@
+{
+  "name": "Backfill Embeddings (Voyage 1024 + Marengo 512)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger-manual",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            { "name": "target_media_type", "value": "image" },
+            { "name": "target_null_column", "value": "embedding_1024" },
+            { "name": "route_as_media_type", "value": "image" },
+            { "name": "image_url_field", "value": "media_url" },
+            { "name": "supabase_base", "value": "https://fliqklclucdhjemdjatr.supabase.co" }
+          ],
+          "number": [{ "name": "batch_size", "value": 5 }]
+        },
+        "options": {}
+      },
+      "id": "set-config",
+      "name": "Config",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [380, 300],
+      "notes": "Backfill modes:\n• Voyage on image ads:   target_media_type=image, target_null_column=embedding_1024, route_as=image,  image_url_field=media_url\n• Voyage on video thumbs: target_media_type=video, target_null_column=embedding_1024, route_as=image,  image_url_field=thumbnail_url\n• Marengo on videos:      target_media_type=video, target_null_column=embedding_512,  route_as=video,  image_url_field=media_url"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.supabase_base + '/rest/v1/ads?select=id,media_url,media_type,thumbnail_url,embedding_text&' + $json.image_url_field + '=not.is.null&media_type=eq.' + $json.target_media_type + '&' + $json.target_null_column + '=is.null&order=id.asc&limit=' + $json.batch_size }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "options": {}
+      },
+      "id": "fetch-pending",
+      "name": "Fetch Pending Ads",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [560, 300],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } },
+      "notes": "Dynamic filters from Config: null-column and image-source-column are interpolated into the URL because PostgREST treats each column as its own query-param NAME (which n8n cannot template in the queryParameters UI)."
+    },
+    {
+      "parameters": { "batchSize": 1, "options": {} },
+      "id": "per-ad-loop",
+      "name": "Per-Ad Loop",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [740, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Shape the input the Embed Ad Router expects: { media_url, media_type, text_payload }.\n// media_url is sourced from Config.image_url_field (media_url for images, thumbnail_url for video-thumb Voyage).\n// media_type is route_as_media_type (drives Voyage vs Marengo branch in the router).\nconst cfg = $('Config').first().json;\nconst ad  = $input.first().json;\nconst imageUrl = ad[cfg.image_url_field];\nreturn [{\n  json: {\n    media_url: imageUrl,\n    media_type: cfg.route_as_media_type,\n    text_payload: ad.embedding_text || ''\n  }\n}];"
+      },
+      "id": "build-router-input",
+      "name": "Build Router Input",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [820, 300]
+    },
+    {
+      "parameters": {
+        "source": "database",
+        "workflowId": "kUgTPBzM5VkDCljC",
+        "options": { "waitForSubWorkflow": true }
+      },
+      "id": "call-router",
+      "name": "Call Embed Ad Router",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [920, 300],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build the bodies we will POST/PATCH to PostgREST.\n// Vector goes as a string '[0.1,0.2,...]' — pgvector casts on column type.\nconst routerOut = $input.first().json;\nconst ad = $('Per-Ad Loop').item.json;\nconst hasVec = Array.isArray(routerOut.vector) && routerOut.vector.length > 0;\nconst vectorStr = hasVec ? '[' + routerOut.vector.join(',') + ']' : null;\n\nconst attemptBody = {\n  ad_id: ad.id,\n  media_type: ad.media_type,\n  media_url: ad.media_url,\n  model_id: routerOut.model_id || 'marengo3.0',\n  status: hasVec ? 'ready' : 'failed',\n  task_id: routerOut.task_id || null,\n  raw_response: routerOut.raw || routerOut,\n  error_text: hasVec ? null : 'no vector returned'\n};\nif (hasVec && routerOut.dim === 512)  attemptBody.vector       = vectorStr;\nif (hasVec && routerOut.dim === 1024) attemptBody.vector_1024  = vectorStr;\n\nconst patchBody = hasVec\n  ? (routerOut.dim === 512  ? { embedding_512:  vectorStr }\n  :  routerOut.dim === 1024 ? { embedding_1024: vectorStr }\n  :  null)\n  : null;\n\nreturn [{ json: { ad_id: ad.id, hasVec, attemptBody, patchBody } }];"
+      },
+      "id": "build-bodies",
+      "name": "Build Bodies",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 240]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').first().json.supabase_base + '/rest/v1/tl_embedding_attempts' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=representation" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json.attemptBody) }}",
+        "options": { "response": { "response": { "neverError": true } } }
+      },
+      "id": "log-attempt",
+      "name": "Log Attempt (raw)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1280, 240],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose" },
+          "conditions": [
+            { "leftValue": "={{ $('Build Bodies').item.json.hasVec }}", "rightValue": true, "operator": { "type": "boolean", "operation": "true", "singleValue": true } }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "if-has-vec",
+      "name": "Vector OK?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1460, 240]
+    },
+    {
+      "parameters": {
+        "method": "PATCH",
+        "url": "={{ $('Config').first().json.supabase_base + '/rest/v1/ads?id=eq.' + $('Build Bodies').item.json.ad_id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=minimal" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($('Build Bodies').item.json.patchBody) }}",
+        "options": { "response": { "response": { "neverError": true } } }
+      },
+      "id": "patch-ads",
+      "name": "Write embedding_512 to ads",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1640, 180],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').first().json.supabase_base + '/rest/v1/tl_embedding_attempts?attempt_id=eq.' + ($json[0]?.attempt_id || 0) }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "options": {}
+      },
+      "id": "noop",
+      "name": "noop",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1640, 360]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Config').first().json.supabase_base + '/rest/v1/tl_embedding_attempts' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Prefer", "value": "return=minimal" }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({ ad_id: $('Per-Ad Loop').item.json.id, media_type: $('Per-Ad Loop').item.json.media_type, media_url: $('Per-Ad Loop').item.json.media_url, status: 'failed', error_text: ($json.error?.message || $json.message || 'router error'), raw_response: $json }) }}",
+        "options": { "response": { "response": { "neverError": true } } }
+      },
+      "id": "log-failed",
+      "name": "Log Failed Attempt",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1100, 460],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Config').first().json.supabase_base + '/rest/v1/v_embedding_coverage' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "options": {}
+      },
+      "id": "verify",
+      "name": "Verify Coverage",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [920, 540],
+      "credentials": { "supabaseApi": { "id": "i11k5KDK4btEHdID", "name": "Supabase account" } }
+    }
+  ],
+  "connections": {
+    "Manual Trigger":           { "main": [[{ "node": "Config", "type": "main", "index": 0 }]] },
+    "Config":                   { "main": [[{ "node": "Fetch Pending Ads", "type": "main", "index": 0 }]] },
+    "Fetch Pending Ads":        { "main": [[{ "node": "Per-Ad Loop", "type": "main", "index": 0 }]] },
+    "Per-Ad Loop":              { "main": [[{ "node": "Build Router Input", "type": "main", "index": 0 }], [{ "node": "Verify Coverage", "type": "main", "index": 0 }]] },
+    "Build Router Input":       { "main": [[{ "node": "Call Embed Ad Router", "type": "main", "index": 0 }]] },
+    "Call Embed Ad Router":     { "main": [[{ "node": "Build Bodies", "type": "main", "index": 0 }], [{ "node": "Log Failed Attempt", "type": "main", "index": 0 }]] },
+    "Build Bodies":             { "main": [[{ "node": "Log Attempt (raw)", "type": "main", "index": 0 }]] },
+    "Log Attempt (raw)":        { "main": [[{ "node": "Vector OK?", "type": "main", "index": 0 }]] },
+    "Vector OK?":               { "main": [[{ "node": "Write embedding_512 to ads", "type": "main", "index": 0 }], [{ "node": "Per-Ad Loop", "type": "main", "index": 0 }]] },
+    "Write embedding_512 to ads": { "main": [[{ "node": "Per-Ad Loop", "type": "main", "index": 0 }]] },
+    "Log Failed Attempt":       { "main": [[{ "node": "Per-Ad Loop", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}

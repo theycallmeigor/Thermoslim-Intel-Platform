@@ -1,0 +1,166 @@
+{
+  "name": "Brand Onboarding (form)",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Add Competitor Brand",
+        "formDescription": "Paste a GetHookd brand URL to start monitoring. Ads launched on or after your cutoff date will trigger Discord alerts once they meet the winner threshold (10+ days active, score 50+).",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "GetHookd Brand URL",
+              "placeholder": "https://app.gethookd.ai/brands/53713",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Brand Name",
+              "placeholder": "Desk",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Monitor ads launched on or after",
+              "fieldType": "date",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Backfill historical ads now?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  { "option": "No — start monitoring forward only" },
+                  { "option": "Yes — pull all matching ads now" }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Account Type",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  { "option": "main" },
+                  { "option": "tof" },
+                  { "option": "whitelist" }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "responseMode": "onReceived",
+        "options": {
+          "formSubmittedText": "Brand added. If you chose Backfill, the first pull is running in the background — Discord alerts will fire as soon as ads cross the winner threshold."
+        }
+      },
+      "id": "form-trigger-0001",
+      "name": "Brand Form",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [0, 192],
+      "webhookId": "brand-onboarding-form"
+    },
+    {
+      "parameters": {
+        "jsCode": "const f = $input.first().json;\n\n// Field names match formLabels exactly.\nconst url = String(f['GetHookd Brand URL'] || '').trim();\nconst name = String(f['Brand Name'] || '').trim();\nconst sinceDateRaw = f['Monitor ads launched on or after'];\nconst backfillChoice = String(f['Backfill historical ads now?'] || '');\nconst accountType = String(f['Account Type'] || 'main').toLowerCase();\n\n// Extract brand_id from URL: matches /brands/<digits>\nconst match = url.match(/\\/brands\\/(\\d+)/);\nif (!match) {\n  throw new Error('Invalid GetHookd URL — expected pattern like https://app.gethookd.ai/brands/12345. Got: ' + url);\n}\nconst gethookdBrandId = parseInt(match[1], 10);\nif (!gethookdBrandId || gethookdBrandId <= 0) {\n  throw new Error('Could not parse brand_id from URL: ' + url);\n}\n\nif (!name) throw new Error('Brand Name is required.');\nif (!sinceDateRaw) throw new Error('Monitor since date is required.');\n\n// Normalize date to YYYY-MM-DD\nconst sinceDate = new Date(sinceDateRaw).toISOString().slice(0, 10);\nconst today = new Date().toISOString().slice(0, 10);\nconst isPastDate = sinceDate < today;\nconst backfillRequested = backfillChoice.toLowerCase().startsWith('yes');\nconst shouldBackfill = backfillRequested && isPastDate;\n\n// Slug for the brands.slug column\nconst slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');\n\nreturn [{\n  json: {\n    gethookd_brand_id: gethookdBrandId,\n    name: name,\n    slug: slug,\n    monitor_since_date: sinceDate,\n    account_type: ['main','tof','whitelist'].includes(accountType) ? accountType : 'main',\n    should_backfill: shouldBackfill,\n    facebook_page_url: null,\n    // Required-NOT-NULL columns get defaults so the INSERT succeeds:\n    status: 'active',\n    total_ads_count: 0,\n    voice_config: {},\n    personas: [],\n    operational_risk_status: {},\n    compliance_status: 'unknown'\n  }\n}];"
+      },
+      "id": "extract-validate-0002",
+      "name": "Extract & Validate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [224, 192]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/brands",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Prefer", "value": "return=representation,resolution=merge-duplicates" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({\n  name: $json.name,\n  slug: $json.slug,\n  gethookd_brand_id: $json.gethookd_brand_id,\n  monitor_since_date: $json.monitor_since_date,\n  account_type: $json.account_type,\n  facebook_page_url: $json.facebook_page_url,\n  status: $json.status,\n  total_ads_count: $json.total_ads_count,\n  voice_config: $json.voice_config,\n  personas: $json.personas,\n  operational_risk_status: $json.operational_risk_status,\n  compliance_status: $json.compliance_status\n}) }}",
+        "options": {}
+      },
+      "id": "insert-brand-0003",
+      "name": "Insert Brand",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [448, 192]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Insert returns an array with the created brand row. Carry brand.id forward.\nconst extracted = $('Extract & Validate').first().json;\nconst inserted = $input.first().json;\nconst brandRow = Array.isArray(inserted) ? inserted[0] : inserted;\nif (!brandRow || !brandRow.id) {\n  throw new Error('Supabase insert did not return a brand row. Response: ' + JSON.stringify(inserted).slice(0, 300));\n}\nreturn [{ json: { brand_id: brandRow.id, should_backfill: extracted.should_backfill } }];"
+      },
+      "id": "carry-context-0004",
+      "name": "Carry Context",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [672, 192]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose" },
+          "conditions": [
+            {
+              "id": "bf-cond",
+              "leftValue": "={{ $json.should_backfill === true }}",
+              "rightValue": "",
+              "operator": { "type": "boolean", "operation": "true", "singleValue": true }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "backfill-gate-0005",
+      "name": "Backfill Requested?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [896, 192]
+    },
+    {
+      "parameters": {
+        "workflowId": "REPLACE_WITH_ACTIVE_ADS_REFRESH_WORKFLOW_ID",
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": { "brand_id": "={{ $json.brand_id }}" },
+          "matchingColumns": []
+        },
+        "options": { "waitForSubWorkflow": false }
+      },
+      "id": "call-refresh-0006",
+      "name": "Call Active Ads Refresh",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.2,
+      "position": [1120, 96]
+    }
+  ],
+  "connections": {
+    "Brand Form": {
+      "main": [[{ "node": "Extract & Validate", "type": "main", "index": 0 }]]
+    },
+    "Extract & Validate": {
+      "main": [[{ "node": "Insert Brand", "type": "main", "index": 0 }]]
+    },
+    "Insert Brand": {
+      "main": [[{ "node": "Carry Context", "type": "main", "index": 0 }]]
+    },
+    "Carry Context": {
+      "main": [[{ "node": "Backfill Requested?", "type": "main", "index": 0 }]]
+    },
+    "Backfill Requested?": {
+      "main": [
+        [{ "node": "Call Active Ads Refresh", "type": "main", "index": 0 }],
+        []
+      ]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}

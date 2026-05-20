@@ -1,0 +1,205 @@
+{
+  "name": "Competitor Winner Alerts (Discord)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 9 * * *" }] }
+      },
+      "id": "trigger-0001",
+      "name": "Daily 9am (Backup)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, -96],
+      "notes": "Deactivate after merge — daily-delta-and-alerts calls this workflow via Execute Workflow. This trigger remains as a one-toggle failsafe to fire alerts without re-pulling."
+    },
+    {
+      "parameters": {
+        "workflowInputs": { "values": [] }
+      },
+      "id": "trigger-call-0001b",
+      "name": "When Called By Refresh",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [0, 96]
+    },
+    {
+      "parameters": {
+        "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/v_winner_candidates",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "select", "value": "id,external_id,brand_id,brand_name,canonical_brand_id,canonical_brand_name,canonical_monitor_since_date,source_account_type,title,share_url,thumbnail_url,start_date,days_active,performance_score,active_in_library" },
+            { "name": "days_active", "value": "gte.10" },
+            { "name": "performance_score", "value": "gte.50" },
+            { "name": "active_in_library", "value": "eq.1" },
+            { "name": "order", "value": "performance_score.desc" },
+            { "name": "limit", "value": "200" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fetch-winners-0002",
+      "name": "Fetch Winners",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [224, -64]
+    },
+    {
+      "parameters": {
+        "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/ad_alerts_sent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "select", "value": "ad_external_id" },
+            { "name": "alert_channel", "value": "eq.discord" },
+            { "name": "limit", "value": "10000" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fetch-sent-0003",
+      "name": "Fetch Already-Sent IDs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [224, 96]
+    },
+    {
+      "parameters": {
+        "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/app_settings",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "select", "value": "value" },
+            { "name": "key", "value": "eq.winning_alerts_webhook" },
+            { "name": "limit", "value": "1" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "fetch-webhook-0008",
+      "name": "Fetch Discord Webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [224, 208]
+    },
+    {
+      "parameters": {
+        "jsCode": "const winners = $('Fetch Winners').all().map(i => i.json);\nconst sentSet = new Set($('Fetch Already-Sent IDs').all().map(i => String(i.json.ad_external_id)));\nconst newWinners = winners.filter(w => w.external_id && !sentSet.has(String(w.external_id)));\nif (newWinners.length === 0) {\n  return [{ json: { _no_new: true, count: 0 } }];\n}\nreturn newWinners.map(w => ({ json: w }));"
+      },
+      "id": "diff-0004",
+      "name": "Filter Unalerted",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [448, 16]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose" },
+          "conditions": [
+            {
+              "id": "cond-1",
+              "leftValue": "={{ $json._no_new === true }}",
+              "rightValue": "",
+              "operator": { "type": "boolean", "operation": "false", "singleValue": true }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "gate-0005",
+      "name": "Has New Winners?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [672, 16]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $('Fetch Discord Webhook').first().json.value }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [{ "name": "Content-Type", "value": "application/json" }]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ content: 'New update. There might be another winning ad from ' + ($json.canonical_brand_name || $json.brand_name) + ' (' + $json.days_active + 'd active, score ' + $json.performance_score + '). Check it out: ' + $json.share_url }) }}",
+        "options": {}
+      },
+      "id": "discord-0006",
+      "name": "Post to Discord",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [896, -64]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://fliqklclucdhjemdjatr.supabase.co/rest/v1/ad_alerts_sent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "Prefer", "value": "resolution=ignore-duplicates,return=minimal" },
+            { "name": "Content-Type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ ad_external_id: $json.external_id, ad_db_id: $json.id, source_brand_id: $json.brand_id, canonical_brand_id: $json.canonical_brand_id, alert_channel: 'discord', days_active_at_alert: $json.days_active, performance_score_at_alert: $json.performance_score, share_url: $json.share_url }) }}",
+        "options": {}
+      },
+      "id": "mark-sent-0007",
+      "name": "Mark Alert Sent",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1120, -64]
+    }
+  ],
+  "connections": {
+    "Daily 9am (Backup)": {
+      "main": [[
+        { "node": "Fetch Winners", "type": "main", "index": 0 },
+        { "node": "Fetch Already-Sent IDs", "type": "main", "index": 0 },
+        { "node": "Fetch Discord Webhook", "type": "main", "index": 0 }
+      ]]
+    },
+    "When Called By Refresh": {
+      "main": [[
+        { "node": "Fetch Winners", "type": "main", "index": 0 },
+        { "node": "Fetch Already-Sent IDs", "type": "main", "index": 0 },
+        { "node": "Fetch Discord Webhook", "type": "main", "index": 0 }
+      ]]
+    },
+    "Fetch Winners": {
+      "main": [[{ "node": "Filter Unalerted", "type": "main", "index": 0 }]]
+    },
+    "Fetch Already-Sent IDs": {
+      "main": [[{ "node": "Filter Unalerted", "type": "main", "index": 0 }]]
+    },
+    "Fetch Discord Webhook": {
+      "main": [[{ "node": "Filter Unalerted", "type": "main", "index": 0 }]]
+    },
+    "Filter Unalerted": {
+      "main": [[{ "node": "Has New Winners?", "type": "main", "index": 0 }]]
+    },
+    "Has New Winners?": {
+      "main": [
+        [{ "node": "Post to Discord", "type": "main", "index": 0 }],
+        []
+      ]
+    },
+    "Post to Discord": {
+      "main": [[{ "node": "Mark Alert Sent", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": { "executionOrder": "v1" }
+}
