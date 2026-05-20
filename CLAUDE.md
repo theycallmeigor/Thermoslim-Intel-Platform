@@ -170,3 +170,7 @@ See `.env.example` for all required variables. Critical ones:
 - **Decision journal:** `~/Vaults/CROMaxLabs/decision-journal.md` — read before architectural choices
 - **Vault domain docs:** `~/Vaults/CROMaxLabs/thermoslim-platform/_INDEX.md`
 - **Any agent** (Claude Code, Gemini CLI, OpenClaw) reads the same shared knowledge files
+
+## COST TRACKING
+
+Token costs tracked via `python3 ~/.claude/tools/claude-usage/cli.py today`. Session hubs capture `cost_baseline` at start. At session close, update hub `## Cost` section with delta. Include `session_cost` and `model_split` in session exports. Full protocol in global `~/.claude/CLAUDE.md`.
